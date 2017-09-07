@@ -1,0 +1,21 @@
+body{
+	background-color: red;
+	font-family: Cambria;
+}
+h1{
+	color:white;
+	font-family:Arial;
+}
+h2{
+	color:white;
+	font-family:Arial;
+	}
+h3{
+	color:white;
+	font-family:Arial;
+	}	
+footer{
+	text-align:center;
+	font-size: 8pt;
+	border: solid 2px white;
+}
