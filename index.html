@@ -710,6 +710,14 @@ h1{
   100%{box-shadow:0 0 0 18px rgba(17,142,208,0)}
 }
 
+
+.currencybar{margin:12px 0 14px;padding:13px;border:1px solid #cbdced;border-radius:16px;background:linear-gradient(135deg,#ffffff,#f3f9ff);box-shadow:0 8px 22px rgba(16,44,72,.07)}
+.currencytop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}
+.currencytop b{font-size:12px;color:#173b5e}.currencytop span{font-size:9px;color:#68809b;font-weight:800}
+.currencyinputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.currencyfield{background:#fff;border:1px solid #d5e1ee;border-radius:12px;padding:8px 10px}.currencyfield label{display:block;font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:#71859c;font-weight:900;margin-bottom:3px}.currencyfield input{width:100%;border:0;outline:0;color:#173b5e;font-weight:900;font-size:14px;background:transparent}.currencyresult{margin-top:8px;padding:9px 10px;border-radius:11px;background:#eaf7f2;color:#12694e;font-weight:900;font-size:12px}.currencyresult small{font-size:9px;color:#4c7d6d;margin-left:5px}
+.foodhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;padding:13px 14px;border:1px solid #d8e2ed;background:linear-gradient(135deg,#f8fbff,#eef6fd);border-radius:16px}.foodhead b{font-size:13px;color:#173b5e}.foodhead span{display:block;color:#68809b;font-size:9px;margin-top:3px}.foodhead .foodicon{font-size:24px;line-height:1}
+.meals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.meal{padding:11px;border:1px solid #dce5ee;background:#fff;border-radius:14px;box-shadow:0 5px 14px rgba(15,45,73,.05)}.meal .mealtype{font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:#7b8da1;font-weight:900}.meal b{display:block;margin-top:3px;color:#173b5e;font-size:11px}.meal p{margin:4px 0 0;color:#60758c;font-size:9px;line-height:1.4}.meal .price{margin-top:6px;display:inline-block;padding:4px 7px;border-radius:999px;background:#fff5df;color:#8b6005;font-size:8px;font-weight:900}.meal a{display:block;margin-top:7px;color:#176b9c;text-decoration:none;font-size:9px;font-weight:900}.foodgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:8px}.food{padding:9px 10px;margin:0;border:1px solid #e0e6ed;background:#fff;border-radius:12px}.food b{font-size:10px;color:#24445f}.food .addr,.food .kind{font-size:8.5px;margin-top:2px;color:#708198}.food a{display:inline-block;margin-top:5px;color:#47718f;text-decoration:none;font-size:8.5px;font-weight:900}.sectionlabel{margin:10px 0 4px;color:#71859b;font-size:8px;text-transform:uppercase;letter-spacing:.1em;font-weight:900}
+@media(max-width:560px){.meals{grid-template-columns:1fr}.foodgrid{grid-template-columns:1fr}.currencyinputs{grid-template-columns:1fr 1fr}}
 @media(max-width:430px){
   h1{font-size:30px}
   .toolstack{grid-template-columns:1fr}
@@ -736,6 +744,14 @@ h1{
 <span><strong id="paidCount">0</strong>pagadas</span>
 </div>
 <div class="countdown" id="countdown">Calculando cuenta regresiva...</div>
+</section>
+<section class="currencybar" aria-label="Conversor de dólares a colones">
+  <div class="currencytop"><div><b>💵 Conversor USD → CRC</b><span>Tu referencia para el viaje</span></div></div>
+  <div class="currencyinputs">
+    <div class="currencyfield"><label>Tipo de cambio</label><input id="fxRate" inputmode="decimal" value="530" aria-label="Tipo de cambio de dólar a colón"></div>
+    <div class="currencyfield"><label>Dólares USD</label><input id="usdAmount" inputmode="decimal" value="100" aria-label="Monto en dólares"></div>
+  </div>
+  <div class="currencyresult" id="fxResult">$100 USD = ₡53,000 <small>aprox.</small></div>
 </section>
 <section class="toolbar">
 <div class="progressbox">
@@ -986,35 +1002,17 @@ h1{
 <div class="daytools">
 <button type="button" class="dayDone" data-day="1">Marcar actividades del día</button>
 </div>
-<div class="foodhead">
-<b>Comida, agua y snacks</b>
-<span>Opcional · no forma parte de las actividades ni altera el itinerario.</span>
+<div class="foodhead"><div><b>🍕 Comer hoy · opciones según tu ruta</b><span>La idea es que no tengas que desviarte: elige según dónde estés ese día.</span></div><div class="foodicon">🍴</div></div>
+<div class="meals">
+<div class="meal"><div class="mealtype">Desayuno</div><b>Wildberry Pancakes &amp; Cafe</b><p>Buena opción para desayunar antes de Millennium Park.</p><span class="price">$$ · cerca del Loop</span><a href="https://maps.apple.com/?q=Wildberry%20Pancakes%20%26%20Cafe%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
+<div class="meal"><div class="mealtype">Almuerzo</div><b>Christkindlmarket</b><p>Perfecto para probar comida alemana/navideña sin salir de tu recorrido.</p><span class="price">$–$$ · en la ruta</span><a href="https://maps.apple.com/?q=Daley%20Plaza%20Chicago" target="_blank" rel="noopener">📍 Ver zona →</a></div>
+<div class="meal"><div class="mealtype">Cena · pizza 🍕</div><b>Lou Malnati's South Loop</b><p>Buena opción para cerrar el día con pizza estilo Chicago y volver hacia el hospedaje.</p><span class="price">$$</span><a href="https://maps.apple.com/?q=Lou%20Malnati's%20South%20Loop%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
 </div>
-<div class="food">
-<b>Chitown Food &amp; Deli</b>
-<div class="addr">34 E Adams St, Chicago, IL 60603</div>
-<div class="kind">agua · snacks · deli · comida rápida</div>
-<a href="https://maps.apple.com/?q=34%20E%20Adams%20St%2C%20Chicago%2C%20IL%2060603" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Target</b>
-<div class="addr">1 S State St, Chicago, IL 60603</div>
-<div class="kind">grocery · bebidas · snacks</div>
-<a href="https://maps.apple.com/?q=1%20S%20State%20St%2C%20Chicago%2C%20IL%2060603" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Mariano’s South Loop</b>
-<div class="addr">1615 S Clark St, Chicago, IL 60616</div>
-<div class="kind">grocery · deli · comida preparada</div>
-<a href="https://maps.apple.com/?q=1615%20S%20Clark%20St%2C%20Chicago%2C%20IL%2060616" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Trader Joe’s South Loop</b>
-<div class="addr">1147 S Wabash Ave, Chicago, IL 60605</div>
-<div class="kind">grocery · snacks · comida preparada</div>
-<a href="https://maps.apple.com/?q=1147%20S%20Wabash%20Ave%2C%20Chicago%2C%20IL%2060605" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-</section>
+<div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
+<div class="foodgrid">
+<div class="food"><b>Target</b><div class="addr">1 S State St</div><div class="kind">bebidas · snacks · comida lista</div><a href="https://maps.apple.com/?q=1%20S%20State%20St%2C%20Chicago%2C%20IL%2060603" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Trader Joe's South Loop</b><div class="addr">1147 S Wabash Ave</div><div class="kind">snacks · comida preparada</div><a href="https://maps.apple.com/?q=1147%20S%20Wabash%20Ave%2C%20Chicago%2C%20IL%2060605" target="_blank">Apple Maps →</a></div>
+</div></section>
 <section class="day" id="day2">
 <div class="dayhead">
 <h2>Día 2 — Jueves 3 dic | Museum Campus + Bulls</h2>
@@ -1172,29 +1170,17 @@ h1{
 <div class="daytools">
 <button type="button" class="dayDone" data-day="2">Marcar actividades del día</button>
 </div>
-<div class="foodhead">
-<b>Comida, agua y snacks</b>
-<span>Opcional · no forma parte de las actividades ni altera el itinerario.</span>
+<div class="foodhead"><div><b>🌭 Comer hoy · Museum Campus + Bulls</b><span>Opciones pensadas para comer cerca de las zonas por donde ya vas a pasar.</span></div><div class="foodicon">🌭</div></div>
+<div class="meals">
+<div class="meal"><div class="mealtype">Desayuno</div><b>Cafecito</b><p>Desayuno/café cubano; opción práctica antes de Shedd Aquarium.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Cafecito%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
+<div class="meal"><div class="mealtype">Almuerzo</div><b>Field Museum / Museum Campus</b><p>Come sin alejarte de los museos; también puedes llevar algo rápido si quieres ahorrar tiempo.</p><span class="price">$–$$ · práctico</span><a href="https://maps.apple.com/?q=Museum%20Campus%20Chicago" target="_blank" rel="noopener">📍 Ver zona →</a></div>
+<div class="meal"><div class="mealtype">Cena · 🍔🌭</div><b>Portillo's / hot dog estilo Chicago</b><p>Una opción clásica y relativamente rápida antes o después del juego, según el horario.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Portillo's%20Chicago" target="_blank" rel="noopener">📍 Buscar sucursal →</a></div>
 </div>
-<div class="food">
-<b>Jewel-Osco</b>
-<div class="addr">925 S Clark St, Chicago, IL 60607</div>
-<div class="kind">grocery · deli · bebidas</div>
-<a href="https://maps.apple.com/?q=925%20S%20Clark%20St%2C%20Chicago%2C%20IL%2060607" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Target</b>
-<div class="addr">1101 S Canal St, Chicago, IL 60607</div>
-<div class="kind">grocery · comida lista · snacks</div>
-<a href="https://maps.apple.com/?q=1101%20S%20Canal%20St%2C%20Chicago%2C%20IL%2060607" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Chinatown Supermarket</b>
-<div class="addr">2100 S Archer Ave, Chicago, IL 60616</div>
-<div class="kind">grocery · bebidas · snacks</div>
-<a href="https://maps.apple.com/?q=2100%20S%20Archer%20Ave%2C%20Chicago%2C%20IL%2060616" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-</section>
+<div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
+<div class="foodgrid">
+<div class="food"><b>Jewel-Osco</b><div class="addr">925 S Clark St</div><div class="kind">deli · bebidas · snacks</div><a href="https://maps.apple.com/?q=925%20S%20Clark%20St%2C%20Chicago%2C%20IL%2060607" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Chinatown Supermarket</b><div class="addr">2100 S Archer Ave</div><div class="kind">grocery · bebidas · snacks</div><a href="https://maps.apple.com/?q=2100%20S%20Archer%20Ave%2C%20Chicago%2C%20IL%2060616" target="_blank">Apple Maps →</a></div>
+</div></section>
 <section class="day" id="day3">
 <div class="dayhead">
 <h2>Día 3 — Viernes 4 dic | Lincoln Park + Mag Mile + Navy Pier + ZooLights</h2>
@@ -1410,29 +1396,17 @@ h1{
 <div class="daytools">
 <button type="button" class="dayDone" data-day="3">Marcar actividades del día</button>
 </div>
-<div class="foodhead">
-<b>Comida, agua y snacks</b>
-<span>Opcional · no forma parte de las actividades ni altera el itinerario.</span>
+<div class="foodhead"><div><b>🍕 Comer hoy · Lincoln Park + Mag Mile + Navy Pier</b><span>Este día te conviene aprovechar Lincoln Park para comer algo bueno antes de ZooLights.</span></div><div class="foodicon">🍕</div></div>
+<div class="meals">
+<div class="meal"><div class="mealtype">Desayuno</div><b>Breakfast cerca de Lincoln Park</b><p>Algo sencillo con huevos, pan y café antes del zoo; prioriza una opción sobre Clark St para no desviarte.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=breakfast%20Lincoln%20Park%20Chicago" target="_blank" rel="noopener">📍 Ver opciones →</a></div>
+<div class="meal"><div class="mealtype">Almuerzo · 🌭</div><b>Portillo's River North</b><p>Hot dog italiano/Chicago-style y comida rápida clásica; encaja bien entre Mag Mile y Navy Pier.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Portillo's%20River%20North%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
+<div class="meal"><div class="mealtype">Cena · 🍕</div><b>Pequod's Pizza</b><p>Una de las opciones que más sentido tiene para probar pizza de Chicago en Lincoln Park después de ZooLights.</p><span class="price">$$</span><a href="https://maps.apple.com/?q=Pequod's%20Pizza%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
 </div>
-<div class="food">
-<b>Target Lincoln Park</b>
-<div class="addr">555 W Webster Ave, Chicago, IL 60614</div>
-<div class="kind">grocery · comida lista · snacks</div>
-<a href="https://maps.apple.com/?q=555%20W%20Webster%20Ave%2C%20Chicago%2C%20IL%2060614" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Jewel-Osco</b>
-<div class="addr">1224 N State St, Chicago, IL 60610</div>
-<div class="kind">grocery · deli · bebidas</div>
-<a href="https://maps.apple.com/?q=1224%20N%20State%20St%2C%20Chicago%2C%20IL%2060610" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Whole Foods Market</b>
-<div class="addr">1550 N Kingsbury St, Chicago, IL 60642</div>
-<div class="kind">comida preparada · ensaladas · bowls · snacks</div>
-<a href="https://maps.apple.com/?q=1550%20N%20Kingsbury%20St%2C%20Chicago%2C%20IL%2060642" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-</section>
+<div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
+<div class="foodgrid">
+<div class="food"><b>Target Lincoln Park</b><div class="addr">555 W Webster Ave</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=555%20W%20Webster%20Ave%2C%20Chicago%2C%20IL%2060614" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Whole Foods Market</b><div class="addr">1550 N Kingsbury St</div><div class="kind">bowls · ensaladas · comida preparada</div><a href="https://maps.apple.com/?q=1550%20N%20Kingsbury%20St%2C%20Chicago%2C%20IL%2060642" target="_blank">Apple Maps →</a></div>
+</div></section>
 <section class="day" id="day4">
 <div class="dayhead">
 <h2>Día 4 — Sábado 5 dic | Riverwalk + Water Taxi + Chinatown + Chicago nocturno</h2>
@@ -1706,30 +1680,18 @@ h1{
 <div class="daytools">
 <button type="button" class="dayDone" data-day="4">Marcar actividades del día</button>
 </div>
-<div class="foodhead">
-<b>Comida, agua y snacks</b>
-<span>Opcional · no forma parte de las actividades ni altera el itinerario.</span>
+<div class="foodhead"><div><b>🥪 Comer hoy · Riverwalk + Chinatown + noche</b><span>El mejor momento para variar la comida es Chinatown; la cena puede volver a ser pizza.</span></div><div class="foodicon">🥟</div></div>
+<div class="meals">
+<div class="meal"><div class="mealtype">Desayuno</div><b>Desayuno sencillo en el Loop</b><p>Huevos, pan y café cerca del hospedaje antes de caminar hacia Riverwalk.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=breakfast%20Loop%20Chicago" target="_blank" rel="noopener">📍 Ver opciones →</a></div>
+<div class="meal"><div class="mealtype">Almuerzo · 🥟</div><b>Chinatown</b><p>Aprovecha que llegarás en Water Taxi: dumplings, noodles o BBQ chino. Es el día ideal para probar algo diferente.</p><span class="price">$–$$ · buena relación precio/cantidad</span><a href="https://maps.apple.com/?q=Chinatown%20Chicago" target="_blank" rel="noopener">📍 Ver zona →</a></div>
+<div class="meal"><div class="mealtype">Cena · 🍕</div><b>Bongiorno's Cucina Italiana &amp; Pizzeria</b><p>Pizza cerca del Riverwalk/Loop; buena opción para terminar la noche sin complicar el recorrido.</p><span class="price">$</span><a href="https://maps.apple.com/?q=Bongiorno's%20Cucina%20Italiana%20%26%20Pizzeria%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
 </div>
-<div class="food">
-<b>Bockwinkel&#x27;s Harbor Market</b>
-<div class="addr">155 N Harbor Dr, Chicago, IL 60601</div>
-<div class="kind">sandwiches · ensaladas · comida preparada</div>
-<a href="https://maps.apple.com/?q=155%20N%20Harbor%20Dr%2C%20Chicago%2C%20IL%2060601" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Target</b>
-<div class="addr">111 N State St, Chicago, IL 60602</div>
-<div class="kind">grocery · comida lista · snacks</div>
-<a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-<div class="food">
-<b>Jewel-Osco</b>
-<div class="addr">353 E Grand Ave, Chicago, IL 60611</div>
-<div class="kind">grocery · bebidas · snacks</div>
-<a href="https://maps.apple.com/?q=353%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank" rel="noopener">Abrir en Apple Maps →</a>
-</div>
-</section>
-<footer class="footer">Itinerario Chicago Premium · Optimizado para móvil · Tu progreso se guarda automáticamente</footer>
+<div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
+<div class="foodgrid">
+<div class="food"><b>Target</b><div class="addr">111 N State St</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Jewel-Osco</b><div class="addr">353 E Grand Ave</div><div class="kind">bebidas · snacks · grocery</div><a href="https://maps.apple.com/?q=353%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank">Apple Maps →</a></div>
+</div></section>
+<footer class="footer">Itinerario Chicago Premium v5 · Optimizado para móvil · Tu progreso se guarda automáticamente</footer>
 <button type="button" class="topbtn" id="topBtn" aria-label="Volver arriba">↑</button>
 <script>
 (function(){
@@ -2008,7 +1970,21 @@ h1{
  const resetBtn=document.getElementById('resetBtn');
  if(resetBtn){resetBtn.addEventListener('click',resetAll);}
 
+
+ function setupCurrency(){
+   const rate=document.getElementById('fxRate'), usd=document.getElementById('usdAmount'), out=document.getElementById('fxResult');
+   if(!rate||!usd||!out){return;}
+   function fmt(n){return new Intl.NumberFormat('es-CR',{maximumFractionDigits:0}).format(n);}
+   function calc(){
+     const r=parseFloat(String(rate.value).replace(',','.'))||0;
+     const u=parseFloat(String(usd.value).replace(',','.'))||0;
+     out.innerHTML='$'+fmt(u)+' USD = ₡'+fmt(u*r)+' <small>aprox.</small>';
+   }
+   rate.addEventListener('input',calc); usd.addEventListener('input',calc); calc();
+ }
+
  addCopyButtons();
+ setupCurrency();
  setupCollapsers();
  setupPacklist();
  setupTopButton();
