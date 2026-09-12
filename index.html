@@ -2069,10 +2069,10 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 })();
 </script>
 </main>
-<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen seleccionado arriba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir directamente las opciones de transporte desde el origen seleccionado arriba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">Al abrir el trayecto, el mapa reemplaza esta página en la misma pestaña. Puedes volver atrás para regresar al itinerario.</div></div></div><script>
+<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen seleccionado arriba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir las opciones de transporte en Apple Maps o Google Maps.</span></button><button class="route-choice" id="routeTransitApp" type="button"><strong>🚇 Abrir en Transit</strong><span>Planear el trayecto en Transit usando el origen seleccionado arriba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">Al abrir el trayecto, el mapa reemplaza esta página en la misma pestaña. Puedes volver atrás para regresar al itinerario.</div></div></div><script>
 (function(){
   const modal=document.getElementById('routeModal'), title=document.getElementById('routeTitle'), sub=document.getElementById('routeSub');
-  const result=document.getElementById('routeResult'), walk=document.getElementById('routeWalk'), transit=document.getElementById('routeTransit'), close=document.querySelector('.route-close');
+  const result=document.getElementById('routeResult'), walk=document.getElementById('routeWalk'), transit=document.getElementById('routeTransit'), transitApp=document.getElementById('routeTransitApp'), close=document.querySelector('.route-close');
   const providerButtons=()=>[...document.querySelectorAll('[data-map-provider]')];
   const originButtons=()=>[...document.querySelectorAll('[data-origin-mode]')];
   const HOTEL='24 E Ida B Wells Dr, Chicago, IL 60605';
@@ -2088,11 +2088,16 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
     originButtons().forEach(b=>b.classList.toggle('active',b.dataset.originMode===originMode()));
     if(walk) walk.querySelector('strong').textContent='🚶 Caminar en '+providerName();
     if(transit) transit.querySelector('strong').textContent='🚌 Transporte en '+providerName();
+    if(transitApp) transitApp.querySelector('strong').textContent='🚇 Abrir en Transit';
   }
   function mapUrl(mode,destination,forceCurrent){
     const d=encodeURIComponent(destination), o=forceCurrent?'':effectiveOrigin();
     if(provider()==='google') return 'https://www.google.com/maps/dir/?api=1'+(o?'&origin='+encodeURIComponent(o):'')+'&destination='+d+'&travelmode='+mode+'&dir_action=navigate';
     return 'https://maps.apple.com/?'+(o?'saddr='+encodeURIComponent(o)+'&':'')+'daddr='+d+'&dirflg='+(mode==='walking'?'w':'r');
+  }
+  function transitUrl(destination,forceCurrent){
+    const d=encodeURIComponent(destination), o=forceCurrent?'':effectiveOrigin();
+    return 'transit://directions?'+(o?'from='+encodeURIComponent(o)+'&':'')+'to='+d;
   }
   function setTitle(){if(!current)return; title.textContent=originLabel()+' → '+current.destinationLabel;}
   function openModal(btn){
@@ -2114,6 +2119,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
   });
   walk.addEventListener('click',()=>{if(current)window.location.href=mapUrl('walking',current.destination,hotelDirect);});
   transit.addEventListener('click',()=>{if(current)window.location.href=mapUrl('transit',current.destination,hotelDirect);});
+  transitApp.addEventListener('click',()=>{if(current)window.location.href=transitUrl(current.destination,hotelDirect);});
   close.addEventListener('click',()=>{modal.classList.add('hidden');modal.setAttribute('aria-hidden','true');});
   modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true');}});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true');}});
