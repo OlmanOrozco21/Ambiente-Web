@@ -8,7 +8,7 @@
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="telephone=no" name="format-detection"/>
 <meta content="#07111f" name="theme-color"/>
-<title>Chicago · Itinerario Premium v15 — Apple Maps</title>
+<title>Chicago · Itinerario Premium v16 — Apple Maps / Google Maps</title>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Manrope:wght@500;700;800&display=swap");
 
@@ -787,8 +787,16 @@ background:#176b9c;color:#fff!important;font-size:8.5px;font-weight:900}
   transform:none !important;
   position:relative !important;
 }
+</style><style class="map-switch-css">
+.map-switch{display:flex;align-items:center;justify-content:space-between;gap:10px;
+margin:8px 0 12px;padding:9px 10px;border:1px solid #d9e5ee;border-radius:12px;background:#fff}
+.map-switch-label{font-size:8px;font-weight:900;color:#536d83}
+.map-switch-buttons{display:flex;gap:4px}
+.map-switch button{border:1px solid #d3e0e9;background:#f7fafc;color:#5c7184;
+font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cursor:pointer}
+.map-switch button.active{background:#eaf5fb;border-color:#8fc2df;color:#176b9c}
 </style></head>
-<body data-maps-provider="Apple Maps">
+<body data-maps-provider="Apple Maps"><div class="map-switch"><div class="map-switch-label">🗺️ MAPAS PARA LOS TRAYECTOS</div><div class="map-switch-buttons"><button data-map-provider="apple" type="button">🍎 Apple Maps</button><button data-map-provider="google" type="button">🟦 Google Maps</button></div></div>
 <main class="app">
 <section class="hero">
 <div class="eyebrow">CHICAGO · 2–5 DICIEMBRE 2026</div>
@@ -1734,7 +1742,7 @@ background:#176b9c;color:#fff!important;font-size:8.5px;font-weight:900}
 <div class="food"><b>Target</b><div class="addr">111 N State St</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1 S State St, Chicago, IL 60603" data-destination="1 S State St, Chicago, IL 60603" data-destination-label="Target · 1 S State" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 <div class="food"><b>Whole Foods Market — Chicago Ave</b><div class="addr">3 W Chicago Ave, Chicago, IL 60654</div><div class="kind">bebidas · snacks · grocery</div><a href="https://maps.apple.com/?q=353%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="3 W Chicago Ave, Chicago, IL 60654" data-destination="3 W Chicago Ave, Chicago, IL 60654" data-destination-label="Whole Foods · Chicago Ave" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div></section>
-<footer class="footer">Itinerario Chicago Premium v15 · Apple Maps · Puntos de acceso recomendados</footer>
+<footer class="footer">Itinerario Chicago Premium v16 · Apple Maps / Google Maps seleccionable · Preferencia guardada</footer>
 <button aria-label="Volver arriba" class="topbtn" id="topBtn" type="button">↑</button>
 <script>
 (function(){
@@ -2043,7 +2051,7 @@ background:#176b9c;color:#fff!important;font-size:8.5px;font-weight:900}
 })();
 </script>
 </main>
-<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">La ruta termina en el acceso recomendado del lugar, no necesariamente en el centro del edificio. Así evitamos que Maps te deje en un punto incómodo del complejo.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir directamente la ruta caminando.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir directamente las opciones de transporte.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">La opción de transporte se abre directamente con la ruta calculada desde el origen de prueba o tu ubicación actual.</div></div></div><script>
+<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen de prueba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir directamente las opciones de transporte desde el origen de prueba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">La opción de transporte se abre directamente con la ruta calculada desde el origen de prueba o tu ubicación actual.</div></div></div><script>
 (function(){
   const modal = document.getElementById('routeModal');
   const title = document.getElementById('routeTitle');
@@ -2052,64 +2060,109 @@ background:#176b9c;color:#fff!important;font-size:8.5px;font-weight:900}
   const walk = document.getElementById('routeWalk');
   const transit = document.getElementById('routeTransit');
   const close = document.querySelector('.route-close');
+  const providerButtons = () => [...document.querySelectorAll('[data-map-provider]')];
+
   let current = null;
-  // PRUEBA: true = usar hotel como origen. Antes del viaje cambiar a false.
+  const MAP_KEY = 'chicago_maps_provider';
   const TEST_MODE = true;
   const TEST_ORIGIN = '24 E Ida B Wells Dr, Chicago, IL 60605';
+
+  function provider(){
+    return localStorage.getItem(MAP_KEY) || 'apple';
+  }
+
+  function providerName(){
+    return provider() === 'google' ? 'Google Maps' : 'Apple Maps';
+  }
+
+  function renderProvider(){
+    providerButtons().forEach(function(b){
+      b.classList.toggle('active', b.dataset.mapProvider === provider());
+    });
+    if(walk){
+      walk.querySelector('strong').textContent = '🚶 Caminar en ' + providerName();
+    }
+    if(transit){
+      transit.querySelector('strong').textContent = '🚌 Transporte en ' + providerName();
+    }
+  }
 
   function mapUrl(mode){
     if(!current) return '#';
     const d = encodeURIComponent(current.destination);
+    if(provider() === 'google'){
+      return 'https://www.google.com/maps/dir/?api=1' +
+        (TEST_MODE ? '&origin=' + encodeURIComponent(TEST_ORIGIN) : '') +
+        '&destination=' + d +
+        '&travelmode=' + mode +
+        '&dir_action=navigate';
+    }
     return 'https://maps.apple.com/?' +
       (TEST_MODE ? 'saddr=' + encodeURIComponent(TEST_ORIGIN) + '&' : '') +
-      'daddr=' + d + '&dirflg=' + (mode === 'walking' ? 'w' : 'r');
+      'daddr=' + d +
+      '&dirflg=' + (mode === 'walking' ? 'w' : 'r');
   }
 
   function openModal(btn){
     current = {
-      origin: TEST_MODE ? TEST_ORIGIN : '',
       destination: btn.dataset.destination,
       destinationLabel: btn.dataset.destinationLabel,
-      recommendation: btn.dataset.recommendation,
-      reason: btn.dataset.reason,
-      route: btn.dataset.route
+      recommendation: btn.dataset.recommendation || '',
+      reason: btn.dataset.reason || '',
+      route: btn.dataset.route || ''
     };
     title.textContent = (TEST_MODE ? '🏨 Hotel → ' : '📍 Mi ubicación → ') + current.destinationLabel;
-    sub.textContent = TEST_MODE
-      ? 'Modo prueba: el origen será tu hotel. El destino es el lugar que acabas de seleccionar.'
-      : 'El origen será tu ubicación actual en el teléfono.';
+    sub.textContent = 'Elige cómo quieres llegar. El destino usa el punto de acceso recomendado del lugar.';
     result.style.display = 'none';
     result.innerHTML = '';
+    renderProvider();
     modal.classList.remove('hidden');
     modal.setAttribute('aria-hidden','false');
   }
 
-  function showTransit(){
-    if(current) window.open(mapUrl('transit'), '_blank', 'noopener');
-  }
-
   document.addEventListener('click', function(e){
     const btn = e.target.closest('.route-btn');
-    if(btn){ e.preventDefault(); openModal(btn); }
+    if(btn){ e.preventDefault(); openModal(btn); return; }
+
+    const p = e.target.closest('[data-map-provider]');
+    if(p){
+      localStorage.setItem(MAP_KEY, p.dataset.mapProvider);
+      renderProvider();
+      if(current){
+        title.textContent = (TEST_MODE ? '🏨 Hotel → ' : '📍 Mi ubicación → ') + current.destinationLabel;
+      }
+    }
   });
 
   walk.addEventListener('click', function(){
     if(current) window.open(mapUrl('walking'), '_blank', 'noopener');
   });
 
-  transit.addEventListener('click', showTransit);
+  transit.addEventListener('click', function(){
+    if(!current) return;
+    window.open(mapUrl('transit'), '_blank', 'noopener');
+  });
 
   close.addEventListener('click', function(){
-    modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true');
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden','true');
   });
 
   modal.addEventListener('click', function(e){
-    if(e.target === modal){ modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true'); }
+    if(e.target === modal){
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden','true');
+    }
   });
 
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){ modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true'); }
+    if(e.key === 'Escape'){
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden','true');
+    }
   });
+
+  renderProvider();
 })();
 </script></body>
 </html>
