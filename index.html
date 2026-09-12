@@ -1,13 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#07111f">
-<title>Chicago · Itinerario Premium v3</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="telephone=no" name="format-detection"/>
+<meta content="#07111f" name="theme-color"/>
+<title>Chicago · Itinerario Premium v15 — Apple Maps</title>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Manrope:wght@500;700;800&display=swap");
 
@@ -729,9 +730,65 @@ h1{
   .toolstack{grid-template-columns:1fr 1fr 1fr}
   .notegrid{grid-template-columns:1fr 1fr}
 }
+
+.transitpanel{margin:14px 0 18px;padding:14px;border:1px solid #cbdced;border-radius:18px;background:linear-gradient(145deg,#ffffff,#f2f8ff);box-shadow:0 10px 26px rgba(16,44,72,.08)}
+.transithead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.transithead b{font-size:13px;color:#173b5e}.transithead span{display:block;margin-top:3px;color:#68809b;font-size:9px;line-height:1.35}.transitdate{font-size:8px;font-weight:900;color:#176b9c;background:#e7f5ff;padding:5px 7px;border-radius:999px;white-space:nowrap}.routegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.routecard{padding:10px;border:1px solid #dce5ee;border-radius:14px;background:#fff}.routecard .rline{display:flex;justify-content:space-between;gap:7px;align-items:center}.routecard .rnum{font-size:18px;font-weight:900;color:#0d6da0}.routecard .rname{font-size:9px;font-weight:900;color:#234a68}.routecard .rinfo{margin-top:6px;color:#5e7389;font-size:8.5px;line-height:1.45}.routecard .peak{margin-top:6px;padding:6px 7px;border-radius:9px;background:#fff6e3;color:#8a6208;font-size:8px;font-weight:900}.routecard a{display:inline-block;margin-top:6px;color:#176b9c;text-decoration:none;font-size:8.5px;font-weight:900}.transitnote{margin-top:9px;padding:8px 9px;border-radius:10px;background:#f5f9fd;color:#62778d;font-size:8.5px;line-height:1.45}
+.daytransit{margin:9px 0 11px;padding:10px 11px;border:1px solid #d7e4ef;border-radius:13px;background:#f8fbff}.daytransit b{font-size:9px;color:#234b6c}.daytransit p{margin:3px 0 0;color:#62778d;font-size:8.5px;line-height:1.4}
+@media(max-width:560px){.routegrid{grid-template-columns:1fr}}
 </style>
-</head>
-<body>
+<style>
+.route-btn{appearance:none;border:1px solid #cfe0ed;background:#f7fbff;color:#176b9c;
+font:inherit;font-size:8.5px;font-weight:900;padding:7px 9px;border-radius:9px;cursor:pointer}
+.route-btn:hover{background:#edf7fc}
+.route-modal{position:fixed;inset:0;z-index:9999;background:rgba(13,30,45,.55);display:flex;
+align-items:flex-end;justify-content:center;padding:12px}
+.route-modal.hidden{display:none}
+.route-box{width:min(520px,100%);background:#fff;border-radius:20px 20px 14px 14px;
+box-shadow:0 18px 60px rgba(0,0,0,.25);padding:18px;max-height:88vh;overflow:auto}
+.route-close{float:right;border:0;background:#eef4f8;width:30px;height:30px;border-radius:50%;
+font-size:18px;cursor:pointer}
+.route-kicker{font-size:8px;font-weight:900;color:#6a8196;text-transform:uppercase;letter-spacing:.08em}
+.route-box h3{margin:5px 38px 5px 0;font-size:16px;color:#183d5a}
+.route-sub{font-size:9px;color:#71859a;line-height:1.45;margin-bottom:13px}
+.route-choice{display:block;width:100%;text-align:left;border:1px solid #d5e2ec;background:#fff;
+border-radius:13px;padding:12px;margin:8px 0;cursor:pointer}
+.route-choice strong{display:block;font-size:10px;color:#214d6c}
+.route-choice span{display:block;font-size:8.5px;color:#657c90;margin-top:3px;line-height:1.4}
+.route-choice.primary{border-color:#bcdccc;background:#f1fbf6}
+.route-result{margin-top:12px;border:1px solid #d6e3ec;border-radius:14px;padding:12px;background:#f8fbfd}
+.route-result .recommend{font-size:10px;font-weight:900;color:#194d70}
+.route-result p{font-size:8.5px;color:#60788e;line-height:1.45;margin:6px 0}
+.route-map{display:inline-block;text-decoration:none;margin-top:5px;padding:8px 10px;border-radius:9px;
+background:#176b9c;color:#fff!important;font-size:8.5px;font-weight:900}
+.route-back{border:0;background:none;color:#176b9c;font-size:8px;font-weight:900;cursor:pointer;padding:5px 0}
+.route-note{font-size:7.5px;color:#8193a2;margin-top:10px;line-height:1.4}
+</style><style>
+.food-route-btn{display:block;margin-top:7px;width:100%;text-align:center}
+.meal .food-route-btn{font-size:8px;padding:6px 8px}
+.food .food-route-btn{font-size:8px;padding:6px 8px}
+</style><style>
+.route-modal{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:9999 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:18px !important;
+  background:rgba(13,30,45,.58) !important;
+}
+.route-modal.hidden{display:none !important}
+.route-box{
+  width:min(520px,100%) !important;
+  max-height:min(82vh,620px) !important;
+  overflow-y:auto !important;
+  margin:auto !important;
+  border-radius:20px !important;
+  transform:none !important;
+  position:relative !important;
+}
+</style></head>
+<body data-maps-provider="Apple Maps">
 <main class="app">
 <section class="hero">
 <div class="eyebrow">CHICAGO · 2–5 DICIEMBRE 2026</div>
@@ -745,19 +802,32 @@ h1{
 </div>
 <div class="countdown" id="countdown">Calculando cuenta regresiva...</div>
 </section>
-<section class="currencybar" aria-label="Conversor de dólares a colones">
-  <div class="currencytop"><div><b>💵 Conversor USD → CRC</b><span>Tu referencia para el viaje</span></div></div>
-  <div class="currencyinputs">
-    <div class="currencyfield"><label>Tipo de cambio</label><input id="fxRate" inputmode="decimal" value="530" aria-label="Tipo de cambio de dólar a colón"></div>
-    <div class="currencyfield"><label>Dólares USD</label><input id="usdAmount" inputmode="decimal" value="100" aria-label="Monto en dólares"></div>
-  </div>
-  <div class="currencyresult" id="fxResult">$100 USD = ₡53,000 <small>aprox.</small></div>
+<section aria-label="Conversor de dólares a colones" class="currencybar">
+<div class="currencytop"><div><b>💵 Conversor USD → CRC</b><span>Tu referencia para el viaje</span></div></div>
+<div class="currencyinputs">
+<div class="currencyfield"><label>Tipo de cambio</label><input aria-label="Tipo de cambio de dólar a colón" id="fxRate" inputmode="decimal" value="530"/></div>
+<div class="currencyfield"><label>Dólares USD</label><input aria-label="Monto en dólares" id="usdAmount" inputmode="decimal" value="100"/></div>
+</div>
+<div class="currencyresult" id="fxResult">$100 USD = ₡53,000 <small>aprox.</small></div>
+</section>
+<section class="transitpanel" id="transit">
+<div class="transithead"><div><b>🚌 Tus líneas CTA · horarios para tu viaje</b><span>Tus 7 líneas guardadas: 4, 20, 22, 66, 126, 146 y 151. Las uso como candidatas cuando encajan con el trayecto; no voy a asumir que caminar es mejor solo por estar dentro de cierta distancia.</span></div><div class="transitdate">CTA 2026</div></div>
+<div class="routegrid">
+<article class="routecard"><div class="rline"><span class="rnum">4</span><span class="rname">Cottage Grove</span></div><div class="rinfo"><b>Mié–vie:</b> aprox. 5:00–23:25 · <b>sáb:</b> 5:05–23:25.<br/><b>Frecuencia:</b> ≤10 min en la red frecuente durante el día; Owl por la noche.</div><div class="peak">⚠️ Más lleno: laborables 6:30–9:00 y 15:30–18:30; sáb 11:00–16:00.</div><a href="https://www.transitchicago.com/bus/4/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">20</span><span class="rname">Madison</span></div><div class="rinfo"><b>Mié–vie:</b> servicio amplio + Owl · <b>sáb:</b> servicio amplio.<br/><b>Frecuencia:</b> hasta ≤10 min en la red frecuente durante las franjas de servicio.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–15:00.</div><a href="https://www.transitchicago.com/bus/20/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">22</span><span class="rname">Clark</span></div><div class="rinfo"><b>Mié–vie y sáb:</b> servicio 24 h / Owl según tramo.<br/><b>Frecuencia:</b> variable; suele ser más rápida en el centro y horas pico.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–19:00; sáb 11:00–17:00.</div><a href="https://www.transitchicago.com/bus/22/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">66</span><span class="rname">Chicago</span></div><div class="rinfo"><b>Mié–vie:</b> 3:55–23:50 hacia Navy Pier; regreso hasta 00:55.<br/><b>Sáb:</b> 4:10–23:50; regreso hasta 00:50. Owl durante la noche.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–17:00.</div><a href="https://www.transitchicago.com/bus/66/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">126</span><span class="rname">Jackson</span></div><div class="rinfo"><b>Mié–vie:</b> 5:20–22:40 desde terminales principales; <b>sáb:</b> aprox. 6:00–22:40.<br/><b>Frecuencia:</b> variable, más espaciada que la red frecuente.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–16:00.</div><a href="https://www.transitchicago.com/bus/126/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">146</span><span class="rname">Inner Lake Shore/Michigan Express</span></div><div class="rinfo"><b>Mié–vie:</b> 5:00–22:40 desde Berwyn hacia Museum Campus; regreso hasta 23:35.<br/><b>Sáb:</b> 6:00–22:40; regreso hasta 23:40.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:30 y 16:00–18:30; sáb 11:00–16:00.</div><a href="https://www.transitchicago.com/bus/146/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">151</span><span class="rname">Sheridan</span></div><div class="rinfo"><b>Mié–vie:</b> aprox. 5:00–01:25; <b>sáb:</b> 5:25–01:30.<br/><b>Frecuencia:</b> aprox. 9–16 min laborables y 8–15 min sábado según tramo.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–17:00.</div><a href="https://www.transitchicago.com/bus/151/" rel="noopener" target="_blank">Horario CTA →</a></article>
+</div>
+<div class="transitnote">💡 <b>Importante:</b> “Más lleno” es una ventana de planificación, no una predicción exacta para diciembre. CTA basa su indicador de crowdedness en datos recientes y recomienda revisar el Bus Tracker/alertas antes de salir. Las horas exactas dependen de la parada y dirección.</div>
 </section>
 <section class="toolbar">
 <div class="progressbox">
 <div class="progressline">
 <span>Progreso del viaje</span>
-<span id="progressText" aria-live="polite">0 / 28</span>
+<span aria-live="polite" id="progressText">0 / 28</span>
 </div>
 <div class="bar">
 <i id="progressBar">
@@ -772,16 +842,17 @@ h1{
 </section>
 <section class="smartpanel">
 <label for="searchInput">Buscar actividad o dirección</label>
-<input id="searchInput" type="search" placeholder="Ej: Navy Pier, Chinatown, Millennium..." autocomplete="off">
-<div class="filters" role="group" aria-label="Filtros de actividades">
-<button type="button" class="filter active" data-filter="all">Todas</button>
-<button type="button" class="filter" data-filter="pending">Pendientes</button>
-<button type="button" class="filter" data-filter="done">Hechas</button>
-<button type="button" class="filter" data-filter="free">Gratis</button>
-<button type="button" class="filter" data-filter="paid">Pagadas</button>
+<input autocomplete="off" id="searchInput" placeholder="Ej: Navy Pier, Chinatown, Millennium..." type="search"/>
+<div aria-label="Filtros de actividades" class="filters" role="group">
+<button class="filter active" data-filter="all" type="button">Todas</button>
+<button class="filter" data-filter="pending" type="button">Pendientes</button>
+<button class="filter" data-filter="done" type="button">Hechas</button>
+<button class="filter" data-filter="free" type="button">Gratis</button>
+<button class="filter" data-filter="paid" type="button">Pagadas</button>
 </div>
 </section>
 <nav class="tabs">
+<a href="#transit">🚌 Buses</a>
 <a href="#day1">Día 1</a>
 <a href="#day2">Día 2</a>
 <a href="#day3">Día 3</a>
@@ -814,11 +885,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=201%20E%20Randolph%20St%2C%20Chicago%2C%20IL%2060601%20%E2%80%94%20Cloud%20Gate%20/%20Millennium%20Park" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Millennium%20Park%20%2B%20The%20Bean%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="201 E Randolph St, Chicago, IL 60601 — West Walkway / Welcome Center" data-destination="201 E Randolph St, Chicago, IL 60601 — West Walkway / Welcome Center" data-destination-label="Millennium Park · acceso oeste" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Es un tramo corto y además estás entrando al Loop." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Millennium%20Park%20%2B%20The%20Bean%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -843,11 +913,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=78%20E%20Washington%20St%2C%20Chicago%2C%20IL%2060602" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Cultural%20Center%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="78 E Washington St, Chicago, IL 60602 — Washington St entrance" data-destination="78 E Washington St, Chicago, IL 60602 — Washington St entrance" data-destination-label="Chicago Cultural Center · entrada Washington St" data-origin="201 E Randolph St, Chicago, IL 60601 — Cloud Gate / Millennium Park" data-origin-label="Millennium Park + The Bean" data-reason="Está prácticamente al lado; no gastaría tiempo esperando transporte." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Cultural%20Center%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -872,11 +941,10 @@ h1{
 </div>
 <div class="desc">GRATIS — entrada</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=50%20W%20Washington%20St%2C%20Chicago%2C%20IL%2060602%20%E2%80%94%20Daley%20Plaza" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Christkindlmarket%20%E2%80%94%20Daley%20Plaza%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination-label="Christkindlmarket · Daley Plaza" data-origin="78 E Washington St, Chicago, IL 60602" data-origin-label="Chicago Cultural Center" data-reason="Muy cerca y el paseo por el Loop es parte de la experiencia." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Christkindlmarket%20%E2%80%94%20Daley%20Plaza%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -890,7 +958,7 @@ h1{
 <div class="row">
 <div>
 <div class="num">PARADA 04</div>
-<div class="place">Macy&#x27;s / State Street</div>
+<div class="place">Macy's / State Street</div>
 <div class="time">13:45–14:45</div>
 <span class="badge free">GRATIS</span>
 </div>
@@ -901,11 +969,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602%20%E2%80%94%20Macy%E2%80%99s%20State%20Street" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Macy%27s%20/%20State%20Street%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="111 N State St, Chicago, IL 60602 — State Street entrance" data-destination="111 N State St, Chicago, IL 60602 — State Street entrance" data-destination-label="Macy's · entrada State Street" data-origin="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-origin-label="Christkindlmarket — Daley Plaza" data-reason="Son pocas cuadras por State Street." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Macy%27s%20/%20State%20Street%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -930,11 +997,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=175%20N%20State%20St%2C%20Chicago%2C%20IL%2060601" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Theatre%20%E2%80%94%20exterior%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="175 N State St, Chicago, IL 60601 — State St" data-destination="175 N State St, Chicago, IL 60601 — State St" data-destination-label="Chicago Theatre · fachada State St" data-origin="111 N State St, Chicago, IL 60602 — Macy’s State Street" data-origin-label="Macy's / State Street" data-reason="Está a un par de cuadras." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Theatre%20%E2%80%94%20exterior%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -959,11 +1025,10 @@ h1{
 </div>
 <div class="desc">GRATIS — alquiler de patines aparte</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=55%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060601%20%E2%80%94%20Millennium%20Park" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=McCormick%20Tribune%20Ice%20Rink%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="55 N Michigan Ave, Chicago, IL 60601 — Millennium Park" data-destination="55 N Michigan Ave, Chicago, IL 60601 — Millennium Park" data-destination-label="Ice Rink · acceso Michigan Ave" data-origin="175 N State St, Chicago, IL 60601" data-origin-label="Chicago Theatre — exterior" data-reason="Es un paseo corto por el centro." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=McCormick%20Tribune%20Ice%20Rink%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -988,11 +1053,10 @@ h1{
 </div>
 <div class="desc">PAGADO</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=233%20S%20Wacker%20Dr%2C%20Chicago%2C%20IL%2060606%20%E2%80%94%20entrada%20por%20Jackson%20Blvd" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Skydeck%20Chicago%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="233 S Wacker Dr, Chicago, IL 60606 — Jackson Blvd entrance" data-destination="233 S Wacker Dr, Chicago, IL 60606 — Jackson Blvd entrance" data-destination-label="Skydeck · entrada Jackson Blvd" data-origin="55 N Michigan Ave, Chicago, IL 60601 — Millennium Park" data-origin-label="McCormick Tribune Ice Rink" data-reason="Todavía es un trayecto razonable para explorar el Loop; si hace mucho frío o están cansados, aquí sí consideraría CTA/Uber." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Skydeck%20Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1000,18 +1064,18 @@ h1{
 </article>
 </div>
 <div class="daytools">
-<button type="button" class="dayDone" data-day="1">Marcar actividades del día</button>
+<button class="dayDone" data-day="1" type="button">Marcar actividades del día</button>
 </div>
 <div class="foodhead"><div><b>🍕 Comer hoy · opciones según tu ruta</b><span>La idea es que no tengas que desviarte: elige según dónde estés ese día.</span></div><div class="foodicon">🍴</div></div>
 <div class="meals">
-<div class="meal"><div class="mealtype">Desayuno</div><b>Wildberry Pancakes &amp; Cafe</b><p>Buena opción para desayunar antes de Millennium Park.</p><span class="price">$$ · cerca del Loop</span><a href="https://maps.apple.com/?q=Wildberry%20Pancakes%20%26%20Cafe%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
-<div class="meal"><div class="mealtype">Almuerzo</div><b>Christkindlmarket</b><p>Perfecto para probar comida alemana/navideña sin salir de tu recorrido.</p><span class="price">$–$$ · en la ruta</span><a href="https://maps.apple.com/?q=Daley%20Plaza%20Chicago" target="_blank" rel="noopener">📍 Ver zona →</a></div>
-<div class="meal"><div class="mealtype">Cena · pizza 🍕</div><b>Lou Malnati's South Loop</b><p>Buena opción para cerrar el día con pizza estilo Chicago y volver hacia el hospedaje.</p><span class="price">$$</span><a href="https://maps.apple.com/?q=Lou%20Malnati's%20South%20Loop%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
+<div class="food-location-note" style="margin:6px 0 10px;padding:8px 10px;border-radius:11px;background:#f4f9fc;border:1px solid #d8e6ef;font-size:8px;color:#5f7487;line-height:1.4">📍 Selección por zona: prioricé lugares que queden sobre o muy cerca del recorrido de este día para evitar desvíos innecesarios.</div><div class="meal"><div class="mealtype">Desayuno</div><b>Wildberry Pancakes &amp; Cafe</b><p>Desayuno práctico junto a Millennium Park; no desvía el inicio del recorrido.</p><span class="price">$$ · cerca del Loop</span><a href="https://maps.apple.com/?q=Wildberry%20Pancakes%20%26%20Cafe%20Chicago" rel="noopener" target="_blank">📍 Ver en Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="130 E Randolph St, Chicago, IL 60601" data-destination="130 E Randolph St, Chicago, IL 60601" data-destination-label="Wildberry · entrada principal" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Almuerzo</div><b>Christkindlmarket</b><p>Perfecto para probar comida alemana/navideña sin salir de tu recorrido.</p><span class="price">$–$$ · en la ruta</span><a href="https://maps.apple.com/?q=Daley%20Plaza%20Chicago" rel="noopener" target="_blank">📍 Ver zona →</a><button class="route-btn food-route-btn" data-access-point="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination-label="Christkindlmarket · Daley Plaza" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Cena · pizza 🍕</div><b>Giordano's — Millennium Park</b><p>Pizza estilo Chicago prácticamente sobre el recorrido del Loop.</p><span class="price">$$</span><a href="https://maps.apple.com/?q=Lou%20Malnati's%20South%20Loop%20Chicago" rel="noopener" target="_blank">📍 Ver en Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="130 E Randolph St, Chicago, IL 60601" data-destination="130 E Randolph St, Chicago, IL 60601" data-destination-label="Giordano's · Millennium Park" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div>
 <div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
 <div class="foodgrid">
-<div class="food"><b>Target</b><div class="addr">1 S State St</div><div class="kind">bebidas · snacks · comida lista</div><a href="https://maps.apple.com/?q=1%20S%20State%20St%2C%20Chicago%2C%20IL%2060603" target="_blank">Apple Maps →</a></div>
-<div class="food"><b>Trader Joe's South Loop</b><div class="addr">1147 S Wabash Ave</div><div class="kind">snacks · comida preparada</div><a href="https://maps.apple.com/?q=1147%20S%20Wabash%20Ave%2C%20Chicago%2C%20IL%2060605" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Target</b><div class="addr">1 S State St</div><div class="kind">bebidas · snacks · comida lista</div><a href="https://maps.apple.com/?q=1%20S%20State%20St%2C%20Chicago%2C%20IL%2060603" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1 S State St, Chicago, IL 60603" data-destination="1 S State St, Chicago, IL 60603" data-destination-label="Target · 1 S State" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="food"><b>Target — 1 S State St</b><div class="addr">1 S State St, Chicago, IL 60603</div><div class="kind">snacks · comida preparada</div><a href="https://maps.apple.com/?q=1147%20S%20Wabash%20Ave%2C%20Chicago%2C%20IL%2060605" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1 S State St, Chicago, IL 60603" data-destination="1 S State St, Chicago, IL 60603" data-destination-label="Target · 1 S State" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div></section>
 <section class="day" id="day2">
 <div class="dayhead">
@@ -1040,11 +1104,10 @@ h1{
 </div>
 <div class="desc">PAGADO</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=1200%20S%20DuSable%20Lake%20Shore%20Dr%2C%20Chicago%2C%20IL%2060605" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Shedd%20Aquarium%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="1200 S DuSable Lake Shore Dr, Chicago, IL 60605 — Main Entrance / half-circle drive" data-destination="1200 S DuSable Lake Shore Dr, Chicago, IL 60605 — Main Entrance / half-circle drive" data-destination-label="Shedd Aquarium · entrada principal" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Este sí es uno de los trayectos donde prefiero transporte: el Museum Campus queda bastante más lejos del alojamiento." data-recommendation="🚌 CTA #146" data-route="146" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Shedd%20Aquarium%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1069,11 +1132,10 @@ h1{
 </div>
 <div class="desc">PAGADO</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=1400%20S%20DuSable%20Lake%20Shore%20Dr%2C%20Chicago%2C%20IL%2060605" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Field%20Museum%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — East Entrance" data-destination="1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — East Entrance" data-destination-label="Field Museum · East Entrance" data-origin="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Shedd Aquarium" data-reason="Shedd y Field Museum están dentro de Museum Campus." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Field%20Museum%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1098,11 +1160,10 @@ h1{
 </div>
 <div class="desc">GRATIS — solo exterior</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=1300%20S%20DuSable%20Lake%20Shore%20Dr%2C%20Chicago%2C%20IL%2060605" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Adler%20Planetarium%20%E2%80%94%20exterior%20%2B%20skyline%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="1300 S DuSable Lake Shore Dr, Chicago, IL 60605 — front entrance" data-destination="1300 S DuSable Lake Shore Dr, Chicago, IL 60605 — front entrance" data-destination-label="Adler · acceso principal" data-origin="1400 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Field Museum" data-reason="El paseo hacia Adler forma parte de las vistas del lago y del skyline." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Adler%20Planetarium%20%E2%80%94%20exterior%20%2B%20skyline%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1127,11 +1188,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=Museum%20Campus%2C%201400%20S%20DuSable%20Lake%20Shore%20Dr%2C%20Chicago%2C%20IL%2060605%20%E2%80%94%20zona%20exterior" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Museum%20Campus%20%2B%20Lake%20Michigan%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — Museum Campus" data-destination="1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — Museum Campus" data-destination-label="Museum Campus · zona exterior" data-origin="1300 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Adler Planetarium — exterior + skyline" data-reason="Es dentro de Museum Campus." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Museum%20Campus%20%2B%20Lake%20Michigan%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1156,11 +1216,10 @@ h1{
 </div>
 <div class="desc">PAGADO</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=1901%20W%20Madison%20St%2C%20Chicago%2C%20IL%2060612" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Bulls%20vs%20Cleveland%20Cavaliers%20%E2%80%94%20United%20Center%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="1901 W Madison St, Chicago, IL 60612 — Madison St / Wood St main entrance" data-destination="1901 W Madison St, Chicago, IL 60612 — Madison St / Wood St main entrance" data-destination-label="United Center · entrada Madison/Wood" data-origin="Museum Campus, 1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — zona exterior" data-origin-label="Museum Campus + Lake Michigan" data-reason="Es el gran desplazamiento del día. #146 te saca del Museum Campus y #20 es la línea útil para acercarte al United Center." data-recommendation="🔄 CTA #146 + #20" data-route="20" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Bulls%20vs%20Cleveland%20Cavaliers%20%E2%80%94%20United%20Center%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1168,18 +1227,18 @@ h1{
 </article>
 </div>
 <div class="daytools">
-<button type="button" class="dayDone" data-day="2">Marcar actividades del día</button>
+<button class="dayDone" data-day="2" type="button">Marcar actividades del día</button>
 </div>
 <div class="foodhead"><div><b>🌭 Comer hoy · Museum Campus + Bulls</b><span>Opciones pensadas para comer cerca de las zonas por donde ya vas a pasar.</span></div><div class="foodicon">🌭</div></div>
 <div class="meals">
-<div class="meal"><div class="mealtype">Desayuno</div><b>Cafecito</b><p>Desayuno/café cubano; opción práctica antes de Shedd Aquarium.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Cafecito%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
-<div class="meal"><div class="mealtype">Almuerzo</div><b>Field Museum / Museum Campus</b><p>Come sin alejarte de los museos; también puedes llevar algo rápido si quieres ahorrar tiempo.</p><span class="price">$–$$ · práctico</span><a href="https://maps.apple.com/?q=Museum%20Campus%20Chicago" target="_blank" rel="noopener">📍 Ver zona →</a></div>
-<div class="meal"><div class="mealtype">Cena · 🍔🌭</div><b>Portillo's / hot dog estilo Chicago</b><p>Una opción clásica y relativamente rápida antes o después del juego, según el horario.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Portillo's%20Chicago" target="_blank" rel="noopener">📍 Buscar sucursal →</a></div>
+<div class="food-location-note" style="margin:6px 0 10px;padding:8px 10px;border-radius:11px;background:#f4f9fc;border:1px solid #d8e6ef;font-size:8px;color:#5f7487;line-height:1.4">📍 Selección por zona: prioricé lugares que queden sobre o muy cerca del recorrido de este día para evitar desvíos innecesarios.</div><div class="meal"><div class="mealtype">Desayuno</div><b>Cafecito</b><p>Desayuno/café cubano; opción práctica antes de Shedd Aquarium.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Cafecito%20Chicago" rel="noopener" target="_blank">📍 Ver en Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="215 W Jackson Blvd, Chicago, IL 60606" data-destination="215 W Jackson Blvd, Chicago, IL 60606" data-destination-label="Cafecito · entrada principal" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Almuerzo</div><b>Field Museum / Museum Campus</b><p>Come sin alejarte de los museos; también puedes llevar algo rápido si quieres ahorrar tiempo.</p><span class="price">$–$$ · práctico</span><a href="https://maps.apple.com/?q=Museum%20Campus%20Chicago" rel="noopener" target="_blank">📍 Ver zona →</a><button class="route-btn food-route-btn" data-access-point="1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — East Entrance" data-destination="1400 S DuSable Lake Shore Dr, Chicago, IL 60605 — East Entrance" data-destination-label="Field Museum · East Entrance" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Cena · 🍔🌭</div><b>Billy Goat Tavern — Madison</b><p>Hot dog, burger e Italian beef a poca distancia del United Center; encaja mucho mejor con el día de los Bulls.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Portillo's%20Chicago" rel="noopener" target="_blank">📍 Buscar sucursal →</a><button class="route-btn food-route-btn" data-access-point="1535 W Madison St, Chicago, IL 60612" data-destination="1535 W Madison St, Chicago, IL 60612" data-destination-label="Billy Goat Tavern · Madison" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div>
 <div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
 <div class="foodgrid">
-<div class="food"><b>Jewel-Osco</b><div class="addr">925 S Clark St</div><div class="kind">deli · bebidas · snacks</div><a href="https://maps.apple.com/?q=925%20S%20Clark%20St%2C%20Chicago%2C%20IL%2060607" target="_blank">Apple Maps →</a></div>
-<div class="food"><b>Chinatown Supermarket</b><div class="addr">2100 S Archer Ave</div><div class="kind">grocery · bebidas · snacks</div><a href="https://maps.apple.com/?q=2100%20S%20Archer%20Ave%2C%20Chicago%2C%20IL%2060616" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Jewel-Osco — South Loop</b><div class="addr">1224 S Wabash Ave, Chicago, IL 60605</div><div class="kind">deli · bebidas · snacks</div><a href="https://maps.apple.com/?q=925%20S%20Clark%20St%2C%20Chicago%2C%20IL%2060607" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1224 S Wabash Ave, Chicago, IL 60605" data-destination="1224 S Wabash Ave, Chicago, IL 60605" data-destination-label="Jewel-Osco · South Loop" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="food"><b>United Center Market &amp; Grill</b><div class="addr">2132 W Washington Blvd, Chicago, IL 60612</div><div class="kind">grocery · bebidas · snacks</div><a href="https://maps.apple.com/?q=2100%20S%20Archer%20Ave%2C%20Chicago%2C%20IL%2060616" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1901 W Madison St, Chicago, IL 60612 — United Center area" data-destination="1901 W Madison St, Chicago, IL 60612 — United Center area" data-destination-label="United Center · zona Madison" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div></section>
 <section class="day" id="day3">
 <div class="dayhead">
@@ -1208,11 +1267,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=2001%20N%20Clark%20St%2C%20Chicago%2C%20IL%2060614%20%E2%80%94%20East%20Gate%20/%20Visitor%20Center" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Lincoln%20Park%20Zoo%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="2400 N Cannon Dr, Chicago, IL 60614 — East Gate" data-destination="2400 N Cannon Dr, Chicago, IL 60614 — East Gate" data-destination-label="Lincoln Park Zoo · East Gate" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Es un desplazamiento largo desde el alojamiento; aquí sí vale la pena mirar CTA." data-recommendation="🚌 CTA #22" data-route="22" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Lincoln%20Park%20Zoo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1237,11 +1295,10 @@ h1{
 </div>
 <div class="desc">GRATIS — entrada</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=676%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Harry%20Potter%20Shop%20Chicago%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="676 N Michigan Ave, Chicago, IL 60611" data-destination="676 N Michigan Ave, Chicago, IL 60611" data-destination-label="Harry Potter Shop · entrada principal" data-origin="2001 N Clark St, Chicago, IL 60614 — East Gate / Visitor Center" data-origin-label="Lincoln Park Zoo" data-reason="Está cerca del límite de 25 min. Si tienen energía, este tramo es bueno para conocer Lincoln Park; si no, vuelve a abrir 'Ver método'." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Harry%20Potter%20Shop%20Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1266,11 +1323,10 @@ h1{
 </div>
 <div class="desc">GRATIS — compras opcionales</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=625%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060611%20%E2%80%94%20referencia%20central%20de%20Magnificent%20Mile" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Magnificent%20Mile%20%E2%80%94%20paseo%20y%20compras%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="625 N Michigan Ave, Chicago, IL 60611" data-destination="625 N Michigan Ave, Chicago, IL 60611" data-destination-label="Magnificent Mile · punto central" data-origin="676 N Michigan Ave, Chicago, IL 60611" data-origin-label="Harry Potter Shop Chicago" data-reason="La tienda y Magnificent Mile están en la misma zona." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Magnificent%20Mile%20%E2%80%94%20paseo%20y%20compras%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1295,11 +1351,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=400%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Wrigley%20Building%20%E2%80%94%20exterior%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave" data-destination="400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave" data-destination-label="Wrigley Building · acceso exterior" data-origin="625 N Michigan Ave, Chicago, IL 60611 — referencia central de Magnificent Mile" data-origin-label="Magnificent Mile — paseo y compras" data-reason="Son pocas cuadras por Michigan Avenue." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Wrigley%20Building%20%E2%80%94%20exterior%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1324,11 +1379,10 @@ h1{
 </div>
 <div class="desc">GRATIS — entrada al muelle</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=600%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Navy%20Pier%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="600 E Grand Ave, Chicago, IL 60611 — main entrance" data-destination="600 E Grand Ave, Chicago, IL 60611 — main entrance" data-destination-label="Navy Pier · entrada principal" data-origin="400 N Michigan Ave, Chicago, IL 60611" data-origin-label="Wrigley Building — exterior" data-reason="15–20 min aproximadamente y es un buen paseo hacia el lago." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Navy%20Pier%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1353,11 +1407,10 @@ h1{
 </div>
 <div class="desc">PAGADO</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=600%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611%20%E2%80%94%20Navy%20Pier" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Centennial%20Wheel%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="600 E Grand Ave, Chicago, IL 60611 — Navy Pier" data-destination="600 E Grand Ave, Chicago, IL 60611 — Navy Pier" data-destination-label="Centennial Wheel · Navy Pier" data-origin="600 E Grand Ave, Chicago, IL 60611" data-origin-label="Navy Pier" data-reason="Está dentro de Navy Pier." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Centennial%20Wheel%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1382,11 +1435,10 @@ h1{
 </div>
 <div class="desc">PAGADO — anticipado $7–$12 según fecha</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=2001%20N%20Clark%20St%2C%20Chicago%2C%20IL%2060614%20%E2%80%94%20Lincoln%20Park%20Zoo" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=ZooLights%20%E2%80%94%20Lincoln%20Park%20Zoo%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="2400 N Cannon Dr, Chicago, IL 60614 — East Gate" data-destination="2400 N Cannon Dr, Chicago, IL 60614 — East Gate" data-destination-label="ZooLights · Lincoln Park Zoo" data-origin="600 E Grand Ave, Chicago, IL 60611 — Navy Pier" data-origin-label="Centennial Wheel" data-reason="Aquí sí usaría transporte: hay que volver hacia Lincoln Park y ya llevan bastante caminando. La combinación exacta puede variar según el servicio del día." data-recommendation="🔄 CTA #66 + #22" data-route="66" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=ZooLights%20%E2%80%94%20Lincoln%20Park%20Zoo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1394,18 +1446,18 @@ h1{
 </article>
 </div>
 <div class="daytools">
-<button type="button" class="dayDone" data-day="3">Marcar actividades del día</button>
+<button class="dayDone" data-day="3" type="button">Marcar actividades del día</button>
 </div>
 <div class="foodhead"><div><b>🍕 Comer hoy · Lincoln Park + Mag Mile + Navy Pier</b><span>Este día te conviene aprovechar Lincoln Park para comer algo bueno antes de ZooLights.</span></div><div class="foodicon">🍕</div></div>
 <div class="meals">
-<div class="meal"><div class="mealtype">Desayuno</div><b>Breakfast cerca de Lincoln Park</b><p>Algo sencillo con huevos, pan y café antes del zoo; prioriza una opción sobre Clark St para no desviarte.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=breakfast%20Lincoln%20Park%20Chicago" target="_blank" rel="noopener">📍 Ver opciones →</a></div>
-<div class="meal"><div class="mealtype">Almuerzo · 🌭</div><b>Portillo's River North</b><p>Hot dog italiano/Chicago-style y comida rápida clásica; encaja bien entre Mag Mile y Navy Pier.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Portillo's%20River%20North%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
-<div class="meal"><div class="mealtype">Cena · 🍕</div><b>Pequod's Pizza</b><p>Una de las opciones que más sentido tiene para probar pizza de Chicago en Lincoln Park después de ZooLights.</p><span class="price">$$</span><a href="https://maps.apple.com/?q=Pequod's%20Pizza%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
+<div class="food-location-note" style="margin:6px 0 10px;padding:8px 10px;border-radius:11px;background:#f4f9fc;border:1px solid #d8e6ef;font-size:8px;color:#5f7487;line-height:1.4">📍 Selección por zona: prioricé lugares que queden sobre o muy cerca del recorrido de este día para evitar desvíos innecesarios.</div><div class="meal"><div class="mealtype">Desayuno</div><b>Nookies Wells</b><p>Desayuno sencillo cerca de Lincoln Park para no cruzar la ciudad antes del zoo.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=breakfast%20Lincoln%20Park%20Chicago" rel="noopener" target="_blank">📍 Ver opciones →</a><button class="route-btn food-route-btn" data-access-point="1746 N Wells St, Chicago, IL 60614" data-destination="1746 N Wells St, Chicago, IL 60614" data-destination-label="Nookies Wells · entrada principal" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Almuerzo · 🌭</div><b>Chicago's Dog House — Magnificent Mile</b><p>Hot dog estilo Chicago directamente en la zona de Michigan Avenue; evita el desvío hacia River North.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=Portillo's%20River%20North%20Chicago" rel="noopener" target="_blank">📍 Ver en Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="520 N Michigan Ave, Chicago, IL 60611" data-destination="520 N Michigan Ave, Chicago, IL 60611" data-destination-label="Chicago's Dog House · Michigan Ave" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Cena · 🍕</div><b>Pequod's Pizza</b><p>Una de las opciones que más sentido tiene para probar pizza de Chicago en Lincoln Park después de ZooLights.</p><span class="price">$$</span><a href="https://maps.apple.com/?q=Pequod's%20Pizza%20Chicago" rel="noopener" target="_blank">📍 Ver en Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="2207 N Clybourn Ave, Chicago, IL 60614" data-destination="2207 N Clybourn Ave, Chicago, IL 60614" data-destination-label="Pequod's Pizza · entrada principal" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div>
 <div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
 <div class="foodgrid">
-<div class="food"><b>Target Lincoln Park</b><div class="addr">555 W Webster Ave</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=555%20W%20Webster%20Ave%2C%20Chicago%2C%20IL%2060614" target="_blank">Apple Maps →</a></div>
-<div class="food"><b>Whole Foods Market</b><div class="addr">1550 N Kingsbury St</div><div class="kind">bowls · ensaladas · comida preparada</div><a href="https://maps.apple.com/?q=1550%20N%20Kingsbury%20St%2C%20Chicago%2C%20IL%2060642" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Target — Lincoln Park</b><div class="addr">555 W Webster Ave, Chicago, IL 60614</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=555%20W%20Webster%20Ave%2C%20Chicago%2C%20IL%2060614" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="555 W Webster Ave, Chicago, IL 60614" data-destination="555 W Webster Ave, Chicago, IL 60614" data-destination-label="Target · Lincoln Park" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="food"><b>Trader Joe's — Diversey</b><div class="addr">667 W Diversey Pkwy, Chicago, IL 60614</div><div class="kind">bowls · ensaladas · comida preparada</div><a href="https://maps.apple.com/?q=1550%20N%20Kingsbury%20St%2C%20Chicago%2C%20IL%2060642" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="667 W Diversey Pkwy, Chicago, IL 60614" data-destination="667 W Diversey Pkwy, Chicago, IL 60614" data-destination-label="Trader Joe's · Diversey" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div></section>
 <section class="day" id="day4">
 <div class="dayhead">
@@ -1434,11 +1486,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=112%20E%20Wacker%20Dr%2C%20Chicago%2C%20IL%2060601%20%E2%80%94%20acceso%20Michigan%20Ave%20/%20Upper%20Wacker" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Riverwalk%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="112 E Wacker Dr, Chicago, IL 60601 — Michigan Ave / Upper Wacker access" data-destination="112 E Wacker Dr, Chicago, IL 60601 — Michigan Ave / Upper Wacker access" data-destination-label="Riverwalk · acceso Michigan/Upper Wacker" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="El Riverwalk está lo bastante cerca como para empezar caminando." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Riverwalk%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1463,11 +1514,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=333%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060601%20%E2%80%94%20DuSable%20Bridge%20/%20Michigan%20Ave" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Downtown%20%2B%20puentes%20/%20arquitectura%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="333 N Michigan Ave, Chicago, IL 60601 — DuSable Bridge" data-destination="333 N Michigan Ave, Chicago, IL 60601 — DuSable Bridge" data-destination-label="DuSable Bridge · Michigan Ave" data-origin="112 E Wacker Dr, Chicago, IL 60601 — acceso Michigan Ave / Upper Wacker" data-origin-label="Chicago Riverwalk" data-reason="Es precisamente una zona para recorrer a pie y mirar arquitectura." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Downtown%20%2B%20puentes%20/%20arquitectura%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1492,11 +1542,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=625%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060611%20%E2%80%94%20referencia%20central%3B%20recorrido%20por%20Michigan%20Ave" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Michigan%20Avenue%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="625 N Michigan Ave, Chicago, IL 60611" data-destination="625 N Michigan Ave, Chicago, IL 60611" data-destination-label="Michigan Avenue · punto central" data-origin="333 N Michigan Ave, Chicago, IL 60601 — DuSable Bridge / Michigan Ave" data-origin-label="Downtown + puentes / arquitectura" data-reason="Pocas cuadras y mucha actividad turística en el camino." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Michigan%20Avenue%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1521,11 +1570,10 @@ h1{
 </div>
 <div class="desc">PAGADO — $10 por trayecto</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=400%20N%20Michigan%20Ave%2C%20Chicago%2C%20IL%2060611%20%E2%80%94%20Michigan%20Ave%20Dock" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Water%20Taxi%20%E2%80%94%20Michigan%20Ave%20%E2%86%92%20Chinatown%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave dock" data-destination="400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave dock" data-destination-label="Water Taxi · muelle Michigan Ave" data-origin="625 N Michigan Ave, Chicago, IL 60611 — referencia central; recorrido por Michigan Ave" data-origin-label="Michigan Avenue" data-reason="El muelle está en la misma zona; caminar es lo más sencillo." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Water%20Taxi%20%E2%80%94%20Michigan%20Ave%20%E2%86%92%20Chinatown%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1550,11 +1598,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=1700%20S%20Wentworth%20Ave%2C%20Chicago%2C%20IL%2060616%20%E2%80%94%20Ping%20Tom%20Memorial%20Park%20/%20Chinatown" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chinatown%20%2B%20Ping%20Tom%20Memorial%20Park%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="1700 S Wentworth Ave, Chicago, IL 60616 — Ping Tom Memorial Park" data-destination="1700 S Wentworth Ave, Chicago, IL 60616 — Ping Tom Memorial Park" data-destination-label="Chinatown/Ping Tom · acceso" data-origin="400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave Dock" data-origin-label="Chicago Water Taxi — Michigan Ave → Chinatown" data-reason="Aquí el transporte es parte de la experiencia y además evita rodear todo el centro por tierra." data-recommendation="🚤 Water Taxi" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chinatown%20%2B%20Ping%20Tom%20Memorial%20Park%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1579,11 +1626,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=50%20W%20Washington%20St%2C%20Chicago%2C%20IL%2060602%20%E2%80%94%20Daley%20Plaza" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Daley%20Plaza%20%2B%20%C3%A1rbol%20de%20Navidad%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination-label="Daley Plaza · árbol de Navidad" data-origin="1700 S Wentworth Ave, Chicago, IL 60616 — Ping Tom Memorial Park / Chinatown" data-origin-label="Chinatown + Ping Tom Memorial Park" data-reason="Desde Chinatown ya es un desplazamiento suficientemente largo como para considerar bus y ahorrar piernas." data-recommendation="🚌 CTA #126" data-route="126" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Daley%20Plaza%20%2B%20%C3%A1rbol%20de%20Navidad%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1608,11 +1654,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602%20%E2%80%94%20referencia%3B%20recorrido%20por%20State%20St" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=State%20Street%20iluminada%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="111 N State St, Chicago, IL 60602" data-destination="111 N State St, Chicago, IL 60602" data-destination-label="State Street · punto central" data-origin="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-origin-label="Daley Plaza + árbol de Navidad" data-reason="Está a pocas cuadras de Daley Plaza y es parte del paseo navideño." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=State%20Street%20iluminada%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1637,11 +1682,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=112%20E%20Wacker%20Dr%2C%20Chicago%2C%20IL%2060601%20%E2%80%94%20acceso%20Michigan%20Ave%20/%20Upper%20Wacker" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Riverwalk%20de%20noche%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="112 E Wacker Dr, Chicago, IL 60601 — Michigan Ave / Upper Wacker access" data-destination="112 E Wacker Dr, Chicago, IL 60601 — Michigan Ave / Upper Wacker access" data-destination-label="Riverwalk · acceso nocturno" data-origin="111 N State St, Chicago, IL 60602 — referencia; recorrido por State St" data-origin-label="State Street iluminada" data-reason="Corto y bonito para ver el centro iluminado." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago%20Riverwalk%20de%20noche%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1666,11 +1710,10 @@ h1{
 </div>
 <div class="desc">GRATIS</div>
 </div>
-<div class="actions">
-<a href="https://maps.apple.com/?q=175%20N%20State%20St%2C%20Chicago%2C%20IL%2060601%20%E2%80%94%20referencia%20central%20del%20Loop" target="_blank" rel="noopener">Abrir Apple Maps →</a>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Paseo%20nocturno%20por%20el%20Loop%20Chicago" target="_blank" rel="noopener">Ver fotos →</a>
+<div class="actions"><button class="route-btn" data-access-point="175 N State St, Chicago, IL 60601" data-destination="175 N State St, Chicago, IL 60601" data-destination-label="Loop · punto central" data-origin="112 E Wacker Dr, Chicago, IL 60601 — acceso Michigan Ave / Upper Wacker" data-origin-label="Chicago Riverwalk de noche" data-reason="Es un último paseo corto; no buscaría bus." data-recommendation="🚶 Caminando" data-route="" type="button">🗺️ Ver trayecto</button>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Paseo%20nocturno%20por%20el%20Loop%20Chicago" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
-<input type="checkbox" aria-label="Marcar como hecha">
+<input aria-label="Marcar como hecha" type="checkbox"/>
 <span>Marcar como hecha</span>
 </label>
 </div>
@@ -1678,21 +1721,21 @@ h1{
 </article>
 </div>
 <div class="daytools">
-<button type="button" class="dayDone" data-day="4">Marcar actividades del día</button>
+<button class="dayDone" data-day="4" type="button">Marcar actividades del día</button>
 </div>
 <div class="foodhead"><div><b>🥪 Comer hoy · Riverwalk + Chinatown + noche</b><span>El mejor momento para variar la comida es Chinatown; la cena puede volver a ser pizza.</span></div><div class="foodicon">🥟</div></div>
 <div class="meals">
-<div class="meal"><div class="mealtype">Desayuno</div><b>Desayuno sencillo en el Loop</b><p>Huevos, pan y café cerca del hospedaje antes de caminar hacia Riverwalk.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=breakfast%20Loop%20Chicago" target="_blank" rel="noopener">📍 Ver opciones →</a></div>
-<div class="meal"><div class="mealtype">Almuerzo · 🥟</div><b>Chinatown</b><p>Aprovecha que llegarás en Water Taxi: dumplings, noodles o BBQ chino. Es el día ideal para probar algo diferente.</p><span class="price">$–$$ · buena relación precio/cantidad</span><a href="https://maps.apple.com/?q=Chinatown%20Chicago" target="_blank" rel="noopener">📍 Ver zona →</a></div>
-<div class="meal"><div class="mealtype">Cena · 🍕</div><b>Bongiorno's Cucina Italiana &amp; Pizzeria</b><p>Pizza cerca del Riverwalk/Loop; buena opción para terminar la noche sin complicar el recorrido.</p><span class="price">$</span><a href="https://maps.apple.com/?q=Bongiorno's%20Cucina%20Italiana%20%26%20Pizzeria%20Chicago" target="_blank" rel="noopener">📍 Ver en Apple Maps →</a></div>
+<div class="food-location-note" style="margin:6px 0 10px;padding:8px 10px;border-radius:11px;background:#f4f9fc;border:1px solid #d8e6ef;font-size:8px;color:#5f7487;line-height:1.4">📍 Selección por zona: prioricé lugares que queden sobre o muy cerca del recorrido de este día para evitar desvíos innecesarios.</div><div class="meal"><div class="mealtype">Desayuno</div><b>Goddess and the Baker — 181 W Madison</b><p>Desayuno y café muy cerca del alojamiento y del inicio del Riverwalk.</p><span class="price">$–$$</span><a href="https://maps.apple.com/?q=breakfast%20Loop%20Chicago" rel="noopener" target="_blank">📍 Ver opciones →</a><button class="route-btn food-route-btn" data-access-point="181 W Madison St, Chicago, IL 60602" data-destination="181 W Madison St, Chicago, IL 60602" data-destination-label="Goddess and the Baker · Madison" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Almuerzo · 🥟</div><b>Chinatown</b><p>Aprovecha que llegarás en Water Taxi: dumplings, noodles o BBQ chino. Es el día ideal para probar algo diferente.</p><span class="price">$–$$ · buena relación precio/cantidad</span><a href="https://maps.apple.com/?q=Chinatown%20Chicago" rel="noopener" target="_blank">📍 Ver zona →</a><button class="route-btn food-route-btn" data-access-point="1700 S Wentworth Ave, Chicago, IL 60616 — Chinatown" data-destination="1700 S Wentworth Ave, Chicago, IL 60616 — Chinatown" data-destination-label="Chinatown · Wentworth" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="meal"><div class="mealtype">Cena · 🍕</div><b>Bongiorno's Cucina Italiana &amp; Pizzeria</b><p>Pizza cerca del Riverwalk/Loop; buena opción para terminar la noche sin complicar el recorrido.</p><span class="price">$</span><a href="https://maps.apple.com/?q=Bongiorno's%20Cucina%20Italiana%20%26%20Pizzeria%20Chicago" rel="noopener" target="_blank">📍 Ver en Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="217 E Ohio St, Chicago, IL 60611" data-destination="217 E Ohio St, Chicago, IL 60611" data-destination-label="Bongiorno's · entrada principal" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div>
 <div class="sectionlabel">🛒 Supermercados / compras rápidas</div>
 <div class="foodgrid">
-<div class="food"><b>Target</b><div class="addr">111 N State St</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602" target="_blank">Apple Maps →</a></div>
-<div class="food"><b>Jewel-Osco</b><div class="addr">353 E Grand Ave</div><div class="kind">bebidas · snacks · grocery</div><a href="https://maps.apple.com/?q=353%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank">Apple Maps →</a></div>
+<div class="food"><b>Target</b><div class="addr">111 N State St</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1 S State St, Chicago, IL 60603" data-destination="1 S State St, Chicago, IL 60603" data-destination-label="Target · 1 S State" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
+<div class="food"><b>Whole Foods Market — Chicago Ave</b><div class="addr">3 W Chicago Ave, Chicago, IL 60654</div><div class="kind">bebidas · snacks · grocery</div><a href="https://maps.apple.com/?q=353%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="3 W Chicago Ave, Chicago, IL 60654" data-destination="3 W Chicago Ave, Chicago, IL 60654" data-destination-label="Whole Foods · Chicago Ave" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div></section>
-<footer class="footer">Itinerario Chicago Premium v5 · Optimizado para móvil · Tu progreso se guarda automáticamente</footer>
-<button type="button" class="topbtn" id="topBtn" aria-label="Volver arriba">↑</button>
+<footer class="footer">Itinerario Chicago Premium v15 · Apple Maps · Puntos de acceso recomendados</footer>
+<button aria-label="Volver arriba" class="topbtn" id="topBtn" type="button">↑</button>
 <script>
 (function(){
  const KEY='chicago-itinerary-v4-completed';
@@ -1974,10 +2017,16 @@ h1{
  function setupCurrency(){
    const rate=document.getElementById('fxRate'), usd=document.getElementById('usdAmount'), out=document.getElementById('fxResult');
    if(!rate||!usd||!out){return;}
+   const savedRate=localStorage.getItem('chicago_fx_rate');
+   const savedUsd=localStorage.getItem('chicago_fx_usd');
+   if(savedRate!==null) rate.value=savedRate;
+   if(savedUsd!==null) usd.value=savedUsd;
    function fmt(n){return new Intl.NumberFormat('es-CR',{maximumFractionDigits:0}).format(n);}
    function calc(){
      const r=parseFloat(String(rate.value).replace(',','.'))||0;
      const u=parseFloat(String(usd.value).replace(',','.'))||0;
+     localStorage.setItem('chicago_fx_rate', rate.value);
+     localStorage.setItem('chicago_fx_usd', usd.value);
      out.innerHTML='$'+fmt(u)+' USD = ₡'+fmt(u*r)+' <small>aprox.</small>';
    }
    rate.addEventListener('input',calc); usd.addEventListener('input',calc); calc();
@@ -1994,5 +2043,73 @@ h1{
 })();
 </script>
 </main>
-</body>
+<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">La ruta termina en el acceso recomendado del lugar, no necesariamente en el centro del edificio. Así evitamos que Maps te deje en un punto incómodo del complejo.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir directamente la ruta caminando.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir directamente las opciones de transporte.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">La opción de transporte se abre directamente con la ruta calculada desde el origen de prueba o tu ubicación actual.</div></div></div><script>
+(function(){
+  const modal = document.getElementById('routeModal');
+  const title = document.getElementById('routeTitle');
+  const sub = document.getElementById('routeSub');
+  const result = document.getElementById('routeResult');
+  const walk = document.getElementById('routeWalk');
+  const transit = document.getElementById('routeTransit');
+  const close = document.querySelector('.route-close');
+  let current = null;
+  // PRUEBA: true = usar hotel como origen. Antes del viaje cambiar a false.
+  const TEST_MODE = true;
+  const TEST_ORIGIN = '24 E Ida B Wells Dr, Chicago, IL 60605';
+
+  function mapUrl(mode){
+    if(!current) return '#';
+    const d = encodeURIComponent(current.destination);
+    return 'https://maps.apple.com/?' +
+      (TEST_MODE ? 'saddr=' + encodeURIComponent(TEST_ORIGIN) + '&' : '') +
+      'daddr=' + d + '&dirflg=' + (mode === 'walking' ? 'w' : 'r');
+  }
+
+  function openModal(btn){
+    current = {
+      origin: TEST_MODE ? TEST_ORIGIN : '',
+      destination: btn.dataset.destination,
+      destinationLabel: btn.dataset.destinationLabel,
+      recommendation: btn.dataset.recommendation,
+      reason: btn.dataset.reason,
+      route: btn.dataset.route
+    };
+    title.textContent = (TEST_MODE ? '🏨 Hotel → ' : '📍 Mi ubicación → ') + current.destinationLabel;
+    sub.textContent = TEST_MODE
+      ? 'Modo prueba: el origen será tu hotel. El destino es el lugar que acabas de seleccionar.'
+      : 'El origen será tu ubicación actual en el teléfono.';
+    result.style.display = 'none';
+    result.innerHTML = '';
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden','false');
+  }
+
+  function showTransit(){
+    if(current) window.open(mapUrl('transit'), '_blank', 'noopener');
+  }
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.route-btn');
+    if(btn){ e.preventDefault(); openModal(btn); }
+  });
+
+  walk.addEventListener('click', function(){
+    if(current) window.open(mapUrl('walking'), '_blank', 'noopener');
+  });
+
+  transit.addEventListener('click', showTransit);
+
+  close.addEventListener('click', function(){
+    modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true');
+  });
+
+  modal.addEventListener('click', function(e){
+    if(e.target === modal){ modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true'); }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true'); }
+  });
+})();
+</script></body>
 </html>
