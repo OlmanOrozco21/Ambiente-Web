@@ -8,7 +8,7 @@
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="telephone=no" name="format-detection"/>
 <meta content="#07111f" name="theme-color"/>
-<title>Chicago · Itinerario Premium v17 — Apple Maps / Google Maps</title>
+<title>Chicago · Itinerario Premium v19 — Apple Maps / Google Maps</title>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Manrope:wght@500;700;800&display=swap");
 
@@ -797,8 +797,24 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 .map-switch button.active{background:#eaf5fb;border-color:#8fc2df;color:#176b9c}
 </style><style>
 .route-map{cursor:pointer}
+</style><style id="route-controls-v19">
+.route-controls{margin:8px 0 12px;padding:10px;border:1px solid #d9e5ee;border-radius:14px;background:#fff;display:grid;gap:8px}
+.route-control-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.route-control-label{font-size:8px;font-weight:900;color:#536d83;white-space:nowrap}
+.route-control-buttons{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.route-control-buttons button{border:1px solid #d3e0e9;background:#f7fafc;color:#5c7184;font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:9px;cursor:pointer}
+.route-control-buttons button.active{background:#eaf5fb;border-color:#8fc2df;color:#176b9c}
+.hotel-float{position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:9998;border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:10px 14px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 24px rgba(0,0,0,.16);color:#23465c;font:inherit;font-size:11px;font-weight:900;cursor:pointer}
+.hotel-route-card{margin:12px 0 16px;padding:14px;border:1px solid #d9e5ee;border-radius:16px;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hotel-route-card .hotel-route-copy{min-width:0}.hotel-route-card b{font-size:11px;color:#24485d}.hotel-route-card span{display:block;font-size:8px;color:#6b8191;margin-top:3px}
+.hotel-route-card button{flex:none;border:1px solid #bcd8e8;background:#edf7fc;color:#176b9c;font:inherit;font-size:9px;font-weight:900;padding:8px 10px;border-radius:10px;cursor:pointer}
+@media(max-width:480px){.route-control-row{align-items:flex-start;flex-direction:column}.route-control-buttons{justify-content:flex-start}.hotel-route-card{align-items:flex-start}.hotel-route-card button{margin-top:1px}}
 </style></head>
-<body data-maps-provider="Apple Maps"><div class="map-switch"><div class="map-switch-label">🗺️ MAPAS PARA LOS TRAYECTOS</div><div class="map-switch-buttons"><button data-map-provider="apple" type="button">🍎 Apple Maps</button><button data-map-provider="google" type="button">🟦 Google Maps</button></div></div>
+<body data-maps-provider="Apple Maps"><div class="route-controls" aria-label="Configuración de rutas">
+<div class="route-control-row"><div class="route-control-label">🗺️ MAPA</div><div class="route-control-buttons"><button data-map-provider="apple" type="button">🍎 Apple Maps</button><button data-map-provider="google" type="button">🟦 Google Maps</button></div></div>
+<div class="route-control-row"><div class="route-control-label">📍 ORIGEN</div><div class="route-control-buttons"><button data-origin-mode="current" type="button">📍 Ubicación actual</button><button data-origin-mode="hotel" type="button">🏨 Hospedaje</button></div></div>
+</div>
+<div class="hotel-route-card" aria-label="Ruta al hospedaje"><div class="hotel-route-copy"><b>🏨 Ir al hospedaje</b><span>Desde tu ubicación actual hasta 24 E Ida B. Wells Dr.</span></div><button id="hotelRouteBtn" type="button">Cómo llegar →</button></div>
 <main class="app">
 <section class="hero">
 <div class="eyebrow">CHICAGO · 2–5 DICIEMBRE 2026</div>
@@ -1744,7 +1760,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div class="food"><b>Target</b><div class="addr">111 N State St</div><div class="kind">comida lista · snacks · bebidas</div><a href="https://maps.apple.com/?q=111%20N%20State%20St%2C%20Chicago%2C%20IL%2060602" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="1 S State St, Chicago, IL 60603" data-destination="1 S State St, Chicago, IL 60603" data-destination-label="Target · 1 S State" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 <div class="food"><b>Whole Foods Market — Chicago Ave</b><div class="addr">3 W Chicago Ave, Chicago, IL 60654</div><div class="kind">bebidas · snacks · grocery</div><a href="https://maps.apple.com/?q=353%20E%20Grand%20Ave%2C%20Chicago%2C%20IL%2060611" target="_blank">Apple Maps →</a><button class="route-btn food-route-btn" data-access-point="3 W Chicago Ave, Chicago, IL 60654" data-destination="3 W Chicago Ave, Chicago, IL 60654" data-destination-label="Whole Foods · Chicago Ave" data-reason="" data-recommendation="" data-route="" type="button">🗺️ Cómo llegar</button></div>
 </div></section>
-<footer class="footer">Itinerario Chicago Premium v17 · Mapas en la misma pestaña · Preferencia guardada</footer>
+<footer class="footer">Itinerario Chicago Premium v19 · Mapas en la misma pestaña · Preferencia guardada</footer>
 <button aria-label="Volver arriba" class="topbtn" id="topBtn" type="button">↑</button>
 <script>
 (function(){
@@ -2053,118 +2069,56 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 })();
 </script>
 </main>
-<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen de prueba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir directamente las opciones de transporte desde el origen de prueba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">Al abrir el trayecto, el mapa reemplaza esta página en la misma pestaña. Puedes volver atrás para regresar al itinerario.</div></div></div><script>
+<div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen seleccionado arriba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir directamente las opciones de transporte desde el origen seleccionado arriba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">Al abrir el trayecto, el mapa reemplaza esta página en la misma pestaña. Puedes volver atrás para regresar al itinerario.</div></div></div><script>
 (function(){
-  const modal = document.getElementById('routeModal');
-  const title = document.getElementById('routeTitle');
-  const sub = document.getElementById('routeSub');
-  const result = document.getElementById('routeResult');
-  const walk = document.getElementById('routeWalk');
-  const transit = document.getElementById('routeTransit');
-  const close = document.querySelector('.route-close');
-  const providerButtons = () => [...document.querySelectorAll('[data-map-provider]')];
-
-  let current = null;
-  const MAP_KEY = 'chicago_maps_provider';
-  const TEST_MODE = true;
-  const TEST_ORIGIN = '24 E Ida B Wells Dr, Chicago, IL 60605';
-
-  function provider(){
-    return localStorage.getItem(MAP_KEY) || 'apple';
+  const modal=document.getElementById('routeModal'), title=document.getElementById('routeTitle'), sub=document.getElementById('routeSub');
+  const result=document.getElementById('routeResult'), walk=document.getElementById('routeWalk'), transit=document.getElementById('routeTransit'), close=document.querySelector('.route-close');
+  const providerButtons=()=>[...document.querySelectorAll('[data-map-provider]')];
+  const originButtons=()=>[...document.querySelectorAll('[data-origin-mode]')];
+  const HOTEL='24 E Ida B Wells Dr, Chicago, IL 60605';
+  const MAP_KEY='chicago_maps_provider', ORIGIN_KEY='chicago_route_origin_mode';
+  let current=null, hotelDirect=false;
+  function provider(){return localStorage.getItem(MAP_KEY)||'apple';}
+  function originMode(){return localStorage.getItem(ORIGIN_KEY)||'hotel';}
+  function providerName(){return provider()==='google'?'Google Maps':'Apple Maps';}
+  function originLabel(){return originMode()==='hotel'?'🏨 Hospedaje':'📍 Ubicación actual';}
+  function effectiveOrigin(){return originMode()==='hotel'?HOTEL:'';}
+  function renderControls(){
+    providerButtons().forEach(b=>b.classList.toggle('active',b.dataset.mapProvider===provider()));
+    originButtons().forEach(b=>b.classList.toggle('active',b.dataset.originMode===originMode()));
+    if(walk) walk.querySelector('strong').textContent='🚶 Caminar en '+providerName();
+    if(transit) transit.querySelector('strong').textContent='🚌 Transporte en '+providerName();
   }
-
-  function providerName(){
-    return provider() === 'google' ? 'Google Maps' : 'Apple Maps';
+  function mapUrl(mode,destination,forceCurrent){
+    const d=encodeURIComponent(destination), o=forceCurrent?'':effectiveOrigin();
+    if(provider()==='google') return 'https://www.google.com/maps/dir/?api=1'+(o?'&origin='+encodeURIComponent(o):'')+'&destination='+d+'&travelmode='+mode+'&dir_action=navigate';
+    return 'https://maps.apple.com/?'+(o?'saddr='+encodeURIComponent(o)+'&':'')+'daddr='+d+'&dirflg='+(mode==='walking'?'w':'r');
   }
-
-  function renderProvider(){
-    providerButtons().forEach(function(b){
-      b.classList.toggle('active', b.dataset.mapProvider === provider());
-    });
-    if(walk){
-      walk.querySelector('strong').textContent = '🚶 Caminar en ' + providerName();
-    }
-    if(transit){
-      transit.querySelector('strong').textContent = '🚌 Transporte en ' + providerName();
-    }
-  }
-
-  function mapUrl(mode){
-    if(!current) return '#';
-    const d = encodeURIComponent(current.destination);
-    if(provider() === 'google'){
-      return 'https://www.google.com/maps/dir/?api=1' +
-        (TEST_MODE ? '&origin=' + encodeURIComponent(TEST_ORIGIN) : '') +
-        '&destination=' + d +
-        '&travelmode=' + mode +
-        '&dir_action=navigate';
-    }
-    return 'https://maps.apple.com/?' +
-      (TEST_MODE ? 'saddr=' + encodeURIComponent(TEST_ORIGIN) + '&' : '') +
-      'daddr=' + d +
-      '&dirflg=' + (mode === 'walking' ? 'w' : 'r');
-  }
-
+  function setTitle(){if(!current)return; title.textContent=originLabel()+' → '+current.destinationLabel;}
   function openModal(btn){
-    current = {
-      destination: btn.dataset.destination,
-      destinationLabel: btn.dataset.destinationLabel,
-      recommendation: btn.dataset.recommendation || '',
-      reason: btn.dataset.reason || '',
-      route: btn.dataset.route || ''
-    };
-    title.textContent = (TEST_MODE ? '🏨 Hotel → ' : '📍 Mi ubicación → ') + current.destinationLabel;
-    sub.textContent = 'Elige cómo quieres llegar. El destino usa el punto de acceso recomendado del lugar.';
-    result.style.display = 'none';
-    result.innerHTML = '';
-    renderProvider();
-    modal.classList.remove('hidden');
-    modal.setAttribute('aria-hidden','false');
+    hotelDirect=false;
+    current={destination:btn.dataset.destination,destinationLabel:btn.dataset.destinationLabel,recommendation:btn.dataset.recommendation||'',reason:btn.dataset.reason||'',route:btn.dataset.route||''};
+    setTitle(); sub.textContent='Elige cómo llegar. El origen se controla arriba y nunca depende de la actividad anterior.'; result.style.display='none'; result.innerHTML=''; renderControls(); modal.classList.remove('hidden'); modal.setAttribute('aria-hidden','false');
   }
-
-  document.addEventListener('click', function(e){
-    const btn = e.target.closest('.route-btn');
-    if(btn){ e.preventDefault(); openModal(btn); return; }
-
-    const p = e.target.closest('[data-map-provider]');
-    if(p){
-      localStorage.setItem(MAP_KEY, p.dataset.mapProvider);
-      renderProvider();
-      if(current){
-        title.textContent = (TEST_MODE ? '🏨 Hotel → ' : '📍 Mi ubicación → ') + current.destinationLabel;
-      }
-    }
+  function openHotelRoute(){
+    hotelDirect=true; current={destination:HOTEL,destinationLabel:'Hospedaje · 24 E Ida B. Wells Dr'};
+    title.textContent='📍 Ubicación actual → 🏨 Hospedaje';
+    sub.textContent='Ruta de regreso al alojamiento. Esta ruta siempre usa tu ubicación actual como origen.';
+    result.style.display='none'; result.innerHTML=''; renderControls(); modal.classList.remove('hidden'); modal.setAttribute('aria-hidden','false');
+  }
+  document.addEventListener('click',function(e){
+    const btn=e.target.closest('.route-btn'); if(btn){e.preventDefault();openModal(btn);return;}
+    const p=e.target.closest('[data-map-provider]'); if(p){localStorage.setItem(MAP_KEY,p.dataset.mapProvider);renderControls();setTitle();return;}
+    const o=e.target.closest('[data-origin-mode]'); if(o){localStorage.setItem(ORIGIN_KEY,o.dataset.originMode);renderControls();setTitle();return;}
+    if(e.target.closest('#hotelRouteBtn')||e.target.closest('#hotelFloat')){e.preventDefault();openHotelRoute();return;}
   });
-
-  walk.addEventListener('click', function(){
-    if(current) window.open(mapUrl('walking'), '_blank', 'noopener');
-  });
-
-  transit.addEventListener('click', function(){
-    if(!current) return;
-    window.open(mapUrl('transit'), '_blank', 'noopener');
-  });
-
-  close.addEventListener('click', function(){
-    modal.classList.add('hidden');
-    modal.setAttribute('aria-hidden','true');
-  });
-
-  modal.addEventListener('click', function(e){
-    if(e.target === modal){
-      modal.classList.add('hidden');
-      modal.setAttribute('aria-hidden','true');
-    }
-  });
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){
-      modal.classList.add('hidden');
-      modal.setAttribute('aria-hidden','true');
-    }
-  });
-
-  renderProvider();
+  walk.addEventListener('click',()=>{if(current)window.location.href=mapUrl('walking',current.destination,hotelDirect);});
+  transit.addEventListener('click',()=>{if(current)window.location.href=mapUrl('transit',current.destination,hotelDirect);});
+  close.addEventListener('click',()=>{modal.classList.add('hidden');modal.setAttribute('aria-hidden','true');});
+  modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true');}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true');}});
+  renderControls();
 })();
-</script></body>
+</script><button class="hotel-float" id="hotelFloat" type="button">🏨 Hospedaje</button>
+</body>
 </html>
