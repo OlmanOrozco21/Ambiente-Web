@@ -722,7 +722,6 @@ h1{
   100%{box-shadow:0 0 0 18px rgba(17,142,208,0)}
 }
 
-
 .currencybar{margin:12px 0 14px;padding:13px;border:1px solid #cbdced;border-radius:16px;background:linear-gradient(135deg,#ffffff,#f3f9ff);box-shadow:0 8px 22px rgba(16,44,72,.07)}
 .currencytop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}
 .currencytop b{font-size:12px;color:#173b5e}.currencytop span{font-size:9px;color:#68809b;font-weight:800}
@@ -942,6 +941,50 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
   overflow:auto !important;
 }
 </style>
+
+<style id="v50-food-modal-cleanup">
+/* v50: the only distance shown to the user is the useful walking-route result on each card. */
+#foodModalSub,
+#foodModal .v45-food-status,
+#foodModal .v49-food-status,
+#foodModal .food-location-status,
+#foodModal .v45-live-distance,
+#foodModal .live-distance {
+  display: none !important;
+}
+</style>
+
+<style id="v54-important-transit">
+.transit-important{
+  position:relative;
+  z-index:3;
+  box-sizing:border-box;
+  margin:0 0 12px 47px;
+  width:calc(100% - 47px);
+  padding:10px 13px;
+  border:1px solid #cfe2ee;
+  border-radius:12px;
+  background:#f5fbff;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  column-gap:8px;
+  row-gap:2px;
+  color:#24485d;
+  box-shadow:0 4px 12px rgba(12,42,70,.035);
+}
+.transit-important b{font-size:.78rem;font-weight:900;white-space:nowrap}
+.transit-important span{font-size:.78rem;font-weight:800;min-width:0}
+.transit-important small{grid-column:2;font-size:.68rem;color:#6c8094;font-weight:700}
+@media (max-width:560px){
+  .transit-important{
+    grid-template-columns:1fr;
+    row-gap:3px;
+  }
+  .transit-important small{grid-column:1}
+  .transit-important b{white-space:normal}
+}
+</style>
 </head>
 <body data-maps-provider="Apple Maps"><div aria-label="Configuración de rutas" class="route-controls">
 <div class="route-control-row"><div class="route-control-label">🗺️ MAPA</div><div class="route-control-buttons"><button data-map-provider="apple" type="button">🍎 Apple Maps</button><button data-map-provider="google" type="button">🟦 Google Maps</button></div></div>
@@ -971,13 +1014,13 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <section class="transitpanel" id="transit">
 <div class="transithead"><div><b>🚌 Tus líneas CTA · horarios para tu viaje</b><span>Tus 7 líneas guardadas: 4, 20, 22, 66, 126, 146 y 151. Las uso como candidatas cuando encajan con el trayecto; no voy a asumir que caminar es mejor solo por estar dentro de cierta distancia.</span></div><div class="transitdate">CTA 2026</div></div>
 <div class="routegrid">
-<article class="routecard"><div class="rline"><span class="rnum">4</span><span class="rname">Cottage Grove</span></div><div class="rinfo"><b>Mié–vie:</b> aprox. 5:00–23:25 · <b>sáb:</b> 5:05–23:25.<br/><b>Frecuencia:</b> ≤10 min en la red frecuente durante el día; Owl por la noche.</div><div class="peak">⚠️ Más lleno: laborables 6:30–9:00 y 15:30–18:30; sáb 11:00–16:00.</div><a href="https://www.transitchicago.com/bus/4/" rel="noopener" target="_blank">Horario CTA →</a></article>
-<article class="routecard"><div class="rline"><span class="rnum">20</span><span class="rname">Madison</span></div><div class="rinfo"><b>Mié–vie:</b> servicio amplio + Owl · <b>sáb:</b> servicio amplio.<br/><b>Frecuencia:</b> hasta ≤10 min en la red frecuente durante las franjas de servicio.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–15:00.</div><a href="https://www.transitchicago.com/bus/20/" rel="noopener" target="_blank">Horario CTA →</a></article>
-<article class="routecard"><div class="rline"><span class="rnum">22</span><span class="rname">Clark</span></div><div class="rinfo"><b>Mié–vie y sáb:</b> servicio 24 h / Owl según tramo.<br/><b>Frecuencia:</b> variable; suele ser más rápida en el centro y horas pico.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–19:00; sáb 11:00–17:00.</div><a href="https://www.transitchicago.com/bus/22/" rel="noopener" target="_blank">Horario CTA →</a></article>
-<article class="routecard"><div class="rline"><span class="rnum">66</span><span class="rname">Chicago</span></div><div class="rinfo"><b>Mié–vie:</b> 3:55–23:50 hacia Navy Pier; regreso hasta 00:55.<br/><b>Sáb:</b> 4:10–23:50; regreso hasta 00:50. Owl durante la noche.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–17:00.</div><a href="https://www.transitchicago.com/bus/66/" rel="noopener" target="_blank">Horario CTA →</a></article>
-<article class="routecard"><div class="rline"><span class="rnum">126</span><span class="rname">Jackson</span></div><div class="rinfo"><b>Mié–vie:</b> 5:20–22:40 desde terminales principales; <b>sáb:</b> aprox. 6:00–22:40.<br/><b>Frecuencia:</b> variable, más espaciada que la red frecuente.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–16:00.</div><a href="https://www.transitchicago.com/bus/126/" rel="noopener" target="_blank">Horario CTA →</a></article>
-<article class="routecard"><div class="rline"><span class="rnum">146</span><span class="rname">Inner Lake Shore/Michigan Express</span></div><div class="rinfo"><b>Mié–vie:</b> 5:00–22:40 desde Berwyn hacia Museum Campus; regreso hasta 23:35.<br/><b>Sáb:</b> 6:00–22:40; regreso hasta 23:40.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:30 y 16:00–18:30; sáb 11:00–16:00.</div><a href="https://www.transitchicago.com/bus/146/" rel="noopener" target="_blank">Horario CTA →</a></article>
-<article class="routecard"><div class="rline"><span class="rnum">151</span><span class="rname">Sheridan</span></div><div class="rinfo"><b>Mié–vie:</b> aprox. 5:00–01:25; <b>sáb:</b> 5:25–01:30.<br/><b>Frecuencia:</b> aprox. 9–16 min laborables y 8–15 min sábado según tramo.</div><div class="peak">⚠️ Más lleno: laborables 7:00–9:00 y 16:00–18:30; sáb 11:00–17:00.</div><a href="https://www.transitchicago.com/bus/151/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">4</span><span class="rname">Cottage Grove</span></div><div class="rinfo"><b>Mié–vie:</b> aprox. 5:00 am–11:25 pm · <b>sáb:</b> 5:05 am–11:25 pm.<br/><b>Frecuencia:</b> ≤10 min en la red frecuente durante el día; Owl por la noche.</div><div class="peak">⚠️ Más lleno: laborables 6:30 am–9:00 am y 3:30 pm–6:30 pm; sáb 11:00 am–4:00 pm.</div><a href="https://www.transitchicago.com/bus/4/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">20</span><span class="rname">Madison</span></div><div class="rinfo"><b>Mié–vie:</b> servicio amplio + Owl · <b>sáb:</b> servicio amplio.<br/><b>Frecuencia:</b> hasta ≤10 min en la red frecuente durante las franjas de servicio.</div><div class="peak">⚠️ Más lleno: laborables 7:00 am–9:00 am y 4:00 pm–6:30 pm; sáb 11:00 am–3:00 pm.</div><a href="https://www.transitchicago.com/bus/20/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">22</span><span class="rname">Clark</span></div><div class="rinfo"><b>Mié–vie y sáb:</b> servicio 24 h / Owl según tramo.<br/><b>Frecuencia:</b> variable; suele ser más rápida en el centro y horas pico.</div><div class="peak">⚠️ Más lleno: laborables 7:00 am–9:00 am y 4:00 pm–7:00 pm; sáb 11:00 am–5:00 pm.</div><a href="https://www.transitchicago.com/bus/22/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">66</span><span class="rname">Chicago</span></div><div class="rinfo"><b>Mié–vie:</b> 3:55 am–11:50 pm hacia Navy Pier; regreso hasta 12:55 am.<br/><b>Sáb:</b> 4:10 am–11:50 pm; regreso hasta 12:50 am. Owl durante la noche.</div><div class="peak">⚠️ Más lleno: laborables 7:00 am–9:00 am y 4:00 pm–6:30 pm; sáb 11:00 am–5:00 pm.</div><a href="https://www.transitchicago.com/bus/66/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">126</span><span class="rname">Jackson</span></div><div class="rinfo"><b>Mié–vie:</b> 5:20 am–10:40 pm desde terminales principales; <b>sáb:</b> aprox. 6:00 am–10:40 pm.<br/><b>Frecuencia:</b> variable, más espaciada que la red frecuente.</div><div class="peak">⚠️ Más lleno: laborables 7:00 am–9:00 am y 4:00 pm–6:30 pm; sáb 11:00 am–4:00 pm.</div><a href="https://www.transitchicago.com/bus/126/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">146</span><span class="rname">Inner Lake Shore/Michigan Express</span></div><div class="rinfo"><b>Mié–vie:</b> 5:00 am–10:40 pm desde Berwyn hacia Museum Campus; regreso hasta 11:35 pm.<br/><b>Sáb:</b> 6:00 am–10:40 pm; regreso hasta 11:40 pm.</div><div class="peak">⚠️ Más lleno: laborables 7:00 am–9:30 am y 4:00 pm–6:30 pm; sáb 11:00 am–4:00 pm.</div><a href="https://www.transitchicago.com/bus/146/" rel="noopener" target="_blank">Horario CTA →</a></article>
+<article class="routecard"><div class="rline"><span class="rnum">151</span><span class="rname">Sheridan</span></div><div class="rinfo"><b>Mié–vie:</b> aprox. 5:00 am–1:25 am; <b>sáb:</b> 5:25 am–1:30 am.<br/><b>Frecuencia:</b> aprox. 9–16 min laborables y 8–15 min sábado según tramo.</div><div class="peak">⚠️ Más lleno: laborables 7:00 am–9:00 am y 4:00 pm–6:30 pm; sáb 11:00 am–5:00 pm.</div><a href="https://www.transitchicago.com/bus/151/" rel="noopener" target="_blank">Horario CTA →</a></article>
 </div>
 <div class="transitnote">💡 <b>Importante:</b> “Más lleno” es una ventana de planificación, no una predicción exacta para diciembre. CTA basa su indicador de crowdedness en datos recientes y recomienda revisar el Bus Tracker/alertas antes de salir. Las horas exactas dependen de la parada y dirección.</div>
 </section>
@@ -1019,188 +1062,190 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <a href="#day6">Día 6</a>
 </nav>
 <section class="day" id="day1"><div class="dayhead"><h2>Día 1 — Miércoles 2 dic | Llegada + Navidad en el Loop + hielo</h2><small>6 actividades</small></div>
-<div class="start"><b>Inicio del día</b> · 24 E Ida B Wells Dr, Chicago, IL 60605</div><div class="timeline"><article class="stop free" data-key="d1s01">
+<div class="start"></div><div class="timeline"><article class="stop free" data-key="d1s01">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 01</div><div class="place">Millennium Park + The Bean</div><div class="time">16:15–16:50</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 01</div><div class="place">Millennium Park + The Bean</div><div class="time">4:15 pm–4:50 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">201 E Randolph St, Chicago, IL 60601 — Cloud Gate / Millennium Park</div></div><div class="desc">GRATIS · primera caminata por Chicago · fotos con The Bean</div></div>
 <div class="actions"><button class="route-btn" data-access-point="201 E Randolph St, Chicago, IL 60601 — Cloud Gate / Millennium Park" data-destination="41.88269,-87.62334" data-destination-label="Millennium Park + The Bean" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Millennium Park + The Bean%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 02</div><div class="place">Chicago Cultural Center</div><div class="time">16:50–17:25</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 02</div><div class="place">Chicago Cultural Center</div><div class="time">4:50 pm–5:25 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">78 E Washington St, Chicago, IL 60602</div></div><div class="desc">GRATIS · interior histórico + cúpulas</div></div>
 <div class="actions"><button class="route-btn" data-access-point="78 E Washington St, Chicago, IL 60602" data-destination="41.88375,-87.62495" data-destination-label="Chicago Cultural Center" data-origin="201 E Randolph St, Chicago, IL 60601" data-origin-label="Millennium Park" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Cultural Center%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 03</div><div class="place">Christkindlmarket — Daley Plaza</div><div class="time">17:35–18:25</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 03</div><div class="place">Christkindlmarket — Daley Plaza</div><div class="time">5:35 pm–6:25 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">50 W Washington St, Chicago, IL 60602 — Daley Plaza</div></div><div class="desc">GRATIS · mercado navideño · comida y ambiente</div></div>
 <div class="actions"><button class="route-btn" data-access-point="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination="41.88342,-87.63020" data-destination-label="Christkindlmarket — Daley Plaza" data-origin="78 E Washington St, Chicago, IL 60602" data-origin-label="Chicago Cultural Center" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Christkindlmarket   Daley Plaza%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 04</div><div class="place">Macy's / State Street</div><div class="time">18:30–19:20</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 04</div><div class="place">Macy's / State Street</div><div class="time">6:30 pm–7:20 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">111 N State St, Chicago, IL 60602 — Macy’s State Street</div></div><div class="desc">GRATIS · decoración navideña + paseo por State Street</div></div>
 <div class="actions"><button class="route-btn" data-access-point="111 N State St, Chicago, IL 60602 — Macy’s State Street" data-destination="41.883697,-87.626969" data-destination-label="Macy's / State Street" data-origin="50 W Washington St, Chicago, IL 60602" data-origin-label="Christkindlmarket" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Macy's / State Street%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 05</div><div class="place">Chicago Theatre — exterior</div><div class="time">19:25–19:45</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 05</div><div class="place">Chicago Theatre — exterior</div><div class="time">7:25 pm–7:45 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">175 N State St, Chicago, IL 60601</div></div><div class="desc">GRATIS · fachada iluminada + fotos</div></div>
 <div class="actions"><button class="route-btn" data-access-point="175 N State St, Chicago, IL 60601" data-destination="41.88530,-87.62775" data-destination-label="Chicago Theatre — exterior" data-origin="111 N State St, Chicago, IL 60602" data-origin-label="Macy's / State Street" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Theatre   exterior%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 06</div><div class="place">McCormick Tribune Ice Rink</div><div class="time">20:00–21:30</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 06</div><div class="place">McCormick Tribune Ice Rink</div><div class="time">8:00 pm–9:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">55 N Michigan Ave, Chicago, IL 60601 — Millennium Park</div></div><div class="desc">GRATIS · alquiler de patines aparte · cierre relajado del primer día</div></div>
 <div class="actions"><button class="route-btn" data-access-point="55 N Michigan Ave, Chicago, IL 60601 — Millennium Park" data-destination="41.88268,-87.62378" data-destination-label="McCormick Tribune Ice Rink" data-origin="175 N State St, Chicago, IL 60601" data-origin-label="Chicago Theatre" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=McCormick Tribune Ice Rink%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article></div>
 <div class="daytools"><button class="dayDone" data-day="1" type="button">Marcar actividades del día</button></div>
-<div class="start"><b>Inicio del día</b> · 24 E Ida B Wells Dr, Chicago, IL 60605</div><div class="timeline"><article class="stop paid" data-key="d2s01">
+</section>
+<section class="day" id="day2"><div class="dayhead"><h2>Día 2 — Jueves 3 dic | Shedd + Field Museum + Bulls</h2><small>6 actividades</small></div>
+<div class="start"></div><div class="timeline"><div class="transit-important"><b>🚌 Traslado importante</b><span>Hospedaje → Shedd Aquarium · ≈ 40 min total</span><small>Caminar + espera + CTA + caminar</small></div><article class="stop paid" data-key="d2s01">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 01</div><div class="place">Shedd Aquarium</div><div class="time">09:00–12:00</div><span class="badge paid">PAGADO</span>
+<div class="num">PARADA 01</div><div class="place">Shedd Aquarium</div><div class="time">9:00 am–12:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1200 S DuSable Lake Shore Dr, Chicago, IL 60605</div></div><div class="desc">PAGADO · visita principal de la mañana</div></div>
 <div class="actions"><button class="route-btn" data-access-point="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-destination="41.86762,-87.61380" data-destination-label="Shedd Aquarium" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA / 🚶" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Shedd Aquarium%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d2s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 02</div><div class="place">Almuerzo — Museum Campus</div><div class="time">12:00–13:00</div><span class="badge free">PAUSA</span>
+<div class="num">PARADA 02</div><div class="place">Almuerzo — Museum Campus</div><div class="time">12:00 pm–1:00 pm</div><span class="badge free">PAUSA</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Museum Campus, Chicago, IL 60605</div></div><div class="desc">PAUSA · una hora real para comer y descansar</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Museum Campus, Chicago, IL 60605" data-destination="41.86466,-87.61444" data-destination-label="Almuerzo — Museum Campus" data-origin="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Shedd Aquarium" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Almuerzo   Museum Campus%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop paid" data-key="d2s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 03</div><div class="place">Field Museum — SUE + dinosaurios</div><div class="time">13:00–16:00</div><span class="badge paid">PAGADO</span>
+<div class="num">PARADA 03</div><div class="place">Field Museum — SUE + dinosaurios</div><div class="time">1:00 pm–4:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1400 S DuSable Lake Shore Dr, Chicago, IL 60605</div></div><div class="desc">PAGADO · SUE the T. rex + salas de dinosaurios y exhibiciones principales</div></div>
 <div class="actions"><button class="route-btn" data-access-point="1400 S DuSable Lake Shore Dr, Chicago, IL 60605" data-destination="41.86621,-87.61690" data-destination-label="Field Museum — SUE + dinosaurios" data-origin="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Museum Campus" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Field Museum   SUE + dinosaurios%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d2s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 04</div><div class="place">Museum Campus + Lake Michigan</div><div class="time">16:00–16:40</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 04</div><div class="place">Museum Campus + Lake Michigan</div><div class="time">4:00 pm–4:40 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Museum Campus, Chicago, IL 60605</div></div><div class="desc">GRATIS · skyline + lago + fotos antes de ir al partido</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Museum Campus, Chicago, IL 60605" data-destination="41.86520,-87.61390" data-destination-label="Museum Campus + Lake Michigan" data-origin="1400 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Field Museum" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Museum Campus + Lake Michigan%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d2s05">
+<a href="https://www.google.com/search?tbm=isch&amp;q=Museum Campus + Lake Michigan%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div class="transit-important"><b>🚌 Traslado importante</b><span>Museum Campus → United Center · ≈ 55 min total</span><small>Caminar + espera + CTA + caminar</small></div><article class="stop free" data-key="d2s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 05</div><div class="place">Traslado + llegada al United Center</div><div class="time">16:40–18:30</div><span class="badge free">MARGEN</span>
+<div class="num">PARADA 05</div><div class="place">Traslado + llegada al United Center</div><div class="time">4:40 pm–6:30 pm</div><span class="badge free">MARGEN</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1901 W Madison St, Chicago, IL 60612 — United Center</div></div><div class="desc">MARGEN · transporte + entrada al estadio + comida antes del juego</div></div>
 <div class="actions"><button class="route-btn" data-access-point="1901 W Madison St, Chicago, IL 60612 — United Center" data-destination="41.88068,-87.67418" data-destination-label="Traslado + llegada al United Center" data-origin="Museum Campus, Chicago, IL 60605" data-origin-label="Museum Campus" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚇/🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Traslado + llegada al United Center%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop paid" data-key="d2s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 06</div><div class="place">Chicago Bulls vs Cleveland Cavaliers</div><div class="time">19:00–22:00</div><span class="badge paid">PAGADO</span>
-</div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1901 W Madison St, Chicago, IL 60612 — United Center</div></div><div class="desc">PAGADO · partido 7:00 PM</div></div>
+<div class="num">PARADA 06</div><div class="place">Chicago Bulls vs Cleveland Cavaliers</div><div class="time">7:00 pm–10:00 pm</div><span class="badge paid">PAGADO</span>
+</div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1901 W Madison St, Chicago, IL 60612 — United Center</div></div><div class="desc">PAGADO · partido 7:00 pm</div></div>
 <div class="actions"><button class="route-btn" data-access-point="1901 W Madison St, Chicago, IL 60612 — United Center" data-destination="41.88068,-87.67418" data-destination-label="Chicago Bulls vs Cleveland Cavaliers" data-origin="1901 W Madison St, Chicago, IL 60612" data-origin-label="United Center" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Bulls vs Cleveland Cavaliers%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article></div>
 <div class="daytools"><button class="dayDone" data-day="2" type="button">Marcar actividades del día</button></div>
 </section>
 <section class="day" id="day3"><div class="dayhead"><h2>Día 3 — Viernes 4 dic | Zoo + Skydeck al atardecer + Navy Pier</h2><small>7 actividades</small></div>
-<div class="start"><b>Inicio del día</b> · 24 E Ida B Wells Dr, Chicago, IL 60605</div><div class="timeline"><article class="stop free" data-key="d3s01">
+<div class="start"></div><div class="timeline"><div class="transit-important"><b>🚌 Traslado importante</b><span>Hospedaje → Lincoln Park Zoo · ≈ 45 min total</span><small>Caminar + espera + CTA + caminar</small></div><article class="stop free" data-key="d3s01">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 01</div><div class="place">Lincoln Park Zoo</div><div class="time">10:00–13:00</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 01</div><div class="place">Lincoln Park Zoo</div><div class="time">10:00 am–1:00 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo</div></div><div class="desc">GRATIS · 3 horas para recorrer el zoo de día</div></div>
 <div class="actions"><button class="route-btn" data-access-point="2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo" data-destination="41.91871,-87.63537" data-destination-label="Lincoln Park Zoo" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Lincoln Park Zoo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d3s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 02</div><div class="place">Almuerzo — Lincoln Park</div><div class="time">13:00–14:00</div><span class="badge free">PAUSA</span>
+<div class="num">PARADA 02</div><div class="place">Almuerzo — Lincoln Park</div><div class="time">1:00 pm–2:00 pm</div><span class="badge free">PAUSA</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Lincoln Park, Chicago, IL 60614</div></div><div class="desc">PAUSA · almuerzo sin correr</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Lincoln Park, Chicago, IL 60614" data-destination="41.92100,-87.63350" data-destination-label="Almuerzo — Lincoln Park" data-origin="2001 N Clark St, Chicago, IL 60614" data-origin-label="Lincoln Park Zoo" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Almuerzo   Lincoln Park%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d3s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 03</div><div class="place">Nature Boardwalk + Lincoln Park</div><div class="time">14:00–15:10</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 03</div><div class="place">Nature Boardwalk + Lincoln Park</div><div class="time">2:00 pm–3:10 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Nature Boardwalk at Lincoln Park Zoo, Chicago, IL 60614</div></div><div class="desc">GRATIS · paseo tranquilo + vistas del skyline</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Nature Boardwalk at Lincoln Park Zoo, Chicago, IL 60614" data-destination="41.91861,-87.63306" data-destination-label="Nature Boardwalk + Lincoln Park" data-origin="2001 N Clark St, Chicago, IL 60614" data-origin-label="Lincoln Park Zoo" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Nature Boardwalk + Lincoln Park%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d3s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 04</div><div class="place">Traslado hacia Skydeck</div><div class="time">15:10–15:55</div><span class="badge free">MARGEN</span>
+<div class="num">PARADA 04</div><div class="place">Traslado hacia Skydeck</div><div class="time">3:10 pm–3:55 pm</div><span class="badge free">MARGEN</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd</div></div><div class="desc">MARGEN · llegar antes del atardecer</div></div>
 <div class="actions"><button class="route-btn" data-access-point="233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd" data-destination="41.87805,-87.63597" data-destination-label="Traslado hacia Skydeck" data-origin="Nature Boardwalk at Lincoln Park Zoo, Chicago, IL 60614" data-origin-label="Nature Boardwalk" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚇/🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Traslado hacia Skydeck%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop paid" data-key="d3s05">
+<a href="https://www.google.com/search?tbm=isch&amp;q=Traslado hacia Skydeck%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div class="transit-important"><b>🚌 Traslado importante</b><span>Nature Boardwalk → Skydeck · ≈ 50 min total</span><small>Caminar + espera + CTA + caminar</small></div><article class="stop paid" data-key="d3s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 05</div><div class="place">Skydeck Chicago</div><div class="time">16:00–17:30</div><span class="badge paid">PAGADO</span>
+<div class="num">PARADA 05</div><div class="place">Skydeck Chicago</div><div class="time">4:00 pm–5:30 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd</div></div><div class="desc">PAGADO · día → atardecer → ciudad iluminada + The Ledge</div></div>
 <div class="actions"><button class="route-btn" data-access-point="233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd" data-destination="41.87884,-87.63604" data-destination-label="Skydeck Chicago" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Willis Tower" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Skydeck Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d3s06">
+<a href="https://www.google.com/search?tbm=isch&amp;q=Skydeck Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div class="transit-important"><b>🚌 Traslado importante</b><span>Skydeck → Navy Pier · ≈ 50 min total</span><small>Caminar + espera + CTA + caminar</small></div><article class="stop free" data-key="d3s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 06</div><div class="place">Cena</div><div class="time">17:30–19:00</div><span class="badge free">PAUSA</span>
-</div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Downtown Chicago, IL</div></div><div class="desc">PAUSA · cena con tiempo antes de Navy Pier</div></div>
-<div class="actions"><button class="route-btn" data-access-point="Downtown Chicago, IL" data-destination="41.87900,-87.63050" data-destination-label="Cena" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Skydeck" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="num">PARADA 06</div><div class="place">Cena</div><div class="time">9:00 pm–10:00 pm</div><span class="badge free">PAUSA</span>
+</div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Downtown Chicago, IL</div></div><div class="desc">PAUSA · cena después de Navy Pier</div></div>
+<div class="actions"><button class="route-btn" data-access-point="Downtown Chicago, IL" data-destination="41.87900,-87.63050" data-destination-label="Cena" data-origin="600 E Grand Ave, Chicago, IL 60611" data-origin-label="Navy Pier" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Cena%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d3s07">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 07</div><div class="place">Navy Pier + ambiente navideño</div><div class="time">19:00–22:00</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 07</div><div class="place">Navy Pier + ambiente navideño</div><div class="time">6:20 pm–9:00 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">600 E Grand Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS · paseo nocturno + lago + luces · Winter WonderFest opcional/pagado</div></div>
-<div class="actions"><button class="route-btn" data-access-point="600 E Grand Ave, Chicago, IL 60611" data-destination="41.89173,-87.60415" data-destination-label="Navy Pier + ambiente navideño" data-origin="Downtown Chicago, IL" data-origin-label="Cena" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA / 🚶" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions"><button class="route-btn" data-access-point="600 E Grand Ave, Chicago, IL 60611" data-destination="41.89173,-87.60415" data-destination-label="Navy Pier + ambiente navideño" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Skydeck" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA / 🚶" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Navy Pier + ambiente navideño%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article></div>
 <div class="daytools"><button class="dayDone" data-day="3" type="button">Marcar actividades del día</button></div>
 </section>
 <section class="day" id="day4"><div class="dayhead"><h2>Día 4 — Sábado 5 dic | Riverwalk + arquitectura + Water Taxi + Chinatown</h2><small>9 actividades</small></div>
-<div class="start"><b>Inicio del día</b> · 24 E Ida B Wells Dr, Chicago, IL 60605</div><div class="timeline"><article class="stop free" data-key="d4s01">
+<div class="start"></div><div class="timeline"><article class="stop free" data-key="d4s01">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 01</div><div class="place">Chicago Riverwalk</div><div class="time">09:30–11:00</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 01</div><div class="place">Chicago Riverwalk</div><div class="time">9:30 am–11:00 am</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Chicago Riverwalk, Chicago, IL</div></div><div class="desc">GRATIS · río + fotos + paseo con calma</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Chicago Riverwalk, Chicago, IL" data-destination="41.88723,-87.62582" data-destination-label="Chicago Riverwalk" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Riverwalk%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 02</div><div class="place">Arquitectura del Loop + puentes</div><div class="time">11:00–12:30</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 02</div><div class="place">Arquitectura del Loop + puentes</div><div class="time">11:00 am–12:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Chicago Loop, Chicago, IL</div></div><div class="desc">GRATIS · edificios, puentes y arquitectura exterior</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Chicago Loop, Chicago, IL" data-destination="41.88847,-87.62441" data-destination-label="Arquitectura del Loop + puentes" data-origin="Chicago Riverwalk, Chicago, IL" data-origin-label="Chicago Riverwalk" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Arquitectura del Loop + puentes%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 03</div><div class="place">Almuerzo</div><div class="time">12:30–13:30</div><span class="badge free">PAUSA</span>
+<div class="num">PARADA 03</div><div class="place">Almuerzo</div><div class="time">12:30 pm–1:30 pm</div><span class="badge free">PAUSA</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Chicago Loop, Chicago, IL</div></div><div class="desc">PAUSA · almuerzo completo</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Chicago Loop, Chicago, IL" data-destination="41.89400,-87.62450" data-destination-label="Almuerzo" data-origin="Chicago Loop, Chicago, IL" data-origin-label="Arquitectura del Loop" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Almuerzo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 04</div><div class="place">Riverwalk / zona del río — tramo final</div><div class="time">13:30–14:30</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 04</div><div class="place">Riverwalk / zona del río — tramo final</div><div class="time">1:30 pm–2:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">400 N Michigan Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS · margen para caminar y acercarse al muelle sin prisa</div></div>
 <div class="actions"><button class="route-btn" data-access-point="400 N Michigan Ave, Chicago, IL 60611" data-destination="41.88847,-87.62441" data-destination-label="Riverwalk / zona del río — tramo final" data-origin="Chicago Loop, Chicago, IL" data-origin-label="Almuerzo" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Riverwalk / zona del río   tramo final%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop paid" data-key="d4s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 05</div><div class="place">Chicago Water Taxi — Michigan Ave → Chinatown</div><div class="time">14:30–15:15 aprox.</div><span class="badge paid">PAGADO</span>
+<div class="num">PARADA 05</div><div class="place">Chicago Water Taxi — Michigan Ave → Chinatown</div><div class="time">2:30 pm–3:15 pm aprox.</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave dock</div></div><div class="desc">PAGADO · objetivo: viajar cerca de la transición hacia el atardecer · horario exacto por confirmar</div></div>
 <div class="actions"><button class="route-btn" data-access-point="400 N Michigan Ave, Chicago, IL 60611 — Michigan Ave dock" data-destination="41.88847,-87.62441" data-destination-label="Chicago Water Taxi — Michigan Ave → Chinatown" data-origin="400 N Michigan Ave, Chicago, IL 60611" data-origin-label="Riverwalk" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚤 Water Taxi" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Water Taxi   Michigan Ave → Chinatown%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 06</div><div class="place">Chinatown + Ping Tom Memorial Park</div><div class="time">15:15–18:30</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 06</div><div class="place">Chinatown + Ping Tom Memorial Park</div><div class="time">3:15 pm–6:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1700 S Wentworth Ave, Chicago, IL 60616</div></div><div class="desc">GRATIS · parque + barrio + tiendas + fotos con luz y al anochecer</div></div>
 <div class="actions"><button class="route-btn" data-access-point="1700 S Wentworth Ave, Chicago, IL 60616" data-destination="41.85694,-87.63472" data-destination-label="Chinatown + Ping Tom Memorial Park" data-origin="1700 S Wentworth Ave, Chicago, IL 60616" data-origin-label="Water Taxi — Chinatown Dock" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chinatown + Ping Tom Memorial Park%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s07">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 07</div><div class="place">Cena en Chinatown</div><div class="time">18:30–20:00</div><span class="badge free">PAUSA</span>
+<div class="num">PARADA 07</div><div class="place">Cena en Chinatown</div><div class="time">6:30 pm–8:00 pm</div><span class="badge free">PAUSA</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Chinatown, Chicago, IL 60616</div></div><div class="desc">PAUSA · cena tranquila en Chinatown</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Chinatown, Chicago, IL 60616" data-destination="41.85260,-87.63202" data-destination-label="Cena en Chinatown" data-origin="1700 S Wentworth Ave, Chicago, IL 60616" data-origin-label="Ping Tom / Chinatown" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Cena en Chinatown%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s08">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 08</div><div class="place">Chinatown de noche</div><div class="time">20:00–21:15</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 08</div><div class="place">Chinatown de noche</div><div class="time">8:00 pm–9:15 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Wentworth Ave &amp; Cermak Rd, Chicago, IL 60616</div></div><div class="desc">GRATIS · Millennium Gate + luces + último paseo</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Wentworth Ave &amp; Cermak Rd, Chicago, IL 60616" data-destination="41.85260,-87.63202" data-destination-label="Chinatown de noche" data-origin="Chinatown, Chicago, IL 60616" data-origin-label="Cena" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chinatown de noche%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s09">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 09</div><div class="place">Regreso tranquilo al Loop / alojamiento</div><div class="time">21:15–22:15</div><span class="badge free">REGRESO</span>
+<div class="num">PARADA 09</div><div class="place">Regreso tranquilo al Loop / alojamiento</div><div class="time">9:15 pm–10:15 pm</div><span class="badge free">REGRESO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">24 E Ida B Wells Dr, Chicago, IL 60605</div></div><div class="desc">PLAN B · Water Taxi si existe salida útil; si no, Red Line desde Cermak-Chinatown</div></div>
 <div class="actions"><button class="route-btn" data-access-point="24 E Ida B Wells Dr, Chicago, IL 60605" data-destination="41.87600,-87.62676" data-destination-label="Regreso tranquilo al Loop / alojamiento" data-origin="Cermak-Chinatown, Chicago, IL 60616" data-origin-label="Chinatown" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚇 Red Line / 🚤 Water Taxi" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Regreso tranquilo al Loop / alojamiento%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article></div>
 <div class="daytools"><button class="dayDone" data-day="4" type="button">Marcar actividades del día</button></div>
 </section>
 <section class="day" id="day5"><div class="dayhead"><h2>Día 5 — Domingo 6 dic | Magnificent Mile + Harry Potter + ZooLights</h2><small>6 actividades</small></div>
-<div class="start"><b>Inicio del día</b> · 24 E Ida B Wells Dr, Chicago, IL 60605</div><div class="timeline"><article class="stop free" data-key="d5s01">
+<div class="start"></div><div class="timeline"><div class="transit-important"><b>🚌 Traslado importante</b><span>Hospedaje → Magnificent Mile · ≈ 45 min total</span><small>Caminar + espera + CTA + caminar</small></div><article class="stop free" data-key="d5s01">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 01</div><div class="place">Michigan Avenue + Magnificent Mile</div><div class="time">10:00–11:15</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 01</div><div class="place">Michigan Avenue + Magnificent Mile</div><div class="time">10:00 am–11:15 am</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">625 N Michigan Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS · paseo por la avenida + arquitectura + tiendas</div></div>
 <div class="actions"><button class="route-btn" data-access-point="625 N Michigan Ave, Chicago, IL 60611" data-destination="41.89311,-87.62364" data-destination-label="Michigan Avenue + Magnificent Mile" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚇/🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Michigan Avenue + Magnificent Mile%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d5s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 02</div><div class="place">Harry Potter Shop Chicago</div><div class="time">11:15–12:30</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 02</div><div class="place">Harry Potter Shop Chicago</div><div class="time">11:15 am–12:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">676 N Michigan Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS para entrar · tienda temática + Butterbeer + productos exclusivos</div></div>
 <div class="actions"><button class="route-btn" data-access-point="676 N Michigan Ave, Chicago, IL 60611" data-destination="41.89475,-87.62465" data-destination-label="Harry Potter Shop Chicago" data-origin="625 N Michigan Ave, Chicago, IL 60611" data-origin-label="Magnificent Mile" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Harry Potter Shop Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d5s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 03</div><div class="place">Magnificent Mile — tiendas + paseo</div><div class="time">12:30–14:00</div><span class="badge free">GRATIS</span>
+<div class="num">PARADA 03</div><div class="place">Magnificent Mile — tiendas + paseo</div><div class="time">12:30 pm–2:00 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Michigan Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS · compras + edificios + recorrer lo que más llame la atención</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Michigan Ave, Chicago, IL 60611" data-destination="41.89257,-87.62428" data-destination-label="Magnificent Mile — tiendas + paseo" data-origin="676 N Michigan Ave, Chicago, IL 60611" data-origin-label="Harry Potter Shop" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Magnificent Mile   tiendas + paseo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d5s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 04</div><div class="place">Almuerzo</div><div class="time">14:00–15:00</div><span class="badge free">PAUSA</span>
+<div class="num">PARADA 04</div><div class="place">Almuerzo</div><div class="time">2:00 pm–3:00 pm</div><span class="badge free">PAUSA</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Near North Side, Chicago, IL</div></div><div class="desc">PAUSA · almuerzo antes de seguir hacia Lincoln Park</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Near North Side, Chicago, IL" data-destination="41.89400,-87.62450" data-destination-label="Almuerzo" data-origin="Michigan Ave, Chicago, IL 60611" data-origin-label="Magnificent Mile" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Almuerzo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d5s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 05</div><div class="place">Paseo tranquilo / café rumbo a Lincoln Park</div><div class="time">15:00–16:30</div><span class="badge free">FLEXIBLE</span>
+<div class="num">PARADA 05</div><div class="place">Paseo tranquilo / café rumbo a Lincoln Park</div><div class="time">3:00 pm–4:30 pm</div><span class="badge free">FLEXIBLE</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Old Town / Lincoln Park, Chicago, IL</div></div><div class="desc">FLEXIBLE · café, descanso y margen antes de ZooLights</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Old Town / Lincoln Park, Chicago, IL" data-destination="41.91110,-87.63950" data-destination-label="Paseo tranquilo / café rumbo a Lincoln Park" data-origin="Near North Side, Chicago, IL" data-origin-label="Almuerzo" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 / 🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Paseo tranquilo / café rumbo a Lincoln Park%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop paid" data-key="d5s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 06</div><div class="place">ZooLights — Lincoln Park Zoo</div><div class="time">17:00–21:00</div><span class="badge paid">PAGADO</span>
+<div class="num">PARADA 06</div><div class="place">ZooLights — Lincoln Park Zoo</div><div class="time">5:00 pm–9:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo</div></div><div class="desc">PAGADO · gran cierre navideño del domingo · luces + ambiente nocturno</div></div>
 <div class="actions"><button class="route-btn" data-access-point="2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo" data-destination="41.91871,-87.63537" data-destination-label="ZooLights — Lincoln Park Zoo" data-origin="Old Town / Lincoln Park, Chicago, IL" data-origin-label="Paseo / café" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 / 🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=ZooLights   Lincoln Park Zoo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article></div>
@@ -1223,7 +1268,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 01</div>
 <div class="place">🚗 Janesville → Milwaukee</div>
-<div class="time">9:00–10:00</div>
+<div class="time">9:00 am–10:00 am</div>
 <span class="badge free">TRASLADO</span>
 </div>
 </div>
@@ -1251,7 +1296,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 02</div>
 <div class="place">🏙️ Historic Third Ward</div>
-<div class="time">10:00–11:00</div>
+<div class="time">10:00 am–11:00 am</div>
 <span class="badge free">GRATIS</span>
 </div>
 </div>
@@ -1279,7 +1324,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 03</div>
 <div class="place">🍔 Milwaukee Public Market</div>
-<div class="time">11:00–12:30</div>
+<div class="time">11:00 am–12:30 pm</div>
 <span class="badge free">VISITA</span>
 </div>
 </div>
@@ -1307,7 +1352,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 04</div>
 <div class="place">🌉 Milwaukee RiverWalk</div>
-<div class="time">12:30–13:30</div>
+<div class="time">12:30 pm–1:30 pm</div>
 <span class="badge free">GRATIS</span>
 </div>
 </div>
@@ -1335,7 +1380,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 05</div>
 <div class="place">🎄 Cathedral Square Park</div>
-<div class="time">13:30–14:30</div>
+<div class="time">1:30 pm–2:30 pm</div>
 <span class="badge free">NAVIDAD</span>
 </div>
 </div>
@@ -1363,7 +1408,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 06</div>
 <div class="place">☕ Downtown / café + últimas fotos</div>
-<div class="time">14:30–15:30</div>
+<div class="time">2:30 pm–3:30 pm</div>
 <span class="badge free">FLEXIBLE</span>
 </div>
 </div>
@@ -1371,7 +1416,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <span class="label">Destino exacto</span>
 <div class="value">Downtown Milwaukee, WI</div>
 </div>
-<div class="desc">Tiempo colchón para café, compras rápidas o repetir el punto que más haya gustado. Puesta de sol aprox. 4:16 PM.</div>
+<div class="desc">Tiempo colchón para café, compras rápidas o repetir el punto que más haya gustado. Puesta de sol aprox. 4:16 pm.</div>
 </div>
 <div class="actions"><button class="route-btn" data-destination="43.03752,-87.91136" data-destination-label="Downtown Milwaukee" data-origin="" data-origin-label="Ubicación actual" data-reason="Último margen antes de salir hacia Crystal Ridge." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Downtown%20Milwaukee%20Milwaukee" rel="noopener" target="_blank">Ver fotos →</a>
@@ -1391,7 +1436,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <div>
 <div class="num">PARADA 07</div>
 <div class="place">🎿 Crystal Ridge</div>
-<div class="time">16:00–21:00</div>
+<div class="time">4:00 pm–9:00 pm</div>
 <span class="badge">SKI + ALQUILER</span>
 </div>
 </div>
@@ -1399,7 +1444,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 <span class="label">Destino exacto</span>
 <div class="value">7011 S Ballpark Dr, Franklin, WI 53132</div>
 </div>
-<div class="desc">Weeknight Open–Close: esquiar toda la ventana de 4:00 PM a 9:00 PM con ticket + alquiler.</div>
+<div class="desc">Weeknight Open–Close: esquiar toda la ventana de 4:00 pm a 9:00 pm con ticket + alquiler.</div>
 </div>
 <div class="ski-price">💵 Desde $59 por persona · ticket + alquiler</div>
 <div class="actions"><button class="route-btn" data-destination="42.91990,-88.01581" data-destination-label="Crystal Ridge" data-origin="" data-origin-label="Ubicación actual" data-reason="Es la última parada del día y el plan principal de ski." data-recommendation="🚗 En carro" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
@@ -1422,7 +1467,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 (function(){
  const KEY='chicago-itinerary-v4-completed';
  const PACK_KEY='chicago-itinerary-v4-packlist';
- const TRIP_START=new Date('2026-12-02T09:00:00-06:00');
+ const TRIP_START=new Date('2026-12-02T09:12:00');
 
  const state=JSON.parse(localStorage.getItem(KEY)||'{}');
  const packState=JSON.parse(localStorage.getItem(PACK_KEY)||'{}');
@@ -1524,7 +1569,8 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
      });
      const empty=ensureDayPlaceholder(day);
      if(empty){
-       empty.hidden=visibleCount!==0||day.classList.contains('collapsed');
+       const filtering = !!searchTerm || activeFilter!=='all';
+       empty.hidden=!filtering || visibleCount!==0 || day.classList.contains('collapsed');
      }
    });
  }
@@ -1630,13 +1676,13 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
        btn.textContent=collapsed?'Expandir':'Compactar';
        const empty=day.querySelector('.emptyday');
        if(empty){
-         empty.hidden=collapsed||!day.querySelector('.stop:not(.hidden)');
+         const filtering = !!searchTerm || activeFilter!=='all';
+         empty.hidden=collapsed || !filtering || !!day.querySelector('.stop:not(.hidden)');
        }
      });
      head.appendChild(btn);
    });
  }
-
 
  function setupDayFood(){
    const panel=document.getElementById('day1FoodPanel');
@@ -1718,7 +1764,6 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 
  const resetBtn=document.getElementById('resetBtn');
  if(resetBtn){resetBtn.addEventListener('click',resetAll);}
-
 
  function setupCurrency(){
    const rate=document.getElementById('fxRate'), usd=document.getElementById('usdAmount'), out=document.getElementById('fxResult');
@@ -2460,7 +2505,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 💡 Los precios son aproximados por persona y pueden variar por tamaño, impuestos, propina y menú. 
 📷 “Ver fotos” abre imágenes del lugar para que puedas reconocerlo antes de ir.
 </div>
-<div class="category-title" style="margin-top:16px">➕ Todas las opciones adicionales de tus listas originales</div><div class="foodHint">Estas opciones fueron recuperadas de los CSV que habíamos preparado. No se eliminaron; las que ya estaban arriba se mantienen una sola vez.</div><div class="category-title" style="font-size:9px;margin-top:10px">🍔 Comida rápida / económica</div><div class="option-grid"><div class="option-card"><b>SALT burgers + fries</b><div class="meta">📍 60 E Jackson Blvd, Chicago, IL 60604<br/>Categoría original: Hamburguesas</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Hamburguesas</span><div class="option-actions"><button class="route-btn" data-destination="60 E Jackson Blvd, Chicago, IL 60604" data-destination-label="SALT burgers + fries" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=SALT burgers + fries Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Potbelly</b><div class="meta">📍 190 N State St, Chicago, IL 60601<br/>Categoría original: Sándwiches</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Sándwiches</span><div class="option-actions"><button class="route-btn" data-destination="190 N State St, Chicago, IL 60601" data-destination-label="Potbelly" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Potbelly Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Potbelly+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>KFC</b><div class="meta">📍 100 W Randolph St, Chicago, IL 60601<br/>Categoría original: Pollo</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Pollo</span><div class="option-actions"><button class="route-btn" data-destination="100 W Randolph St, Chicago, IL 60601" data-destination-label="KFC" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=KFC Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=KFC+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>McDonald's</b><div class="meta">📍 203 N LaSalle St, Chicago, IL 60601<br/>Categoría original: Cadena clásica</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–25</span><span class="tag">Cadena clásica</span><div class="option-actions"><button class="route-btn" data-destination="203 N LaSalle St, Chicago, IL 60601" data-destination-label="McDonald's" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=McDonald's Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=McDonald%27s+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Jimmy John's</b><div class="meta">📍 28 N Clark St, Chicago, IL 60602<br/>Categoría original: Sándwiches</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Sándwiches</span><div class="option-actions"><button class="route-btn" data-destination="28 N Clark St, Chicago, IL 60602" data-destination-label="Jimmy John's" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Jimmy John's Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Jimmy+John%27s+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Subway</b><div class="meta">📍 604 S Wabash Ave, Chicago, IL 60605<br/>Categoría original: Sándwiches</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Sándwiches</span><div class="option-actions"><button class="route-btn" data-destination="604 S Wabash Ave, Chicago, IL 60605" data-destination-label="Subway" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Subway Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Subway+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Kong Dog x Cotti Coffee Loop Chicago</b><div class="meta">📍 77 E Adams St, Chicago, IL 60603<br/>Categoría original: Snack / comida rápida</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–25</span><span class="tag">Snack / comida rápida</span><div class="option-actions"><button class="route-btn" data-destination="77 E Adams St, Chicago, IL 60603" data-destination-label="Kong Dog x Cotti Coffee Loop Chicago" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Kong Dog x Cotti Coffee Loop Chicago Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div></div><div class="category-title" style="font-size:9px;margin-top:10px">☕ Desayunos / café</div><div class="option-grid"><div class="option-card"><b>Luna Cafe Restaurant</b><div class="meta">📍 63 E Harrison St, Chicago, IL 60605<br/>Categoría original: Huevos / desayuno americano</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Huevos / desayuno americano</span><div class="option-actions"><button class="route-btn" data-destination="63 E Harrison St, Chicago, IL 60605" data-destination-label="Luna Cafe Restaurant" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Luna Cafe Restaurant Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Yolk - South Loop</b><div class="meta">📍 1120 S Michigan Ave, Chicago, IL 60605<br/>Categoría original: Huevos / desayuno americano</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Huevos / desayuno americano</span><div class="option-actions"><button class="route-btn" data-destination="1120 S Michigan Ave, Chicago, IL 60605" data-destination-label="Yolk - South Loop" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Yolk - South Loop Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Yolk+-+South+Loop+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Taco Urbano</b><div class="meta">📍 1221 S Wabash Ave, Chicago, IL 60605<br/>Categoría original: Desayuno mexicano</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno mexicano</span><div class="option-actions"><button class="route-btn" data-destination="1221 S Wabash Ave, Chicago, IL 60605" data-destination-label="Taco Urbano" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Taco Urbano Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Sweet Bean</b><div class="meta">📍 1152 S Wabash Ave, Chicago, IL 60605<br/>Categoría original: Desayuno ligero</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno ligero</span><div class="option-actions"><button class="route-btn" data-destination="1152 S Wabash Ave, Chicago, IL 60605" data-destination-label="Sweet Bean" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Sweet Bean Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Holy Bagels CO</b><div class="meta">📍 22 E Randolph St, Chicago, IL 60601<br/>Categoría original: Desayuno ligero</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno ligero</span><div class="option-actions"><button class="route-btn" data-destination="22 E Randolph St, Chicago, IL 60601" data-destination-label="Holy Bagels CO" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Holy Bagels CO Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>The Bagel Spot</b><div class="meta">📍 105 W Madison St Lower level, Chicago, IL 60602<br/>Categoría original: Desayuno</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno</span><div class="option-actions"><button class="route-btn" data-destination="105 W Madison St Lower level, Chicago, IL 60602" data-destination-label="The Bagel Spot" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=The Bagel Spot Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div></div><div class="category-title" style="font-size:9px;margin-top:10px">🛍️ Tiendas / souvenirs</div><div class="option-grid"><div class="option-card"><b>Nordstrom Rack</b><div class="meta">📍 24 N State St, Chicago, IL 60602<br/>Categoría original: Descuento</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Descuento</span><div class="option-actions"><button class="route-btn" data-destination="24 N State St, Chicago, IL 60602" data-destination-label="Nordstrom Rack" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Nordstrom Rack Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Macy's</b><div class="meta">📍 111 N State St, Chicago, IL 60602<br/>Categoría original: Tienda regular</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Tienda regular</span><div class="option-actions"><button class="route-btn" data-destination="111 N State St, Chicago, IL 60602" data-destination-label="Macy's" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Macy's Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Chicago Sports &amp; Novelty</b><div class="meta">📍 332 N Michigan Ave, Chicago, IL 60601<br/>Categoría original: Souvenirs</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Souvenirs</span><div class="option-actions"><button class="route-btn" data-destination="332 N Michigan Ave, Chicago, IL 60601" data-destination-label="Chicago Sports &amp; Novelty" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Chicago Sports &amp; Novelty Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Bye Bye Chicago</b><div class="meta">📍 30 S Michigan Ave, Chicago, IL 60603<br/>Categoría original: Souvenirs</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Souvenirs</span><div class="option-actions"><button class="route-btn" data-destination="30 S Michigan Ave, Chicago, IL 60603" data-destination-label="Bye Bye Chicago" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Bye Bye Chicago Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div></div></div></div></div></div><div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen seleccionado arriba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir las opciones de transporte en Apple Maps o Google Maps.</span></button><button class="route-choice" id="routeTransitApp" type="button"><strong>🚇 Abrir en Transit</strong><span>Planear el trayecto en Transit usando el origen seleccionado arriba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">Las paradas del itinerario usan puntos GPS precisos cuando el lugar tiene una entrada o ubicación interna que una dirección genérica puede interpretar mal. Al abrir el trayecto, el mapa reemplaza esta página en la misma pestaña. Puedes volver atrás para regresar al itinerario.</div></div></div><script>
+<div class="category-title" style="margin-top:16px">➕ Todas las opciones adicionales de tus listas originales</div><div class="foodHint">Estas opciones fueron recuperadas de los CSV que habíamos preparado. No se eliminaron; las que ya estaban arriba se mantienen una sola vez.</div><div class="category-title" style="font-size:9px;margin-top:10px">🍔 Comida rápida / económica</div><div class="option-grid"><div class="option-card"><b>SALT burgers + fries</b><div class="meta">📍 60 E Jackson Blvd, Chicago, IL 60604<br/>Categoría original: Hamburguesas</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Hamburguesas</span><div class="option-actions"><button class="route-btn" data-destination="60 E Jackson Blvd, Chicago, IL 60604" data-destination-label="SALT burgers + fries" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=SALT burgers + fries Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Potbelly</b><div class="meta">📍 190 N State St, Chicago, IL 60601<br/>Categoría original: Sándwiches</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Sándwiches</span><div class="option-actions"><button class="route-btn" data-destination="190 N State St, Chicago, IL 60601" data-destination-label="Potbelly" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Potbelly Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Potbelly+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>KFC</b><div class="meta">📍 100 W Randolph St, Chicago, IL 60601<br/>Categoría original: Pollo</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Pollo</span><div class="option-actions"><button class="route-btn" data-destination="100 W Randolph St, Chicago, IL 60601" data-destination-label="KFC" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=KFC Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=KFC+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>McDonald's</b><div class="meta">📍 203 N LaSalle St, Chicago, IL 60601<br/>Categoría original: Cadena clásica</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–25</span><span class="tag">Cadena clásica</span><div class="option-actions"><button class="route-btn" data-destination="203 N LaSalle St, Chicago, IL 60601" data-destination-label="McDonald's" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=McDonald's Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=McDonald%27s+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Jimmy John's</b><div class="meta">📍 28 N Clark St, Chicago, IL 60602<br/>Categoría original: Sándwiches</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Sándwiches</span><div class="option-actions"><button class="route-btn" data-destination="28 N Clark St, Chicago, IL 60602" data-destination-label="Jimmy John's" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Jimmy John's Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Jimmy+John%27s+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Subway</b><div class="meta">📍 604 S Wabash Ave, Chicago, IL 60605<br/>Categoría original: Sándwiches</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–20</span><span class="tag">Sándwiches</span><div class="option-actions"><button class="route-btn" data-destination="604 S Wabash Ave, Chicago, IL 60605" data-destination-label="Subway" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Subway Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Subway+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Kong Dog x Cotti Coffee Loop Chicago</b><div class="meta">📍 77 E Adams St, Chicago, IL 60603<br/>Categoría original: Snack / comida rápida</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $8–25</span><span class="tag">Snack / comida rápida</span><div class="option-actions"><button class="route-btn" data-destination="77 E Adams St, Chicago, IL 60603" data-destination-label="Kong Dog x Cotti Coffee Loop Chicago" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Kong Dog x Cotti Coffee Loop Chicago Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div></div><div class="category-title" style="font-size:9px;margin-top:10px">☕ Desayunos / café</div><div class="option-grid"><div class="option-card"><b>Luna Cafe Restaurant</b><div class="meta">📍 63 E Harrison St, Chicago, IL 60605<br/>Categoría original: Huevos / desayuno americano</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Huevos / desayuno americano</span><div class="option-actions"><button class="route-btn" data-destination="63 E Harrison St, Chicago, IL 60605" data-destination-label="Luna Cafe Restaurant" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Luna Cafe Restaurant Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Yolk - South Loop</b><div class="meta">📍 1120 S Michigan Ave, Chicago, IL 60605<br/>Categoría original: Huevos / desayuno americano</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Huevos / desayuno americano</span><div class="option-actions"><button class="route-btn" data-destination="1120 S Michigan Ave, Chicago, IL 60605" data-destination-label="Yolk - South Loop" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Yolk - South Loop Chicago" rel="noopener" target="_blank">📷 Fotos</a><a class="menu-link" href="https://www.google.com/search?q=Yolk+-+South+Loop+Chicago+menu" rel="noopener" target="_blank">🔎 Buscar menú</a></div></div><div class="option-card"><b>Taco Urbano</b><div class="meta">📍 1221 S Wabash Ave, Chicago, IL 60605<br/>Categoría original: Desayuno mexicano</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno mexicano</span><div class="option-actions"><button class="route-btn" data-destination="1221 S Wabash Ave, Chicago, IL 60605" data-destination-label="Taco Urbano" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Taco Urbano Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Sweet Bean</b><div class="meta">📍 1152 S Wabash Ave, Chicago, IL 60605<br/>Categoría original: Desayuno ligero</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno ligero</span><div class="option-actions"><button class="route-btn" data-destination="1152 S Wabash Ave, Chicago, IL 60605" data-destination-label="Sweet Bean" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Sweet Bean Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Holy Bagels CO</b><div class="meta">📍 22 E Randolph St, Chicago, IL 60601<br/>Categoría original: Desayuno ligero</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno ligero</span><div class="option-actions"><button class="route-btn" data-destination="22 E Randolph St, Chicago, IL 60601" data-destination-label="Holy Bagels CO" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Holy Bagels CO Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>The Bagel Spot</b><div class="meta">📍 105 W Madison St Lower level, Chicago, IL 60602<br/>Categoría original: Desayuno</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Aprox. $5–18</span><span class="tag">Desayuno</span><div class="option-actions"><button class="route-btn" data-destination="105 W Madison St Lower level, Chicago, IL 60602" data-destination-label="The Bagel Spot" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=The Bagel Spot Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div></div><div class="category-title" style="font-size:9px;margin-top:10px">🛍️ Tiendas / souvenirs</div><div class="option-grid"><div class="option-card"><b>Nordstrom Rack</b><div class="meta">📍 24 N State St, Chicago, IL 60602<br/>Categoría original: Descuento</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Descuento</span><div class="option-actions"><button class="route-btn" data-destination="24 N State St, Chicago, IL 60602" data-destination-label="Nordstrom Rack" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Nordstrom Rack Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Macy's</b><div class="meta">📍 111 N State St, Chicago, IL 60602<br/>Categoría original: Tienda regular</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Tienda regular</span><div class="option-actions"><button class="route-btn" data-destination="111 N State St, Chicago, IL 60602" data-destination-label="Macy's" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Macy's Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Chicago Sports &amp; Novelty</b><div class="meta">📍 332 N Michigan Ave, Chicago, IL 60601<br/>Categoría original: Souvenirs</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Souvenirs</span><div class="option-actions"><button class="route-btn" data-destination="332 N Michigan Ave, Chicago, IL 60601" data-destination-label="Chicago Sports &amp; Novelty" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Chicago Sports &amp; Novelty Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div><div class="option-card"><b>Bye Bye Chicago</b><div class="meta">📍 30 S Michigan Ave, Chicago, IL 60603<br/>Categoría original: Souvenirs</div><span class="food-distance">📍 Desde: Macy’s State Street<small> · ruta a pie exacta al abrir “Cómo llegar”</small></span><span class="price">💵 Precio variable</span><span class="tag">Souvenirs</span><div class="option-actions"><button class="route-btn" data-destination="30 S Michigan Ave, Chicago, IL 60603" data-destination-label="Bye Bye Chicago" data-food-route="1" data-origin="" data-origin-label="Ubicación actual" data-reason="Opción recuperada de tus listas originales." data-recommendation="🚶 / 🚌 CTA" data-route="" type="button">🗺️ Cómo llegar</button><a class="photo-link" href="https://www.google.com/search?tbm=isch&amp;q=Bye Bye Chicago Chicago" rel="noopener" target="_blank">📷 Fotos</a></div></div></div></div></div></div></div><div aria-hidden="true" class="route-modal hidden" id="routeModal"><div aria-modal="true" class="route-box" role="dialog"><button aria-label="Cerrar" class="route-close" type="button">×</button><div class="route-kicker">Trayecto</div><h3 id="routeTitle">¿Cómo quieres llegar?</h3><div class="route-sub" id="routeSub">Elige caminar o transporte. Arriba puedes cambiar entre Apple Maps y Google Maps; tu elección queda guardada.</div><button class="route-choice primary" id="routeWalk" type="button"><strong>🚶 Caminar en Apple Maps</strong><span>Abrir la ruta caminando desde el origen seleccionado arriba.</span></button><button class="route-choice" id="routeTransit" type="button"><strong>🚌 Cómo llegar en transporte</strong><span>Abrir las opciones de transporte en Apple Maps o Google Maps.</span></button><button class="route-choice" id="routeTransitApp" type="button"><strong>🚇 Abrir en Transit</strong><span>Planear el trayecto en Transit usando el origen seleccionado arriba.</span></button><div class="route-result" id="routeResult" style="display:none"></div><div class="route-note">Las paradas del itinerario usan puntos GPS precisos cuando el lugar tiene una entrada o ubicación interna que una dirección genérica puede interpretar mal. Al abrir el trayecto, Maps se abre en una pestaña/ventana aparte para que el itinerario permanezca abierto.</div></div></div><script>
 (function(){
   const modal=document.getElementById('routeModal');
   const title=document.getElementById('routeTitle');
@@ -2503,9 +2548,19 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
     return u;
   }
   function openExternal(url){
-    // Abrir en la misma pestaña evita duplicar Google Maps y deja el itinerario
-    // en el historial para poder volver con el botón Atrás del navegador.
-    window.location.assign(url);
+    // Abrir Maps en un contexto secundario para conservar el itinerario abierto.
+    // Usamos un nombre fijo para reutilizar la misma pestaña/ventana de mapas
+    // en lugar de crear una nueva cada vez. El navegador decide si será pestaña
+    // o ventana independiente según su configuración.
+    const mapWindow = window.open(url, 'chicagoMapsWindow');
+    if(!mapWindow){
+      // Si el navegador bloquea la ventana secundaria, dejamos la ruta en la
+      // pestaña actual como respaldo.
+      window.location.assign(url);
+      return;
+    }
+    try{ mapWindow.focus(); }catch(e){}
+    if(modal){ modal.classList.add('hidden'); modal.setAttribute('aria-hidden','true'); }
   }
   function openModal(btn){
     const isFood=btn.hasAttribute('data-food-route');
@@ -2557,7 +2612,7 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
     picker.style.display='none';
     modal.querySelectorAll('.food-panel').forEach(p=>p.classList.toggle('active',p.dataset.foodPanel===day));
     title.textContent='Opciones del día '+day;
-    sub.textContent=foodOriginMode==='hotel'?'🏨 Distancias desde el hospedaje · en línea recta.':'📍 Distancias desde tu ubicación actual · en línea recta.';
+    sub.textContent='';
     if(userLat!==null) updateDistances(day);
   }
   function open(){showPicker();modal.classList.remove('hidden');modal.setAttribute('aria-hidden','false')}
@@ -2820,5 +2875,206 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 .route-modal{z-index:30000!important}
 .food-modal{z-index:20000!important}
 </style>
+
+<script id="v49-food-redesign">
+(function(){
+  const HOTEL={lat:41.876000,lon:-87.626757};
+  const STORAGE='chicago_route_origin_mode';
+  const GEO_CACHE='chicago_food_geocode_v45';
+  const ROUTE_CACHE='chicago_food_route_v49';
+  const VALHALLA='https://valhalla1.openstreetmap.de/route';
+  const CAT_ORDER=[
+    ['breakfast','☕ Café / desayuno'],
+    ['fast','🍔 Comida rápida'],
+    ['chicago','🌭 Chicago clásico'],
+    ['pizza','🍕 Pizza'],
+    ['chinatown','🥟 Chinatown'],
+    ['snacks','🍿 Snacks'],
+    ['market','🛒 Supermercado / mercado'],
+    ['shops','🛍️ Tiendas / souvenirs']
+  ];
+  let mode=localStorage.getItem(STORAGE)||'hotel';
+  let activeDay=null, activeCat='';
+  let current=null, watchId=null;
+  let busy=false;
+
+  const $=s=>document.querySelector(s);
+  const esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const geoGet=()=>{try{return JSON.parse(localStorage.getItem(GEO_CACHE)||'{}')}catch(e){return {}}};
+  const routeGet=()=>{try{return JSON.parse(localStorage.getItem(ROUTE_CACHE)||'{}')}catch(e){return {}}};
+  const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+
+  function normalizeText(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function classify(card){
+    const name=normalizeText(card.querySelector('b')?.textContent||'');
+    const meta=normalizeText(card.querySelector('.meta')?.textContent||'');
+    const tag=normalizeText(card.querySelector('.tag')?.textContent||'');
+    const all=name+' '+meta+' '+tag;
+    if(/trader joe|jewel-osco|whole foods|mariano|go grocer|park to shop|88 marketplace|h mart|north loop market|south loop market|urban pantry|totto.?s market|supermarket|grocery|market\b/.test(all)) return 'market';
+    if(/harry potter|nike\b|adidas|uniqlo|h&m|macy|burlington|ross dress|nordstrom|marshalls|target\b|my chicago|souvenir|shop|shopping|novelty|discount|tienda|retail|outlet/.test(all)) return 'shops';
+    if(/chinatown|minghin|lao sze|claypot|sichuan|dim sum|chinese|chinatown square|ping tom|dumpling|asian/.test(all)) return 'chinatown';
+    if(/pizza|giordano|gino.?s east|lou malnati|pequod/.test(all)) return 'pizza';
+    if(/garrett|popcorn|snack|sweet bean|dessert|ice cream/.test(all)) return 'snacks';
+    if(/cafe|coffee|breakfast|desayuno|yolk|beatrix|bagel|cafecito|momentum|happy monday|holy bagels|tary/.test(all)) return 'breakfast';
+    if(/italian beef|portillo|hot dog|devil dawgs|billy goat|chicago classic|chicago \/ rapido|chicago \/ rapido|chicago clasico/.test(all)) return 'chicago';
+    return 'fast';
+  }
+
+  function addressFor(card){
+    const b=card.querySelector('.route-btn');
+    if(b?.dataset.destination) return b.dataset.destination;
+    const m=card.querySelector('.meta')?.textContent||'';
+    const x=m.match(/📍\s*([^\n]+)/); return x?x[1].trim():'';
+  }
+  function nameFor(card){return (card.querySelector('b')?.textContent||'Lugar').trim()}
+
+  function routeKey(origin,dest){
+    const a=origin===HOTEL?`hotel:${HOTEL.lat},${HOTEL.lon}`:`gps:${origin.lat.toFixed(4)},${origin.lon.toFixed(4)}`;
+    const d=`${dest.lat.toFixed(5)},${dest.lon.toFixed(5)}`;
+    return a+'|'+d;
+  }
+  async function geocode(address){
+    const c=geoGet(); if(c[address]) return c[address];
+    try{
+      const u='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&q='+encodeURIComponent(address);
+      const r=await fetch(u,{headers:{Accept:'application/json'}}); if(!r.ok)return null;
+      const j=await r.json(); if(!j[0])return null;
+      const v={lat:+j[0].lat,lon:+j[0].lon}; c[address]=v; save(GEO_CACHE,c); return v;
+    }catch(e){return null}
+  }
+  async function walkingRoute(origin,dest){
+    const key=routeKey(origin,dest), c=routeGet(); if(c[key]) return c[key];
+    try{
+      const payload={locations:[{lat:origin.lat,lon:origin.lon},{lat:dest.lat,lon:dest.lon}],costing:'pedestrian',directions_options:{units:'kilometers'}};
+      const u=VALHALLA+'?json='+encodeURIComponent(JSON.stringify(payload));
+      const r=await fetch(u); if(!r.ok)return null;
+      const j=await r.json(); const sum=j?.trip?.summary; if(!sum)return null;
+      const v={km:Number(sum.length),minutes:Math.round(Number(sum.time)/60)};
+      if(Number.isFinite(v.km)&&Number.isFinite(v.minutes)){c[key]=v; save(ROUTE_CACHE,c); return v;}
+    }catch(e){}
+    return null;
+  }
+
+  function injectUI(panel){
+    if(panel.querySelector('.v49-food-ui')) return panel.querySelector('.v49-food-ui');
+    const cards=[...panel.querySelectorAll('.option-card')];
+    const unique=[]; const seen=new Set();
+    cards.forEach(card=>{
+      const key=normalizeText(nameFor(card))+'|'+normalizeText(addressFor(card));
+      if(!seen.has(key)){seen.add(key); unique.push(card)} else card.remove();
+    });
+    const ui=document.createElement('div'); ui.className='v49-food-ui';
+    const tabs=document.createElement('div'); tabs.className='v49-cat-tabs';
+    const body=document.createElement('div'); body.className='v49-cat-body';
+    const groups={}; CAT_ORDER.forEach(([k])=>groups[k]=[]);
+    unique.forEach(card=>{const k=classify(card); (groups[k]||(groups.fast=groups.fast||[],groups.fast)).push(card)});
+    CAT_ORDER.forEach(([k,label])=>{
+      if(!groups[k]?.length)return;
+      const b=document.createElement('button'); b.type='button'; b.className='v49-cat-btn'; b.dataset.cat=k; b.innerHTML=label+' <span>'+groups[k].length+'</span>';
+      tabs.appendChild(b);
+    });
+    // Move cards into category containers, preserving their existing order.
+    Object.entries(groups).forEach(([k,list])=>{
+      if(!list.length)return;
+      const grid=document.createElement('div'); grid.className='v49-grid'; grid.dataset.catGrid=k;
+      list.forEach(card=>{
+        card.classList.add('v49-card');
+        const tag=card.querySelector('.tag'); if(tag) tag.remove();
+        card.querySelectorAll('.food-distance,.live-distance,.v45-live-distance').forEach(x=>x.remove());
+        const meta=card.querySelector('.meta'); if(meta){meta.innerHTML=meta.innerHTML.replace(/<br\s*\/?>\s*Categoría original:[^<]*/i,'').replace(/Categoría original:[^<]*/i,'').trim();}
+        grid.appendChild(card);
+      });
+      body.appendChild(grid);
+    });
+    ui.appendChild(tabs); ui.appendChild(body);
+    // Hide the old category headings/grids but keep their cards now moved into our UI.
+    panel.querySelectorAll('.category-title,.foodHint').forEach(x=>x.style.display='none');
+    panel.querySelectorAll(':scope > .option-grid').forEach(x=>x.style.display='none');
+    const oldMeta=[...panel.children].filter(x=>x.classList?.contains('meta') && !x.closest('.v49-food-ui')); oldMeta.forEach(x=>x.style.display='none');
+    panel.appendChild(ui);
+    return ui;
+  }
+
+  function renderCat(panel,cat){
+    const ui=injectUI(panel); const buttons=[...ui.querySelectorAll('.v49-cat-btn')];
+    if(!cat || !ui.querySelector(`[data-cat-grid="${cat}"]`)) cat=buttons[0]?.dataset.cat||'';
+    activeCat=cat;
+    buttons.forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
+    ui.querySelectorAll('.v49-grid').forEach(g=>g.classList.toggle('active',g.dataset.catGrid===cat));
+    updateDistances(panel,cat);
+  }
+
+  async function updateDistances(panel,cat){
+    const grid=panel.querySelector(`.v49-grid[data-cat-grid="${cat}"]`); if(!grid)return;
+    const cards=[...grid.querySelectorAll('.option-card')];
+    const origin=mode==='hotel'?HOTEL:current;
+    for(const card of cards){
+      let el=card.querySelector('.v49-route-distance');
+      if(!el){el=document.createElement('div');el.className='v49-route-distance';const meta=card.querySelector('.meta');if(meta)meta.after(el);}
+      if(!origin){el.innerHTML='📍 <span>Esperando ubicación…</span>';continue;}
+      const addr=addressFor(card); let target=card.__v49coords;
+      if(!target){el.innerHTML='📍 <span>Calculando ruta caminando…</span>'; target=await geocode(addr); card.__v49coords=target;}
+      if(!target){el.innerHTML='📍 <span>Ruta no disponible · usa “Cómo llegar”</span>';continue;}
+      const r=await walkingRoute(origin,target);
+      if(r) el.innerHTML='🚶 <strong>≈ '+r.km.toFixed(1)+' km</strong> <span>· '+r.minutes+' min caminando</span>';
+      else el.innerHTML='🚶 <span>Distancia de ruta no disponible · usa “Cómo llegar”</span>';
+      await new Promise(res=>setTimeout(res,250));
+    }
+  }
+
+  function setMode(next){
+    mode=next==='current'?'current':'hotel'; localStorage.setItem(STORAGE,mode);
+    if(mode==='hotel'){
+      if(watchId!==null&&navigator.geolocation)navigator.geolocation.clearWatch(watchId); watchId=null; current=null;
+    }else if(navigator.geolocation){
+      const apply=p=>{current={lat:p.coords.latitude,lon:p.coords.longitude}; if(activeDay) updateDistances($('#foodModal .food-panel.active'),activeCat)};
+      navigator.geolocation.getCurrentPosition(apply,()=>{}, {enableHighAccuracy:true,maximumAge:0,timeout:15000});
+      if(watchId!==null)navigator.geolocation.clearWatch(watchId);
+      watchId=navigator.geolocation.watchPosition(apply,()=>{}, {enableHighAccuracy:true,maximumAge:10000,timeout:20000});
+    }
+    document.querySelectorAll('[data-origin-mode]').forEach(b=>b.classList.toggle('active',b.dataset.originMode===mode));
+    document.querySelectorAll('.option-card .route-btn').forEach(b=>{b.dataset.origin=mode==='hotel'?'24 E Ida B Wells Dr, Chicago, IL 60605':'';b.dataset.originLabel=mode==='hotel'?'Hospedaje':'Ubicación actual';b.dataset.originMode=mode});
+    const st=$('#foodModal .v49-food-status'); if(st)st.remove();
+    if(activeDay) updateDistances($('#foodModal .food-panel.active'),activeCat);
+  }
+
+  function openDay(day){
+    activeDay=String(day); const panel=document.querySelector(`#foodModal .food-panel[data-food-panel="${day}"]`); if(!panel)return;
+    injectUI(panel);
+    const ui=panel.querySelector('.v49-food-ui');
+    let st=panel.querySelector('.v49-food-status');
+    if(st) st.remove();
+    const first=ui.querySelector('.v49-cat-btn'); renderCat(panel,first?.dataset.cat||'');
+  }
+
+  document.addEventListener('click',e=>{
+    const origin=e.target.closest('[data-origin-mode]');
+    if(origin){e.preventDefault();e.stopImmediatePropagation();setMode(origin.dataset.originMode);return;}
+    const day=e.target.closest('[data-food-day]'); if(day){setTimeout(()=>openDay(day.dataset.foodDay),100);return;}
+    const cat=e.target.closest('.v49-cat-btn'); if(cat){const p=e.target.closest('.food-panel'); if(p)renderCat(p,cat.dataset.cat);}
+  },true);
+
+  // Clean legacy distance/status elements so only v49 is visible.
+  document.querySelectorAll('.food-panel .v45-food-status,.food-panel .v45-live-distance,.food-panel .live-distance,.food-panel .food-distance').forEach(x=>x.style.display='none');
+  setMode(mode);
+})();
+</script>
+<style id="v49-food-redesign-style">
+.v49-food-ui{margin-top:10px}
+.v49-food-status{margin:0 0 9px;padding:8px 10px;border:1px solid #cfe2ef;background:#eef8fd;color:#176b9c;border-radius:10px;font-size:8.5px;font-weight:900}
+.v49-cat-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.v49-cat-btn{border:1px solid #d7e2eb;background:#fff;border-radius:999px;padding:7px 9px;font-size:8.5px;font-weight:900;color:#526779;cursor:pointer}
+.v49-cat-btn span{opacity:.65;margin-left:2px}
+.v49-cat-btn.active{background:#eaf5fb;border-color:#8fc5df;color:#126d98}
+.v49-grid{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.v49-grid.active{display:grid}
+.v49-card{margin:0!important;min-width:0}
+.v49-card .tag{display:none!important}
+.v49-route-distance{margin-top:6px;padding:5px 7px;border-radius:8px;background:#f3f8fc;color:#176b9c;font-size:8px;font-weight:800}
+.v49-route-distance span{font-weight:700;color:#6b8093}
+.v49-food-ui .option-card{padding:10px!important}
+@media(max-width:700px){.v49-grid{grid-template-columns:1fr}.v49-cat-btn{font-size:8px;padding:6px 8px}}
+</style>
+
 </body>
 </html>
