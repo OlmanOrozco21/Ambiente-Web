@@ -8,9 +8,9 @@
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="telephone=no" name="format-detection"/>
 <meta content="#07111f" name="theme-color"/>
-<link rel="manifest" href="manifest.webmanifest"/>
+<link href="manifest.webmanifest" rel="manifest"/>
 <meta content="Chicago Field Guide" name="apple-mobile-web-app-title"/>
-<title>Chicago · Trip OS — Premium Itinerary v90</title>
+<title>Chicago Itinerario</title>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Manrope:wght@500;700;800&display=swap");
 
@@ -1120,7 +1120,6 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 #zooArrivalModal .zs-note,#skyNavyModal .zs-note,#navyHotelModal .zs-note{margin-top:10px;padding:9px 10px;border-radius:10px;background:#f7fafc;color:#718596;font-size:7.5px;line-height:1.45}
 @media(max-width:480px){#zooArrivalModal .zs-time,#skyNavyModal .zs-time,#navyHotelModal .zs-time{align-items:flex-start;flex-direction:column;gap:2px}}
 </style><style id="day3-extra-transfer-card-style">.transit-zoo-arrival,.transit-sky-navy,.transit-navy-hotel{cursor:pointer}</style>
-
 <style id="chicago-v93-redesign">
 /* =========================================================
    CHICAGO TRIP OS — V93 VISUAL REDESIGN
@@ -2191,8 +2190,114 @@ input:focus-visible{
   }
 }
 </style>
-
-</head>
+<style id="v160-itinerary-hours-visible">
+/* v160 — Horarios visibles dentro de cada tarjeta del itinerario */
+.it-hours{
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:7px !important;
+  margin-top:8px !important;
+  padding:7px 10px !important;
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+  border:1px solid #cfe1d7 !important;
+  border-radius:11px !important;
+  background:linear-gradient(135deg,#f3f8f4 0%,#fffdf9 100%) !important;
+  color:#315449 !important;
+  font-size:10px !important;
+  line-height:1.28 !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  position:relative !important;
+  z-index:2 !important;
+}
+.it-hours-icon{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:20px !important;
+  height:20px !important;
+  flex:0 0 20px !important;
+  border-radius:50% !important;
+  background:#dfeee5 !important;
+  color:#236247 !important;
+  font-size:11px !important;
+}
+.it-hours b{display:block !important;font-weight:900 !important;color:#244d3e !important;margin-bottom:1px !important}
+.it-hours small{display:block !important;color:#668078 !important;font-size:8.5px !important;line-height:1.25 !important;margin-top:1px !important}
+@media(max-width:740px){
+ .it-hours{font-size:9.5px !important;padding:7px 9px !important}
+ .it-hours small{font-size:8px !important}
+}
+</style><style id="v160-hours-legend-style">
+.it-hours-legend{margin:0 0 10px;padding:7px 10px;border:1px solid #e2ebe6;border-radius:10px;background:#fbfdfb;color:#60746e;font-size:9px;line-height:1.3}
+</style><style id="v162-hours-next-to-route">
+/* v162 — Horario directamente en la fila de acciones, junto a Ver trayecto */
+.actions.has-hours{
+  display:grid !important;
+  grid-template-columns:1fr 1fr 1fr !important;
+  align-items:stretch !important;
+}
+.actions.has-hours .route-btn{
+  width:auto !important;
+  min-width:0 !important;
+  min-height:42px !important;
+  border:0 !important;
+  border-right:1px solid #d7e2ee !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+.actions.has-hours > .it-hours-action{
+  width:auto !important;
+  max-width:none !important;
+  min-height:42px !important;
+  margin:0 !important;
+  padding:6px 7px !important;
+  box-sizing:border-box !important;
+  border:0 !important;
+  border-right:1px solid #d7e2ee !important;
+  border-radius:0 !important;
+  background:#fbfdfb !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:4px !important;
+  color:#315449 !important;
+  font-size:8px !important;
+  line-height:1.2 !important;
+}
+.actions.has-hours > .it-hours-action .it-hours-icon{
+  width:16px !important; height:16px !important; flex:0 0 16px !important;
+  font-size:9px !important;
+}
+.actions.has-hours > .it-hours-action > span:not(.it-hours-icon){
+  display:block !important; text-align:left !important;
+}
+.actions.has-hours > .it-hours-action b{
+  display:block !important; font-size:8px !important; margin:0 !important;
+}
+.actions.has-hours > .it-hours-action small{
+  display:none !important;
+}
+.actions.has-hours > a{
+  min-height:42px !important;
+}
+.actions.has-hours .checkbtn{
+  grid-column:1/-1 !important;
+}
+@media(max-width:560px){
+  .actions.has-hours{grid-template-columns:1fr 1.08fr 1fr !important;}
+  .actions.has-hours .route-btn, .actions.has-hours > a, .actions.has-hours > .it-hours-action{font-size:7.7px !important;}
+}
+</style><style id="v165-planning-note-style">
+.transit-planning-note{margin:8px 0 10px 0;padding:8px 10px;border:1px solid #d8e3d4;border-radius:10px;background:#f4f8f3;color:#536b59;font-size:9px;line-height:1.45}
+@media(max-width:700px){.transit-planning-note{font-size:8px}}
+</style></head>
 <body data-maps-provider="Apple Maps"><div aria-label="Configuración de rutas" class="route-controls">
 <div class="route-control-row"><div class="route-control-label">🗺️ MAPA</div><div class="route-control-buttons"><button data-map-provider="apple" type="button">🍎 Apple Maps</button><button data-map-provider="google" type="button">🟦 Google Maps</button></div></div>
 <div class="route-control-row"><div class="route-control-label">📍 ORIGEN</div><div class="route-control-buttons"><button data-origin-mode="current" type="button">📍 Ubicación actual</button><button data-origin-mode="hotel" type="button">🏨 Hospedaje</button></div></div>
@@ -2268,27 +2373,27 @@ input:focus-visible{
 <a href="#day5">Día 5</a>
 <a href="#day6">Día 6</a>
 </nav>
-<section class="day" id="day1"><div class="dayhead"><h2>Día 1 — Miércoles 2 dic | Llegada + Navidad en el Loop + hielo</h2><small>6 actividades</small></div>
+<div class="it-hours-legend">🕒 Horario del lugar · aparece justo debajo de la hora de cada parada cuando existe un horario publicado.</div><section class="day" id="day1"><div class="dayhead"><h2>Día 1 — Miércoles 2 dic | Llegada + Navidad en el Loop + hielo</h2><small>6 actividades</small></div>
 <div class="start"></div><div class="timeline"><div aria-label="Abrir traslado O’Hare a hospedaje" class="transit-important transit-d1-ohare" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>O’Hare → Hospedaje · Blue Line</span><small>🛬 O’Hare → 🚇 Blue Line → Jackson-Blue → 🚶 HI Chicago · salida objetivo ≈ 2:00 pm</small></div><article class="stop free" data-key="d1s01">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 01</div><div class="place">Millennium Park + The Bean</div><div class="time">4:15 pm–4:50 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">201 E Randolph St, Chicago, IL 60601 — Cloud Gate / Millennium Park</div></div><div class="desc">GRATIS · primera caminata por Chicago · fotos con The Bean</div></div>
-<div class="actions"><button class="route-btn" data-access-point="201 E Randolph St, Chicago, IL 60601 — Cloud Gate / Millennium Park" data-destination="41.88269,-87.62334" data-destination-label="Millennium Park + The Bean" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="201 E Randolph St, Chicago, IL 60601 — Cloud Gate / Millennium Park" data-destination="41.88269,-87.62334" data-destination-label="Millennium Park + The Bean" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Horario general del parque"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 6:00 am–11:00 pm<small>Horario general del parque</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Millennium Park + The Bean%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 02</div><div class="place">Chicago Cultural Center</div><div class="time">4:50 pm–5:25 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">78 E Washington St, Chicago, IL 60602</div></div><div class="desc">GRATIS · interior histórico + cúpulas</div></div>
-<div class="actions"><button class="route-btn" data-access-point="78 E Washington St, Chicago, IL 60602" data-destination="41.88375,-87.62495" data-destination-label="Chicago Cultural Center" data-origin="201 E Randolph St, Chicago, IL 60601" data-origin-label="Millennium Park" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="78 E Washington St, Chicago, IL 60602" data-destination="41.88375,-87.62495" data-destination-label="Chicago Cultural Center" data-origin="201 E Randolph St, Chicago, IL 60601" data-origin-label="Millennium Park" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Abierto diariamente; exhibiciones cierran 15 min antes"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 10:00 am–5:00 pm<small>Abierto diariamente; exhibiciones cierran 15 min antes</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Cultural Center%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 03</div><div class="place">Christkindlmarket — Daley Plaza</div><div class="time">5:35 pm–6:25 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">50 W Washington St, Chicago, IL 60602 — Daley Plaza</div></div><div class="desc">GRATIS · mercado navideño · comida y ambiente</div></div>
-<div class="actions"><button class="route-btn" data-access-point="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination="41.88342,-87.63020" data-destination-label="Christkindlmarket — Daley Plaza" data-origin="78 E Washington St, Chicago, IL 60602" data-origin-label="Chicago Cultural Center" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="50 W Washington St, Chicago, IL 60602 — Daley Plaza" data-destination="41.88342,-87.63020" data-destination-label="Christkindlmarket — Daley Plaza" data-origin="78 E Washington St, Chicago, IL 60602" data-origin-label="Chicago Cultural Center" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Miércoles 2 dic 2026 · domingo–jueves"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 11:00 am–8:00 pm<small>Miércoles 2 dic 2026 · domingo–jueves</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Christkindlmarket   Daley Plaza%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 04</div><div class="place">Macy's / State Street</div><div class="time">6:30 pm–7:20 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">111 N State St, Chicago, IL 60602 — Macy’s State Street</div></div><div class="desc">GRATIS · decoración navideña + paseo por State Street</div></div>
-<div class="actions"><button class="route-btn" data-access-point="111 N State St, Chicago, IL 60602 — Macy’s State Street" data-destination="41.883697,-87.626969" data-destination-label="Macy's / State Street" data-origin="50 W Washington St, Chicago, IL 60602" data-origin-label="Christkindlmarket" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="111 N State St, Chicago, IL 60602 — Macy’s State Street" data-destination="41.883697,-87.626969" data-destination-label="Macy's / State Street" data-origin="50 W Washington St, Chicago, IL 60602" data-origin-label="Christkindlmarket" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Miércoles 2 dic 2026"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 10:00 am–9:00 pm<small>Miércoles 2 dic 2026</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Macy's / State Street%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d1s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 05</div><div class="place">Chicago Theatre — exterior</div><div class="time">7:25 pm–7:45 pm</div><span class="badge free">GRATIS</span>
@@ -2298,7 +2403,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 06</div><div class="place">McCormick Tribune Ice Rink</div><div class="time">8:00 pm–9:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">55 N Michigan Ave, Chicago, IL 60601 — Millennium Park</div></div><div class="desc">GRATIS · alquiler de patines aparte · cierre relajado del primer día</div></div>
-<div class="actions"><button class="route-btn" data-access-point="55 N Michigan Ave, Chicago, IL 60601 — Millennium Park" data-destination="41.88268,-87.62378" data-destination-label="McCormick Tribune Ice Rink" data-origin="175 N State St, Chicago, IL 60601" data-origin-label="Chicago Theatre" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="55 N Michigan Ave, Chicago, IL 60601 — Millennium Park" data-destination="41.88268,-87.62378" data-destination-label="McCormick Tribune Ice Rink" data-origin="175 N State St, Chicago, IL 60601" data-origin-label="Chicago Theatre" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="La temporada 2026–27 aún no tiene horario oficial publicado"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 2026–27 por confirmar<small>La temporada 2026–27 aún no tiene horario oficial publicado</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=McCormick Tribune Ice Rink%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article></div>
 <div class="daytools"><button class="dayDone" data-day="1" type="button">Marcar actividades del día</button></div>
 </section>
@@ -2307,7 +2412,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 01</div><div class="place">Shedd Aquarium</div><div class="time">9:00 am–12:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1200 S DuSable Lake Shore Dr, Chicago, IL 60605</div></div><div class="desc">PAGADO · visita principal de la mañana</div></div>
-<div class="actions"><button class="route-btn" data-access-point="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-destination="41.86762,-87.61380" data-destination-label="Shedd Aquarium" data-special-route="shedd-arrival" type="button">🚌 Ver horarios y cómo llegar</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-destination="41.86762,-87.61380" data-destination-label="Shedd Aquarium" data-special-route="shedd-arrival" type="button">🚌 Ver horarios y cómo llegar</button><div class="it-hours it-hours-action" title="Fall/Winter 2026"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 9:00 am–6:00 pm<small>Fall/Winter 2026</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Shedd Aquarium%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d2s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 02</div><div class="place">Almuerzo — Museum Campus</div><div class="time">12:00 pm–1:00 pm</div><span class="badge free">PAUSA</span>
@@ -2317,18 +2422,18 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 03</div><div class="place">Field Museum — SUE + dinosaurios</div><div class="time">1:00 pm–4:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1400 S DuSable Lake Shore Dr, Chicago, IL 60605</div></div><div class="desc">PAGADO · SUE the T. rex + salas de dinosaurios y exhibiciones principales</div></div>
-<div class="actions"><button class="route-btn" data-access-point="1400 S DuSable Lake Shore Dr, Chicago, IL 60605" data-destination="41.86621,-87.61690" data-destination-label="Field Museum — SUE + dinosaurios" data-origin="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Museum Campus" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="1400 S DuSable Lake Shore Dr, Chicago, IL 60605" data-destination="41.86621,-87.61690" data-destination-label="Field Museum — SUE + dinosaurios" data-origin="1200 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Museum Campus" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Última entrada 4:00 pm"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 9:00 am–5:00 pm<small>Última entrada 4:00 pm</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Field Museum   SUE + dinosaurios%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d2s04">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
-<div class="num">PARADA 04</div><div class="place">Museum Campus + Lake Michigan</div><div class="time">4:00 pm–4:40 pm</div><span class="badge free">GRATIS</span>
-</div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Museum Campus, Chicago, IL 60605</div></div><div class="desc">GRATIS · skyline + lago + fotos antes de ir al partido</div></div>
+<div class="num">PARADA 04</div><div class="place">Museum Campus + Lake Michigan</div><div class="time">4:00 pm–4:30 pm</div><span class="badge free">GRATIS</span>
+</div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Museum Campus, Chicago, IL 60605</div></div><div class="desc">GRATIS · skyline + lago + fotos · salida con margen hacia el hospedaje</div></div>
 <div class="actions"><button class="route-btn" data-access-point="Museum Campus, Chicago, IL 60605" data-destination="41.86520,-87.61390" data-destination-label="Museum Campus + Lake Michigan" data-origin="1400 S DuSable Lake Shore Dr, Chicago, IL 60605" data-origin-label="Field Museum" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Museum Campus + Lake Michigan%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div aria-label="Abrir traslado Shedd y Museum Campus a United Center" class="transit-important transit-shedd-united" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>Museum Campus → United Center · 146 → 20</span><small>📍 Solidarity Drive &amp; Aquarium → 146 North → State &amp; Madison → 2 min → Madison &amp; Dearborn/State → 20 West → Madison &amp; United Center</small></div><article class="stop paid" data-key="d2s06">
+<a href="https://www.google.com/search?tbm=isch&amp;q=Museum Campus + Lake Michigan%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div aria-label="Abrir traslado Shedd Aquarium → hospedaje → United Center" class="transit-important transit-shedd-united" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>🐟 Shedd Aquarium → 🏨 Hospedaje (cambio) → 🏀 United Center</span><small>📍 Shedd/Museum Campus → 146 North → State &amp; Harrison / Ida B Wells → 🚶 HI Chicago → cambio de ropa 30 min → 🚶 Madison &amp; Dearborn/State → 20 West → Madison &amp; United Center</small></div><article class="stop paid" data-key="d2s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 06</div><div class="place">Chicago Bulls vs Cleveland Cavaliers</div><div class="time">7:00 pm–10:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1901 W Madison St, Chicago, IL 60612 — United Center</div></div><div class="desc">PAGADO · partido 7:00 pm</div></div>
 <div class="actions"><button class="route-btn" data-access-point="1901 W Madison St, Chicago, IL 60612 — United Center" data-destination="41.88068,-87.67418" data-destination-label="Chicago Bulls vs Cleveland Cavaliers" data-origin="1901 W Madison St, Chicago, IL 60612" data-origin-label="United Center" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
-<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Bulls vs Cleveland Cavaliers%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div aria-label="Abrir traslado United Center a hospedaje" class="transit-important transit-uc-hotel" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>United Center → Hospedaje · 126 Congress Plaza</span><small>🚶 ≈10 min hasta Jackson &amp; Damen → 126 → Michigan &amp; Van Buren/Ida B. Wells → 🚶 ≈3 min al HI Chicago</small></div></div>
+<a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Bulls vs Cleveland Cavaliers%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div class="transit-planning-note" role="note"><b>⏱️ Plan ajustado:</b> Museum Campus termina <b>4:30 pm</b> → regreso al área Shedd → hospedaje ~<b>5:00 pm</b> → <b>30 min para cambiarte</b> → salida <b>5:30 pm</b> → United Center ~<b>6:03 pm</b>. Margen previsto: <b>~57 min</b> antes del partido de las 7:00 pm.</div><div aria-label="Abrir traslado United Center a hospedaje" class="transit-important transit-uc-hotel" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>United Center → Hospedaje · 126 Congress Plaza</span><small>🚶 ≈10 min hasta Jackson &amp; Damen → 126 → Michigan &amp; Van Buren/Ida B. Wells → 🚶 ≈3 min al HI Chicago</small></div></div>
 <div class="daytools"><button class="dayDone" data-day="2" type="button">Marcar actividades del día</button></div>
 </section>
 <section class="day" id="day3"><div class="dayhead"><h2>Día 3 — Viernes 4 dic | Zoo + Skydeck al atardecer + Navy Pier</h2><small>7 actividades</small></div>
@@ -2336,7 +2441,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 01</div><div class="place">Lincoln Park Zoo</div><div class="time">10:00 am–1:00 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo</div></div><div class="desc">GRATIS · 3 horas para recorrer el zoo de día</div></div>
-<div class="actions"><button class="route-btn" data-access-point="2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo" data-destination="41.91871,-87.63537" data-destination-label="Lincoln Park Zoo" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo" data-destination="41.91871,-87.63537" data-destination-label="Lincoln Park Zoo" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Puertas 8:00–5:00 · edificios 10:00–4:30"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 8:00 am–5:00 pm<small>Puertas 8:00–5:00 · edificios 10:00–4:30</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Lincoln Park Zoo%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d3s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 02</div><div class="place">Almuerzo — Lincoln Park</div><div class="time">1:00 pm–2:00 pm</div><span class="badge free">PAUSA</span>
@@ -2356,7 +2461,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 05</div><div class="place">Skydeck Chicago</div><div class="time">4:00 pm–5:30 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd</div></div><div class="desc">PAGADO · día → atardecer → ciudad iluminada + The Ledge</div></div>
-<div class="actions"><button class="route-btn" data-access-point="233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd" data-destination="41.87884,-87.63604" data-destination-label="Skydeck Chicago" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Willis Tower" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="233 S Wacker Dr, Chicago, IL 60606 — entrada por Jackson Blvd" data-destination="41.87884,-87.63604" data-destination-label="Skydeck Chicago" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Willis Tower" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Viernes 4 dic 2026 · horario invierno viernes–sábado"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 9:00 am–10:00 pm<small>Viernes 4 dic 2026 · horario invierno viernes–sábado</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Skydeck Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div aria-label="Abrir traslado Skydeck a Navy Pier" class="transit-important transit-sky-navy" data-special-route="sky-navy" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>Skydeck → Navy Pier · 124 East</span><small>🚶 ≈9 min hasta Washington &amp; Franklin → 124 → Navy Pier Terminal → 🚶 ≈1 min · objetivo Navy Pier 6:20 pm</small></div><article class="stop free" data-key="d3s06">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 06</div><div class="place">Cena</div><div class="time">9:00 pm–10:00 pm</div><span class="badge free">PAUSA</span>
@@ -2366,7 +2471,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 07</div><div class="place">Navy Pier + ambiente navideño</div><div class="time">6:20 pm–9:00 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">600 E Grand Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS · paseo nocturno + lago + luces · Winter WonderFest opcional/pagado</div></div>
-<div class="actions"><button class="route-btn" data-access-point="600 E Grand Ave, Chicago, IL 60611" data-destination="41.89173,-87.60415" data-destination-label="Navy Pier + ambiente navideño" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Skydeck" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA / 🚶" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="600 E Grand Ave, Chicago, IL 60611" data-destination="41.89173,-87.60415" data-destination-label="Navy Pier + ambiente navideño" data-origin="233 S Wacker Dr, Chicago, IL 60606" data-origin-label="Skydeck" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚌 CTA / 🚶" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Viernes 4 dic 2026 · horario sep 8–dic 31"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 11:00 am–10:00 pm<small>Viernes 4 dic 2026 · horario sep 8–dic 31</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Navy Pier + ambiente navideño%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><div aria-label="Abrir traslado Navy Pier a hospedaje" class="transit-important transit-navy-hotel" data-special-route="navy-hotel" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>Navy Pier → Hospedaje · 29 South</span><small>🚶 ≈2 min hasta Navy Pier Terminal → 29 → State &amp; Van Buren → 🚶 ≈3 min al HI Chicago · salida después de la cena</small></div></div>
 <div class="daytools"><button class="dayDone" data-day="3" type="button">Marcar actividades del día</button></div>
 </section>
@@ -2376,7 +2481,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 01</div><div class="place">Chicago Riverwalk</div><div class="time">9:30 am–11:00 am</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Chicago Riverwalk, Chicago, IL</div></div><div class="desc">GRATIS · río + fotos + paseo con calma</div></div>
-<div class="actions"><button class="route-btn" data-access-point="Chicago Riverwalk, Chicago, IL" data-destination="41.88723,-87.62582" data-destination-label="Chicago Riverwalk" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="Chicago Riverwalk, Chicago, IL" data-destination="41.88723,-87.62582" data-destination-label="Chicago Riverwalk" data-origin="24 E Ida B Wells Dr, Chicago, IL 60605" data-origin-label="Alojamiento" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Horario de acceso público"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 6:00 am–11:00 pm<small>Horario de acceso público</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Riverwalk%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d4s02">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 02</div><div class="place">Arquitectura del Loop + puentes</div><div class="time">11:00 am–12:30 pm</div><span class="badge free">GRATIS</span>
@@ -2391,7 +2496,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 04</div><div class="place">Riverwalk / zona del río — tramo final</div><div class="time">1:30 pm–2:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">400 N Michigan Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS · margen para caminar y acercarse al muelle sin prisa</div></div>
-<div class="actions"><button class="route-btn" data-access-point="400 N Michigan Ave, Chicago, IL 60611" data-destination="41.88847,-87.62441" data-destination-label="Riverwalk / zona del río — tramo final" data-origin="Chicago Loop, Chicago, IL" data-origin-label="Almuerzo" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="400 N Michigan Ave, Chicago, IL 60611" data-destination="41.88847,-87.62441" data-destination-label="Riverwalk / zona del río — tramo final" data-origin="Chicago Loop, Chicago, IL" data-origin-label="Almuerzo" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Horario de acceso público del Riverwalk"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 6:00 am–11:00 pm<small>Horario de acceso público del Riverwalk</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Riverwalk / zona del río   tramo final%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop paid" data-key="d4s05">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 05</div><div class="place">Chicago Water Taxi — Michigan Ave → Chinatown</div><div class="time">2:30 pm–3:15 pm aprox.</div><span class="badge paid">PAGADO</span>
@@ -2401,7 +2506,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 06</div><div class="place">Chinatown + Ping Tom Memorial Park</div><div class="time">3:15 pm–6:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">1700 S Wentworth Ave, Chicago, IL 60616</div></div><div class="desc">GRATIS · parque + barrio + tiendas + fotos con luz y al anochecer</div></div>
-<div class="actions"><button class="route-btn" data-access-point="1700 S Wentworth Ave, Chicago, IL 60616" data-destination="41.85694,-87.63472" data-destination-label="Chinatown + Ping Tom Memorial Park" data-origin="1700 S Wentworth Ave, Chicago, IL 60616" data-origin-label="Water Taxi — Chinatown Dock" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="1700 S Wentworth Ave, Chicago, IL 60616" data-destination="41.85694,-87.63472" data-destination-label="Chinatown + Ping Tom Memorial Park" data-origin="1700 S Wentworth Ave, Chicago, IL 60616" data-origin-label="Water Taxi — Chinatown Dock" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Horario del parque"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 6:00 am–10:00 pm<small>Horario del parque</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chinatown + Ping Tom Memorial Park%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article>
 <article class="stop paid" data-key="d4s07"><div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 07</div><div class="place">Chicago Water Taxi — Chinatown → Loop</div><div class="time">6:30 pm–7:15 pm aprox.</div><span class="badge paid">PAGADO</span>
@@ -2411,7 +2516,7 @@ input:focus-visible{
 <article class="stop free" data-key="d4s08"><div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 08</div><div class="place">Chicago Riverwalk de noche</div><div class="time">7:15 pm–8:45 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">Chicago Riverwalk / Loop, Chicago, IL</div></div><div class="desc">GRATIS · paseo nocturno + edificios iluminados + fotos junto al río</div></div>
-<div class="actions"><button class="route-btn" data-access-point="Chicago Riverwalk, Chicago, IL" data-destination="41.88723,-87.62582" data-destination-label="Chicago Riverwalk de noche" data-origin="Michigan Avenue Water Taxi Dock, Chicago, IL" data-origin-label="Water Taxi — Loop" data-reason="Segundo paseo por el Riverwalk para verlo ya de noche." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="Chicago Riverwalk, Chicago, IL" data-destination="41.88723,-87.62582" data-destination-label="Chicago Riverwalk de noche" data-origin="Michigan Avenue Water Taxi Dock, Chicago, IL" data-origin-label="Water Taxi — Loop" data-reason="Segundo paseo por el Riverwalk para verlo ya de noche." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Horario de acceso público"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 6:00 am–11:00 pm<small>Horario de acceso público</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Chicago Riverwalk night Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article>
 </div>
 <div aria-label="Abrir traslado Chicago Riverwalk a hospedaje" class="transit-important transit-d4-return" role="button" tabindex="0"><b>🚌 Traslado importante</b><span>Chicago Riverwalk de noche → Hospedaje · 26 Southbound</span><small>Después del Riverwalk nocturno: 🚶 → Michigan &amp; South Water → 🚌 26 → Michigan &amp; Van Buren / Ida B. Wells → 🚶 HI Chicago</small></div>
@@ -2426,7 +2531,7 @@ input:focus-visible{
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 02</div><div class="place">Harry Potter Shop Chicago</div><div class="time">11:15 am–12:30 pm</div><span class="badge free">GRATIS</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">676 N Michigan Ave, Chicago, IL 60611</div></div><div class="desc">GRATIS para entrar · tienda temática + Butterbeer + productos exclusivos</div></div>
-<div class="actions"><button class="route-btn" data-access-point="676 N Michigan Ave, Chicago, IL 60611" data-destination="41.89475,-87.62465" data-destination-label="Harry Potter Shop Chicago" data-origin="625 N Michigan Ave, Chicago, IL 60611" data-origin-label="Magnificent Mile" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="676 N Michigan Ave, Chicago, IL 60611" data-destination="41.89475,-87.62465" data-destination-label="Harry Potter Shop Chicago" data-origin="625 N Michigan Ave, Chicago, IL 60611" data-origin-label="Magnificent Mile" data-reason="Ruta pensada para mantener el día fluido y sin prisas." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Domingo 6 dic 2026"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 10:00 am–7:00 pm<small>Domingo 6 dic 2026</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Harry Potter Shop Chicago%20Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article><article class="stop free" data-key="d5s03">
 <div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 03</div><div class="place">Magnificent Mile — tiendas + paseo</div><div class="time">12:30 pm–5:00 pm</div><span class="badge free">FLEXIBLE</span>
@@ -2437,7 +2542,7 @@ input:focus-visible{
 <article class="stop paid" data-key="d5s04"><div class="dot"></div><div class="card"><div class="top"><div class="row"><div>
 <div class="num">PARADA 04</div><div class="place">ZooLights — Lincoln Park Zoo</div><div class="time">5:20 pm–9:00 pm</div><span class="badge paid">PAGADO</span>
 </div></div><div class="address"><span class="label">Destino exacto</span><div class="value">2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo</div></div><div class="desc">PAGADO · luces + ambiente nocturno · llegamos directamente desde Magnificent Mile</div></div>
-<div class="actions"><button class="route-btn" data-access-point="2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo" data-destination="41.91871,-87.63537" data-destination-label="ZooLights — Lincoln Park Zoo" data-origin="Michigan &amp; Huron, Chicago, IL" data-origin-label="Magnificent Mile" data-reason="Ruta directa desde Magnificent Mile hacia la entrada del ZooLights." data-recommendation="🚌 151 Devon/Clark" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-access-point="2001 N Clark St, Chicago, IL 60614 — Lincoln Park Zoo" data-destination="41.91871,-87.63537" data-destination-label="ZooLights — Lincoln Park Zoo" data-origin="Michigan &amp; Huron, Chicago, IL" data-origin-label="Magnificent Mile" data-reason="Ruta directa desde Magnificent Mile hacia la entrada del ZooLights." data-recommendation="🚌 151 Devon/Clark" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="ZooLights 2026 · 4:30–9:00 pm"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 4:30 pm–9:00 pm<small>Domingo 6 dic 2026 · última entrada 8:00 pm</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=ZooLights Lincoln Park Zoo Chicago" rel="noopener" target="_blank">Ver fotos →</a><label class="checkbtn"><input aria-label="Marcar como hecha" type="checkbox"/><span>Marcar como hecha</span></label></div></div></article>
 <div aria-label="Abrir traslado ZooLights a hospedaje" class="transit-important transit-d5-return" role="button" tabindex="0">
 <b>🚌 Traslado importante</b><span>ZooLights → Hospedaje · ≈ 31 min total</span>
@@ -2527,7 +2632,7 @@ input:focus-visible{
 </div>
 <div class="desc">Conocer el mercado y almorzar. Buena opción para comer sin alejarnos del recorrido.</div>
 </div>
-<div class="actions"><button class="route-btn" data-destination="43.03525,-87.90809" data-destination-label="Milwaukee Public Market" data-origin="" data-origin-label="Ubicación actual" data-reason="Queda dentro del recorrido del Third Ward." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-destination="43.03525,-87.90809" data-destination-label="Milwaukee Public Market" data-origin="" data-origin-label="Ubicación actual" data-reason="Queda dentro del recorrido del Third Ward." data-recommendation="🚶 Caminando" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Lunes–sábado"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 10:00 am–8:00 pm<small>Lunes–sábado</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Milwaukee%20Public%20Market%20Milwaukee" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
 <input aria-label="Marcar como hecha" type="checkbox"/>
@@ -2640,7 +2745,7 @@ input:focus-visible{
 <div class="desc">Weeknight Open–Close: esquiar toda la ventana de 4:00 pm a 9:00 pm con ticket + alquiler.</div>
 </div>
 <div class="ski-price">💵 Desde $59 por persona · ticket + alquiler</div>
-<div class="actions"><button class="route-btn" data-destination="42.91990,-88.01581" data-destination-label="Crystal Ridge" data-origin="" data-origin-label="Ubicación actual" data-reason="Es la última parada del día y el plan principal de ski." data-recommendation="🚗 En carro" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button>
+<div class="actions has-hours"><button class="route-btn" data-destination="42.91990,-88.01581" data-destination-label="Crystal Ridge" data-origin="" data-origin-label="Ubicación actual" data-reason="Es la última parada del día y el plan principal de ski." data-recommendation="🚗 En carro" data-route="" data-route-target="GPS/WGS84" type="button">🗺️ Ver trayecto</button><div class="it-hours it-hours-action" title="Lunes · temporada de invierno 2026/27"><span class="it-hours-icon">🕒</span><span><b>Horario del lugar</b> 4:00 pm–9:00 pm<small>Lunes · temporada de invierno 2026/27</small></span></div>
 <a href="https://www.google.com/search?tbm=isch&amp;q=Crystal%20Ridge%20Franklin%20Wisconsin" rel="noopener" target="_blank">Ver fotos →</a>
 <label class="checkbtn">
 <input aria-label="Marcar como hecha" type="checkbox"/>
@@ -3731,40 +3836,49 @@ input:focus-visible{
 </div>
 <div class="zs-note">🕒 Los horarios son referencias de Transit para planificar el recorrido; pueden cambiar antes de diciembre de 2026. 🎯 Objetivo: estar en Shedd antes de las 9:00 am.</div></div></div>
 <div aria-hidden="true" class="route-modal hidden su2-modal" id="sheddUnitedModal">
-<div aria-modal="true" class="route-box su2-box" role="dialog"><button aria-label="Cerrar" class="route-close" id="suClose" type="button">×</button><div class="route-kicker">Traslado del Día 2 · antes del partido</div>
-<h3>🐟 Shedd Aquarium → 🏀 United Center</h3>
-<div class="route-sub">Salimos del área del Aquarium alrededor de las 4:31 pm. La ruta usa dos buses CTA y una conexión corta en el Loop.</div>
+<div aria-modal="true" class="route-box su2-box" role="dialog"><button aria-label="Cerrar" class="route-close" id="suClose" type="button">×</button><div class="route-kicker">Traslado del Día 2 · cambio en hospedaje antes del partido</div>
+<h3>🐟 Shedd Aquarium → 🏨 Hospedaje → 🏀 United Center</h3>
+<div class="route-sub">En vez de ir directo al United Center, primero regresamos al hospedaje para cambiarte y luego salimos de ahí hacia el partido. Así el segundo tramo parte limpio desde el hotel.</div>
 <div class="zs-route primary">
-<div class="zs-route-head"><b>🚌 146 North · primera opción</b><span>≈ 22 min</span></div>
-<div class="zs-walk">📍 <b>Ruta:</b> desde <strong>Solidarity Drive &amp; Aquarium</strong> toma el <strong>146 North</strong> y baja en <strong>State &amp; Madison</strong>.</div>
+<div class="zs-route-head"><b>🚌 146 North · Shedd → hospedaje</b><span>≈ 20–25 min + caminata</span></div>
+<div class="zs-walk">📍 <b>Subida:</b> desde <strong>Solidarity Drive &amp; Aquarium</strong> toma el <strong>146 North</strong> y baja en <strong>State &amp; Harrison / Ida B Wells</strong>.</div>
 <div class="zs-times">
-<div class="zs-time"><strong>4:45 pm</strong><em>→ State &amp; Madison ~5:07 pm</em></div>
-<div class="zs-time"><strong>4:54 pm</strong><em>→ State &amp; Madison ~5:16 pm</em></div>
+<div class="zs-time"><strong>≈ 4:40 pm</strong><em>salida objetivo del área Shedd/Museum Campus</em></div>
+<div class="zs-time"><strong>≈ 4:55–5:00 pm</strong><em>State &amp; Harrison / Ida B Wells</em></div>
 </div>
-<div class="zs-walk">🚶 <b>Conexión:</b> desde <strong>State &amp; Madison</strong> camina ≈2 min hasta <strong>Madison &amp; Dearborn/State</strong>, donde tomas el <strong>20 West</strong>.</div>
-<div class="zs-maprow"><button data-su-map="start">🗺️ Caminar al 146</button><button data-su-map="transfer">🗺️ Caminar al 20</button><button data-su-map="full">🗺️ Ver ruta completa</button></div>
+<div class="zs-walk">🚶 <b>Final:</b> desde <strong>State &amp; Harrison / Ida B Wells</strong> camina hasta <strong>HI Chicago · 24 E Ida B. Wells Drive</strong>. El bloque completo queda calculado en ≈20 min con el tiempo de salida y la caminata.</div>
+<div class="zs-maprow"><button data-su-map="shedd-hotel">🗺️ Shedd → hospedaje</button><button data-su-map="full">🗺️ Ruta completa</button></div>
+</div>
+<div class="zs-route primary">
+<div class="zs-route-head"><b>🏨 Cambio en hospedaje</b><span>≈ 25–30 min</span></div>
+<div class="zs-times">
+<div class="zs-time"><strong>≈ 5:00 pm</strong><em>llegada al HI Chicago</em></div>
+<div class="zs-time"><strong>5:00–5:30 pm</strong><em>30 min reservados para entrar, cambiarte y salir</em></div>
+</div>
+<div class="zs-walk">💡 La idea es dejar mochilas, cambiarte y salir de nuevo sin tener que llevar la ropa de cambio hasta el United Center.</div>
 </div>
 <div class="zs-route">
-<div class="zs-route-head"><b>🚌 20 West · conexión</b><span>≈ 20 min</span></div>
-<div class="zs-walk">📍 <b>Ruta:</b> subes en <strong>Madison &amp; Dearborn/State</strong> y bajas en <strong>Madison &amp; United Center (1900 W)</strong>.</div>
+<div class="zs-route-head"><b>🚶 Hotel → 🚌 20 West → 🏀 United Center</b><span>tramo final</span></div>
+<div class="zs-walk">📍 <b>Ir a:</b> desde el hospedaje camina ≈13 min hasta <strong>Madison &amp; Dearborn/State</strong>. La captura de Transit que compartiste muestra este punto como la parada de subida.</div>
 <div class="zs-times">
-<div class="zs-time"><strong>5:12 pm</strong><em>→ United Center ~5:32 pm · principal</em></div>
-<div class="zs-time"><strong>5:21 pm</strong><em>→ United Center ~5:41 pm · backup</em></div>
-<div class="zs-time"><strong>5:31 pm</strong><em>→ United Center ~5:51 pm · siguiente respaldo</em></div>
+<div class="zs-time"><strong>5:30 pm</strong><em>salida del hospedaje después de cambiarte</em></div>
+<div class="zs-time"><strong>5:43 pm</strong><em>llegada a Madison &amp; Dearborn/State</em></div>
+<div class="zs-time"><strong>5:43 pm → 6:02 pm</strong><em>🚌 20 West · llegada a Madison &amp; United Center</em></div>
+<div class="zs-time"><strong>≈ 6:03 pm</strong><em>United Center · ≈57 min antes del partido</em></div>
 </div>
-<div class="zs-walk">🚶 <b>Final:</b> baja en <strong>Madison &amp; United Center (1900 W)</strong> y camina ≈1 min hasta el United Center.</div>
-<div class="zs-maprow"><button data-su-map="full">🗺️ Ver ruta completa</button></div></div>
+<div class="zs-walk">🚶 <b>Final:</b> baja en <strong>Madison &amp; United Center (1900 W)</strong> y camina ≈1 min hasta el estadio.</div>
+<div class="zs-maprow"><button data-su-map="hotel-united">🗺️ Hospedaje → United</button><button data-su-map="full">🗺️ Ruta completa</button></div>
+</div>
 <div class="zs-route primary">
-<div class="zs-route-head"><b>🏀 Llegada al United Center</b><span>≈ 5:32 pm</span></div>
+<div class="zs-route-head"><b>🏀 Llegada al United Center</b><span>≈ 6:03 pm</span></div>
 <div class="zs-times">
 <div class="zs-time"><strong>Parada</strong><em>Madison &amp; United Center (1900 W)</em></div>
 <div class="zs-time"><strong>Destino</strong><em>United Center · 1901 W Madison St</em></div>
-<div class="zs-time"><strong>Margen</strong><em>≈ 1 h 28 min antes del partido de las 7:00 pm</em></div>
+<div class="zs-time"><strong>Margen</strong><em>≈ 57 min antes del partido de las 7:00 pm</em></div>
 </div>
 <div class="zs-maprow"><button data-su-map="full">🗺️ Ver ruta completa</button></div>
 </div>
-<div class="zs-note">🕒 Los horarios son referencias de Transit/Maps para planificar el recorrido; pueden cambiar antes de diciembre de 2026. La CTA confirma que el 146 sirve el área de Museum Campus y que el 20 West sirve United Center.</div></div></div>
-<div aria-hidden="true" class="route-modal hidden su2-modal" id="ucHotelModal">
+<div class="zs-note">🕒 La CTA confirma que el 146 conecta el área del Shedd/Museum Campus con State &amp; Harrison/Ida B Wells, y que el 20 Madison presta servicio directo al United Center. Los tiempos de este bloque son objetivos de planificación y pueden cambiar antes de diciembre de 2026. Las referencias 5:34→5:54 y 5:30→6:03 provienen de las capturas de Transit que compartiste; el día del partido conviene revisar la salida real.</div></div></div><div aria-hidden="true" class="route-modal hidden su2-modal" id="ucHotelModal">
 <div aria-modal="true" class="route-box su2-box" role="dialog"><button aria-label="Cerrar" class="route-close" id="uchClose" type="button">×</button><div class="route-kicker">Traslado del Día 2 · después del partido</div>
 <h3>🏀 United Center → 🏨 Hospedaje</h3>
 <div class="route-sub">El partido está planificado hasta las <b>10:00 pm</b>. Por eso no fijamos una salida a las 9:48 pm: primero sales del United Center, caminas hasta Jackson &amp; Damen y tomas el siguiente 126 disponible.</div>
@@ -4634,10 +4748,16 @@ input:focus-visible{
 .v49-food-ui .option-card{padding:10px!important}
 @media(max-width:700px){.v49-grid{grid-template-columns:1fr}.v49-cat-btn{font-size:8px;padding:6px 8px}}
 </style>
+<style id="v164-shedd-hotel-united-style">
+#sheddUnitedModal .zs-route.primary{border-color:#b9d9c8;background:#f4fbf7}
+#sheddUnitedModal .route-sub{margin-bottom:10px}
+#sheddUnitedModal .zs-route-head b{color:#214d6c}
+</style>
 <script id="day2-modal-map-buttons">
 (function(){
-  function openMap(origin,destination,mode){
-    const u='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin)+'&destination='+encodeURIComponent(destination)+'&travelmode='+mode;
+  function openMap(origin,destination,mode,waypoint){
+    let u='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(origin)+'&destination='+encodeURIComponent(destination)+'&travelmode='+mode;
+    if(waypoint) u+='&waypoints='+encodeURIComponent(waypoint);
     const w=window.open(u,'chicagoMapsWindow');
     if(!w) window.location.assign(u); else { try{w.focus()}catch(e){} }
   }
@@ -4654,10 +4774,9 @@ input:focus-visible{
     }
 
     if(su){
-      if(su==='start') return openMap('Shedd Aquarium, Chicago, IL','Solidarity Drive & Aquarium, Chicago, IL','walking');
-      if(su==='transfer') return openMap('State & Madison, Chicago, IL','Madison & Dearborn/State, Chicago, IL','walking');
-      if(su==='finish') return openMap('Madison & United Center, Chicago, IL','United Center, 1901 W Madison St, Chicago, IL','walking');
-      if(su==='full') return openMap('Solidarity Drive & Aquarium, Chicago, IL','United Center, 1901 W Madison St, Chicago, IL','transit');
+      if(su==='shedd-hotel') return openMap('Shedd Aquarium, Chicago, IL','HI Chicago, 24 E Ida B. Wells Drive, Chicago, IL','transit');
+      if(su==='hotel-united') return openMap('HI Chicago, 24 E Ida B. Wells Drive, Chicago, IL','United Center, 1901 W Madison St, Chicago, IL','transit','Madison & Dearborn/State, Chicago, IL');
+      if(su==='full') return openMap('Shedd Aquarium, Chicago, IL','United Center, 1901 W Madison St, Chicago, IL','transit', 'HI Chicago, 24 E Ida B. Wells Drive, Chicago, IL');
     }
   }
 
@@ -4787,7 +4906,6 @@ function setup(key){const d=defs[key],m=document.getElementById(d.modal);if(!m)r
 setup('d4hr');setup('d4ret');setup('d5arr');setup('d5ret');setup('d5zl');setup('d1oh');setup('d6oh');
 document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;document.querySelectorAll('#d4HotelRiverModal,#d4ReturnModal,#d5ArrivalModal,#d5ReturnModal,#d5ZooLightsModal,#d1OhareModal,#d6OhareModal').forEach(m=>m.classList.add('hidden'))});
 })();</script>
-
 <style id="v90-premium-ui">
 /* =========================================================
    CHICAGO ITINERARY · V90 PREMIUM UI
@@ -5596,8 +5714,6 @@ body::before{
   *,*::before,*::after{scroll-behavior:auto !important;transition:none !important;animation:none !important}
 }
 </style>
-
-
 <script id="v90-premium-ui-js">
 (function(){
   const app=document.querySelector('main.app');
@@ -5885,8 +6001,6 @@ body::before{
   },{passive:true});
 })();
 </script>
-
-
 <style id="v91-ultimate-ui">
 /* =========================================================
    CHICAGO ITINERARY v91 — ULTIMATE UI LAYER
@@ -6345,7 +6459,6 @@ body:before{
   *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
 }
 </style>
-
 <script id="v91-ultimate-ui-js">
 (function(){
   if(document.getElementById('v91CoverTag')) return;
@@ -6464,8 +6577,6 @@ body:before{
   };
 })();
 </script>
-
-
 <style id="v92-signature-ui">
 /* v92 signature pass: remove competing controls and make the chrome intentional */
 .v90-top-actions{align-items:center !important;gap:6px !important}
@@ -6520,7 +6631,6 @@ body:before{
   .v92-route-row{grid-template-columns:1fr;gap:4px}
 }
 </style>
-
 <script id="v92-signature-ui-js">
 (function(){
   if(document.getElementById('v92RoutePill')) return;
@@ -6594,7 +6704,6 @@ body:before{
   }
 })();
 </script>
-
 <style id="v93-journey-system">
 /* v93 · Journey System: a live, installable travel companion */
 .v93-command{
@@ -6636,8 +6745,6 @@ body:before{
   if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
 </script>
-
-
 <style id="atlas-v106-clean-css">
 /* =========================================================
    CHICAGO ATLAS v106 — CLEAN WINTER
@@ -6783,6 +6890,17 @@ body.v106-body .toast{display:none!important}
   padding:6px 8px;text-decoration:none;font-size:6.5px;font-weight:900;cursor:pointer
 }
 .v106-actions .primary{background:#eef4f0;border-color:#c8dbd3;color:#355e51}
+.v106-actions.has-hours{display:flex;align-items:stretch;gap:5px;flex-wrap:wrap}
+.v106-hours{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:27px;box-sizing:border-box;
+  padding:6px 8px;border:1px solid #d6e1dc;border-radius:8px;
+  background:#f7faf8;color:#45675c;font-size:6.4px;font-weight:900;
+  white-space:nowrap;
+}
+@media(max-width:620px){
+  .v106-hours{font-size:6.1px;padding:6px 7px}
+}
 
 /* right side */
 .v106-side{align-self:start}
@@ -6990,7 +7108,6 @@ body.v106-body .toast{display:none!important}
   .v106-time-option{grid-template-columns:1fr;gap:2px}
 }
 </style>
-
 <script id="atlas-v106-clean-js">
 (function(){
   if(window.__atlasV106)return;
@@ -7010,6 +7127,13 @@ body.v106-body .toast{display:none!important}
       time:clean(s.querySelector('.time')?.textContent),
       desc:clean(s.querySelector('.desc')?.textContent),
       addr:clean(s.querySelector('.address .value')?.textContent),
+      hours:(()=>{
+        const h=s.querySelector('.it-hours-action');
+        if(!h)return '';
+        const txt=clean(h.textContent);
+        const m=txt.match(/\d{1,2}:\d{2}\s*[ap]m\s*[–-]\s*\d{1,2}:\d{2}\s*[ap]m/i);
+        return m?m[0]:(/por confirmar/i.test(txt)?'Por confirmar':'');
+      })(),
       free:s.classList.contains('free'),
       paid:s.classList.contains('paid'),
       route:s.querySelector('.route-btn'),
@@ -7092,8 +7216,8 @@ body.v106-body .toast{display:none!important}
         </section>
 
         <section class="v106-food" id="v106FoodView">
-          <div class="v106-section-title">Food map</div>
-          <div class="v106-section-sub">Todas las opciones originales de comida del día, agrupadas por categoría. Nada se descarta.</div>
+          <div class="v106-section-title">Comida</div>
+          <div class="v106-section-sub">Elige una categoría para ver los lugares.</div>
           <div id="v106FoodContent"></div>
         </section>
 
@@ -7137,8 +7261,9 @@ body.v106-body .toast{display:none!important}
             <span class="v106-tag">${String(i+1).padStart(2,'0')}</span>
           </div>
           ${s.addr?`<div class="v106-address">${esc(s.addr)}</div>`:''}
-          <div class="v106-actions">
+          <div class="v106-actions${s.hours?' has-hours':''}">
             ${s.route?`<button class="primary v106-route-btn" data-key="${esc(s.route.dataset.destinationLabel||'')}">↗ Ver trayecto</button>`:''}
+            ${s.hours?`<span class="v106-hours" title="Horario del lugar">🕒 ${esc(s.hours)}</span>`:''}
             ${s.photo?`<a href="${esc(s.photo.href)}" target="_blank" rel="noopener">◌ Fotos</a>`:''}
           </div>
         </div>
@@ -7177,33 +7302,30 @@ body.v106-body .toast{display:none!important}
   }
 
   function renderFood(d){
-    const groups=food[d.num]||[];
     const content=atlas.querySelector('#v106FoodContent');
-    content.innerHTML=`
-      <div class="v106-food-origin">
-        <div><strong>📍 Distancias de comida</strong><span>Usa el sistema de rutas original para “Cómo llegar”.</span></div>
-        <div class="v106-origin-btns"><button class="active">🏨 Hospedaje</button><button>📍 Mi ubicación</button></div>
-      </div>
-      ${groups.map((g,i)=>`
-        <details class="v106-food-category" ${i<3?'open':''}>
-          <summary>${esc(g.name)} <span class="v106-food-count">${g.items.length} opciones</span></summary>
-          <div class="v106-food-grid">
-            ${g.items.map((x,j)=>`
-              <article class="v106-food-card">
-                <b>${esc(x.name)}</b>
-                <div class="v106-food-meta">${esc(x.meta)}</div>
-                ${x.price?`<span class="v106-food-price">${esc(x.price)}</span>`:''}
-                <div class="v106-food-route" data-food-index="${i}-${j}">🗺️ Cómo llegar</div>
-              </article>`).join('')}
-          </div>
-        </details>`).join('')}`;
+    const cats=[
+      {key:'breakfast',label:'Desayunos',desc:'Café · brunch · bagels',img:'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1400&q=88',icon:'☕'},
+      {key:'fast',label:'Comida rápida',desc:'Rápido · casual · económico',img:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1400&q=88',icon:'🍔'},
+      {key:'market',label:'Supermercados',desc:'Agua · snacks · provisiones',img:'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=88',icon:'🛒'},
+      {key:'classic',label:'Chicago clásico',desc:'Pizza · hot dogs · sabores locales',img:'https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1400&q=88',icon:'🌭'},
+      {key:'shops',label:'Tiendas',desc:'Compras · souvenirs · ropa',img:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=88',icon:'🛍️'}
+    ];
+    content.innerHTML=`<div class="v142-food-home">${cats.map(c=>`
+      <button class="v142-food-card" type="button" data-food-category="${c.key}" style="--food-image:url('${c.img}')">
+        <span class="v142-food-bg"></span><span class="v142-food-shade"></span>
+        <span class="v142-food-icon">${c.icon}</span>
+        <span class="v142-food-copy"><b>${c.label}</b><small>${c.desc}</small></span>
+        <span class="v142-food-arrow">›</span>
+      </button>`).join('')}</div>`;
 
-    groups.forEach((g,gi)=>g.items.forEach((x,ji)=>{
-      const el=content.querySelector(`[data-food-index="${gi}-${ji}"]`);
-      el?.addEventListener('click',()=>{
-        const src=[...document.querySelectorAll('.app .route-btn')].find(b=>b.dataset.destinationLabel===x.label||b.dataset.destination===x.dest);
-        if(src)src.click();
-      });
+    content.querySelectorAll('[data-food-category]').forEach(btn=>btn.addEventListener('click',()=>{
+      const modal=document.getElementById('foodModal');
+      const float=document.getElementById('foodFloat');
+      if(float) float.click();
+      setTimeout(()=>{
+        const target=document.querySelector(`#foodModal [data-v141-cat="${btn.dataset.foodCategory}"]`);
+        if(target) target.click();
+      },30);
     }));
   }
 
@@ -7617,8 +7739,6 @@ body.v106-body .toast{display:none!important}
   mode('route');
 })();
 </script>
-
-
 <style id="atlas-v126-transport-css">
 /* v126 · semantic transport modal */
 .v126-modal .route-box{
@@ -7720,8 +7840,6 @@ body.v106-body .toast{display:none!important}
 .v126-modal .v106-modal-note{display:none!important}
 .v126-modal .zs-route,.v126-modal .zs-note{display:none!important}
 </style>
-
-
 <style id="atlas-v130-no-replacement-glyph-css">
 /* v130 · vehicle header uses inline SVG, never an emoji glyph */
 .v126-modal .v126-leg-name{
@@ -7746,8 +7864,6 @@ body.v106-body .toast{display:none!important}
   display:block!important;
 }
 </style>
-
-
 <style id="atlas-v131-alignment-arrivals-css">
 /* v131 · text alignment + complete approximate arrivals */
 .v126-modal .v126-route .v126-step{
@@ -7764,8 +7880,6 @@ body.v106-body .toast{display:none!important}
   align-self:center!important;
 }
 </style>
-
-
 <style id="atlas-v132-universal-css">
 /* =========================================================
    v132 · UNIVERSAL TRANSPORT MODAL
@@ -7951,8 +8065,6 @@ body.v106-body .toast{display:none!important}
 .v132-modal .zs-route,
 .v132-modal .zs-note{display:none!important}
 </style>
-
-
 <script id="atlas-v132-universal-js">
 (function(){
   if(window.__atlasV132)return;
@@ -8281,8 +8393,6 @@ body.v106-body .toast{display:none!important}
   setTimeout(()=>document.querySelectorAll('.route-modal').forEach(build),220);
 })();
 </script>
-
-
 <style id="atlas-v134-bus-emoji-css">
 /* v134 · use the exact bus emoji requested */
 .v132-modal .v132-leg-name{
@@ -8310,6 +8420,1494 @@ body.v106-body .toast{display:none!important}
   line-height:1!important;
 }
 </style>
+<style id="food-v2-premium-css">
+/* =========================================================
+   FOOD V2 — Reestructuración completa de la sección Comida
+   ========================================================= */
+#foodModal .food-v2-shell{
+  display:block;
+  width:min(680px,100%);
+  max-height:min(91vh,860px);
+  overflow:auto;
+  background:linear-gradient(180deg,#f9fcff 0%,#f2f7fb 100%);
+  border:1px solid #d8e5ef;
+  border-radius:26px;
+  box-shadow:0 28px 90px rgba(10,34,55,.28);
+  padding:18px;
+  color:#173b5e;
+  -webkit-overflow-scrolling:touch;
+}
+#foodModal.food-v2-modal{
+  padding:14px !important;
+  background:rgba(7,19,31,.68) !important;
+  backdrop-filter:blur(10px);
+}
+.food-v2-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:3px 2px 14px;
+}
+.food-v2-kicker{
+  margin-bottom:5px;font-size:8px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:#1590c7;
+}
+.food-v2-title{
+  margin:0;font:800 26px/1.03 "Fraunces",serif;color:#102f4d;letter-spacing:-.35px;
+}
+.food-v2-sub{
+  margin:6px 0 0;max-width:48ch;color:#6b8195;font-size:9.5px;line-height:1.45;
+}
+.food-v2-close{
+  flex:0 0 auto;width:34px;height:34px;border:1px solid #cfdeea;border-radius:50%;
+  background:#fff;color:#42627b;font-size:20px;line-height:1;cursor:pointer;
+  box-shadow:0 5px 14px rgba(23,59,94,.08);
+}
+.food-v2-origin{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:9px 10px;margin:0 0 14px;border:1px solid #d8e5ef;border-radius:15px;
+  background:rgba(255,255,255,.88);
+}
+.food-v2-origin-copy{min-width:0}
+.food-v2-origin-copy b{display:block;font-size:9.5px;color:#254a67}
+.food-v2-origin-copy span{display:block;margin-top:2px;font-size:8px;color:#74889a}
+.food-v2-origin-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.food-v2-origin-btn{
+  border:1px solid #d1e0ea;background:#f7fafc;color:#5b7184;border-radius:9px;
+  padding:6px 8px;font-size:8px;font-weight:900;cursor:pointer;white-space:nowrap;
+}
+.food-v2-origin-btn.active{background:#eaf6fd;border-color:#8fc6df;color:#176b98}
 
+.food-v2-category-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+}
+.food-v2-category{
+  position:relative;min-height:154px;padding:0;overflow:hidden;text-align:left;
+  border:1px solid #d7e3ec;border-radius:20px;background:#173b5e;cursor:pointer;
+  box-shadow:0 10px 25px rgba(16,46,70,.09);isolation:isolate;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.food-v2-category:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(16,46,70,.15);border-color:#a8cfe1}
+.food-v2-category:active{transform:scale(.985)}
+.food-v2-category:focus-visible{outline:3px solid #8dc9e8;outline-offset:2px}
+.food-v2-category-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transform:scale(1.035);transition:transform .35s ease;z-index:-3;
+}
+.food-v2-category:hover .food-v2-category-bg{transform:scale(1.08)}
+.food-v2-category:after{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:linear-gradient(180deg,rgba(6,24,38,.12) 0%,rgba(6,25,40,.36) 42%,rgba(6,22,37,.92) 100%);
+}
+.food-v2-category-content{
+  position:absolute;inset:auto 12px 12px;z-index:2;
+  color:#fff;
+}
+.food-v2-category-icon{
+  width:31px;height:31px;display:grid;place-items:center;border-radius:10px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(10px);font-size:17px;margin-bottom:7px;
+}
+.food-v2-category-title{font-size:13px;font-weight:900;line-height:1.1}
+.food-v2-category-desc{margin-top:3px;color:rgba(255,255,255,.82);font-size:8px;line-height:1.35}
+.food-v2-count{
+  display:inline-flex;margin-top:7px;padding:4px 7px;border-radius:999px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);
+  font-size:7.5px;font-weight:900;color:#fff;backdrop-filter:blur(8px);
+}
+.food-v2-arrow{
+  position:absolute;right:11px;top:11px;width:25px;height:25px;display:grid;place-items:center;
+  border-radius:50%;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:13px;transition:.18s;
+}
+.food-v2-category:hover .food-v2-arrow{transform:translateX(2px)}
+
+.food-v2-note{
+  margin:11px 1px 0;padding:9px 10px;border-radius:13px;background:#fff;
+  border:1px dashed #cfdde8;color:#708498;font-size:8px;line-height:1.45;
+}
+
+.food-v2-results{display:none}
+.food-v2-results.active{display:block}
+.food-v2-back{
+  display:inline-flex;align-items:center;gap:5px;border:0;background:transparent;
+  color:#176b98;font-size:8.5px;font-weight:900;padding:2px 0 10px;cursor:pointer;
+}
+.food-v2-results-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;
+}
+.food-v2-results-kicker{font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:#7b8ea0;font-weight:900}
+.food-v2-results-title{margin-top:2px;font-size:19px;font-weight:900;color:#153a59;line-height:1.05}
+.food-v2-results-desc{margin-top:4px;font-size:8.5px;color:#71869a;line-height:1.35}
+.food-v2-daybar{
+  display:flex;gap:6px;overflow:auto;padding:1px 1px 8px;margin-bottom:2px;
+  scrollbar-width:none;
+}
+.food-v2-daybar::-webkit-scrollbar{display:none}
+.food-v2-daybtn{
+  flex:0 0 auto;border:1px solid #d3e1eb;background:#fff;color:#587087;
+  border-radius:999px;padding:7px 9px;font-size:8px;font-weight:900;cursor:pointer;
+}
+.food-v2-daybtn.active{background:#eaf6fd;border-color:#91c6df;color:#176b98}
+
+.food-v2-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.food-v2-card{
+  position:relative;padding:0;overflow:hidden;border:1px solid #dae5ed;border-radius:17px;
+  background:#fff;box-shadow:0 7px 20px rgba(16,46,70,.065);
+  transition:.16s;
+}
+.food-v2-card.hidden{display:none}
+.food-v2-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(16,46,70,.10)}
+.food-v2-card-top{padding:11px 11px 9px}
+.food-v2-card-day{
+  display:inline-flex;padding:4px 6px;border-radius:999px;background:#eef7fb;
+  color:#1b6b94;font-size:7px;font-weight:900;margin-bottom:6px
+}
+.food-v2-card-name{font-size:11.5px;font-weight:900;color:#173b5e;line-height:1.14}
+.food-v2-card-meta{margin-top:4px;color:#708498;font-size:8px;line-height:1.38}
+.food-v2-card-price{
+  display:inline-flex;margin-top:7px;padding:4px 7px;border-radius:999px;
+  background:#fff6e2;color:#8b6209;font-size:7.5px;font-weight:900;
+}
+.food-v2-distance{
+  margin:0;padding:7px 11px;border-top:1px solid #edf1f4;border-bottom:1px solid #edf1f4;
+  background:#f7fafc;color:#196d98;font-size:8px;font-weight:900;
+}
+.food-v2-distance small{font-size:7px;color:#6f8395;font-weight:700}
+.food-v2-actions{display:grid;grid-template-columns:1fr 1fr 1fr}
+.food-v2-actions a,.food-v2-actions button{
+  min-height:34px;border:0;border-right:1px solid #e2e9ef;background:#fff;color:#37637f;
+  font-size:7.5px;font-weight:900;text-decoration:none;cursor:pointer;padding:5px 4px;
+}
+.food-v2-actions a:last-child,.food-v2-actions button:last-child{border-right:0}
+.food-v2-actions a:hover,.food-v2-actions button:hover{background:#f4f9fc;color:#176b98}
+.food-v2-empty{
+  grid-column:1/-1;padding:14px;border:1px dashed #c9d9e5;border-radius:14px;
+  background:#fff;color:#708498;text-align:center;font-size:8.5px;font-weight:700;
+}
+.food-v2-footer-tip{
+  margin-top:11px;padding:9px 10px;border-radius:12px;background:#eef7fb;border:1px solid #d3e6f0;
+  color:#60798d;font-size:8px;line-height:1.45;
+}
+@media(max-width:560px){
+  #foodModal .food-v2-shell{padding:14px;border-radius:22px;max-height:93vh}
+  .food-v2-title{font-size:23px}
+  .food-v2-category-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .food-v2-category{min-height:143px}
+  .food-v2-category-title{font-size:11.5px}
+  .food-v2-list{grid-template-columns:1fr}
+}
+@media(max-width:390px){
+  .food-v2-category-grid{grid-template-columns:1fr}
+  .food-v2-category{min-height:132px}
+  .food-v2-origin{align-items:flex-start;flex-direction:column}
+  .food-v2-origin-actions{width:100%;justify-content:flex-start}
+  .food-v2-origin-btn{flex:1}
+}
+</style>
+<script id="food-v2-premium-js">
+(function(){
+  'use strict';
+
+  const modal=document.getElementById('foodModal');
+  if(!modal) return;
+
+  const HOTEL_LABEL='Hospedaje';
+  const HOTEL_ADDR='24 E Ida B Wells Dr, Chicago, IL 60605';
+  const GEO_KEY='food_v2_geo_cache';
+  const ROUTE_KEY='food_v2_route_cache';
+  const HOTEL={lat:41.876000,lon:-87.626757};
+  let mode=localStorage.getItem('chicago_route_origin_mode')||'hotel';
+  let current=null;
+  let activeCategory='';
+  let activeDay='all';
+  let watchId=null;
+  let cards=[];
+  let places=[];
+
+  const CATEGORY={
+    breakfast:{
+      key:'breakfast',icon:'☕',title:'Desayuno & café',
+      desc:'Café, bagels, brunch y opciones para empezar el día.',
+      image:'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1000&q=82'
+    },
+    fast:{
+      key:'fast',icon:'🍔',title:'Comida rápida',
+      desc:'Opciones rápidas, económicas y casuales para el camino.',
+      image:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=82'
+    },
+    chicago:{
+      key:'chicago',icon:'🌭',title:'Chicago clásico',
+      desc:'Italian beef, hot dogs, pizza y los sabores más típicos.',
+      image:'https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1000&q=82'
+    },
+    market:{
+      key:'market',icon:'🛒',title:'Supermercados',
+      desc:'Mercados y supermercados para snacks, comida y compras.',
+      image:'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=82'
+    },
+    shops:{
+      key:'shops',icon:'🛍️',title:'Tiendas',
+      desc:'Souvenirs, descuentos, centros comerciales y compras.',
+      image:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=82'
+    }
+  };
+
+  const normalize=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  function classify(card){
+    const all=normalize(
+      (card.querySelector('b')?.textContent||'')+' '+
+      (card.querySelector('.meta')?.textContent||'')+' '+
+      (card.querySelector('.tag')?.textContent||'')
+    );
+    if(/trader joe|jewel[- ]?osco|whole foods|mariano|go grocer|park to shop|88 marketplace|h mart|north loop market|south loop market|urban pantry|totto.?s market|supermarket|grocery|market\b/.test(all)) return 'market';
+    if(/harry potter|nike\b|adidas|uniqlo|h&m|macy|burlington|ross dress|nordstrom|marshalls|target\b|my chicago|souvenir|shop|shopping|novelty|discount|tienda|retail|outlet/.test(all)) return 'shops';
+    if(/cafe|coffee|breakfast|desayuno|yolk|beatrix|bagel|cafecito|holy bagels/.test(all)) return 'breakfast';
+    if(/italian beef|portillo|hot dog|devil dawgs|billy goat|pizza|giordano|gino.?s east|lou malnati|pequod|chicago classic|chicago \/ rapido|chicago clasico/.test(all)) return 'chicago';
+    return 'fast';
+  }
+
+  function getCache(key){
+    try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(e){return {}}
+  }
+  function saveCache(key,val){
+    try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}
+  }
+
+  function addressFor(card){
+    const b=card.querySelector('.route-btn,[data-destination]');
+    if(b?.dataset.destination)return b.dataset.destination;
+    const m=card.querySelector('.meta')?.textContent||'';
+    const x=m.match(/📍\s*([^\n]+)/);
+    return x?x[1].trim():'';
+  }
+
+  function nameFor(card){return (card.querySelector('b')?.textContent||'Lugar').trim()}
+
+  function priceFor(card){
+    return card.querySelector('.price')?.textContent?.trim()||'Precio aprox. no indicado';
+  }
+
+  function dayFor(panel){
+    const btn=document.querySelector(`[data-food-day="${panel.dataset.foodPanel}"] strong`);
+    if(btn){
+      const raw=btn.textContent.trim();
+      return raw.replace(/^Día\s+\d+\s*[·•-]\s*/i,'').trim();
+    }
+    return 'Recorrido';
+  }
+
+  function collectPlaces(){
+    const all=[];
+    document.querySelectorAll('#foodModal .food-panel').forEach(panel=>{
+      const dayId=String(panel.dataset.foodPanel||'');
+      const dayLabel=`Día ${dayId}`;
+      const dayName=dayFor(panel);
+      panel.querySelectorAll('.option-card').forEach(card=>{
+        const name=nameFor(card), address=addressFor(card);
+        if(!name || !address)return;
+        const signature=normalize(name)+'|'+normalize(address);
+        const existing=all.find(x=>x.signature===signature);
+        if(existing){
+          if(!existing.days.some(d=>d.id===dayId)) existing.days.push({id:dayId,label:dayLabel,name:dayName});
+          return;
+        }
+        const clone=card.cloneNode(true);
+        all.push({
+          signature,name,address,price:priceFor(card),category:classify(card),
+          dayIds:[dayId],
+          days:[{id:dayId,label:dayLabel,name:dayName}],
+          meta:card.querySelector('.meta')?.innerHTML||'',
+          clone
+        });
+      });
+    });
+    return all;
+  }
+
+  function stripCategoryText(meta){
+    return String(meta||'')
+      .replace(/<br\s*\/?>\s*Categoría original:[^<]*/ig,'')
+      .replace(/Categoría original:[^<]*/ig,'')
+      .replace(/^📍\s*/,'📍 ')
+      .trim();
+  }
+
+  function buildShell(){
+    modal.classList.add('food-v2-modal');
+    const old=[...modal.children].filter(x=>!x.classList.contains('food-v2-shell'));
+    old.forEach(x=>x.style.display='none');
+
+    const shell=document.createElement('div');
+    shell.className='food-v2-shell';
+    shell.innerHTML=`
+      <div class="food-v2-head">
+        <div>
+          <div class="food-v2-kicker">Chicago · Food Guide</div>
+          <h3 class="food-v2-title">¿Qué te apetece?</h3>
+          <p class="food-v2-sub">Cinco categorías claras. Menos repetición y más fácil encontrar algo cerca de tu recorrido.</p>
+        </div>
+        <button class="food-v2-close" type="button" aria-label="Cerrar">×</button>
+      </div>
+
+      <div class="food-v2-origin">
+        <div class="food-v2-origin-copy">
+          <b>📍 Distancias y rutas</b>
+          <span class="food-v2-origin-label">Calculando desde el hospedaje</span>
+        </div>
+        <div class="food-v2-origin-actions">
+          <button type="button" class="food-v2-origin-btn" data-v2-origin="hotel">🏨 Hospedaje</button>
+          <button type="button" class="food-v2-origin-btn" data-v2-origin="current">📍 Mi ubicación</button>
+        </div>
+      </div>
+
+      <div class="food-v2-home">
+        <div class="food-v2-category-grid"></div>
+        <div class="food-v2-note">Toca una categoría para ver los lugares. Dentro puedes filtrar por día y cada opción conserva <strong>Cómo llegar</strong>, fotos y menú cuando existen.</div>
+      </div>
+
+      <section class="food-v2-results">
+        <button class="food-v2-back" type="button">← Volver a categorías</button>
+        <div class="food-v2-results-head">
+          <div>
+            <div class="food-v2-results-kicker"></div>
+            <div class="food-v2-results-title"></div>
+            <div class="food-v2-results-desc"></div>
+          </div>
+        </div>
+        <div class="food-v2-daybar"></div>
+        <div class="food-v2-list"></div>
+        <div class="food-v2-footer-tip">💡 La distancia se muestra en kilómetros. Cambia el origen arriba para comparar desde el hospedaje o desde tu ubicación actual.</div>
+      </section>
+    `;
+    modal.appendChild(shell);
+
+    shell.querySelector('.food-v2-close').addEventListener('click',()=>document.getElementById('foodClose')?.click());
+    shell.querySelector('.food-v2-back').addEventListener('click',showHome);
+    shell.querySelectorAll('[data-v2-origin]').forEach(btn=>{
+      btn.addEventListener('click',()=>setOrigin(btn.dataset.v2Origin));
+    });
+    return shell;
+  }
+
+  function buildCategoryCards(shell){
+    const grid=shell.querySelector('.food-v2-category-grid');
+    grid.innerHTML='';
+    Object.values(CATEGORY).forEach(c=>{
+      const count=places.filter(p=>p.category===c.key).length;
+      if(!count)return;
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='food-v2-category';
+      btn.dataset.category=c.key;
+      btn.innerHTML=`
+        <div class="food-v2-category-bg" style="background-image:url('${c.image}')"></div>
+        <div class="food-v2-arrow">›</div>
+        <div class="food-v2-category-content">
+          <div class="food-v2-category-icon">${c.icon}</div>
+          <div class="food-v2-category-title">${c.title}</div>
+          <div class="food-v2-category-desc">${c.desc}</div>
+          <div class="food-v2-count">${count} opciones</div>
+        </div>`;
+      btn.addEventListener('click',()=>showCategory(c.key));
+      grid.appendChild(btn);
+    });
+  }
+
+  function setOriginButtons(){
+    document.querySelectorAll('#foodModal [data-v2-origin]').forEach(b=>b.classList.toggle('active',b.dataset.v2Origin===mode));
+    const label=document.querySelector('#foodModal .food-v2-origin-label');
+    if(label) label.textContent=mode==='hotel'?'Calculando desde el hospedaje':'Calculando desde tu ubicación actual';
+  }
+
+  function showHome(){
+    activeCategory='';
+    activeDay='all';
+    const shell=document.querySelector('#foodModal .food-v2-shell');
+    if(!shell)return;
+    shell.querySelector('.food-v2-home').style.display='block';
+    shell.querySelector('.food-v2-results').classList.remove('active');
+    shell.querySelector('.food-v2-title').textContent='¿Qué te apetece?';
+    shell.querySelector('.food-v2-sub').textContent='Cinco categorías claras. Menos repetición y más fácil encontrar algo cerca de tu recorrido.';
+    setOriginButtons();
+  }
+
+  function dayNamesForCategory(cat){
+    const set=new Map();
+    places.filter(p=>p.category===cat).forEach(p=>{
+      p.days.forEach(d=>{if(!set.has(d.id))set.set(d.id,d)})
+    });
+    return [...set.values()].sort((a,b)=>+a.id-+b.id);
+  }
+
+  function showCategory(cat){
+    activeCategory=cat; activeDay='all';
+    const shell=document.querySelector('#foodModal .food-v2-shell');
+    if(!shell)return;
+    const c=CATEGORY[cat];
+    shell.querySelector('.food-v2-home').style.display='none';
+    shell.querySelector('.food-v2-results').classList.add('active');
+    shell.querySelector('.food-v2-results-kicker').textContent='Categoría';
+    shell.querySelector('.food-v2-results-title').textContent=c.icon+' '+c.title;
+    shell.querySelector('.food-v2-results-desc').textContent=c.desc;
+
+    const daybar=shell.querySelector('.food-v2-daybar');
+    daybar.innerHTML='';
+    const allBtn=document.createElement('button');
+    allBtn.className='food-v2-daybtn active'; allBtn.dataset.day='all'; allBtn.textContent='Todos';
+    daybar.appendChild(allBtn);
+    dayNamesForCategory(cat).forEach(d=>{
+      const b=document.createElement('button');
+      b.className='food-v2-daybtn'; b.dataset.day=d.id; b.textContent=d.label;
+      daybar.appendChild(b);
+    });
+    daybar.querySelectorAll('.food-v2-daybtn').forEach(b=>b.addEventListener('click',()=>{
+      activeDay=b.dataset.day;
+      daybar.querySelectorAll('.food-v2-daybtn').forEach(x=>x.classList.toggle('active',x===b));
+      renderCards();
+    }));
+    renderCards();
+  }
+
+  function renderCards(){
+    const shell=document.querySelector('#foodModal .food-v2-shell');
+    const list=shell.querySelector('.food-v2-list');
+    list.innerHTML='';
+    const filtered=places.filter(p=>p.category===activeCategory && (activeDay==='all'||p.dayIds.includes(activeDay)));
+    if(!filtered.length){
+      list.innerHTML='<div class="food-v2-empty">No hay opciones para ese día.</div>';
+      return;
+    }
+    filtered.forEach((p)=>{
+      const el=document.createElement('article');
+      el.className='food-v2-card';
+      const dayText=p.days.map(d=>d.label).join(' · ');
+      const meta=stripCategoryText(p.meta);
+      const route= p.clone.querySelector('.route-btn');
+      const photo=p.clone.querySelector('.photo-link');
+      const menu=p.clone.querySelector('.menu-link');
+      const routeBtn=route?.cloneNode(true);
+      if(routeBtn){
+        routeBtn.classList.add('v2-route-btn');
+        routeBtn.textContent='🗺️ Cómo llegar';
+        routeBtn.removeAttribute('style');
+      }
+      const photoHtml=photo?`<a href="${photo.getAttribute('href')}" target="_blank" rel="noopener">📷 Fotos</a>`:'<span></span>';
+      const menuHtml=menu?`<a href="${menu.getAttribute('href')}" target="_blank" rel="noopener">🍽️ Menú</a>`:'<span></span>';
+      el.innerHTML=`
+        <div class="food-v2-card-top">
+          <div class="food-v2-card-day">${dayText}</div>
+          <div class="food-v2-card-name">${escapeHtml(p.name)}</div>
+          <div class="food-v2-card-meta">${meta}</div>
+          <div class="food-v2-card-price">${escapeHtml(p.price)}</div>
+        </div>
+        <div class="food-v2-distance" data-v2-distance="${escapeHtmlAttr(p.signature)}">📍 Calculando distancia…</div>
+        <div class="food-v2-actions"></div>
+      `;
+      const actions=el.querySelector('.food-v2-actions');
+      if(routeBtn){
+        actions.appendChild(routeBtn);
+        routeBtn.addEventListener('click',e=>{
+          routeBtn.dataset.originMode=mode;
+          routeBtn.dataset.origin=mode==='hotel'?HOTEL_ADDR:'';
+          routeBtn.dataset.originLabel=mode==='hotel'?HOTEL_LABEL:'Ubicación actual';
+        });
+      } else {
+        const s=document.createElement('span'); actions.appendChild(s);
+      }
+      actions.insertAdjacentHTML('beforeend',photoHtml);
+      actions.insertAdjacentHTML('beforeend',menuHtml);
+      list.appendChild(el);
+      p.__view=el;
+      p.__distance=el.querySelector('.food-v2-distance');
+    });
+    updateVisibleDistances(filtered);
+  }
+
+  function escapeHtml(v){
+    return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function escapeHtmlAttr(v){return escapeHtml(v).replace(/\s/g,' ');}
+
+  function haversine(a,b){
+    const R=6371, rad=Math.PI/180, dLat=(b.lat-a.lat)*rad, dLon=(b.lon-a.lon)*rad;
+    const x=Math.sin(dLat/2)**2+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dLon/2)**2;
+    return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+  }
+
+  async function geocode(address){
+    const cache=getCache(GEO_KEY);
+    if(cache[address])return cache[address];
+    try{
+      const u='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&q='+encodeURIComponent(address);
+      const r=await fetch(u,{headers:{Accept:'application/json'}});
+      if(!r.ok)return null;
+      const j=await r.json();
+      if(!j[0])return null;
+      const v={lat:+j[0].lat,lon:+j[0].lon};
+      cache[address]=v; saveCache(GEO_KEY,cache); return v;
+    }catch(e){return null}
+  }
+
+  async function updateVisibleDistances(list){
+    const origin=mode==='hotel'?HOTEL:current;
+    for(const p of list){
+      const el=p.__distance;if(!el)continue;
+      if(!origin){
+        el.innerHTML='📍 <small>Activa “Mi ubicación” para calcular desde donde estás.</small>';
+        continue;
+      }
+      const target=await geocode(p.address);
+      if(!target){
+        el.innerHTML='📍 <small>Distancia no disponible · usa Cómo llegar.</small>';
+        continue;
+      }
+      const km=haversine(origin,{lat:target.lat,lon:target.lon});
+      el.innerHTML=`📍 <strong>≈ ${km.toFixed(1)} km</strong> <small>· ${mode==='hotel'?'desde el hospedaje':'desde tu ubicación'}</small>`;
+      await new Promise(r=>setTimeout(r,180));
+    }
+  }
+
+  function applyCurrent(p){
+    current={lat:p.coords.latitude,lon:p.coords.longitude};
+    if(activeCategory) renderCards();
+  }
+
+  function setOrigin(next){
+    mode=next==='current'?'current':'hotel';
+    localStorage.setItem('chicago_route_origin_mode',mode);
+    setOriginButtons();
+    document.querySelectorAll('#foodModal .v2-route-btn').forEach(btn=>{
+      btn.dataset.originMode=mode;
+      btn.dataset.origin=mode==='hotel'?HOTEL_ADDR:'';
+      btn.dataset.originLabel=mode==='hotel'?HOTEL_LABEL:'Ubicación actual';
+    });
+    if(mode==='current' && navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(applyCurrent,()=>{},{
+        enableHighAccuracy:true,maximumAge:60000,timeout:12000
+      });
+      if(watchId!==null)navigator.geolocation.clearWatch(watchId);
+      watchId=navigator.geolocation.watchPosition(applyCurrent,()=>{},{
+        enableHighAccuracy:true,maximumAge:10000,timeout:20000
+      });
+    }else if(watchId!==null && navigator.geolocation){
+      navigator.geolocation.clearWatch(watchId);watchId=null;current=null;
+      if(activeCategory)renderCards();
+    }else if(activeCategory){renderCards();}
+  }
+
+  function init(){
+    places=collectPlaces();
+    if(!places.length)return;
+    const shell=buildShell();
+    buildCategoryCards(shell);
+    setOriginButtons();
+    showHome();
+
+    // Sync with the existing modal open/close system.
+    const observer=new MutationObserver(()=>{
+      if(!modal.classList.contains('hidden')){
+        setOriginButtons();
+      }
+    });
+    observer.observe(modal,{attributes:true,attributeFilter:['class']});
+
+    // Ensure the original food trigger opens our redesigned UI.
+    document.addEventListener('click',e=>{
+      if(e.target.closest('.food-float')){
+        setTimeout(()=>showHome(),20);
+      }
+    },true);
+
+    // Clicking outside closes the redesigned modal.
+    modal.addEventListener('click',e=>{
+      if(e.target===modal) document.getElementById('foodClose')?.click();
+    },true);
+
+    setOrigin(mode);
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+<style id="v138-food-rebuild-style">
+/* ===== v137 — Comida rebuilt from zero ===== */
+#foodModal .food-box.v137-box{width:min(720px,100%);max-height:min(92vh,860px);padding:0;overflow:hidden;border-radius:26px;background:#f6f8fb}
+.v137-shell{display:flex;flex-direction:column;max-height:min(92vh,860px);min-height:0}
+.v137-head{padding:20px 20px 14px;background:linear-gradient(145deg,#0f2d43 0%,#174a64 56%,#226e79 100%);color:#fff;position:relative;overflow:hidden}
+.v137-head:after{content:"";position:absolute;right:-55px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#7bd2c433 0%,transparent 68%)}
+.v137-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#bfe7ec}
+.v137-title{margin:6px 42px 3px 0;font-size:25px;line-height:1.05;font-weight:900;letter-spacing:-.4px}
+.v137-sub{margin:0;color:#d7eef1;font-size:9.5px;line-height:1.45;max-width:56ch}
+.v137-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border:1px solid #ffffff38;border-radius:50%;background:#ffffff18;color:#fff;font-size:21px;cursor:pointer;z-index:2}
+.v137-origin{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px;position:relative;z-index:2}
+.v137-origin button{border:1px solid #ffffff33;background:#ffffff12;color:#eaf7f8;border-radius:13px;padding:9px 10px;text-align:left;cursor:pointer}
+.v137-origin button strong{display:block;font-size:9.5px}
+.v137-origin button span{display:block;margin-top:2px;font-size:7.5px;color:#bddde1}
+.v137-origin button.active{background:#fff;color:#16384b;border-color:#fff}
+.v137-origin button.active span{color:#607c87}
+.v137-status{margin-top:9px;display:flex;align-items:center;gap:7px;font-size:8px;color:#cbe7ea;min-height:13px}
+.v137-status .dot{position:static;width:7px;height:7px;border:0;background:#70d1aa;box-shadow:none;flex:none}
+.v137-status.wait .dot{background:#f4c86c}
+.v137-body{padding:14px 16px 18px;overflow:auto;min-height:0}
+.v137-daybar{display:flex;gap:6px;overflow:auto;padding-bottom:10px;scrollbar-width:none}.v137-daybar::-webkit-scrollbar{display:none}
+.v137-day{border:1px solid #d8e2ea;background:#fff;color:#496375;border-radius:999px;padding:8px 11px;font-size:8.5px;font-weight:900;white-space:nowrap;cursor:pointer}
+.v137-day.active{background:#163f54;color:#fff;border-color:#163f54}
+.v137-intro{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:2px 0 10px}
+.v137-intro h4{margin:0;color:#18384c;font-size:15px}.v137-intro p{margin:3px 0 0;color:#718394;font-size:8.5px;line-height:1.35}.v137-counter{flex:none;font-size:8px;font-weight:900;color:#2a677c;background:#e8f3f5;padding:6px 8px;border-radius:999px}
+.v137-cats{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.v137-cat{position:relative;min-height:112px;border:1px solid #d8e3eb;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#fff,#f4f8fb);text-align:left;cursor:pointer;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 8px 22px rgba(22,56,76,.06);transition:.18s}
+.v137-cat:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(22,56,76,.1)}
+.v137-cat:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 84% 18%,var(--cat-glow,#dff0f3),transparent 44%);opacity:.9}
+.v137-cat-emoji{position:absolute;right:14px;top:12px;font-size:31px;line-height:1;filter:drop-shadow(0 6px 8px rgba(0,0,0,.08));z-index:1}
+.v137-cat b,.v137-cat span{position:relative;z-index:1}.v137-cat b{font-size:13px;color:#17394c}.v137-cat span{margin-top:3px;font-size:8px;color:#6c7f8d;line-height:1.35}.v137-cat .count{margin-top:7px;font-size:8px;font-weight:900;color:#237189}
+.v137-cat.wide{grid-column:1/-1;min-height:96px}
+.v137-list-head{display:flex;align-items:center;gap:8px;margin:2px 0 10px}.v137-back{border:1px solid #d4e1e8;background:#fff;color:#2a6175;border-radius:10px;padding:7px 9px;font-size:8px;font-weight:900;cursor:pointer}.v137-list-title{min-width:0}.v137-list-title b{display:block;color:#18384c;font-size:14px}.v137-list-title span{display:block;margin-top:2px;color:#718394;font-size:8px}
+.v137-sort{margin-left:auto;border:1px solid #d4e1e8;background:#fff;border-radius:10px;color:#557080;padding:7px 8px;font-size:8px;font-weight:900}
+.v137-list{display:grid;gap:7px}
+.v137-row{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px;border:1px solid #dbe5eb;background:#fff;border-radius:15px;box-shadow:0 4px 12px rgba(20,53,72,.035)}
+.v137-thumb{width:52px;height:52px;border-radius:13px;background:var(--thumb,#edf5f6);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.v137-main{min-width:0}.v137-main b{display:block;color:#1a4053;font-size:11px;line-height:1.2}.v137-meta{margin-top:3px;color:#7a8995;font-size:7.8px;line-height:1.35}.v137-distance{margin-top:5px;color:#176b80;font-size:8px;font-weight:900}.v137-distance small{color:#718493;font-weight:700}.v137-actions{display:flex;flex-direction:column;gap:5px;min-width:78px}.v137-actions .route-btn,.v137-actions a{display:flex;align-items:center;justify-content:center;min-height:29px;padding:6px 8px;border-radius:9px;border:1px solid #d1e0e7;background:#f7fbfc;color:#2d6578;text-decoration:none;font-size:7.5px;font-weight:900;cursor:pointer;white-space:nowrap}.v137-actions .route-btn{font-family:inherit}.v137-actions .route-btn:hover,.v137-actions a:hover{background:#edf7f9}
+.v137-empty{padding:18px;border:1px dashed #ccdbe3;border-radius:14px;background:#fbfdfe;color:#6d7f8b;text-align:center;font-size:9px}
+.v137-note{margin-top:10px;padding:9px 10px;border-radius:11px;background:#edf6f8;color:#5e7883;font-size:7.8px;line-height:1.45}
+.v137-hidden-source{display:none!important}
+@media(max-width:620px){#foodModal .food-box.v137-box{width:100%;max-height:94vh;border-radius:22px}.v137-cats{grid-template-columns:1fr 1fr}.v137-row{grid-template-columns:46px minmax(0,1fr)}.v137-thumb{width:46px;height:46px}.v137-actions{grid-column:2;flex-direction:row;justify-content:flex-start;min-width:0}.v137-actions .route-btn,.v137-actions a{flex:1}.v137-actions a.menu-link{display:none}}
+@media(max-width:430px){.v137-cats{grid-template-columns:1fr}.v137-cat.wide{grid-column:auto}.v137-cat{min-height:100px}.v137-row{grid-template-columns:42px minmax(0,1fr);gap:8px}.v137-thumb{width:42px;height:42px;font-size:19px}.v137-actions{gap:4px}.v137-actions .route-btn,.v137-actions a{font-size:7px;padding:6px}.v137-title{font-size:23px}}
+</style>
+<style id="v142-food-home-css">
+.v142-food-home{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:2px 0 8px}
+.v142-food-card{position:relative;min-height:185px;border:0;border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;color:#fff;padding:0;isolation:isolate;box-shadow:0 10px 26px rgba(24,52,40,.12);transition:transform .22s ease,box-shadow .22s ease}
+.v142-food-card:nth-child(5){grid-column:1/-1;min-height:150px}
+.v142-food-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(24,52,40,.18)}
+.v142-food-bg,.v142-food-shade{position:absolute;inset:0}.v142-food-bg{background-image:var(--food-image);background-size:cover;background-position:center;z-index:-3;transition:transform .5s ease}.v142-food-card:hover .v142-food-bg{transform:scale(1.06)}
+.v142-food-shade{background:linear-gradient(180deg,rgba(12,28,20,.05) 15%,rgba(8,24,17,.78) 100%);z-index:-2}
+.v142-food-icon{position:absolute;top:14px;left:14px;width:40px;height:40px;border-radius:13px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);display:grid;place-items:center;font-size:21px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.v142-food-copy{position:absolute;left:16px;bottom:15px;right:50px}.v142-food-copy b{display:block;font-size:19px;letter-spacing:-.03em}.v142-food-copy small{display:block;margin-top:4px;font-size:10px;opacity:.8}.v142-food-arrow{position:absolute;right:14px;bottom:14px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.16);font-size:24px}
+@media(max-width:650px){.v142-food-home{grid-template-columns:1fr 1fr;gap:9px}.v142-food-card{min-height:145px;border-radius:16px}.v142-food-card:nth-child(5){min-height:125px}.v142-food-copy{left:12px;bottom:12px}.v142-food-copy b{font-size:15px}.v142-food-copy small{font-size:8px}.v142-food-icon{top:10px;left:10px;width:33px;height:33px;border-radius:10px;font-size:18px}.v142-food-arrow{right:10px;bottom:10px;width:27px;height:27px;font-size:21px}}
+</style>
+<script id="v143-food-categories-by-day">
+(function(){
+  const modal=document.getElementById('foodModal'); if(!modal)return;
+  const box=modal.querySelector('.food-box'); if(!box)return;
+  const panels=[...modal.querySelectorAll('.food-panel')];
+  const clean=s=>(s||'').replace(/\s+/g,' ').trim();
+  const normalize=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+  const esc=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+  const dayInfo={};
+  panels.forEach(p=>{
+    const day=String(p.dataset.foodPanel||'');
+    const title=clean(p.querySelector('.food-selected-title')?.textContent||('Día '+day));
+    dayInfo[day]=title;
+  });
+
+  const raw=[];
+  panels.forEach(panel=>{
+    const day=String(panel.dataset.foodPanel||'');
+    panel.querySelectorAll('.option-card').forEach(card=>{
+      const route=card.querySelector('.route-btn'), photos=card.querySelector('.photo-link'), menu=card.querySelector('.menu-link');
+      const name=clean(card.querySelector('b')?.textContent||'Lugar'); if(!name)return;
+      const meta=clean(card.querySelector('.meta')?.textContent||'');
+      const address=route?.dataset.destination||((meta.match(/📍\s*([^·]+?)(?:\s{2,}|$)/)||[])[1]||'').trim();
+      raw.push({day,name,meta,address,price:clean(card.querySelector('.price')?.textContent),tag:clean(card.querySelector('.tag')?.textContent),routeAttrs:route?Object.fromEntries([...route.attributes].map(a=>[a.name,a.value])):null,photo:photos?.href||'',menu:menu?.href||''});
+    });
+  });
+
+  function category(x){
+    const all=normalize([x.name,x.meta,x.tag].join(' '));
+    if(/trader joe|jewel[- ]?osco|whole foods|mariano|go grocer|park to shop|88 marketplace|h mart|north loop market|south loop market|urban pantry|totto.?s market|supermarket|grocery|grocer\b/.test(all))return 'market';
+    if(/harry potter|nike\b|adidas|uniqlo|h&m|macy|burlington|ross dress|nordstrom|marshalls|target\b|my chicago|souvenir|novelty|shopping|discount|shop\b|retail|outlet|store\b/.test(all))return 'shops';
+    if(/breakfast|desayuno|coffee|cafe\b|café|cafecito|yolk|beatrix|bagel|brunch/.test(all))return 'breakfast';
+    if(/italian beef|portillo|hot dog|devil dawgs|billy goat|giordano|gino.?s east|lou malnati|pequod|deep dish|chicago classic|chicago clasico|pizza/.test(all))return 'classic';
+    return 'fast';
+  }
+  const cats={
+    breakfast:{label:'Desayunos',emoji:'☕',desc:'Café · brunch · bagels',image:'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1400&q=88'},
+    fast:{label:'Comida rápida',emoji:'🍔',desc:'Rápido · casual · económico',image:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1400&q=88'},
+    classic:{label:'Chicago clásico',emoji:'🌭',desc:'Pizza · hot dogs · sabores locales',image:'https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1400&q=88'},
+    market:{label:'Supermercados',emoji:'🛒',desc:'Agua · snacks · provisiones',image:'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1400&q=88'},
+    shops:{label:'Tiendas',emoji:'🛍️',desc:'Compras · souvenirs · ropa',image:'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=88'}
+  };
+
+  // Deduplicate places, but keep every itinerary day where the place appears.
+  const map=new Map();
+  raw.forEach(x=>{
+    x.cat=category(x);
+    const key=normalize(x.name)+'|'+normalize(x.address);
+    if(!map.has(key)) map.set(key,{...x,days:[x.day]});
+    else {const y=map.get(key); if(!y.days.includes(x.day))y.days.push(x.day);}
+  });
+  const items=[...map.values()].sort((a,b)=>Number(a.days[0])-Number(b.days[0])||a.name.localeCompare(b.name));
+  const icons={breakfast:'☕',fast:'🍔',classic:'🌭',market:'🛒',shops:'🛍️'};
+  let originMode=localStorage.getItem('chicago_route_origin_mode')||'hotel', current=null, activeCat=null;
+  const HOTEL={lat:41.876000,lon:-87.626757};
+  const GEO_KEY='v143_food_geo', ROUTE_KEY='v143_food_routes';
+  const getStore=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return {}}};
+  const putStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+  const geoStore=getStore(GEO_KEY),routeStore=getStore(ROUTE_KEY);
+
+  function build(){
+    box.classList.add('v143-box');
+    box.innerHTML=`<div class="v143-shell">
+      <header class="v143-head">
+        <div class="v143-eyebrow">COMIDA · COMPRAS</div><h2>¿Qué buscas?</h2>
+        <p>Elige una categoría para ver los lugares cerca de cada día.</p>
+        <button class="v143-close" id="v143Close" aria-label="Cerrar">×</button>
+      </header>
+      <main class="v143-main">
+        <section id="v143Home"><div class="v143-grid" id="v143Cats"></div></section>
+        <section id="v143Results" hidden>
+          <div class="v143-results-top"><button id="v143Back" type="button">‹ Categorías</button><div><h3 id="v143ListTitle"></h3><span id="v143ListSub"></span></div></div>
+          <div class="v143-origin"><button type="button" data-v143-origin="hotel"><b>🏨 Hospedaje</b><span>24 E Ida B. Wells Dr</span></button><button type="button" data-v143-origin="current"><b>📍 Mi ubicación</b><span>Ubicación del teléfono</span></button></div>
+          <div id="v143List"></div>
+        </section>
+      </main>
+    </div>`;
+  }
+  function setOriginButtons(){box.querySelectorAll('[data-v143-origin]').forEach(b=>b.classList.toggle('active',b.dataset.v143Origin===originMode));}
+  function renderHome(){activeCat=null;const ctx=window.__foodContextDay?String(window.__foodContextDay):'';box.querySelector('#v143Home').hidden=false;box.querySelector('#v143Results').hidden=true;box.querySelector('#v143Cats').innerHTML=Object.entries(cats).map(([k,c])=>{const n=items.filter(x=>x.cat===k&&(!ctx||x.days.includes(ctx))).length;return `<button class="v143-cat" data-v143-cat="${k}" style="--food-img:url('${c.image}')"><span class="v143-bg"></span><span class="v143-shade"></span><span class="v143-cat-icon">${c.emoji}</span><span class="v143-cat-copy"><b>${c.label}</b><small>${c.desc}</small><em>${n} ${n===1?'lugar':'lugares'}</em></span><span class="v143-arrow">›</span></button>`}).join('');}
+  function createRouteButton(x){const b=document.createElement('button');b.type='button';b.className='route-btn';b.textContent='🗺️ Cómo llegar';if(x.routeAttrs)Object.entries(x.routeAttrs).forEach(([k,v])=>{if(k!=='class'&&k!=='type')b.setAttribute(k,v)});b.dataset.originMode=originMode;b.dataset.origin=originMode==='hotel'?'24 E Ida B Wells Dr, Chicago, IL 60605':'';b.dataset.originLabel=originMode==='hotel'?'Hospedaje':'Ubicación actual';return b;}
+  function menuUrl(x){return x.menu||('https://www.google.com/search?q='+encodeURIComponent(x.name+' '+(x.address||'')+' Chicago IL menu'));}
+  function hoursUrl(x){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.name+' '+(x.address||'')+' Chicago IL');}
+  function addLink(parent,href,text,title,cls){const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';a.textContent=text;a.title=title;a.className=cls||'';parent.appendChild(a);return a;}
+  function dayLabel(day){return dayInfo[day]||('Día '+day);}
+  function renderResults(cat){
+    activeCat=cat;const ctx=window.__foodContextDay?String(window.__foodContextDay):'';const c=cats[cat],list=items.filter(x=>x.cat===cat&&(!ctx||x.days.includes(ctx)));
+    box.querySelector('#v143Home').hidden=true;box.querySelector('#v143Results').hidden=false;
+    box.querySelector('#v143ListTitle').textContent=c.label;box.querySelector('#v143ListSub').textContent=`${list.length} ${list.length===1?'lugar':'lugares'} · organizados por día del itinerario`;
+    const el=box.querySelector('#v143List');el.innerHTML='';
+    const groups=ctx?[ctx]:[...new Set(list.flatMap(x=>x.days))].sort((a,b)=>Number(a)-Number(b));
+    groups.forEach(day=>{
+      const group=document.createElement('section');group.className='v143-day-group';
+      group.innerHTML=`<div class="v143-day-head"><span>Día ${esc(day)}</span><b>${esc(dayLabel(day).replace(/^Día\s*\d+\s*[·-]?\s*/i,''))}</b></div><div class="v143-day-list"></div>`;
+      const gl=group.querySelector('.v143-day-list');
+      list.filter(x=>!ctx||x.days.includes(String(day))).forEach(x=>{
+        const row=document.createElement('article');row.className='v143-row';row.dataset.address=x.address;
+        const also=x.days.filter(d=>d!==day).sort((a,b)=>Number(a)-Number(b));
+        row.innerHTML=`<div class="v143-thumb" style="background-image:url('${c.image}')"><span>${icons[cat]}</span></div><div class="v143-info"><b>${esc(x.name)}</b><small>${esc(x.meta)}${x.price?' · '+esc(x.price):''}</small><div class="v143-distance">Calculando…</div>${also.length?`<div class="v143-also">También cerca del día ${also.join(', ')}</div>`:''}</div><div class="v143-actions"></div>`;
+        const a=row.querySelector('.v143-actions');
+        a.appendChild(createRouteButton(x));
+        if(x.photo){addLink(a,x.photo,'📷','Fotos','photo-link')}
+        if(['breakfast','fast','classic'].includes(cat)){addLink(a,menuUrl(x),'🍽️ Menú','Ver menú','menu-link')}
+        addLink(a,hoursUrl(x),'🕒 Horario','Ver horario actualizado','hours-link');
+        row.__food=x;gl.appendChild(row);
+      });
+      el.appendChild(group);
+    });
+    setOriginButtons();updateDistances();
+  }
+  async function geocode(address){if(!address)return null;if(geoStore[address])return geoStore[address];try{const u='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&q='+encodeURIComponent(address+', Chicago, IL');const r=await fetch(u,{headers:{Accept:'application/json'}});if(!r.ok)return null;const j=await r.json();if(!j[0])return null;const v={lat:+j[0].lat,lon:+j[0].lon};geoStore[address]=v;putStore(GEO_KEY,geoStore);return v}catch(e){return null}}
+  async function walk(o,t){const ok=o===HOTEL?'hotel':o.lat.toFixed(4)+','+o.lon.toFixed(4),key=ok+'|'+t.lat.toFixed(5)+','+t.lon.toFixed(5);if(routeStore[key])return routeStore[key];try{const payload={locations:[{lat:o.lat,lon:o.lon},{lat:t.lat,lon:t.lon}],costing:'pedestrian',directions_options:{units:'kilometers'}};const r=await fetch('https://valhalla1.openstreetmap.de/route?json='+encodeURIComponent(JSON.stringify(payload)));if(!r.ok)throw 0;const j=await r.json(),s=j?.trip?.summary;if(!s)throw 0;const v={km:+s.length,minutes:Math.max(1,Math.round(+s.time/60))};routeStore[key]=v;putStore(ROUTE_KEY,routeStore);return v}catch(e){return null}}
+  function fallback(a,b){const R=6371,p=Math.PI/180,d1=(b.lat-a.lat)*p,d2=(b.lon-a.lon)*p,s=Math.sin(d1/2)**2+Math.cos(a.lat*p)*Math.cos(b.lat*p)*Math.sin(d2/2)**2;return R*2*Math.atan2(Math.sqrt(s),Math.sqrt(1-s))}
+  async function getOrigin(){return originMode==='hotel'?HOTEL:current}
+  async function updateDistances(){const rows=[...box.querySelectorAll('.v143-row')],o=await getOrigin();if(!o){rows.forEach(r=>r.querySelector('.v143-distance').textContent='📍 Activa tu ubicación');return}for(const row of rows){const el=row.querySelector('.v143-distance'),x=row.__food;if(!x.address){el.textContent='📍 Distancia no disponible';continue}const g=await geocode(x.address);if(!g){el.textContent='📍 Distancia no disponible';continue}const r=await walk(o,g);if(r)el.innerHTML=`🚶 <b>≈ ${r.km.toFixed(1)} km</b> <span>· ${r.minutes} min</span>`;else{const k=fallback(o,g);el.innerHTML=`🚶 <b>≈ ${k.toFixed(1)} km</b> <span>· estimado</span>`}}}
+  function requestLocation(){if(!navigator.geolocation)return;navigator.geolocation.getCurrentPosition(p=>{current={lat:p.coords.latitude,lon:p.coords.longitude};if(activeCat)renderResults(activeCat)},()=>{}, {enableHighAccuracy:true,maximumAge:30000,timeout:12000})}
+  function setOrigin(m){originMode=m;localStorage.setItem('chicago_route_origin_mode',m);setOriginButtons();if(m==='current'){requestLocation()}else{current=null;if(activeCat)updateDistances()}}
+  build();renderHome();if(originMode==='current')requestLocation();
+  box.addEventListener('click',e=>{const o=e.target.closest('[data-v143-origin]');if(o){setOrigin(o.dataset.v143Origin);return}const c=e.target.closest('[data-v143-cat]');if(c){renderResults(c.dataset.v143Cat);return}if(e.target.closest('#v143Back')){renderHome();return}if(e.target.closest('#v143Close')){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true')}});
+  document.getElementById('foodFloat')?.addEventListener('click',()=>{modal.classList.remove('hidden');modal.setAttribute('aria-hidden','false');renderHome()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.classList.contains('hidden')){modal.classList.add('hidden');modal.setAttribute('aria-hidden','true')}});
+})();
+</script>
+<style id="v138-remove-bottom-dock">
+  .v90-bottomdock, #v90BottomDock, .bottom-dock, .bottom-nav, .app-bottom-nav {
+    display:none !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+    height:0 !important;
+    min-height:0 !important;
+    max-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    overflow:hidden !important;
+  }
+  body{padding-bottom:0 !important;}
+  .app{padding-bottom:24px !important;}
+</style>
+<style id="v139-food-images-only">
+/* v139 — food only: image category cards */
+.v137-cat{
+  position:relative !important;
+  overflow:hidden !important;
+  padding:0 !important;
+  min-height:156px !important;
+  isolation:isolate;
+  background:#173b4d !important;
+  border-color:#d6e1e7 !important;
+}
+.v139-cat-bg{
+  position:absolute;
+  inset:0;
+  background-image:var(--cat-image);
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.01);
+  transition:transform .35s ease,filter .35s ease;
+  z-index:-3;
+}
+.v139-cat-shade{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,
+    rgba(5,22,32,.06) 0%,
+    rgba(5,22,32,.20) 38%,
+    rgba(5,22,32,.88) 100%);
+  z-index:-2;
+}
+.v137-cat:hover .v139-cat-bg{
+  transform:scale(1.07);
+  filter:saturate(1.08);
+}
+.v137-cat-content{
+  position:absolute;
+  left:13px;
+  right:13px;
+  bottom:12px;
+  z-index:2;
+  color:#fff;
+}
+.v137-cat-content .v137-cat-emoji{
+  position:static !important;
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  margin:0 0 7px;
+  border-radius:10px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(8px);
+  font-size:17px;
+  filter:none;
+}
+.v137-cat-content b{
+  display:block;
+  color:#fff !important;
+  font-size:13px !important;
+  line-height:1.1;
+}
+.v137-cat-content span{
+  color:rgba(255,255,255,.84) !important;
+}
+.v137-cat-content .count{
+  display:inline-flex;
+  margin-top:7px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.20);
+  color:#fff !important;
+  font-size:7.5px;
+  font-weight:900;
+  backdrop-filter:blur(8px);
+}
+.v139-cat-arrow{
+  position:absolute;
+  top:11px;
+  right:11px;
+  z-index:3;
+  width:27px;
+  height:27px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.22);
+  color:#fff;
+  font-size:18px;
+  line-height:1;
+  backdrop-filter:blur(8px);
+  transition:transform .18s ease;
+}
+.v137-cat:hover .v139-cat-arrow{transform:translateX(2px)}
+@media(max-width:620px){
+  .v137-cat{min-height:148px !important}
+}
+@media(max-width:430px){
+  .v137-cat{min-height:132px !important}
+}
+</style>
+<style id="v141-food-ui">
+.v141-shell{font-family:inherit;background:#f7f4ed;color:#18352a;min-height:100%;overflow:hidden}
+.v141-head{position:relative;padding:24px 22px 18px;background:linear-gradient(135deg,#173d2d,#234f3c);color:#fff}
+.v141-eyebrow{font-size:10px;letter-spacing:.16em;font-weight:800;opacity:.72}.v141-head h2{margin:5px 0 2px;font-size:28px;letter-spacing:-.04em}.v141-head p{margin:0 0 15px;opacity:.72;font-size:13px}
+.v141-close{position:absolute;right:15px;top:14px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.1);color:#fff;font-size:24px;cursor:pointer}
+.v141-origin{display:grid;grid-template-columns:1fr 1fr;gap:8px}.v141-origin button{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#fff;border-radius:13px;padding:9px 11px;text-align:left;cursor:pointer}.v141-origin button.active{background:#f3ead8;color:#173d2d;border-color:#f3ead8}.v141-origin b{display:block;font-size:12px}.v141-origin span{display:block;font-size:10px;opacity:.66;margin-top:2px}
+.v141-main{padding:16px}.v141-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.v141-cat{position:relative;min-height:165px;border:0;border-radius:22px;overflow:hidden;color:#fff;text-align:left;padding:0;cursor:pointer;box-shadow:0 8px 22px rgba(20,43,33,.12);isolation:isolate}.v141-cat:nth-child(5){grid-column:1/-1;min-height:145px}.v141-bg,.v141-shade{position:absolute;inset:0}.v141-bg{background-image:var(--food-img);background-size:cover;background-position:center;z-index:-3;transition:transform .4s ease}.v141-shade{background:linear-gradient(180deg,rgba(0,0,0,.03) 20%,rgba(0,0,0,.76) 100%);z-index:-2}.v141-cat:hover .v141-bg,.v141-cat:active .v141-bg{transform:scale(1.07)}.v141-cat-icon{position:absolute;top:13px;left:14px;width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,.16);backdrop-filter:blur(8px);display:grid;place-items:center;font-size:20px}.v141-cat-copy{position:absolute;left:15px;right:38px;bottom:14px}.v141-cat-copy b{display:block;font-size:18px;letter-spacing:-.025em}.v141-cat-copy small{display:block;font-size:10px;opacity:.78;margin-top:3px}.v141-cat-copy em{display:block;font-style:normal;font-size:10px;font-weight:800;margin-top:8px;opacity:.9}.v141-arrow{position:absolute;right:12px;bottom:13px;width:27px;height:27px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;font-size:22px}.v141-results-head{display:flex;align-items:center;gap:10px;margin:2px 2px 14px}.v141-results-head button{border:0;background:#e9e2d5;color:#244536;border-radius:12px;padding:9px 11px;font-weight:800;cursor:pointer}.v141-results-head h3{margin:0;font-size:20px}.v141-results-head span{font-size:11px;color:#78827d}.v141-list{display:grid;gap:9px}.v141-row{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px;background:#fff;border:1px solid #e7e2d8;border-radius:16px;box-shadow:0 3px 10px rgba(26,48,38,.05)}.v141-thumb{width:58px;height:58px;border-radius:13px;background-size:cover;background-position:center;position:relative;overflow:hidden;display:grid;place-items:center}.v141-thumb:after{content:"";position:absolute;inset:0;background:rgba(13,36,26,.4)}.v141-thumb span{position:relative;z-index:1;font-size:23px}.v141-info{min-width:0}.v141-info>b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v141-info>small{display:block;color:#77817c;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.v141-distance{margin-top:6px;font-size:10px;color:#315c49}.v141-distance span{color:#89918d}.v141-actions{display:flex;gap:5px;align-items:center}.v141-actions .route-btn,.v141-actions a{border:1px solid #dce5df;background:#f5f8f5;color:#244c3b;border-radius:10px;padding:7px 8px;font-size:10px;text-decoration:none;white-space:nowrap}.v141-actions a{font-size:13px;padding:7px}.v141-actions .route-btn{font-weight:800}
+@media(max-width:600px){.v141-head{padding:20px 15px 14px}.v141-head h2{font-size:24px}.v141-main{padding:11px}.v141-grid{gap:9px}.v141-cat{min-height:145px;border-radius:18px}.v141-cat:nth-child(5){min-height:125px}.v141-row{grid-template-columns:48px minmax(0,1fr);padding:9px}.v141-thumb{width:48px;height:48px}.v141-actions{grid-column:2;justify-content:flex-start}.v141-actions .route-btn{flex:1}.v141-origin b{font-size:11px}.v141-origin span{font-size:9px}}
+</style>
+<style id="v143-food-day-groups">
+.v143-day-group{margin:0 0 15px}.v143-day-head{display:flex;align-items:baseline;gap:8px;padding:10px 3px 7px;border-bottom:1px solid #dcd4c7}.v143-day-head span{font-size:11px;font-weight:900;color:#315442;text-transform:uppercase;letter-spacing:.08em}.v143-day-head b{font-size:11px;color:#756f67;font-weight:700}.v143-day-list{display:grid;gap:8px;padding-top:8px}.v143-also{margin-top:4px;font-size:8px;color:#9a7658;font-weight:800}.v143-results-top{display:flex;align-items:center;gap:10px;margin:2px 2px 12px}.v143-results-top button{border:0;background:#e9e2d5;color:#244536;border-radius:12px;padding:9px 11px;font-weight:800;cursor:pointer}.v143-results-top h3{margin:0;font-size:20px}.v143-results-top span{font-size:10px;color:#78827d}.v143-origin{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 13px}.v143-origin button{border:1px solid #ddd5c8;background:#fffdf8;color:#315442;border-radius:12px;padding:8px 10px;text-align:left;cursor:pointer}.v143-origin button.active{background:#e9f0e8;border-color:#bfd0c0}.v143-origin b{display:block;font-size:10px}.v143-origin span{display:block;font-size:8px;color:#89918d;margin-top:2px}.v143-row{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:9px;align-items:center;padding:9px;background:#fff;border:1px solid #e4ddd2;border-radius:14px;box-shadow:0 3px 9px rgba(26,48,38,.045)}.v143-thumb{width:52px;height:52px;border-radius:12px;background-size:cover;background-position:center;position:relative;overflow:hidden;display:grid;place-items:center}.v143-thumb:after{content:"";position:absolute;inset:0;background:rgba(20,43,31,.42)}.v143-thumb span{position:relative;z-index:1;font-size:21px}.v143-info{min-width:0}.v143-info>b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v143-info>small{display:block;color:#7b827e;font-size:9px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}.v143-distance{margin-top:5px;font-size:9px;color:#315c49}.v143-distance span{color:#89918d}.v143-actions{display:flex;gap:4px;align-items:center}.v143-actions .route-btn,.v143-actions a{border:1px solid #dce5df;background:#f5f8f5;color:#244c3b;border-radius:9px;padding:7px 8px;font-size:9px;text-decoration:none;white-space:nowrap}.v143-actions a{font-size:12px;padding:7px}.v143-actions .route-btn{font-weight:800}
+@media(max-width:600px){.v143-row{grid-template-columns:46px minmax(0,1fr);padding:8px}.v143-thumb{width:46px;height:46px}.v143-actions{grid-column:2;justify-content:flex-start}.v143-actions .route-btn{flex:1}.v143-origin b{font-size:9px}.v143-origin span{font-size:8px}.v143-day-head{flex-wrap:wrap;gap:4px}.v143-day-head b{font-size:9px}.v143-results-top h3{font-size:18px}}
+</style>
+<style id="v153-food-modal-clean">
+/* v153: Comida is a modal action only; never render the inline food view. */
+#v106FoodView{display:none!important}
+</style>
+<script id="v153-food-modal-clean-js">
+(function(){
+  'use strict';
+  const atlas=document.querySelector('.v106');
+  const modal=document.getElementById('foodModal');
+  const floatBtn=document.getElementById('foodFloat');
+  if(!atlas||!modal||!floatBtn)return;
+
+  function selectedDay(){
+    const active=atlas.querySelector('.v106-day.active');
+    if(active && active.dataset.day!=null) return String(Number(active.dataset.day)+1);
+    const tab=document.querySelector('.v90-daytab.active');
+    if(tab && tab.dataset.v90Day) return String(tab.dataset.v90Day);
+    return '1';
+  }
+
+  function applyContext(day){
+    window.__foodContextDay=String(day);
+    const h=modal.querySelector('.v143-head h2');
+    const p=modal.querySelector('.v143-head p');
+    if(h)h.textContent='Comida · Día '+day;
+    if(p)p.textContent='Selecciona una categoría para ver los lugares de este día.';
+  }
+
+  function openModalForDay(day){
+    applyContext(day);
+    // Let the original food system build its modal. It already honors __foodContextDay.
+    floatBtn.click();
+    setTimeout(function(){applyContext(day);},50);
+  }
+
+  atlas.addEventListener('click',function(e){
+    const btn=e.target.closest('.v106-modes button[data-mode="food"]');
+    if(!btn)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openModalForDay(selectedDay());
+  },true);
+
+  // Selecting a day only changes the atlas selection; it does not open food automatically.
+  atlas.querySelectorAll('.v106-day').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      window.__foodContextDay=String(Number(btn.dataset.day)+1);
+    },true);
+  });
+})();
+</script>
+<!-- v157: Cafecito explicitly classified as Desayunos in the active v143 food classifier. -->
+
+<style id="v165-shedd-hotel-united-timing-style">
+.transit-shedd-united .transit-planning-note{font-weight:800}
+@media(max-width:700px){.transit-planning-note{font-size:8px!important}}
+</style>
+
+<style id="v166-shedd-united-complete-style">
+#sheddUnitedModal .v166-su-summary{margin:10px 20px 8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#sheddUnitedModal .v166-su-card{border:1px solid #d9e1db;border-radius:12px;background:#f8faf8;padding:8px 9px}
+#sheddUnitedModal .v166-su-card.main{border-color:#b9d9c8;background:#f3faf6}
+#sheddUnitedModal .v166-su-card b{display:block;font-size:8px;color:#335449}
+#sheddUnitedModal .v166-su-card strong{display:block;margin-top:3px;font-size:10px;color:#204d43}
+#sheddUnitedModal .v166-su-card span{display:block;margin-top:2px;font-size:6.8px;color:#73827b;line-height:1.35}
+#sheddUnitedModal .v166-su-section{margin:0 20px 8px;border:1px solid #d8e3df;border-radius:13px;overflow:hidden;background:#fff}
+#sheddUnitedModal .v166-su-head{padding:8px 10px 6px;display:flex;justify-content:space-between;gap:8px;align-items:center;background:#f5f8f5}
+#sheddUnitedModal .v166-su-head b{font-size:8.5px;color:#354b43}
+#sheddUnitedModal .v166-su-head span{font-size:6.5px;color:#73817b}
+#sheddUnitedModal .v166-su-body{padding:8px 10px}
+#sheddUnitedModal .v166-su-options{display:flex;gap:6px;overflow:auto;scrollbar-width:none}
+#sheddUnitedModal .v166-su-options::-webkit-scrollbar{display:none}
+#sheddUnitedModal .v166-su-option{min-width:118px;padding:8px;border:1px solid #d5ddd8;border-radius:10px;background:#fff;text-align:left;cursor:pointer}
+#sheddUnitedModal .v166-su-option.active{border-color:#a9cdbc;background:#eef8f2}
+#sheddUnitedModal .v166-su-option small{display:block;font-size:6px;text-transform:uppercase;letter-spacing:.08em;color:#7e8984;font-weight:900}
+#sheddUnitedModal .v166-su-option strong{display:block;margin-top:3px;font-size:10px;color:#31564b}
+#sheddUnitedModal .v166-su-option span{display:block;margin-top:2px;font-size:6.5px;color:#7a8781;line-height:1.3}
+#sheddUnitedModal .v166-su-route{margin:0 20px 8px;border:1px solid #d8e3df;border-radius:13px;background:#fff;padding:10px 11px}
+#sheddUnitedModal .v166-su-step{display:grid;grid-template-columns:22px 1fr;gap:8px;position:relative;padding:7px 0}
+#sheddUnitedModal .v166-su-step:not(:last-child)::after{content:"";position:absolute;left:10px;top:25px;bottom:-6px;width:2px;background:#bcd8cc}
+#sheddUnitedModal .v166-su-icon{position:relative;z-index:1;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#edf6f1;border:1px solid #bcd5c8;font-size:10px}
+#sheddUnitedModal .v166-su-label{font-size:5.5px;text-transform:uppercase;letter-spacing:.08em;color:#829089;font-weight:900}
+#sheddUnitedModal .v166-su-main{margin-top:2px;font-size:8.5px;font-weight:900;color:#314a43}
+#sheddUnitedModal .v166-su-detail{margin-top:2px;font-size:6.7px;color:#74827d;line-height:1.4}
+#sheddUnitedModal .v166-su-buffer{margin:7px 0;padding:8px 9px;border-radius:10px;border:1px dashed #c9d8ce;background:#f7faf8;color:#536e63;font-size:7px;line-height:1.45}
+#sheddUnitedModal .v166-su-actions{display:flex;gap:6px;margin:8px 20px 4px}
+#sheddUnitedModal .v166-su-actions button{flex:1;border:1px solid #c9dce8;background:#eef7fc;color:#176b9c;border-radius:9px;padding:8px;font-size:7px;font-weight:900;cursor:pointer}
+#sheddUnitedModal .v166-su-note{margin:7px 20px 12px;padding:8px 9px;border-radius:10px;background:#f7faf8;color:#70807a;font-size:6.8px;line-height:1.45}
+@media(max-width:560px){#sheddUnitedModal .v166-su-summary{grid-template-columns:1fr}.v166-su-card{min-height:0}}
+</style>
+<script id="v166-shedd-united-complete-script">
+(function(){
+  function clean(s){return String(s||'').replace(/\s+/g,' ').trim()}
+  function setup(){
+    const modal=document.getElementById('sheddUnitedModal');
+    if(!modal || modal.dataset.v166Complete==='1') return;
+    const box=modal.querySelector('.route-box');
+    if(!box) return;
+    modal.dataset.v166Complete='1';
+    const old=box.querySelector('.v126-content');
+    if(!old) return;
+    const fullBtn=old.querySelector('[data-full-route]');
+    old.remove();
+
+    const content=document.createElement('div');
+    content.className='v166-su-content';
+    content.innerHTML=`
+      <div class="v166-su-summary">
+        <div class="v166-su-card main"><b>TRAMO 1</b><strong>🐟 Shedd → 🏨 Hotel</strong><span>≈ 4:40 pm → ≈ 5:00 pm</span></div>
+        <div class="v166-su-card"><b>CAMBIO</b><strong>🏨 30 min</strong><span>5:00–5:30 pm para cambiarte</span></div>
+        <div class="v166-su-card"><b>TRAMO 2</b><strong>🏨 Hotel → 🏀 United</strong><span>5:30 pm → ≈ 6:03 pm</span></div>
+      </div>
+
+      <section class="v166-su-section">
+        <div class="v166-su-head"><b>🚌 146 North · Shedd → hospedaje</b><span>objetivo de planificación</span></div>
+        <div class="v166-su-body">
+          <div class="v166-su-options" data-su146>
+            <button class="v166-su-option active" type="button" data-depart="≈ 4:40 pm" data-arrive="≈ 5:00 pm"><small>plan recomendado</small><strong>≈ 4:40 pm</strong><span>llegada objetivo ≈ 5:00 pm</span></button>
+            <button class="v166-su-option" type="button" data-depart="≈ 4:55 pm" data-arrive="≈ 5:15 pm"><small>respaldo</small><strong>≈ 4:55 pm</strong><span>llegada objetivo ≈ 5:15 pm</span></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="v166-su-route">
+        <div class="v166-su-step"><div class="v166-su-icon">🐟</div><div><div class="v166-su-label">Salir</div><div class="v166-su-main">Shedd Aquarium</div><div class="v166-su-detail">1200 S DuSable Lake Shore Dr</div></div></div>
+        <div class="v166-su-step"><div class="v166-su-icon">🚶</div><div><div class="v166-su-label">Ir a</div><div class="v166-su-main">Solidarity Drive & Aquarium</div><div class="v166-su-detail">≈ 2 min caminando desde Shedd</div></div></div>
+        <div class="v166-su-step"><div class="v166-su-icon">🚌</div><div><div class="v166-su-label">Tomar</div><div class="v166-su-main">146 North · Shedd → hospedaje <span data-su146inline>≈ 4:40 pm</span></div><div class="v166-su-detail">Bajar en State & Harrison / Ida B Wells</div></div></div>
+        <div class="v166-su-step"><div class="v166-su-icon">🚶</div><div><div class="v166-su-label">Bajar En</div><div class="v166-su-main">State & Harrison/Ida B Wells Drive</div><div class="v166-su-detail">≈ 3–4 min desde la parada</div></div></div>
+      </div>
+
+      <section class="v166-su-section">
+        <div class="v166-su-head"><b>🏨 Parada en hospedaje</b><span>tiempo reservado</span></div>
+        <div class="v166-su-body">
+          <div class="v166-su-buffer"><b>5:00–5:30 pm · 30 min</b><br>Entrar al hotel, cambiarte, dejar lo necesario y salir. Este bloque está reservado deliberadamente para no intentar enlazar Shedd → United de forma directa.</div>
+        </div>
+      </section>
+
+      <section class="v166-su-section">
+        <div class="v166-su-head"><b>🚶 Hotel → 🚌 20 West → 🏀 United Center</b><span>tramo final</span></div>
+        <div class="v166-su-body">
+          <div class="v166-su-route" style="margin:0;padding:0;border:0">
+            <div class="v166-su-step"><div class="v166-su-icon">🏨</div><div><div class="v166-su-label">Salir</div><div class="v166-su-main">HI Chicago</div><div class="v166-su-detail">Objetivo: 5:30 pm</div></div></div>
+            <div class="v166-su-step"><div class="v166-su-icon">🚶</div><div><div class="v166-su-label">Ir a</div><div class="v166-su-main">Madison & Dearborn/State</div><div class="v166-su-detail">≈ 13 min caminando · llegada objetivo ≈ 5:43 pm</div></div></div>
+            <div class="v166-su-step"><div class="v166-su-icon">🚌</div><div><div class="v166-su-label">Tomar</div><div class="v166-su-main">20 West · Austin</div><div class="v166-su-detail">5:43 pm → ≈ 6:02 pm · baja en Madison & United Center</div></div></div>
+            <div class="v166-su-step"><div class="v166-su-icon">🏀</div><div><div class="v166-su-label">Llegar</div><div class="v166-su-main">United Center · 1901 W Madison St</div><div class="v166-su-detail">≈ 6:03 pm · ≈ 57 min antes del partido de las 7:00 pm</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="v166-su-actions"><button type="button" data-su-map="shedd-hotel">🗺️ Shedd → hospedaje</button><button type="button" data-su-map="hotel-united">🗺️ Hospedaje → United</button><button type="button" data-su-map="full">🗺️ Ruta completa</button></div>
+      <div class="v166-su-note">🕒 Los horarios del transporte son referencias de planificación, no una promesa de servicio para diciembre de 2026. El objetivo es proteger el bloque de 30 min para cambiarte y aun así llegar al United Center con margen. Las referencias de Transit que compartiste se pueden usar para recalcular la salida real cuando se acerque el viaje.</div>
+    `;
+
+    box.querySelector('h3')?.insertAdjacentElement('afterend',content);
+
+    const depart=content.querySelector('[data-su146inline]');
+    const chips=[...content.querySelectorAll('[data-su146] .v166-su-option')];
+    chips.forEach((chip)=>chip.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active')); chip.classList.add('active');
+      if(depart) depart.textContent=chip.dataset.depart||'';
+      const note=content.querySelector('.v166-su-card.main span');
+      if(note) note.textContent=(chip.dataset.depart||'')+' → '+(chip.dataset.arrive||'');
+    }));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setup); else setup();
+  setTimeout(setup,250);
+})();
+</script>
 </body>
+<style id="v155-transport-modal-css">
+/* v155 · Transporte como modal por día */
+#atlasTransportModal{
+  position:fixed;inset:0;z-index:160000;
+  display:flex;align-items:center;justify-content:center;
+  padding:22px;background:rgba(24,35,30,.42);
+  backdrop-filter:blur(6px);
+}
+#atlasTransportModal[hidden]{display:none!important}
+#atlasTransportModal .atm-box{
+  width:min(760px,calc(100% - 16px));max-height:min(88vh,900px);overflow:auto;
+  background:#f7f4ec;border:1px solid #d7cec3;border-bottom:0;
+  border-radius:26px 26px 0 0;box-shadow:0 -20px 70px rgba(26,39,33,.24);
+  animation:atmIn .22s ease-out;
+}
+@keyframes atmIn{from{transform:translateY(10px) scale(.985);opacity:.65}to{transform:translateY(0) scale(1);opacity:1}}
+.atm-head{
+  position:sticky;top:0;z-index:3;padding:18px 18px 14px;
+  background:linear-gradient(135deg,#173d2d,#28533e 65%,#3b6048);color:#fff;
+  border-radius:26px 26px 0 0;
+}
+.atm-eyebrow{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;opacity:.74}
+.atm-title{margin:5px 42px 2px 0;font:800 24px/1.02 "Fraunces",serif;letter-spacing:-.03em}
+.atm-sub{margin:0;max-width:54ch;font-size:10px;line-height:1.45;color:#dbe5df}
+.atm-close{
+  position:absolute;right:15px;top:14px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.10);
+  color:#fff;font-size:20px;line-height:1;cursor:pointer
+}
+.atm-body{padding:14px}
+.atm-dayline{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  margin:0 0 11px;padding:9px 11px;border:1px solid #ddd4c8;border-radius:13px;
+  background:#fffaf2
+}
+.atm-dayline b{font-size:11px;color:#29493c}
+.atm-dayline span{font-size:8px;color:#817971}
+.atm-list{display:grid;gap:10px}
+.atm-card{
+  position:relative;padding:12px 12px 11px 14px;border:1px solid #dbd2c7;
+  border-radius:16px;background:#fffdfa;box-shadow:0 4px 12px rgba(33,49,41,.05);overflow:hidden
+}
+.atm-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#52796a}
+.atm-card-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.atm-num{font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:#8c8179;font-weight:900}
+.atm-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 7px;border-radius:999px;background:#e8f0eb;color:#46695d;font-size:7px;font-weight:900;white-space:nowrap}
+.atm-name{margin-top:5px;font:800 17px/1.08 "Fraunces",serif;color:#354942}
+.atm-route{margin-top:5px;font-size:9px;line-height:1.45;color:#756e68}
+.atm-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.atm-actions button{
+  flex:1 1 150px;min-height:34px;border:1px solid #ccdad3;border-radius:9px;
+  background:#edf4f0;color:#355f52;font-size:8px;font-weight:900;cursor:pointer
+}
+.atm-actions button.map{background:#fffdf8;border-color:#ddd3c8;color:#5e716a}
+.atm-empty{
+  padding:22px 14px;text-align:center;border:1px dashed #d3c9be;border-radius:15px;
+  background:#fffdfa;color:#746d67;font-size:9px;line-height:1.5
+}
+.atm-foot{padding:0 14px 14px;font-size:7.5px;color:#8b837c;text-align:center}
+@media(max-width:620px){
+  #atlasTransportModal{align-items:center;padding:12px}
+  #atlasTransportModal .atm-box{width:100%;max-height:92vh;border-radius:22px}
+  .atm-head{padding:16px 15px 13px;border-radius:22px 22px 0 0}
+  .atm-title{font-size:22px}
+  .atm-body{padding:11px}
+  .atm-card{padding:11px 11px 10px 13px}
+  .atm-name{font-size:16px}
+  .atm-route{font-size:8.5px}
+}
+</style>
+<script id="v155-transport-modal-js">
+(function(){
+  'use strict';
+  if(window.__v155TransportModal)return;
+  window.__v155TransportModal=true;
+
+  const atlas=document.querySelector('.v106');
+  if(!atlas)return;
+
+  const modal=document.createElement('div');
+  modal.id='atlasTransportModal';
+  modal.hidden=true;
+  modal.setAttribute('aria-hidden','true');
+  modal.innerHTML=`
+    <div class="atm-box" role="dialog" aria-modal="true" aria-labelledby="atmTitle">
+      <header class="atm-head">
+        <div class="atm-eyebrow">TRANSPORTE · ITINERARIO</div>
+        <h2 class="atm-title" id="atmTitle">Transporte · Día 1</h2>
+        <p class="atm-sub">Traslados importantes de este día. Abre el plan completo de cada trayecto.</p>
+        <button class="atm-close" type="button" aria-label="Cerrar">×</button>
+      </header>
+      <main class="atm-body">
+        <div class="atm-dayline"><b id="atmDayLabel">Día 1</b><span id="atmCount">0 traslados</span></div>
+        <div class="atm-list" id="atmList"></div>
+      </main>
+      <div class="atm-foot">Los planes detallados se abren sobre el sistema de transporte existente.</div>
+    </div>`;
+  document.body.appendChild(modal);
+
+  const title=modal.querySelector('#atmTitle');
+  const dayLabel=modal.querySelector('#atmDayLabel');
+  const count=modal.querySelector('#atmCount');
+  const list=modal.querySelector('#atmList');
+
+  function currentIndex(){
+    const active=atlas.querySelector('.v106-day.active');
+    return active?Number(active.dataset.day||0):0;
+  }
+  function currentDay(){
+    const days=[...atlas.querySelectorAll('.v106-day')];
+    const b=days[currentIndex()];
+    return b?{
+      index:currentIndex(),
+      num:currentIndex()+1,
+      label:(b.querySelector('strong')?.textContent||'').trim(),
+      detail:(b.querySelector('span')?.textContent||'').trim()
+    }:{index:0,num:1,label:'Día 1',detail:''};
+  }
+  function sourceDay(){
+    const ds=[...document.querySelectorAll('.app .day')];
+    return ds[currentIndex()]||null;
+  }
+  function transferData(){
+    const d=sourceDay();
+    if(!d)return [];
+    return [...d.querySelectorAll(':scope .transit-important')].map((x,i)=>{
+      const cls=[...x.classList].find(c=>c.startsWith('transit-')&&c!=='transit-important')||'';
+      return {
+        cls,
+        title:(x.querySelector('span')?.textContent||'Traslado importante').replace(/\s+/g,' ').trim(),
+        detail:(x.querySelector('small')?.textContent||'').replace(/\s+/g,' ').trim()
+      };
+    }).filter(x=>x.cls||x.title);
+  }
+  function findSource(cls){
+    if(!cls)return null;
+    try{return document.querySelector('.app .' + (window.CSS&&CSS.escape?CSS.escape(cls):cls));}
+    catch(e){return document.querySelector('.app .' + cls);}
+  }
+  function openOriginal(cls){
+    close();
+    const src=findSource(cls);
+    if(!src)return;
+    src.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
+  }
+  function openMap(cls){
+    close();
+    const src=findSource(cls);
+    if(!src)return;
+    const mapButton=src.querySelector('button[class*="map"], button[data-map], button[data-route-map]');
+    if(mapButton)mapButton.click();
+    else openOriginal(cls);
+  }
+  function render(){
+    const d=currentDay(), transfers=transferData();
+    title.textContent=`Transporte · Día ${d.num}`;
+    const suffix=d.detail?` · ${d.detail}`:'';
+    dayLabel.textContent=`Día ${d.num}${suffix}`;
+    count.textContent=`${transfers.length} ${transfers.length===1?'traslado':'traslados'}`;
+    if(!transfers.length){
+      list.innerHTML=`<div class="atm-empty">Este día no tiene traslados destacados en el itinerario.</div>`;
+      return;
+    }
+    list.innerHTML=transfers.map((t,i)=>`
+      <article class="atm-card">
+        <div class="atm-card-top">
+          <div class="atm-num">Traslado ${String(i+1).padStart(2,'0')}</div>
+          <span class="atm-pill">🚌 Transporte</span>
+        </div>
+        <div class="atm-name">${esc(t.title)}</div>
+        <div class="atm-route">${esc(t.detail||'Plan de transporte del itinerario')}</div>
+        <div class="atm-actions">
+          <button type="button" class="plan" data-cls="${esc(t.cls)}">🗺️ Ver plan de viaje</button>
+        </div>
+      </article>`).join('');
+
+    list.querySelectorAll('button.plan').forEach(b=>b.addEventListener('click',()=>openOriginal(b.dataset.cls)));
+  }
+  function open(){
+    atlas.querySelectorAll('.v106-modes button').forEach(b=>b.classList.toggle('active',b.dataset.mode==='transit'));
+    render();
+    modal.hidden=false;modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('v155-modal-open');
+  }
+  function close(){
+    modal.hidden=true;modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('v155-modal-open');
+  }
+  function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+
+  const transportButton=atlas.querySelector('.v106-modes button[data-mode="transit"]');
+  if(transportButton){
+    atlas.addEventListener('click',function(e){
+      const btn=e.target.closest('.v106-modes button[data-mode="transit"]');
+      if(!btn)return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      open();
+    },true);
+  }
+  atlas.querySelectorAll('.v106-day').forEach(btn=>btn.addEventListener('click',()=>{
+    if(!modal.hidden){render();}
+  },true));
+
+  modal.querySelector('.atm-close').addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
+})();
+</script>
+<style id="v156-transport-modal-fix">
+/* v156 — modal centrado + cierra el wrapper antes del plan/mapa */
+#atlasTransportModal{align-items:center!important;justify-content:center!important;padding:22px!important;}
+#atlasTransportModal .atm-box{width:min(760px,calc(100% - 16px))!important;max-height:min(88vh,900px)!important;border-radius:26px!important;border-bottom:1px solid #d7cec3!important;box-shadow:0 24px 80px rgba(26,39,33,.28)!important;}
+@media(max-width:620px){
+  #atlasTransportModal{align-items:center!important;padding:12px!important;}
+  #atlasTransportModal .atm-box{width:100%!important;max-height:92vh!important;border-radius:22px!important;}
+}
+</style>
+<style id="v158-food-menu-hours-css">
+/* v158 — menú disponible en toda comida + horario para todas las categorías */
+#foodModal .v143-actions{display:flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap;max-width:260px}
+#foodModal .v143-actions a.menu-link,#foodModal .v143-actions a.hours-link,#foodModal .v143-actions a.photo-link{display:inline-flex;align-items:center;justify-content:center;min-height:29px;padding:6px 7px;border:1px solid #dce5df;background:#f5f8f5;color:#244c3b;border-radius:8px;font-size:8px;font-weight:800;text-decoration:none;white-space:nowrap}
+#foodModal .v143-actions a.menu-link{background:#f3eadb;border-color:#ddd0b9;color:#6b5130}
+#foodModal .v143-actions a.hours-link{background:#edf3ec;border-color:#cfdccf;color:#315842}
+#foodModal .v143-actions a.photo-link{min-width:29px;font-size:11px}
+@media(max-width:600px){#foodModal .v143-actions{grid-column:2;justify-content:flex-start;max-width:none}.v143-actions .route-btn{flex:1 1 100%}.v143-actions a.menu-link,.v143-actions a.hours-link{flex:1 1 0;min-width:0}.v143-actions a.photo-link{flex:0 0 31px}}
+</style>
+<style id="v158-transport-single-action">
+/* v158 — un solo acceso al detalle de transporte */
+#atlasTransportModal .atm-actions button.plan{flex:1 1 100%;min-height:36px;background:#edf4f0;border-color:#ccdad3;color:#355f52}
+</style>
 </html>
+<style id="v140-food-visual-fix">
+/* v140 — solo comida: tarjetas visuales compactas, sin tocar transporte */
+#foodModal .food-box.v137-box{width:min(760px,100%);background:#f7f4ec;border-radius:24px;overflow:hidden}
+#foodModal .v137-shell{max-height:min(92vh,900px)}
+#foodModal .v137-head{padding:16px 18px 12px;background:linear-gradient(135deg,#173c2d,#28523c 62%,#3b6048);}
+#foodModal .v137-kicker{color:#d8e3d5;font-size:8px}
+#foodModal .v137-title{font-size:22px;margin-top:4px}
+#foodModal .v137-sub{font-size:8px;color:#dbe5dc;max-width:38ch}
+#foodModal .v137-origin{margin-top:9px;gap:6px}
+#foodModal .v137-origin button{padding:6px 8px}
+#foodModal .v137-body{padding:12px 14px 16px;background:#f7f4ec}
+#foodModal .v137-daybar{margin-bottom:10px}
+#foodModal .v137-day{background:#fffaf1;border-color:#ded6c6;color:#66705f}
+#foodModal .v137-day.active{background:#234d38;border-color:#234d38;color:#fff}
+#foodModal .v137-intro{margin:0 0 9px}
+#foodModal .v137-intro h4{font-size:13px;color:#294333}
+#foodModal .v137-intro p{display:none}
+#foodModal .v137-counter{background:#e9eee6;color:#42624e}
+#foodModal .v137-cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#foodModal .v137-cat,
+#foodModal .v137-cat.wide{
+  min-height:142px;height:142px;padding:0;border:0;border-radius:17px;background:#24382d;box-shadow:0 8px 20px rgba(31,48,38,.13);isolation:isolate;
+}
+#foodModal .v137-cat.wide{grid-column:1/-1;height:118px;min-height:118px}
+#foodModal .v137-cat:before{display:none}
+#foodModal .v137-cat .v139-cat-bg{position:absolute;inset:0;z-index:-3;background-image:var(--cat-image);background-size:cover;background-position:center;transform:scale(1.01);transition:transform .35s ease}
+#foodModal .v137-cat .v139-cat-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(9,25,17,.02) 15%,rgba(9,25,17,.20) 42%,rgba(7,21,14,.91) 100%)}
+#foodModal .v137-cat:hover .v139-cat-bg{transform:scale(1.07)}
+#foodModal .v137-cat-content{position:absolute;left:11px;right:11px;bottom:10px;display:block;color:#fff}
+#foodModal .v137-cat-emoji{position:static;width:29px;height:29px;margin:0 0 6px;display:grid;place-items:center;border-radius:9px;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.24);font-size:16px;filter:none;backdrop-filter:blur(8px)}
+#foodModal .v137-cat b{display:block;font-size:13px;line-height:1.05;color:#fff}
+#foodModal .v137-cat span:not(.count){display:block;margin-top:3px;font-size:7.5px;line-height:1.25;color:rgba(255,255,255,.78);max-width:29ch}
+#foodModal .v137-cat .count{display:inline-flex;margin-top:6px;padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);font-size:7px;color:#fff;backdrop-filter:blur(8px)}
+#foodModal .v139-cat-arrow{position:absolute;right:10px;top:10px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:17px;line-height:1;transition:.18s}
+#foodModal .v137-cat:hover .v139-cat-arrow{transform:translateX(2px)}
+#foodModal .v137-list-head{margin-bottom:9px}
+#foodModal .v137-back{background:#fffaf1;border-color:#ddd5c6;color:#42624e}
+#foodModal .v137-list-title b{color:#294333}
+#foodModal .v137-row{border-color:#e2ddcf;background:#fffdf8;border-radius:14px}
+#foodModal .v137-thumb{border-radius:11px}
+#foodModal .v137-distance{color:#39664b}
+@media(max-width:430px){
+ #foodModal .v137-cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #foodModal .v137-cat,#foodModal .v137-cat.wide{min-height:128px;height:128px;border-radius:15px}
+ #foodModal .v137-cat.wide{height:108px;min-height:108px}
+ #foodModal .v137-cat-content{left:9px;right:9px;bottom:8px}
+ #foodModal .v137-cat b{font-size:11.5px}
+ #foodModal .v137-cat span:not(.count){font-size:7px}
+ #foodModal .v137-cat-emoji{width:27px;height:27px;font-size:15px;margin-bottom:5px}
+}
+</style>
+<style id="v149-food-day-context-style">
+/* v149 — contexto de día REAL de la página principal. Solo comida. */
+#foodModal .v143-day-context{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:8px 10px;border:1px solid #ddd5c8;border-radius:12px;background:#fffdf8;color:#315442;font-size:9px;font-weight:900}
+#foodModal .v143-day-context small{font-size:8px;color:#8a8f89;font-weight:700}
+#foodModal .v143-cat[data-context-zero="true"]{display:none!important}
+#foodModal .v143-context-empty{padding:18px 12px;border:1px dashed #d7cdbd;border-radius:14px;background:#fffdf8;color:#7d827d;font-size:10px;text-align:center}
+</style>
+\n
+
+<style id="v154-food-categories-polish">
+/* v154 — food only: polished category cards + cleaner result view */
+#foodModal .v143-box{
+  width:min(760px,calc(100vw - 24px)) !important;
+  max-height:min(92vh,860px) !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  border-radius:24px !important;
+  background:#f7f4ec !important;
+  box-shadow:0 24px 70px rgba(10,35,24,.28) !important;
+}
+#foodModal .v143-shell{max-height:min(92vh,860px);display:flex;flex-direction:column;overflow:hidden}
+#foodModal .v143-head{
+  position:relative;padding:18px 18px 16px !important;
+  background:linear-gradient(135deg,#173d2d 0%,#244f3a 66%,#355c47 100%) !important;
+  color:#fff !important;
+}
+#foodModal .v143-eyebrow{font-size:9px;letter-spacing:.16em;font-weight:900;opacity:.72}
+#foodModal .v143-head h2{margin:5px 42px 3px 0 !important;font-size:24px !important;line-height:1.05 !important;letter-spacing:-.04em !important;color:#fff !important}
+#foodModal .v143-head p{margin:0 !important;font-size:10px !important;line-height:1.35 !important;max-width:44ch;color:rgba(255,255,255,.76) !important}
+#foodModal .v143-close{
+  position:absolute;right:13px;top:13px;width:34px;height:34px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;
+  font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;
+}
+#foodModal .v143-main{padding:13px 14px 15px !important;background:#f7f4ec !important;overflow:auto;min-height:0}
+#foodModal .v143-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#foodModal .v143-cat{
+  position:relative;min-height:145px;height:145px;padding:0 !important;border:0 !important;
+  border-radius:17px !important;overflow:hidden;cursor:pointer;text-align:left;color:#fff !important;
+  background:#294437 !important;box-shadow:0 10px 25px rgba(23,53,40,.14) !important;
+  isolation:isolate;transform:translateZ(0);transition:transform .18s ease,box-shadow .18s ease;
+}
+#foodModal .v143-cat:hover{transform:translateY(-2px);box-shadow:0 15px 30px rgba(23,53,40,.18) !important}
+#foodModal .v143-cat:active{transform:scale(.985)}
+#foodModal .v143-bg,#foodModal .v143-shade{position:absolute;inset:0;display:block}
+#foodModal .v143-bg{background-image:var(--food-img);background-size:cover;background-position:center;z-index:-3;transition:transform .35s ease}
+#foodModal .v143-shade{background:linear-gradient(180deg,rgba(8,27,18,.04) 10%,rgba(8,27,18,.18) 38%,rgba(8,27,18,.90) 100%);z-index:-2}
+#foodModal .v143-cat:hover .v143-bg{transform:scale(1.06)}
+#foodModal .v143-cat-icon{
+  position:absolute;left:11px;top:11px;width:34px;height:34px;border-radius:11px;
+  display:grid;place-items:center;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(8px);font-size:18px;box-shadow:0 4px 12px rgba(0,0,0,.08)
+}
+#foodModal .v143-cat-copy{position:absolute;left:12px;right:42px;bottom:11px;display:block}
+#foodModal .v143-cat-copy b{display:block;font-size:15px;line-height:1.05;letter-spacing:-.02em;color:#fff !important}
+#foodModal .v143-cat-copy small{display:block;margin-top:4px;font-size:8px;line-height:1.3;color:rgba(255,255,255,.78) !important}
+#foodModal .v143-cat-copy em{display:inline-flex;margin-top:7px;padding:4px 7px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);font-size:7.5px;font-style:normal;font-weight:900;color:#fff !important;backdrop-filter:blur(7px)}
+#foodModal .v143-arrow{
+  position:absolute;right:10px;bottom:10px;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;line-height:1;
+  backdrop-filter:blur(7px);transition:transform .18s ease
+}
+#foodModal .v143-cat:hover .v143-arrow{transform:translateX(2px)}
+
+/* detail state */
+#foodModal .v143-shell.v154-detail .v143-close{display:none !important}
+#foodModal .v143-results-top{margin:0 0 11px !important;display:flex;align-items:center;gap:9px}
+#foodModal .v143-results-top button{border:0;background:#e9e2d5;color:#244536;border-radius:11px;padding:9px 11px;font-size:10px;font-weight:900;cursor:pointer}
+#foodModal .v143-results-top h3{margin:0 !important;font-size:18px !important;line-height:1.05;color:#294333}
+#foodModal .v143-results-top span{display:block;margin-top:3px;font-size:8px;color:#7e857f}
+#foodModal .v143-origin{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+#foodModal .v143-origin button{border:1px solid #ddd5c8;background:#fffdf8;color:#315442;border-radius:12px;padding:8px 9px;text-align:left;cursor:pointer}
+#foodModal .v143-origin button.active{background:#e8f0e8;border-color:#bfd0c1}
+#foodModal .v143-origin b{display:block;font-size:9px}.v143-origin span{display:block;font-size:8px;color:#89918d;margin-top:2px}
+#foodModal .v143-day-group{margin:0 0 12px}
+#foodModal .v143-day-head{display:flex;align-items:baseline;gap:7px;padding:8px 2px 6px;border-bottom:1px solid #ddd5c8}
+#foodModal .v143-day-head span{font-size:9px;font-weight:900;color:#315442;text-transform:uppercase;letter-spacing:.08em}
+#foodModal .v143-day-head b{font-size:9px;color:#7b776f;font-weight:700}
+#foodModal .v143-day-list{display:grid;gap:7px;padding-top:7px}
+#foodModal .v143-row{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px;background:#fffdf8;border:1px solid #e5dfd4;border-radius:13px;box-shadow:0 3px 10px rgba(26,48,38,.045)}
+#foodModal .v143-thumb{width:48px;height:48px;border-radius:11px;background-size:cover;background-position:center;position:relative;overflow:hidden;display:grid;place-items:center}
+#foodModal .v143-thumb:after{content:"";position:absolute;inset:0;background:rgba(13,36,26,.42)}
+#foodModal .v143-thumb span{position:relative;z-index:1;font-size:20px}
+#foodModal .v143-info{min-width:0}.v143-info>b{display:block;font-size:11px}
+#foodModal .v143-info>small{display:block;color:#77817c;font-size:8px;line-height:1.3;margin-top:3px}
+#foodModal .v143-distance{margin-top:5px;font-size:8px;color:#315c49}.v143-distance span{color:#89918d}
+#foodModal .v143-actions{display:flex;gap:4px;align-items:center}.v143-actions .route-btn,.v143-actions a{border:1px solid #dce5df;background:#f5f8f5;color:#244c3b;border-radius:8px;padding:6px 7px;font-size:8px;text-decoration:none;white-space:nowrap}.v143-actions a{font-size:11px}
+@media(max-width:430px){
+  #foodModal .v143-box{width:calc(100vw - 12px) !important;border-radius:20px !important}
+  #foodModal .v143-head{padding:16px 15px 14px !important}
+  #foodModal .v143-head h2{font-size:21px !important}
+  #foodModal .v143-main{padding:10px !important}
+  #foodModal .v143-grid{gap:8px}
+  #foodModal .v143-cat{min-height:128px;height:128px;border-radius:15px !important}
+  #foodModal .v143-cat-icon{width:30px;height:30px;left:9px;top:9px;font-size:16px;border-radius:9px}
+  #foodModal .v143-cat-copy{left:10px;right:36px;bottom:9px}
+  #foodModal .v143-cat-copy b{font-size:12px}.v143-cat-copy small{font-size:7px}.v143-cat-copy em{font-size:6.8px;margin-top:6px;padding:3px 6px}
+  #foodModal .v143-arrow{right:8px;bottom:8px;width:24px;height:24px;font-size:18px}
+  #foodModal .v143-row{grid-template-columns:44px minmax(0,1fr);padding:8px}.v143-thumb{width:44px;height:44px}.v143-actions{grid-column:2;justify-content:flex-start}
+}
+</style>
+<script id="v154-food-categories-polish-js">
+(function(){
+  const modal=document.getElementById('foodModal');
+  if(!modal)return;
+  const box=modal.querySelector('.v143-box');
+  if(!box)return;
+  const home=box.querySelector('#v143Home');
+  const results=box.querySelector('#v143Results');
+  const sync=()=>{
+    const detail=results && !results.hidden;
+    box.classList.toggle('v154-detail',!!detail);
+  };
+  box.addEventListener('click',()=>setTimeout(sync,0));
+  const close=box.querySelector('#v143Close');
+  if(close) close.addEventListener('click',()=>box.classList.remove('v154-detail'));
+  sync();
+})();
+</script>
