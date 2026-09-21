@@ -8,9 +8,12 @@
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="telephone=no" name="format-detection"/>
 <meta content="#07111f" name="theme-color"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<meta content="Chicago Field Guide" name="apple-mobile-web-app-title"/>
 <title>Chicago · Trip OS — Premium Itinerary v90</title>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Manrope:wght@500;700;800&display=swap");
+
 
 :root{
   --bg:#eef3f9;
@@ -769,6 +772,16 @@ h1{
 .foodHint{margin:0 2px 7px;color:#6c8094;font-size:8px;line-height:1.4}
 @media(max-width:560px){.foodOptionList{grid-template-columns:1fr}}
 
+
+.v135-train-emoji{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.22em;
+  line-height:1;
+  transform:translateY(1px);
+}
+
 </style>
 <style id="transfer-click-fix">.transit-important{cursor:pointer;transition:.15s}.transit-important:hover{border-color:#9bc8df;background:#eef8fd;transform:translateY(-1px)}.transit-important:focus{outline:2px solid #8fc5df;outline-offset:2px}.su2-modal{z-index:25000!important}.su2-box{max-height:min(88vh,720px)}.su2-box .su-goal{margin:10px 0;padding:10px 11px;border:1px solid #cfe2ee;border-radius:12px;background:#f5fbff;color:#214d6c}.su2-box .su-goal strong{display:block;font-size:10px}.su2-box .su-goal span{display:block;margin-top:3px;font-size:8px;color:#6b8091}.su-step{margin:8px 0;border:1px solid #d8e3eb;border-radius:14px;padding:11px;background:#fff}.su-step.main{border-color:#b9d9c8;background:#f4fbf7}.su-step .topline{display:flex;justify-content:space-between;gap:8px;align-items:center}.su-step .topline b{font-size:10px;color:#214d6c}.su-time{font-size:8px;font-weight:900;color:#167253}.su-step p{margin:7px 0;font-size:8.5px;color:#5b7285;line-height:1.45}.su-badge{display:inline-block;padding:5px 7px;border-radius:999px;background:#e9f5fb;color:#176b9c;font-size:7.5px;font-weight:900}.su-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}.su-option{padding:9px;border:1px solid #d8e3eb;border-radius:12px;background:#fff}.su-option.recommended{border-color:#b9d9c8;background:#f3fbf6}.su-option .label{font-size:7.5px;text-transform:uppercase;letter-spacing:.08em;color:#718596;font-weight:900}.su-option .route{margin-top:3px;font-size:9px;color:#204d6d;font-weight:900}.su-option .detail{margin-top:4px;font-size:8px;color:#62788b;line-height:1.4}.su-walk{margin:8px 0;padding:8px 9px;border-radius:10px;background:#f7fafc;color:#62798c;font-size:8px;line-height:1.4}.su-map{display:inline-block;margin-top:6px;padding:7px 9px;border-radius:9px;background:#176b9c;color:#fff!important;text-decoration:none;font-size:8px;font-weight:900}.su-note{margin-top:9px;padding:9px 10px;border-radius:10px;background:#f7fafc;color:#718596;font-size:7.5px;line-height:1.45}@media(max-width:560px){.su-options{grid-template-columns:1fr}} </style>
 <style id="zoo-sky-modal-style">
@@ -1106,7 +1119,1080 @@ font:inherit;font-size:8px;font-weight:900;padding:6px 9px;border-radius:8px;cur
 #zooArrivalModal .zs-maprow button,#skyNavyModal .zs-maprow button,#navyHotelModal .zs-maprow button{flex:1;border:1px solid #c9dce8;background:#eef7fc;color:#176b9c;border-radius:9px;padding:7px;font-size:8px;font-weight:900;cursor:pointer}
 #zooArrivalModal .zs-note,#skyNavyModal .zs-note,#navyHotelModal .zs-note{margin-top:10px;padding:9px 10px;border-radius:10px;background:#f7fafc;color:#718596;font-size:7.5px;line-height:1.45}
 @media(max-width:480px){#zooArrivalModal .zs-time,#skyNavyModal .zs-time,#navyHotelModal .zs-time{align-items:flex-start;flex-direction:column;gap:2px}}
-</style><style id="day3-extra-transfer-card-style">.transit-zoo-arrival,.transit-sky-navy,.transit-navy-hotel{cursor:pointer}</style></head>
+</style><style id="day3-extra-transfer-card-style">.transit-zoo-arrival,.transit-sky-navy,.transit-navy-hotel{cursor:pointer}</style>
+
+<style id="chicago-v93-redesign">
+/* =========================================================
+   CHICAGO TRIP OS — V93 VISUAL REDESIGN
+   Capa visual sobre el itinerario existente.
+   No reemplaza la lógica JS.
+   ========================================================= */
+
+:root{
+  --chi-red:#d92f3f;
+  --chi-red-dark:#a91f2c;
+  --chi-navy:#071525;
+  --chi-blue:#167da8;
+  --chi-cream:#f5f0e7;
+  --chi-sand:#e9dfcf;
+  --chi-white:#fff;
+  --chi-ink:#142437;
+  --chi-muted:#718096;
+  --chi-green:#15936d;
+  --chi-gold:#c28a25;
+
+  --radius-xl:28px;
+  --radius-lg:21px;
+  --radius-md:15px;
+
+  --shadow-soft:0 12px 35px rgba(7,21,37,.09);
+  --shadow-card:0 18px 45px rgba(7,21,37,.12);
+}
+
+/* ---------- BASE ---------- */
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(
+      900px 500px at 10% -10%,
+      rgba(217,47,63,.08),
+      transparent 65%
+    ),
+    radial-gradient(
+      800px 500px at 100% 5%,
+      rgba(22,125,168,.10),
+      transparent 65%
+    ),
+    var(--chi-cream) !important;
+
+  color:var(--chi-ink) !important;
+}
+
+.app{
+  max-width:860px !important;
+  padding-left:18px !important;
+  padding-right:18px !important;
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+  min-height:520px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+
+  position:relative;
+  overflow:hidden;
+
+  padding:34px 28px 28px !important;
+
+  border:0 !important;
+  border-radius:34px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7,21,37,.02) 20%,
+      rgba(7,21,37,.35) 55%,
+      rgba(7,21,37,.94) 100%
+    ),
+    linear-gradient(
+      135deg,
+      #174e70 0%,
+      #071525 55%,
+      #d92f3f 150%
+    ) !important;
+
+  box-shadow:
+    0 30px 80px rgba(7,21,37,.22) !important;
+
+  color:#fff !important;
+}
+
+/* Decorative skyline */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:auto -5% 0;
+  height:52%;
+  opacity:.20;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 4%,
+      #fff 4% 6%,
+      transparent 6% 9%,
+      #fff 9% 13%,
+      transparent 13% 16%,
+      #fff 16% 18%,
+      transparent 18% 23%,
+      #fff 23% 29%,
+      transparent 29% 33%,
+      #fff 33% 36%,
+      transparent 36% 40%,
+      #fff 40% 47%,
+      transparent 47% 51%,
+      #fff 51% 55%,
+      transparent 55% 59%,
+      #fff 59% 64%,
+      transparent 64% 69%,
+      #fff 69% 72%,
+      transparent 72% 78%,
+      #fff 78% 84%,
+      transparent 84% 88%,
+      #fff 88% 94%,
+      transparent 94%
+    );
+
+  clip-path:polygon(
+    0 100%,
+    0 66%,
+    5% 66%,
+    5% 43%,
+    9% 43%,
+    9% 72%,
+    14% 72%,
+    14% 30%,
+    19% 30%,
+    19% 59%,
+    24% 59%,
+    24% 20%,
+    30% 20%,
+    30% 52%,
+    36% 52%,
+    36% 12%,
+    42% 12%,
+    42% 47%,
+    48% 47%,
+    48% 27%,
+    54% 27%,
+    54% 61%,
+    61% 61%,
+    61% 17%,
+    67% 17%,
+    67% 49%,
+    73% 49%,
+    73% 8%,
+    78% 8%,
+    78% 43%,
+    84% 43%,
+    84% 24%,
+    90% 24%,
+    90% 56%,
+    96% 56%,
+    96% 36%,
+    100% 36%,
+    100% 100%
+  );
+}
+
+.hero::after{
+  width:340px !important;
+  height:340px !important;
+  right:-100px !important;
+  bottom:-150px !important;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(217,47,63,.45),
+      rgba(217,47,63,.08) 45%,
+      transparent 70%
+    ) !important;
+
+  animation:chiFloat 8s ease-in-out infinite alternate;
+}
+
+.hero > *{
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  color:#ff6d79 !important;
+  font-size:11px !important;
+  letter-spacing:.22em !important;
+}
+
+h1{
+  max-width:650px;
+  margin:12px 0 !important;
+
+  color:#fff !important;
+
+  font-size:clamp(42px,8vw,76px) !important;
+  line-height:.94 !important;
+  letter-spacing:-2px !important;
+
+  text-shadow:
+    0 8px 35px rgba(0,0,0,.30);
+}
+
+.hero p{
+  max-width:620px !important;
+  color:rgba(255,255,255,.78) !important;
+  font-size:14px !important;
+}
+
+.herochips{
+  margin-top:18px !important;
+}
+
+.herochips span{
+  border-color:rgba(255,255,255,.20) !important;
+  background:rgba(255,255,255,.10) !important;
+  backdrop-filter:blur(12px);
+  color:#fff !important;
+}
+
+.herochips strong{
+  color:#fff !important;
+}
+
+.countdown{
+  align-self:flex-start;
+  margin-top:15px !important;
+
+  border:1px solid rgba(255,255,255,.18) !important;
+  background:rgba(255,255,255,.09) !important;
+  color:#fff !important;
+
+  backdrop-filter:blur(14px);
+}
+
+/* ---------- TOP TOOLBAR ---------- */
+
+.toolbar{
+  margin:18px 0 !important;
+}
+
+.progressbox{
+  border:0 !important;
+  border-radius:20px !important;
+  background:#fff !important;
+  box-shadow:var(--shadow-soft) !important;
+}
+
+.progressline{
+  color:var(--chi-ink) !important;
+}
+
+.bar{
+  height:10px !important;
+  background:#edf0f2 !important;
+}
+
+.bar i{
+  background:
+    linear-gradient(
+      90deg,
+      var(--chi-red),
+      #ef6a48,
+      var(--chi-green)
+    ) !important;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.ghost,
+.share,
+.reset{
+  border-radius:15px !important;
+  border:1px solid #d9d3c9 !important;
+  background:#fff !important;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    background .2s ease !important;
+}
+
+.ghost:hover,
+.share:hover,
+.reset:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(7,21,37,.10);
+}
+
+.share{
+  color:var(--chi-red-dark) !important;
+}
+
+.reset{
+  color:#7b3440 !important;
+}
+
+/* ---------- SEARCH ---------- */
+
+.smartpanel{
+  border:0 !important;
+  border-radius:21px !important;
+  background:#fff !important;
+  box-shadow:var(--shadow-soft) !important;
+}
+
+#searchInput{
+  min-height:48px;
+  border:1px solid #ddd7cd !important;
+  border-radius:14px !important;
+  background:#faf9f6 !important;
+}
+
+.filter{
+  border-color:#ded8ce !important;
+  background:#fff !important;
+}
+
+.filter.active{
+  border-color:var(--chi-red) !important;
+  background:#fff1f2 !important;
+  color:var(--chi-red-dark) !important;
+}
+
+/* ---------- NAVIGATION ---------- */
+
+.tabs{
+  border:0 !important;
+  padding:7px !important;
+
+  background:rgba(255,255,255,.82) !important;
+
+  box-shadow:
+    0 12px 30px rgba(7,21,37,.10);
+
+  backdrop-filter:blur(20px) !important;
+}
+
+.tabs a{
+  border:0 !important;
+  background:transparent !important;
+  color:#536273 !important;
+  transition:.2s;
+}
+
+.tabs a:hover{
+  background:#f4eeee !important;
+  color:var(--chi-red) !important;
+}
+
+.tabs a[href="#day1"]{
+  color:var(--chi-red-dark) !important;
+}
+
+/* ---------- DAY HEADER ---------- */
+
+.day{
+  margin-top:48px !important;
+}
+
+.dayhead{
+  position:relative;
+
+  padding:
+    0 0 18px !important;
+
+  border-bottom:1px solid #d8d1c6 !important;
+}
+
+.dayhead::before{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+
+  width:64px;
+  height:3px;
+
+  border-radius:99px;
+
+  background:var(--chi-red);
+}
+
+.dayhead h2{
+  font-family:"Fraunces",serif !important;
+  font-size:clamp(25px,5vw,34px) !important;
+  letter-spacing:-.5px;
+  color:var(--chi-navy) !important;
+}
+
+.dayhead small{
+  color:#8a7f72 !important;
+}
+
+/* ---------- DAY START ---------- */
+
+.start{
+  margin:16px 0 !important;
+  padding:17px !important;
+
+  border:0 !important;
+  border-left:4px solid var(--chi-red) !important;
+
+  border-radius:16px !important;
+
+  background:#fff !important;
+
+  box-shadow:var(--shadow-soft);
+}
+
+/* ---------- TIMELINE ---------- */
+
+.timeline::before{
+  left:21px !important;
+  width:3px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--chi-red),
+      #e6b49c 45%,
+      #a9d5c5 100%
+    ) !important;
+
+  transform-origin:top;
+  animation:drawLine 1.5s ease both;
+}
+
+.stop{
+  padding-left:58px !important;
+  margin:22px 0 !important;
+
+  animation:
+    chiReveal .55s cubic-bezier(.2,.8,.2,1) both !important;
+}
+
+.stop:nth-child(2){animation-delay:.04s !important}
+.stop:nth-child(3){animation-delay:.08s !important}
+.stop:nth-child(4){animation-delay:.12s !important}
+.stop:nth-child(5){animation-delay:.16s !important}
+.stop:nth-child(6){animation-delay:.20s !important}
+.stop:nth-child(7){animation-delay:.24s !important}
+.stop:nth-child(8){animation-delay:.28s !important}
+
+.dot{
+  left:13px !important;
+  top:25px !important;
+
+  width:19px !important;
+  height:19px !important;
+
+  border:5px solid var(--chi-red) !important;
+
+  box-shadow:
+    0 0 0 6px rgba(217,47,63,.08);
+}
+
+.stop.free .dot{
+  border-color:var(--chi-green) !important;
+}
+
+.stop.paid .dot{
+  border-color:var(--chi-gold) !important;
+}
+
+/* ---------- CARDS ---------- */
+
+.card{
+  border:0 !important;
+  border-radius:22px !important;
+
+  background:#fff !important;
+
+  box-shadow:var(--shadow-card) !important;
+
+  transition:
+    transform .25s cubic-bezier(.2,.8,.2,1),
+    box-shadow .25s ease !important;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    0 24px 60px rgba(7,21,37,.16) !important;
+}
+
+.top{
+  padding:19px !important;
+}
+
+.num{
+  color:var(--chi-red) !important;
+  letter-spacing:.16em !important;
+}
+
+.place{
+  color:var(--chi-navy) !important;
+
+  font-family:"Fraunces",serif;
+  font-size:22px !important;
+  letter-spacing:-.2px;
+}
+
+.time{
+  color:#586b7b !important;
+  font-weight:800;
+}
+
+.badge{
+  border-radius:99px !important;
+}
+
+.address{
+  margin-top:14px !important;
+  border:0 !important;
+  background:#f7f5f1 !important;
+  border-radius:13px !important;
+}
+
+.copyAddr{
+  border-color:#d8d0c5 !important;
+  color:#5b5d5d !important;
+}
+
+/* ---------- DESCRIPTION ---------- */
+
+.desc{
+  color:#657384 !important;
+  font-size:11px !important;
+  line-height:1.65 !important;
+}
+
+/* ---------- ACTIONS ---------- */
+
+.actions{
+  border-top:1px solid #eee9e2 !important;
+}
+
+.actions a,
+.checkbtn{
+  min-height:48px !important;
+}
+
+.actions a{
+  color:var(--chi-red-dark) !important;
+}
+
+.checkbtn{
+  background:#faf9f6 !important;
+  color:#607080 !important;
+}
+
+/* ---------- DONE STATE ---------- */
+
+.stop.done .card{
+  opacity:.60;
+  transform:scale(.985);
+}
+
+.stop.done .dot{
+  border-color:var(--chi-green) !important;
+  background:#d9f5eb !important;
+
+  box-shadow:
+    0 0 0 7px rgba(21,147,109,.10) !important;
+}
+
+/* ---------- TRANSIT ---------- */
+
+.transit-important{
+  margin-left:58px !important;
+  width:calc(100% - 58px) !important;
+
+  border:0 !important;
+  border-radius:15px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #edf8fc,
+      #f7fbfd
+    ) !important;
+
+  box-shadow:none !important;
+
+  color:#24506a !important;
+}
+
+.transit-important::before{
+  content:"";
+  display:block;
+
+  width:4px;
+  height:100%;
+
+  position:absolute;
+  left:0;
+  top:0;
+
+  border-radius:99px;
+  background:var(--chi-blue);
+}
+
+/* ---------- TRANSIT PANEL ---------- */
+
+.transitpanel{
+  border:0 !important;
+  border-radius:24px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      #071525,
+      #12344c
+    ) !important;
+
+  color:#fff !important;
+
+  box-shadow:
+    0 25px 60px rgba(7,21,37,.20) !important;
+}
+
+.transithead b{
+  color:#fff !important;
+}
+
+.transithead span{
+  color:rgba(255,255,255,.62) !important;
+}
+
+.transitdate{
+  background:rgba(255,255,255,.12) !important;
+  color:#fff !important;
+}
+
+.routecard{
+  border-color:rgba(255,255,255,.10) !important;
+  background:rgba(255,255,255,.07) !important;
+}
+
+.routecard .rnum{
+  color:#62c4e8 !important;
+}
+
+.routecard .rname,
+.routecard .rinfo{
+  color:rgba(255,255,255,.75) !important;
+}
+
+.routecard .peak{
+  background:rgba(217,47,63,.16) !important;
+  color:#ffadb4 !important;
+}
+
+.routecard a{
+  color:#72d0ee !important;
+}
+
+.transitnote{
+  background:rgba(255,255,255,.06) !important;
+  color:rgba(255,255,255,.58) !important;
+}
+
+/* ---------- FOOD ---------- */
+
+.foodhead{
+  border:0 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #f4eee5
+    ) !important;
+
+  border-radius:20px !important;
+  box-shadow:var(--shadow-soft);
+}
+
+.foodhead b{
+  color:var(--chi-navy) !important;
+}
+
+.meal,
+.food,
+.option-card,
+.foodOption{
+  border-color:#e4ddd3 !important;
+  background:#fff !important;
+  border-radius:16px !important;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease !important;
+}
+
+.meal:hover,
+.food:hover,
+.option-card:hover,
+.foodOption:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(7,21,37,.09);
+}
+
+.meal b,
+.food b,
+.option-card b,
+.foodOption b{
+  color:var(--chi-navy) !important;
+}
+
+/* ---------- ROUTE BUTTONS ---------- */
+
+.route-btn,
+.food-route-btn{
+  border:0 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--chi-red),
+      var(--chi-red-dark)
+    ) !important;
+
+  color:#fff !important;
+
+  border-radius:10px !important;
+
+  box-shadow:
+    0 7px 18px rgba(217,47,63,.20);
+}
+
+/* ---------- MODALS ---------- */
+
+.route-modal,
+.food-modal{
+  background:rgba(3,13,23,.72) !important;
+  backdrop-filter:blur(8px);
+}
+
+.route-box,
+.food-box{
+  border:0 !important;
+  border-radius:26px !important;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.35) !important;
+
+  animation:
+    modalIn .3s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.route-choice,
+.route-result,
+.zs-route,
+.zs-stop{
+  border-color:#e3ddd4 !important;
+  border-radius:15px !important;
+}
+
+.route-choice.primary,
+.zs-route.primary,
+.zs-stop.primary{
+  border-color:#a9d8c6 !important;
+  background:#f0faf6 !important;
+}
+
+/* ---------- CURRENCY ---------- */
+
+.currencybar{
+  border:0 !important;
+  border-radius:20px !important;
+
+  background:#fff !important;
+
+  box-shadow:var(--shadow-soft) !important;
+}
+
+.currencyresult{
+  background:#edf8f3 !important;
+  color:#137454 !important;
+}
+
+/* ---------- PACK LIST ---------- */
+
+.travelnotes{
+  border:0 !important;
+  border-radius:22px !important;
+
+  background:#fff !important;
+
+  box-shadow:var(--shadow-soft) !important;
+}
+
+.quicklink{
+  border-color:#e1dbd2 !important;
+  border-radius:13px !important;
+}
+
+/* ---------- FLOATING CONTROLS ---------- */
+
+.hotel-float,
+.food-float{
+  border:0 !important;
+
+  background:
+    rgba(7,21,37,.94) !important;
+
+  color:#fff !important;
+
+  box-shadow:
+    0 15px 35px rgba(7,21,37,.30) !important;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease !important;
+}
+
+.hotel-float:hover,
+.food-float:hover{
+  transform:translateX(-50%) translateY(-3px) !important;
+}
+
+/* ---------- TOP BUTTON ---------- */
+
+.topbtn{
+  border:0 !important;
+  background:var(--chi-red) !important;
+  color:#fff !important;
+
+  box-shadow:
+    0 15px 35px rgba(217,47,63,.30) !important;
+}
+
+/* ---------- TOAST ---------- */
+
+.toast{
+  background:var(--chi-navy) !important;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* ---------- SECTION LABELS ---------- */
+
+.sectionlabel{
+  color:#927e6b !important;
+  letter-spacing:.14em !important;
+}
+
+/* ---------- DAY COLLAPSE ---------- */
+
+.collapseToggle{
+  border:0 !important;
+  background:#f2eee8 !important;
+  color:#5e5b58 !important;
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible{
+  outline:3px solid rgba(217,47,63,.35) !important;
+  outline-offset:3px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes chiReveal{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes drawLine{
+  from{
+    transform:scaleY(0);
+  }
+  to{
+    transform:scaleY(1);
+  }
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:translateY(18px) scale(.97);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes chiFloat{
+  from{
+    transform:translate(0,0) scale(1);
+  }
+  to{
+    transform:translate(-20px,-15px) scale(1.08);
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+  }
+}
+
+/* ---------- TABLET ---------- */
+
+@media(min-width:700px){
+
+  .app{
+    padding-top:30px !important;
+  }
+
+  .hero{
+    min-height:600px;
+    padding:42px !important;
+  }
+
+  .timeline{
+    padding-right:12px;
+  }
+
+  .stop{
+    padding-left:72px !important;
+  }
+
+  .timeline::before{
+    left:26px !important;
+  }
+
+  .dot{
+    left:17px !important;
+  }
+
+  .transit-important{
+    margin-left:72px !important;
+    width:calc(100% - 72px) !important;
+  }
+
+  .place{
+    font-size:24px !important;
+  }
+}
+
+/* ---------- PHONE ---------- */
+
+@media(max-width:560px){
+
+  .app{
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+
+  .hero{
+    min-height:590px;
+    padding:26px 20px 22px !important;
+    border-radius:27px !important;
+  }
+
+  h1{
+    font-size:48px !important;
+  }
+
+  .hero p{
+    font-size:13px !important;
+  }
+
+  .day{
+    margin-top:38px !important;
+  }
+
+  .dayhead h2{
+    font-size:25px !important;
+  }
+
+  .stop{
+    padding-left:48px !important;
+    margin:18px 0 !important;
+  }
+
+  .timeline::before{
+    left:18px !important;
+  }
+
+  .dot{
+    left:10px !important;
+    width:17px !important;
+    height:17px !important;
+  }
+
+  .transit-important{
+    margin-left:48px !important;
+    width:calc(100% - 48px) !important;
+  }
+
+  .top{
+    padding:16px !important;
+  }
+
+  .place{
+    font-size:20px !important;
+  }
+
+  .card{
+    border-radius:19px !important;
+  }
+
+  .actions a,
+  .checkbtn{
+    min-height:46px !important;
+  }
+
+  .routegrid{
+    gap:7px !important;
+  }
+
+  .transitpanel{
+    border-radius:21px !important;
+    padding:13px !important;
+  }
+
+  .foodgrid,
+  .option-grid{
+    gap:7px !important;
+  }
+}
+
+/* ---------- EXTRA SMALL ---------- */
+
+@media(max-width:380px){
+
+  h1{
+    font-size:42px !important;
+  }
+
+  .hero{
+    min-height:560px;
+  }
+
+  .herochips span{
+    padding:6px 8px !important;
+  }
+}
+</style>
+
+</head>
 <body data-maps-provider="Apple Maps"><div aria-label="Configuración de rutas" class="route-controls">
 <div class="route-control-row"><div class="route-control-label">🗺️ MAPA</div><div class="route-control-buttons"><button data-map-provider="apple" type="button">🍎 Apple Maps</button><button data-map-provider="google" type="button">🟦 Google Maps</button></div></div>
 <div class="route-control-row"><div class="route-control-label">📍 ORIGEN</div><div class="route-control-buttons"><button data-origin-mode="current" type="button">📍 Ubicación actual</button><button data-origin-mode="hotel" type="button">🏨 Hospedaje</button></div></div>
@@ -5508,6 +6594,1722 @@ body:before{
   }
 })();
 </script>
+
+<style id="v93-journey-system">
+/* v93 · Journey System: a live, installable travel companion */
+.v93-command{
+  position:relative; z-index:4; margin:12px 0 15px; padding:14px;
+  border:1px solid rgba(82,130,145,.22); border-radius:20px;
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(237,249,250,.88));
+  box-shadow:0 14px 34px rgba(14,57,70,.08); overflow:hidden;
+}
+.v93-command:after{content:"";position:absolute;width:160px;height:160px;right:-76px;top:-94px;border-radius:50%;background:radial-gradient(circle,#9ce8e8 0,transparent 67%);opacity:.55;pointer-events:none}
+.v93-command-head{display:flex;justify-content:space-between;gap:10px;align-items:center;position:relative;z-index:1}
+.v93-live{display:flex;align-items:center;gap:7px;color:#246473;font-size:8px;letter-spacing:.13em;text-transform:uppercase;font-weight:900}
+.v93-live i{width:7px;height:7px;border-radius:50%;background:#2fc68d;box-shadow:0 0 0 4px rgba(47,198,141,.13)}
+.v93-command-head button{border:1px solid #c9e0e4;background:#fff;color:#276172;border-radius:9px;padding:6px 8px;font-size:8px;font-weight:900;cursor:pointer}
+.v93-next{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin-top:10px}
+.v93-orb{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:#0d3442;color:#9bf0ed;font-size:16px;box-shadow:0 7px 15px rgba(9,44,55,.18)}
+.v93-next small{display:block;color:#77939a;font-size:7px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.v93-next b{display:block;margin-top:2px;color:#153f4e;font-size:12px;line-height:1.2}.v93-next span{color:#397382;font-size:8px;font-weight:800;text-align:right;max-width:92px}
+.v93-command-foot{position:relative;z-index:1;display:flex;gap:6px;overflow:auto;margin-top:12px;padding-top:10px;border-top:1px solid rgba(64,124,137,.14)}
+.v93-command-foot a{flex:0 0 auto;border:1px solid #d7e8e9;border-radius:999px;padding:7px 9px;color:#39707d;background:#fff;text-decoration:none;font-size:8px;font-weight:900}.v93-command-foot a:first-child{background:#e5fbf6;border-color:#a9dfd0;color:#176b58}
+.v93-done{padding:4px 7px;border-radius:999px;background:#e8f8f0;color:#257259;font-size:7px;font-weight:900}
+@media(max-width:460px){.v93-command{margin:10px 0 12px}.v93-next b{font-size:11px}.v93-next span{font-size:7px}.v93-command-foot a{font-size:7px}}
+</style>
+<script id="v93-journey-system-js">
+(()=>{
+  const app=document.querySelector('main.app'); if(!app || document.getElementById('v93Command')) return;
+  const hero=app.querySelector('.hero'); if(!hero) return;
+  const panel=document.createElement('section'); panel.id='v93Command'; panel.className='v93-command';
+  panel.innerHTML=`<div class="v93-command-head"><div class="v93-live"><i></i><span id="v93Status">PLAN EN VIVO</span></div><button type="button" id="v93NextBtn">Ver siguiente →</button></div><div class="v93-next"><div class="v93-orb">⌁</div><div><small id="v93Kicker">PRÓXIMA PARADA</small><b id="v93Place">Preparando tu recorrido…</b></div><span id="v93Meta"></span></div><div class="v93-command-foot"><a href="#transit">🚌 CTA y buses</a><a href="https://www.transitchicago.com/bus-tracker/" target="_blank" rel="noopener">Bus Tracker ↗</a><a href="https://www.transitchicago.com/alerts/" target="_blank" rel="noopener">Alertas CTA ↗</a><a href="https://www.google.com/maps" target="_blank" rel="noopener">Abrir Maps ↗</a></div>`;
+  hero.insertAdjacentElement('afterend',panel);
+  const getStops=()=>[...app.querySelectorAll('.stop')];
+  function refresh(){
+    const stops=getStops(), done=stops.filter(s=>s.querySelector('input[type=checkbox]')?.checked);
+    const next=stops.find(s=>!s.querySelector('input[type=checkbox]')?.checked);
+    const status=document.getElementById('v93Status'),place=document.getElementById('v93Place'),meta=document.getElementById('v93Meta'),kick=document.getElementById('v93Kicker');
+    if(next){const day=next.closest('.day')?.querySelector('.dayhead h2')?.textContent?.match(/Día\s+\d+/i)?.[0]||'ITINERARIO';place.textContent=next.querySelector('.place')?.textContent?.trim()||'Siguiente actividad';meta.textContent=`${day} · ${next.querySelector('.time')?.textContent?.trim()||'Sin hora'}`;kick.textContent='PRÓXIMA PARADA';status.textContent=`${done.length} DE ${stops.length} COMPLETADAS`;}
+    else {place.textContent='¡Itinerario completo!';meta.innerHTML='<span class="v93-done">TODO HECHO</span>';kick.textContent='MISIÓN CUMPLIDA';status.textContent='VIAJE COMPLETADO';}
+  }
+  document.getElementById('v93NextBtn').addEventListener('click',()=>{const next=getStops().find(s=>!s.querySelector('input[type=checkbox]')?.checked);if(next){next.scrollIntoView({behavior:'smooth',block:'center'});next.classList.add('flash');setTimeout(()=>next.classList.remove('flash'),1300)}});
+  document.addEventListener('change',e=>{if(e.target.matches('.checkbtn input')) refresh()},true); refresh();
+  if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+})();
+</script>
+
+
+<style id="atlas-v106-clean-css">
+/* =========================================================
+   CHICAGO ATLAS v106 — CLEAN WINTER
+   Built directly from v92. One UI layer only.
+   ========================================================= */
+:root{
+  --v106-pine:#355b50;
+  --v106-pine-dark:#203f37;
+  --v106-pine-soft:#edf4f0;
+  --v106-wine:#7b4654;
+  --v106-wine-soft:#f4eaed;
+  --v106-gold:#b89a63;
+  --v106-cream:#f7f1e8;
+  --v106-paper:#fffdf9;
+  --v106-ink:#293432;
+  --v106-muted:#7c7671;
+  --v106-line:#ddd4ca;
+}
+
+/* original app is the data source, not the visible interface */
+body.v106-body{background:#e9e4dc!important}
+body.v106-body .app{display:none!important}
+body.v106-body .topbtn,
+body.v106-body .toast{display:none!important}
+
+/* ---------------- main shell ---------------- */
+.v106{
+  min-height:100vh;
+  padding:18px;
+  background:
+    radial-gradient(760px 390px at 100% -5%,rgba(123,70,84,.06),transparent 70%),
+    radial-gradient(700px 380px at -5% 12%,rgba(53,91,80,.09),transparent 70%),
+    linear-gradient(180deg,#efeae4 0%,#e7e1d9 100%);
+}
+.v106-shell{
+  max-width:1240px;margin:auto;background:var(--v106-paper);
+  border:1px solid #cec5bb;box-shadow:0 24px 70px rgba(45,39,33,.13);
+  overflow:hidden;
+}
+.v106-mast{
+  padding:24px 28px 20px;
+  background:linear-gradient(120deg,#fffefa,#f2eee7);
+  border-bottom:1px solid var(--v106-line);
+  position:relative;
+}
+.v106-brand{
+  font-size:8px;letter-spacing:.19em;text-transform:uppercase;font-weight:900;color:var(--v106-pine)
+}
+.v106-title{
+  margin:7px 0 5px;font:800 clamp(38px,5vw,63px)/.9 "Fraunces",serif;color:#2b3834;
+}
+.v106-sub{font-size:10px;line-height:1.5;color:#77716d;max-width:720px}
+.v106-mast:after{
+  content:"✦  ✦  ✦";
+  position:absolute;right:24px;top:18px;color:#c0a46d;font-size:8px;letter-spacing:.16em;opacity:.65
+}
+
+/* day navigation */
+.v106-dayrail{
+  display:flex;overflow:auto;background:#334a43;scrollbar-width:none
+}
+.v106-dayrail::-webkit-scrollbar{display:none}
+.v106-day{
+  flex:1 0 150px;min-width:150px;padding:13px 15px;
+  border:0;border-right:1px solid rgba(255,255,255,.08);
+  background:transparent;color:#cad7d2;text-align:left;cursor:pointer;position:relative;
+}
+.v106-day small{display:block;font-size:6px;letter-spacing:.12em;text-transform:uppercase;opacity:.67;font-weight:900}
+.v106-day strong{display:block;margin-top:4px;font-size:11px;color:#f2f6f3}
+.v106-day span{display:block;margin-top:3px;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.68}
+.v106-day.active{background:#466057}
+.v106-day.active:after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:3px;background:#c5a76c}
+
+/* nav: no blue dock */
+.v106-nav{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 16px;border-bottom:1px solid var(--v106-line);background:#fffdfa;
+  position:sticky;top:0;z-index:30;
+}
+.v106-modes{
+  display:flex;gap:4px;padding:4px;background:#eee8e0;border-radius:10px
+}
+.v106-modes button{
+  border:0;background:transparent;color:#77716d;padding:8px 11px;border-radius:7px;
+  font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;cursor:pointer
+}
+.v106-modes button.active{background:#fffdfa;color:var(--v106-pine-dark);box-shadow:0 2px 8px rgba(40,53,48,.07)}
+.v106-mini{
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end
+}
+.v106-mini span{
+  padding:5px 7px;border:1px solid #ddd5cb;border-radius:999px;
+  color:#7d7670;background:#fffdf9;font-size:6px;font-weight:900;text-transform:uppercase
+}
+
+/* page header */
+.v106-page{padding:21px 22px 0}
+.v106-head{
+  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;
+  border-bottom:1px solid var(--v106-line);padding-bottom:16px
+}
+.v106-kicker{font-size:6.5px;letter-spacing:.15em;text-transform:uppercase;color:#668377;font-weight:900}
+.v106-h1{margin:5px 0 5px;font:800 clamp(29px,4vw,48px)/.98 "Fraunces",serif;color:#2c3935}
+.v106-desc{max-width:760px;font-size:9px;line-height:1.5;color:#7b7470}
+.v106-stats{display:flex;gap:8px}
+.v106-stat{padding-left:9px;border-left:2px solid #d4c8bc;min-width:62px}
+.v106-stat b{display:block;font:800 18px "Fraunces",serif;color:var(--v106-pine-dark)}
+.v106-stat span{display:block;margin-top:2px;font-size:6px;text-transform:uppercase;letter-spacing:.08em;color:#8a837e;font-weight:900}
+
+/* journey */
+.v106-view{margin-top:17px}
+.v106-journey-grid{
+  display:grid;grid-template-columns:1fr 285px;gap:19px
+}
+.v106-route{
+  position:relative;padding:2px 0 26px 55px
+}
+.v106-route:before{
+  content:"";position:absolute;left:21px;top:12px;bottom:14px;width:1px;
+  background:linear-gradient(180deg,#d9d0c6,#b9c9c2 50%,#d9d0c6)
+}
+.v106-stop{
+  position:relative;display:grid;grid-template-columns:96px 1fr;gap:13px;margin-bottom:9px
+}
+.v106-stop-pin{
+  position:absolute;left:-43px;top:14px;width:18px;height:18px;border-radius:50%;
+  border:4px solid #fffdf9;background:#6c4854;box-shadow:0 0 0 1px #c9beb3;z-index:2
+}
+.v106-stop.free .v106-stop-pin{background:#497567}
+.v106-stop.paid .v106-stop-pin{background:#b99c66}
+.v106-time{text-align:right;padding-top:9px;font:800 12px/1 "Fraunces",serif;color:#746e69}
+.v106-stop-main{border-top:1px solid #e1dad2;padding:9px 0 11px}
+.v106-place{font-size:14px;font-weight:900;color:#30403b}
+.v106-stop-desc{margin-top:3px;font-size:8px;line-height:1.45;color:#7a7470}
+.v106-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.v106-tag{padding:4px 6px;border-radius:999px;background:#f1ede7;border:1px solid #ddd5cc;color:#746d68;font-size:6px;font-weight:900}
+.v106-tag.free{background:#edf4f0;border-color:#cce0d7;color:#3d6b5c}
+.v106-tag.paid{background:#f8f1df;border-color:#e4d4b0;color:#876c35}
+.v106-address{margin-top:6px;font-size:7px;color:#89817c}
+.v106-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.v106-actions a,.v106-actions button{
+  border:1px solid #d7d0c8;background:#fffdf9;color:#46645b;border-radius:8px;
+  padding:6px 8px;text-decoration:none;font-size:6.5px;font-weight:900;cursor:pointer
+}
+.v106-actions .primary{background:#eef4f0;border-color:#c8dbd3;color:#355e51}
+
+/* right side */
+.v106-side{align-self:start}
+.v106-panel{
+  border:1px solid #d9d0c6;background:#fffefa;padding:14px
+}
+.v106-panel + .v106-panel{margin-top:9px}
+.v106-eyeline{
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8c817a;font-weight:900
+}
+.v106-panel h3{
+  margin:4px 0 5px;font:800 19px/1 "Fraunces",serif;color:#34433e
+}
+.v106-panel .note{font-size:7.4px;line-height:1.45;color:#7b7470}
+
+/* one and only route list */
+.v106-transfer-title{
+  margin-top:11px;padding-top:9px;border-top:1px solid #ded6ce;
+  font-size:6px;letter-spacing:.11em;text-transform:uppercase;color:#817771;font-weight:900
+}
+.v106-transfer{
+  margin-top:7px;padding:9px 10px;border:1px solid #d8d0c7;border-left:3px solid #527969;
+  border-radius:10px;background:linear-gradient(135deg,#fffefa,#f6f1ea);cursor:pointer
+}
+.v106-transfer:hover{background:#fbf8f3;box-shadow:0 6px 16px rgba(45,60,54,.06)}
+.v106-transfer-top{display:flex;justify-content:space-between;gap:7px;align-items:center}
+.v106-transfer-top span{font-size:5.7px;letter-spacing:.1em;text-transform:uppercase;color:#71867d;font-weight:900}
+.v106-transfer-top b{font-size:6px;color:#476b5d}
+.v106-transfer-name{margin-top:4px;font-size:8.4px;color:#374842;font-weight:900}
+.v106-transfer-route{margin-top:3px;font-size:6.7px;line-height:1.4;color:#7c7470}
+
+/* food */
+.v106-food{display:none;margin-top:17px}
+.v106-food.active{display:block}
+.v106-section-title{font:800 28px/1 "Fraunces",serif;color:#2e3d38}
+.v106-section-sub{margin-top:4px;font-size:8px;line-height:1.45;color:#7d7671}
+.v106-food-origin{
+  margin:12px 0;padding:10px;border:1px solid #d9d0c6;border-radius:12px;background:#f6f2eb;
+  display:flex;justify-content:space-between;gap:10px;align-items:center
+}
+.v106-food-origin strong{display:block;font-size:7px;color:#53645e}
+.v106-food-origin span{display:block;margin-top:2px;font-size:6px;color:#8a827d}
+.v106-origin-btns{display:flex;gap:5px}
+.v106-origin-btns button{
+  border:1px solid #cfdad4;background:#fffdfa;color:#61746c;border-radius:8px;padding:6px 7px;font-size:6.5px;font-weight:900
+}
+.v106-origin-btns button.active{background:#e9f1ed;color:#3c6659;border-color:#bdd3c9}
+.v106-food-category{
+  border:1px solid #d9d0c6;background:#fffefa;margin-bottom:8px
+}
+.v106-food-category summary{list-style:none;cursor:pointer;padding:10px;font-size:8px;font-weight:900;color:#455851}
+.v106-food-category summary::-webkit-details-marker{display:none}
+.v106-food-category summary:after{content:"＋";float:right;color:#899089}
+.v106-food-category[open] summary:after{content:"−"}
+.v106-food-count{margin-left:5px;font-size:6px;color:#927a42}
+.v106-food-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:0 8px 8px}
+.v106-food-card{border:1px solid #e1dad2;background:#fff;padding:9px;border-radius:9px}
+.v106-food-card b{font-size:8.5px;color:#455751}
+.v106-food-meta{margin-top:3px;font-size:6.8px;line-height:1.4;color:#7e7670}
+.v106-food-price{display:inline-block;margin-top:5px;padding:3px 6px;border-radius:999px;background:#f8f0df;color:#876c35;font-size:6px;font-weight:900}
+.v106-food-route{
+  margin-top:6px;padding:6px;border-radius:8px;background:#edf4f0;color:#3c6659;font-size:6.3px;font-weight:900
+}
+
+/* transit overview */
+.v106-transit{display:none;margin-top:17px}
+.v106-transit.active{display:block}
+.v106-transit-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+.v106-transit-card{
+  border:1px solid #d5cec5;background:#fffefa;padding:13px;position:relative
+}
+.v106-transit-card:before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#52786a
+}
+.v106-transit-num{font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8b8079;font-weight:900}
+.v106-transit-card h4{margin:4px 0;font:800 18px/1.05 "Fraunces",serif;color:#384942}
+.v106-transit-card p{margin:0;font-size:7px;line-height:1.45;color:#7c7470}
+.v106-transit-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.v106-transit-actions button{
+  flex:1 1 135px;min-height:33px;border:1px solid #cedbd5;background:#fffdfa;color:#49685e;
+  border-radius:8px;font-size:6.5px;font-weight:900;cursor:pointer
+}
+.v106-transit-actions .main{background:#eaf2ed;border-color:#c5d9cf;color:#355f52}
+
+/* ---------------- cleaned bus modal ---------------- */
+.v106-modal .route-box{
+  width:min(720px,100%)!important;max-height:min(91vh,850px)!important;
+  padding:0!important;background:#fffdf9!important;border:1px solid #d2c8be!important;
+  border-radius:24px!important;box-shadow:0 30px 100px rgba(31,39,35,.25)!important
+}
+.v106-modal .route-kicker{padding:18px 52px 0 19px!important;color:#698277!important;letter-spacing:.13em!important;font-size:6.5px!important}
+.v106-modal .route-box h3{margin:6px 0 0!important;padding:0 19px!important;font:800 22px/1.05 "Fraunces",serif!important;color:#2d3935!important}
+.v106-modal .route-sub{margin:6px 0 0!important;padding:0 19px!important;color:#7b7470!important;font-size:8.5px!important;line-height:1.45!important}
+
+/* hero journey header */
+.v106-modal-hero{
+  margin:13px 19px 10px;padding:11px 12px;border:1px solid #d8d0c7;border-radius:14px;
+  background:linear-gradient(135deg,#f4f1eb,#eef3ef)
+}
+.v106-modal-hero-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.v106-modal-hero-label{font-size:5.8px;letter-spacing:.13em;text-transform:uppercase;color:#8b817b;font-weight:900}
+.v106-modal-hero-badge{padding:4px 6px;border-radius:999px;background:#e4eee9;color:#476b5d;font-size:5.8px;font-weight:900}
+.v106-modal-hero-title{margin-top:4px;font-size:9.5px;font-weight:900;color:#394a44}
+.v106-modal-path{
+  margin-top:8px;display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:5px
+}
+.v106-node{
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e1ece7;color:#42685b;font-size:7px;font-weight:900;border:1px solid #c6d9cf
+}
+.v106-node.bus{background:#edf2ee}
+.v106-node.end{background:#f3eceb;color:#775362;border-color:#decbd0}
+.v106-line{height:1px;background:#d3cec8}
+.v106-modal-metrics{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px
+}
+.v106-modal-metric{
+  background:#fffdfa;border:1px solid #e2dad2;border-radius:8px;padding:6px
+}
+.v106-modal-metric small{display:block;font-size:5.4px;text-transform:uppercase;letter-spacing:.08em;color:#918880;font-weight:900}
+.v106-modal-metric b{display:block;margin-top:2px;font-size:7px;color:#4a5b55}
+.v106-modal-section-label{
+  margin:12px 19px 6px;font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8a7f79;font-weight:900
+}
+
+/* primary route schedule */
+.v106-primary-route{
+  margin:0 19px;border:1px solid #c9dcd2;border-radius:15px;background:#f5f8f5;overflow:hidden
+}
+.v106-primary-head{padding:10px 11px;border-bottom:1px solid #d8e2dc}
+.v106-primary-tag{
+  display:inline-block;padding:4px 6px;border-radius:999px;background:#e2eee8;color:#41695b;font-size:5.7px;font-weight:900;letter-spacing:.08em
+}
+.v106-primary-title{margin-top:4px;font-size:9px;color:#385148;font-weight:900}
+.v106-walk{
+  margin:8px 10px;padding:8px;border-radius:9px;background:#fffdfa;border:1px solid #e2dbd3;
+  color:#6f6964;font-size:7px;line-height:1.45
+}
+.v106-schedule{
+  margin:8px 10px 10px;display:grid;gap:5px
+}
+.v106-time-option{
+  display:grid;grid-template-columns:66px 1fr;gap:7px;align-items:center;
+  padding:8px;border-radius:9px;background:#fffdfa;border:1px solid #e4ddd5
+}
+.v106-time-option b{font-size:8px;color:#456a5d}
+.v106-time-option span{font-size:6.8px;line-height:1.35;color:#726b67}
+.v106-mapbar{
+  display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px
+}
+.v106-mapbar button{
+  flex:1 1 150px;min-height:34px;border:1px solid #cbdad4;background:#fffdfa;color:#43685d;
+  border-radius:9px;font-size:6.6px;font-weight:900;cursor:pointer
+}
+.v106-mapbar button:last-child{background:#e8f1ec;border-color:#c0d5ca;color:#315d50}
+
+/* alternative routes are collapsed, not repeated */
+.v106-alt{
+  margin:8px 19px 12px;border:1px solid #ded6ce;border-radius:13px;background:#fffefa
+}
+.v106-alt summary{list-style:none;cursor:pointer;padding:10px;font-size:7px;font-weight:900;color:#5f6c67}
+.v106-alt summary::-webkit-details-marker{display:none}
+.v106-alt summary:after{content:"＋";float:right;color:#89938e}
+.v106-alt[open] summary:after{content:"−"}
+.v106-alt-item{margin:0 9px 9px;border:1px solid #e2dad2;border-radius:10px;background:#fbf8f3;overflow:hidden}
+.v106-alt-head{padding:8px 9px;border-bottom:1px solid #e5ded7}
+.v106-alt-head b{font-size:7px;color:#52625d}
+.v106-alt-times{padding:7px 8px;display:grid;gap:4px}
+.v106-alt-time{display:grid;grid-template-columns:60px 1fr;gap:7px;padding:6px 7px;border-radius:8px;background:#fffdfa}
+.v106-alt-time b{font-size:7px;color:#537165}
+.v106-alt-time span{font-size:6.3px;color:#756e69;line-height:1.35}
+.v106-alt-maps{display:flex;gap:5px;padding:0 8px 8px}
+.v106-alt-maps button{
+  flex:1;border:1px solid #d1ddd7;background:#fff;color:#4b6d61;border-radius:7px;padding:6px;font-size:6px;font-weight:900
+}
+.v106-modal-note{
+  margin:10px 19px 17px;padding:9px 10px;border:1px solid #ddd5cc;border-radius:10px;
+  background:#f2eee8;color:#7b746f;font-size:6.8px;line-height:1.45
+}
+
+@media(max-width:900px){
+  .v106-journey-grid{grid-template-columns:1fr}
+  .v106-food-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .v106{padding:0}
+  .v106-shell{border:0;min-height:100vh}
+  .v106-mast{padding:20px 17px 17px}
+  .v106-page{padding:17px 14px 0}
+  .v106-head{grid-template-columns:1fr}
+  .v106-stats{width:100%}
+  .v106-stat{flex:1}
+  .v106-nav{padding:9px 11px}
+  .v106-mini{display:none}
+  .v106-day{min-width:122px}
+  .v106-route{padding-left:43px}
+  .v106-route:before{left:17px}
+  .v106-stop{grid-template-columns:1fr;gap:2px}
+  .v106-time{text-align:left;padding-top:6px}
+  .v106-stop-pin{left:-35px}
+  .v106-food-grid{grid-template-columns:1fr}
+  .v106-food-origin{align-items:flex-start;flex-direction:column}
+  .v106-transit-grid{grid-template-columns:1fr}
+  .v106-modal-metrics{grid-template-columns:1fr 1fr 1fr}
+  .v106-time-option{grid-template-columns:1fr;gap:2px}
+}
+</style>
+
+<script id="atlas-v106-clean-js">
+(function(){
+  if(window.__atlasV106)return;
+  window.__atlasV106=true;
+  document.body.classList.add('v106-body');
+
+  const sourceDays=[...document.querySelectorAll('.app .day')];
+  const foodPanels=[...document.querySelectorAll('.food-panel[data-food-panel]')];
+
+  const clean=s=>(s||'').replace(/\s+/g,' ').trim();
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+  const days=sourceDays.map((d,i)=>{
+    const num=(d.id.match(/(\d+)$/)||[])[1]||String(i+1);
+    const stops=[...d.querySelectorAll(':scope .timeline > .stop')].map((s,j)=>({
+      place:clean(s.querySelector('.place')?.textContent),
+      time:clean(s.querySelector('.time')?.textContent),
+      desc:clean(s.querySelector('.desc')?.textContent),
+      addr:clean(s.querySelector('.address .value')?.textContent),
+      free:s.classList.contains('free'),
+      paid:s.classList.contains('paid'),
+      route:s.querySelector('.route-btn'),
+      photo:s.querySelector('.actions a')
+    }));
+    const transfers=[...d.querySelectorAll(':scope .transit-important')].map((x,j)=>({
+      cls:[...x.classList].find(c=>c.startsWith('transit-')&&c!=='transit-important')||'',
+      title:clean(x.querySelector('span')?.textContent||'Traslado importante'),
+      detail:clean(x.querySelector('small')?.textContent||'')
+    }));
+    const head=clean(d.querySelector('.dayhead h2')?.textContent);
+    const small=clean(d.querySelector('.dayhead small')?.textContent);
+    const start=clean(d.querySelector('.start')?.textContent);
+    return {num,id:d.id,head,small,start,stops,transfers};
+  });
+
+  /* -------- food source: keep every option -------- */
+  const food={};
+  foodPanels.forEach(p=>{
+    const day=String(p.dataset.foodPanel);
+    food[day]=[];
+    p.querySelectorAll('.category-title').forEach(title=>{
+      let node=title.nextElementSibling,items=[];
+      while(node&&!node.classList.contains('category-title')){
+        node.querySelectorAll?.('.option-card')?.forEach(c=>{
+          const name=clean(c.querySelector('b')?.textContent);
+          if(!name)return;
+          const route=c.querySelector('.route-btn');
+          items.push({
+            name,
+            meta:clean(c.querySelector('.meta')?.textContent),
+            price:clean(c.querySelector('.price')?.textContent),
+            dest:route?.dataset.destination||'',
+            label:route?.dataset.destinationLabel||name,
+            links:[...c.querySelectorAll('a')].map(a=>({text:clean(a.textContent),href:a.href}))
+          });
+        });
+        node=node.nextElementSibling;
+      }
+      if(items.length)food[day].push({name:clean(title.textContent),items});
+    });
+  });
+
+  const atlas=document.createElement('div');
+  atlas.className='v106';
+  atlas.innerHTML=`
+    <div class="v106-shell">
+      <header class="v106-mast">
+        <div class="v106-brand">Chicago · Personal Fieldbook</div>
+        <div class="v106-title">The Chicago Atlas</div>
+        <div class="v106-sub">Tu itinerario completo reorganizado como una experiencia de viaje: recorrido, comida y transporte en un solo sistema, sin eliminar la información original.</div>
+      </header>
+      <nav class="v106-dayrail" id="v106DayRail"></nav>
+      <div class="v106-nav">
+        <div class="v106-modes">
+          <button class="active" data-mode="route">Ruta</button>
+          <button data-mode="food">Comida</button>
+          <button data-mode="transit">Transporte</button>
+        </div>
+        <div class="v106-mini"><span id="v106StopsMini"></span><span id="v106FoodMini"></span></div>
+      </div>
+      <main class="v106-page">
+        <header class="v106-head">
+          <div>
+            <div class="v106-kicker" id="v106Kicker"></div>
+            <h1 class="v106-h1" id="v106Title"></h1>
+            <div class="v106-desc" id="v106Desc"></div>
+          </div>
+          <div class="v106-stats" id="v106Stats"></div>
+        </header>
+
+        <section class="v106-view" id="v106RouteView">
+          <div class="v106-journey-grid">
+            <div class="v106-route" id="v106Route"></div>
+            <aside class="v106-side">
+              <div class="v106-panel" id="v106StartPanel"></div>
+              <div class="v106-panel" id="v106BriefPanel"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="v106-food" id="v106FoodView">
+          <div class="v106-section-title">Food map</div>
+          <div class="v106-section-sub">Todas las opciones originales de comida del día, agrupadas por categoría. Nada se descarta.</div>
+          <div id="v106FoodContent"></div>
+        </section>
+
+        <section class="v106-transit" id="v106TransitView">
+          <div class="v106-section-title">Transport map</div>
+          <div class="v106-section-sub">Cada traslado importante del día, con acceso al plan completo y al mapa.</div>
+          <div class="v106-transit-grid" id="v106TransitContent"></div>
+        </section>
+      </main>
+    </div>`;
+  document.body.insertBefore(atlas,document.body.firstChild);
+
+  const rail=atlas.querySelector('#v106DayRail');
+  days.forEach((d,i)=>{
+    const b=document.createElement('button');
+    b.className='v106-day';b.dataset.day=i;
+    b.innerHTML=`<small>Día ${esc(d.num)}</small><strong>${esc(d.head.replace(/^Día\s*\d+\s*[—-]\s*/,'').split('|')[0])}</strong><span>${esc(d.head.split('|').slice(1).join('|').trim())}</span>`;
+    rail.appendChild(b);
+  });
+
+  function activateOriginalTransfer(cls){
+    const source=document.querySelector('.app .'+cls);
+    if(source){source.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));return}
+  }
+
+  function openOriginalMapFromModal(modal, selector){
+    const b=modal?.querySelector(selector);
+    if(b)b.click();
+  }
+
+  function renderRoute(d){
+    atlas.querySelector('#v106Route').innerHTML=d.stops.map((s,i)=>`
+      <article class="v106-stop ${s.free?'free':s.paid?'paid':''}">
+        <span class="v106-stop-pin"></span>
+        <div class="v106-time">${esc(s.time)}</div>
+        <div class="v106-stop-main">
+          <div class="v106-place">${esc(s.place)}</div>
+          <div class="v106-stop-desc">${esc(s.desc)}</div>
+          <div class="v106-tags">
+            <span class="v106-tag ${s.free?'free':s.paid?'paid':''}">${s.free?'GRATIS':s.paid?'PAGADO':'PLAN'}</span>
+            <span class="v106-tag">${String(i+1).padStart(2,'0')}</span>
+          </div>
+          ${s.addr?`<div class="v106-address">${esc(s.addr)}</div>`:''}
+          <div class="v106-actions">
+            ${s.route?`<button class="primary v106-route-btn" data-key="${esc(s.route.dataset.destinationLabel||'')}">↗ Ver trayecto</button>`:''}
+            ${s.photo?`<a href="${esc(s.photo.href)}" target="_blank" rel="noopener">◌ Fotos</a>`:''}
+          </div>
+        </div>
+      </article>`).join('');
+
+    atlas.querySelectorAll('.v106-route-btn').forEach((b,idx)=>{
+      const source=d.stops[idx]?.route;
+      if(source)b.addEventListener('click',()=>source.click());
+    });
+
+    atlas.querySelector('#v106StartPanel').innerHTML=`
+      <div class="v106-eyeline">Punto de salida</div>
+      <h3>Antes de arrancar</h3>
+      <div class="note">${esc(d.start||'No hay una nota específica de salida para este día.')}</div>`;
+
+    atlas.querySelector('#v106BriefPanel').innerHTML=`
+      <div class="v106-eyeline">Lectura del día</div>
+      <h3>${d.stops.length} paradas</h3>
+      <div class="note">${d.stops.filter(x=>x.free).length} experiencias gratuitas · ${d.stops.filter(x=>x.paid).length} pagadas/entradas · ${d.transfers.length} ${d.transfers.length===1?'traslado':'traslados'} clave.</div>
+      ${d.transfers.length?'<div class="v106-transfer-title">Rutas importantes · toca una para abrir</div>':''}
+      ${d.transfers.map((t,i)=>`
+        <div class="v106-transfer" data-transfer-class="${esc(t.cls)}" role="button" tabindex="0">
+          <div class="v106-transfer-top"><span>🚌 Transporte ${String(i+1).padStart(2,'0')}</span><b>Ver cómo tomarla →</b></div>
+          <div class="v106-transfer-name">${esc(t.title)}</div>
+          <div class="v106-transfer-route">${esc(t.detail)}</div>
+        </div>`).join('')}`;
+
+    atlas.querySelectorAll('.v106-transfer[data-transfer-class]').forEach(el=>{
+      const open=()=>{
+        const source=document.querySelector('.app .'+el.dataset.transferClass);
+        if(source)source.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
+      };
+      el.addEventListener('click',open);
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+    });
+  }
+
+  function renderFood(d){
+    const groups=food[d.num]||[];
+    const content=atlas.querySelector('#v106FoodContent');
+    content.innerHTML=`
+      <div class="v106-food-origin">
+        <div><strong>📍 Distancias de comida</strong><span>Usa el sistema de rutas original para “Cómo llegar”.</span></div>
+        <div class="v106-origin-btns"><button class="active">🏨 Hospedaje</button><button>📍 Mi ubicación</button></div>
+      </div>
+      ${groups.map((g,i)=>`
+        <details class="v106-food-category" ${i<3?'open':''}>
+          <summary>${esc(g.name)} <span class="v106-food-count">${g.items.length} opciones</span></summary>
+          <div class="v106-food-grid">
+            ${g.items.map((x,j)=>`
+              <article class="v106-food-card">
+                <b>${esc(x.name)}</b>
+                <div class="v106-food-meta">${esc(x.meta)}</div>
+                ${x.price?`<span class="v106-food-price">${esc(x.price)}</span>`:''}
+                <div class="v106-food-route" data-food-index="${i}-${j}">🗺️ Cómo llegar</div>
+              </article>`).join('')}
+          </div>
+        </details>`).join('')}`;
+
+    groups.forEach((g,gi)=>g.items.forEach((x,ji)=>{
+      const el=content.querySelector(`[data-food-index="${gi}-${ji}"]`);
+      el?.addEventListener('click',()=>{
+        const src=[...document.querySelectorAll('.app .route-btn')].find(b=>b.dataset.destinationLabel===x.label||b.dataset.destination===x.dest);
+        if(src)src.click();
+      });
+    }));
+  }
+
+  function renderTransit(d){
+    const grid=atlas.querySelector('#v106TransitContent');
+    grid.innerHTML=d.transfers.length?d.transfers.map((t,i)=>`
+      <article class="v106-transit-card">
+        <div class="v106-transit-num">Traslado ${String(i+1).padStart(2,'0')}</div>
+        <h4>${esc(t.title)}</h4>
+        <p>${esc(t.detail)}</p>
+        <div class="v106-transit-actions">
+          <button class="main v106-open-transfer" data-cls="${esc(t.cls)}">Ver plan de viaje</button>
+          <button class="v106-open-map" data-cls="${esc(t.cls)}">Abrir mapa</button>
+        </div>
+      </article>`).join('')
+    :'<article class="v106-transit-card"><div class="v106-transit-num">Transport</div><h4>Sin traslados destacados</h4><p>Este día no tiene bloques de transporte importantes.</p></article>';
+
+    grid.querySelectorAll('.v106-open-transfer').forEach(b=>{
+      b.addEventListener('click',()=>activateOriginalTransfer(b.dataset.cls));
+    });
+    grid.querySelectorAll('.v106-open-map').forEach(b=>{
+      b.addEventListener('click',()=>{
+        const src=document.querySelector('.app .'+b.dataset.cls);
+        const mapButton=src?.querySelector('button[class*="map"]')||src?.querySelector('button[data-');
+        if(mapButton)mapButton.click();
+        else activateOriginalTransfer(b.dataset.cls);
+      });
+    });
+  }
+
+  function render(i){
+    const d=days[i];
+    rail.querySelectorAll('.v106-day').forEach((b,n)=>b.classList.toggle('active',n===i));
+    const cleanHead=d.head.replace(/^Día\s*\d+\s*[—-]\s*/,'');
+    const parts=cleanHead.split('|');
+    atlas.querySelector('#v106Kicker').textContent=`${d.small||'Chicago'} · Día ${d.num}`;
+    atlas.querySelector('#v106Title').textContent=parts[0]?.trim()||cleanHead;
+    atlas.querySelector('#v106Desc').textContent=parts.slice(1).join(' · ').trim()||'Ruta del día basada en tu itinerario original.';
+    atlas.querySelector('#v106Stats').innerHTML=`
+      <div class="v106-stat"><b>${d.stops.length}</b><span>paradas</span></div>
+      <div class="v106-stat"><b>${d.transfers.length}</b><span>traslados</span></div>
+      <div class="v106-stat"><b>${(food[d.num]||[]).reduce((n,g)=>n+g.items.length,0)}</b><span>opciones comida</span></div>`;
+    atlas.querySelector('#v106StopsMini').textContent=`${d.stops.length} paradas`;
+    atlas.querySelector('#v106FoodMini').textContent=`${(food[d.num]||[]).reduce((n,g)=>n+g.items.length,0)} comidas`;
+    renderRoute(d);renderFood(d);renderTransit(d);
+  }
+
+  function mode(which){
+    atlas.querySelectorAll('.v106-modes button').forEach(b=>b.classList.toggle('active',b.dataset.mode===which));
+    atlas.querySelector('#v106RouteView').style.display=which==='route'?'block':'none';
+    atlas.querySelector('#v106FoodView').classList.toggle('active',which==='food');
+    atlas.querySelector('#v106TransitView').classList.toggle('active',which==='transit');
+  }
+
+  rail.querySelectorAll('.v106-day').forEach(b=>b.addEventListener('click',()=>render(Number(b.dataset.day))));
+  atlas.querySelectorAll('.v106-modes button').forEach(b=>b.addEventListener('click',()=>mode(b.dataset.mode)));
+
+
+  /* =========================================================
+     v126 · TRANSPORT LOGIC FIX
+     Built only from the original .zs-route semantic blocks.
+     ========================================================= */
+  function buildModal(modal){
+    if(!modal || modal.dataset.v126Built) return;
+    const box=modal.querySelector('.route-box');
+    if(!box) return;
+
+    function busSvg(){
+      return `<svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="4.5" width="16" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M7 16.5v3M17 16.5v3M5 9.5h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="8" cy="14" r="1.2" fill="currentColor"/><circle cx="16" cy="14" r="1.2" fill="currentColor"/>
+      </svg>`;
+    }
+    function trainSvg(){
+      return `<svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="6" y="4" width="12" height="15" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M8 8h8M9 12h6M8 19l-2 2M16 19l2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    const title=clean(box.querySelector('h3')?.textContent||'Traslado');
+    const transitRoutes=[...box.querySelectorAll('.zs-route')].filter(r=>{
+      const h=clean(r.querySelector('.zs-route-head b')?.textContent||'');
+      return /^(🚌|🚇)/.test(h);
+    });
+    if(!transitRoutes.length) return;
+
+    modal.dataset.v126Built='1';
+    modal.classList.add('v126-modal');
+
+    const titleParts=title.split('→').map(clean).filter(Boolean);
+    const origin=titleParts[0]||'Origen';
+    const destination=titleParts[titleParts.length-1]||'Destino';
+
+    const lineFromHead = route => clean(route.querySelector('.zs-route-head b')?.textContent||'')
+      .replace(/^[🚌🚇]\s*/,'')
+      .replace(/\s*·\s*(primera opción|backup|respaldo|conexión|siguiente respaldo|ruta principal|salida.*)$/i,'')
+      .trim();
+
+    const headText = route => clean(route.querySelector('.zs-route-head b')?.textContent||'');
+
+    const strongsForLabel = (route, labelRegex) => {
+      const values=[];
+      route.querySelectorAll('.zs-walk').forEach(w=>{
+        const b=w.querySelector('b');
+        if(!b || !labelRegex.test(clean(b.textContent))) return;
+        w.querySelectorAll('strong').forEach(s=>{
+          const value=clean(s.textContent);
+          if(value && !values.includes(value)) values.push(value);
+        });
+      });
+      return values;
+    };
+
+    const allStrongValues = route => {
+      const values=[];
+      route.querySelectorAll('.zs-walk strong').forEach(s=>{
+        const value=clean(s.textContent);
+        if(value && !values.includes(value)) values.push(value);
+      });
+      return values;
+    };
+
+    function boardingFromRoute(route, line){
+      // Explicit labels first.
+      for(const label of [/^Subida/i,/^Salida/i,/^Ruta/i]){
+        const values=strongsForLabel(route,label);
+        if(!values.length) continue;
+
+        if(/^Ruta/i.test(label)){
+          const idx=values.findIndex(v=>v.toLowerCase().includes(line.toLowerCase()));
+          if(idx>0) return values[idx-1];
+          if(values.length>=2) return values[0];
+        }else{
+          // Salida/lúgar de subida: the final strong is normally the stop.
+          return /^Salida/i.test(label) ? values[values.length-1] : values[0];
+        }
+      }
+
+      // Plain-text cases such as O'Hare / Blue Line.
+      const walks=[...route.querySelectorAll('.zs-walk')].map(x=>clean(x.textContent));
+      for(const text of walks){
+        let m=text.match(/(?:desde|de)\s+([^·]+?)(?:\s+sigue|\s+camina|\s+para|\.|$)/i);
+        if(m && /Salida/i.test(text)) return clean(m[1]);
+
+        m=text.match(/(?:hasta|a)\s+([^·]+?)(?:\s+para tomar|\.|$)/i);
+        if(m && /Salida|Subida/i.test(text)) return clean(m[1]);
+      }
+
+      return '';
+    }
+
+    function alightingFromRoute(route, line){
+      // Explicit "Bajada" or "Final" is authoritative.
+      for(const label of [/^Bajada/i,/^Final/i]){
+        const values=strongsForLabel(route,label);
+        if(values.length) return values[0];
+      }
+
+      // A "Ruta" sentence uses: boarding → bus → alighting.
+      const values=strongsForLabel(route,/^Ruta/i);
+      if(values.length){
+        const idx=values.findIndex(v=>v.toLowerCase().includes(line.toLowerCase()));
+        if(idx>=0 && values[idx+1]) return values[idx+1];
+        if(values.length>=2) return values[values.length-1];
+      }
+
+      // Plain text / Blue Line.
+      const walks=[...route.querySelectorAll('.zs-walk')].map(x=>clean(x.textContent));
+      for(const text of walks){
+        let m=text.match(/(?:bajas?|bajar|bájate)\s+en\s+([^·.;]+)/i);
+        if(m) return clean(m[1]);
+      }
+      for(const row of route.querySelectorAll('.zs-time em')){
+        const text=clean(row.textContent);
+        let m=text.match(/(?:bajar en|baja en)\s+([^·.;]+)/i);
+        if(m) return clean(m[1]);
+      }
+      return '';
+    }
+
+    function parseTimeMinutes(value){
+      const m=clean(value).match(/(\d{1,2}):(\d{2})\s*(am|pm)/i);
+      if(!m) return null;
+      let h=Number(m[1]), min=Number(m[2]);
+      const ap=m[3].toLowerCase();
+      if(ap==='pm' && h<12) h+=12;
+      if(ap==='am' && h===12) h=0;
+      return h*60+min;
+    }
+
+    function formatTimeMinutes(total){
+      total=((total%1440)+1440)%1440;
+      let h=Math.floor(total/60), min=total%60;
+      const ap=h>=12?'pm':'am';
+      h=h%12||12;
+      return `${h}:${String(min).padStart(2,'0')} ${ap}`;
+    }
+
+    function durationMinutes(route){
+      const head=clean(route.querySelector('.zs-route-head span')?.textContent||'');
+      const candidates=[
+        head,
+        ...[...route.querySelectorAll('.zs-time em')].map(x=>clean(x.textContent))
+      ];
+      for(const text of candidates){
+        const m=text.match(/(?:≈|~)?\s*(\d+)\s*(?:min|mins|minutes)\b/i);
+        if(m) return Number(m[1]);
+      }
+      return null;
+    }
+
+    function arrivalFromDetail(detail){
+      const matches=[...clean(detail).matchAll(/(\d{1,2}:\d{2})\s*(am|pm)/ig)];
+      if(!matches.length) return '';
+      const last=matches[matches.length-1];
+      return `${last[1]} ${last[2].toLowerCase()}`;
+    }
+
+    function parseSchedules(routes){
+      const schedules=[];
+      routes.forEach(route=>{
+        const dur=durationMinutes(route);
+        route.querySelectorAll('.zs-time').forEach(row=>{
+          const rawTime=clean(row.querySelector('strong')?.textContent);
+          const detail=clean(row.querySelector('em')?.textContent);
+
+          /* Some rows are real departures even when the label also contains
+             a stop, e.g. "Armitage · 3:03 pm". */
+          const departureMatch=rawTime.match(/(\d{1,2}:\d{2})\s*(am|pm)/i);
+          if(!departureMatch) return;
+
+          const departure=`${departureMatch[1]} ${departureMatch[2].toLowerCase()}`;
+          let arrival=arrivalFromDetail(detail);
+
+          /* When the source only gives a duration, derive the approximate
+             arrival from the selected departure. */
+          if(!arrival && dur!=null){
+            const mins=parseTimeMinutes(departure);
+            if(mins!=null) arrival=formatTimeMinutes(mins+dur);
+          }
+
+          schedules.push({
+            time:rawTime,
+            detail,
+            arrival
+          });
+        });
+      });
+      return schedules;
+    }
+
+    /* "primera opción/backup/respaldo" = same bus leg.
+       "conexión" = next actual bus leg. */
+    const legs=[];
+    transitRoutes.forEach(route=>{
+      const line=lineFromHead(route);
+      const head=headText(route);
+      const connection=/\bconexi[oó]n\b/i.test(head);
+
+      if(!legs.length || connection){
+        legs.push({line, routes:[route]});
+      }else if(legs[legs.length-1].line===line || /backup|respaldo|primera opción/i.test(head)){
+        legs[legs.length-1].routes.push(route);
+      }else{
+        legs.push({line, routes:[route]});
+      }
+    });
+
+    const data=legs.map((leg,legIndex)=>{
+      const primary=leg.routes.find(r=>/primera opci[oó]n|ruta principal|salida/i.test(headText(r))) || leg.routes[0];
+      const boarding=boardingFromRoute(primary,leg.line);
+      const alighting=alightingFromRoute(primary,leg.line);
+      const schedules=parseSchedules(leg.routes);
+
+      return {
+        line:leg.line,
+        boarding,
+        alighting,
+        schedules,
+        maps:[...leg.routes.flatMap(r=>[...r.querySelectorAll('.zs-maprow button')])]
+      };
+    });
+
+    /* Hide original transport blocks; keep them as source for their working map buttons. */
+    [...box.querySelectorAll('.zs-route,.zs-note')].forEach(x=>x.style.display='none');
+
+    const fullMap=[...box.querySelectorAll('.zs-maprow button')]
+      .find(b=>/ruta completa/i.test(clean(b.textContent)));
+
+    const mount=document.createElement('div');
+    mount.innerHTML=`
+      <div class="v126-content">
+        ${data.some(g=>g.schedules.length)?`
+          <div class="v126-schedule-title">
+            <b>Horarios disponibles</b>
+            <span>seleccioná la salida</span>
+          </div>`:''}
+
+        ${data.map((g,gi)=>g.schedules.length?`
+          <section class="v126-leg" data-leg="${gi}">
+            <div class="v126-leg-head">
+              <div class="v126-leg-name">
+  <span class="v130-vehicle" aria-hidden="true">${/Blue Line/i.test(g.line)?trainSvg():busSvg()}</span>
+  <span>${esc(g.line)}</span>
+</div>
+              <div class="v126-leg-count">${g.schedules.length} ${g.schedules.length===1?'horario':'horarios'}</div>
+            </div>
+            <div class="v126-picker">
+              ${g.schedules.map((s,i)=>`
+                <button class="v126-chip ${i===0?'active':''}" data-time="${i}">
+                  <small>${i===0?'plan':'salida'}</small>
+                  <strong>${esc(s.time)}</strong>
+                  <span>${esc(s.arrival?`→ ${s.arrival}`:s.detail.slice(0,36))}</span>
+                </button>`).join('')}
+            </div>
+          </section>`:'').join('')}
+
+        ${data.some(g=>g.schedules.length)?`
+          <div class="v126-selected">
+            <div><small>Salida seleccionada</small><b data-selected-depart>${esc(data.find(g=>g.schedules.length)?.schedules[0]?.time||'—')}</b></div>
+            <div class="arrow">→</div>
+            <div class="arr"><small>Llegada aproximada</small><b data-selected-arrive>${esc(data.find(g=>g.schedules.length)?.schedules[0]?.arrival||'—')}</b></div>
+          </div>`:''}
+
+        <div class="v126-route-title">Cómo llegar</div>
+        <div class="v126-route">
+
+          <div class="v126-step">
+            <div class="v126-icon start">📍</div>
+            <div class="v126-text">
+              <div class="v126-label">Salir</div>
+              <div class="v126-main">${esc(origin)}</div>
+            </div>
+          </div>
+
+          ${data.map((g,gi)=>`
+            <div class="v126-step walk">
+              <div class="v126-icon">🚶</div>
+              <div class="v126-text">
+                <div class="v126-label">Ir a</div>
+                <div class="v126-main">${esc(g.boarding||origin)}</div>
+              </div>
+            </div>
+
+            <div class="v126-step bus">
+              <div class="v126-icon">${/Blue Line/i.test(g.line)?'🚇':'🚌'}</div>
+              <div class="v126-text">
+                <div class="v126-label">Tomar</div>
+                <div class="v126-main v126-busrow">
+                  <span>${esc(g.line)}</span>
+                  ${g.schedules.length?`<span class="v126-time" data-inline="${gi}">${esc(g.schedules[0].time)}</span>`:''}
+                </div>
+              </div>
+            </div>
+
+            <div class="v126-step stop">
+              <div class="v126-icon">📍</div>
+              <div class="v126-text">
+                <div class="v126-label">Bajar en</div>
+                <div class="v126-main">${esc(g.alighting||destination)}</div>
+              </div>
+            </div>
+          `).join('')}
+
+          <div class="v126-step finish">
+            <div class="v126-icon">🚶</div>
+            <div class="v126-text">
+              <div class="v126-label">Caminar hasta</div>
+              <div class="v126-main">${esc(destination)}</div>
+            </div>
+          </div>
+        </div>
+
+        ${fullMap?`<div class="v126-map"><button data-full-route>🗺️ Ver ruta completa</button></div>`:''}
+      </div>
+    `;
+
+    const content=mount.firstElementChild;
+    box.querySelector('h3')?.insertAdjacentElement('afterend',content);
+
+    data.forEach((g,gi)=>{
+      const leg=content.querySelector(`[data-leg="${gi}"]`);
+      const inline=content.querySelector(`[data-inline="${gi}"]`);
+      if(!leg) return;
+
+      leg.querySelectorAll('.v126-chip').forEach((chip,i)=>{
+        chip.addEventListener('click',()=>{
+          leg.querySelectorAll('.v126-chip').forEach(x=>x.classList.remove('active'));
+          chip.classList.add('active');
+          const selected=g.schedules[i];
+          if(inline) inline.textContent=selected.time;
+
+          if(gi===0){
+            const d=content.querySelector('[data-selected-depart]');
+            const a=content.querySelector('[data-selected-arrive]');
+            if(d) d.textContent=selected.time;
+            if(a) a.textContent=selected.arrival||'—';
+          }
+        });
+      });
+    });
+
+    content.querySelector('[data-full-route]')?.addEventListener('click',()=>fullMap?.click());
+  }
+
+  document.querySelectorAll('.route-modal').forEach(buildModal);
+
+  render(0);
+  mode('route');
+})();
+</script>
+
+
+<style id="atlas-v126-transport-css">
+/* v126 · semantic transport modal */
+.v126-modal .route-box{
+  width:min(660px,100%)!important;max-height:min(92vh,850px)!important;
+  padding:0!important;background:#fffdf9!important;border:1px solid #d3cbc1!important;
+  border-radius:22px!important;box-shadow:0 28px 90px rgba(32,46,40,.24)!important
+}
+.v126-modal .route-kicker,.v126-modal .route-sub{display:none!important}
+.v126-modal .route-box h3{
+  margin:0!important;padding:19px 48px 7px 20px!important;
+  font:800 23px/1.03 "Fraunces",serif!important;color:#2e3d38!important
+}
+.v126-content{padding-bottom:5px}
+.v126-schedule-title{
+  margin:10px 20px 5px;display:flex;justify-content:space-between;align-items:center
+}
+.v126-schedule-title b{
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8a817b;font-weight:900
+}
+.v126-schedule-title span{font-size:5.7px;color:#8a837e}
+.v126-leg{
+  margin:0 20px 8px;border:1px solid #d1ddd7;border-radius:13px;
+  background:#f5f8f5;overflow:hidden
+}
+.v126-leg-head{
+  padding:8px 10px 7px;display:flex;justify-content:space-between;align-items:center;gap:8px
+}
+.v126-leg-name{font-size:9px;font-weight:900;color:#354b43}
+.v126-leg-count{font-size:5.5px;color:#718079}
+.v126-picker{
+  display:flex;gap:5px;overflow:auto;padding:0 8px 8px;scrollbar-width:none
+}
+.v126-picker::-webkit-scrollbar{display:none}
+.v126-chip{
+  flex:0 0 auto;min-width:86px;padding:5px 6px;border:1px solid #d2ded8;border-radius:9px;
+  background:#fffdfa;text-align:left;cursor:pointer
+}
+.v126-chip small{
+  display:block;font-size:4.8px;text-transform:uppercase;letter-spacing:.08em;color:#8b847d;font-weight:900
+}
+.v126-chip strong{display:block;margin-top:2px;font:800 12px "Fraunces",serif;color:#4a6e60}
+.v126-chip span{
+  display:block;margin-top:1px;font-size:5.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#756e69
+}
+.v126-chip.active{background:#e8f1ec;border-color:#a8c3b7;box-shadow:0 0 0 1px #cbdcd4 inset}
+.v126-selected{
+  margin:7px 20px 11px;padding:9px 10px;border:1px solid #d8d0c8;border-radius:12px;
+  background:linear-gradient(135deg,#f8f4ed,#eef4f0);
+  display:grid;grid-template-columns:1fr 27px 1fr;align-items:center;gap:8px
+}
+.v126-selected small{
+  display:block;font-size:4.9px;letter-spacing:.1em;text-transform:uppercase;color:#8e857f;font-weight:900
+}
+.v126-selected b{display:block;margin-top:2px;font:800 17px "Fraunces",serif;color:#456b5d}
+.v126-selected .arr{text-align:right}
+.v126-selected .arrow{
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e3eee8;border:1px solid #c6d9d0;color:#4a6e60;font-size:12px;font-weight:900
+}
+.v126-route-title{
+  margin:0 20px 6px;font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8a817b;font-weight:900
+}
+.v126-route{
+  margin:0 20px;padding:9px 9px 5px;border:1px solid #ddd5cc;border-radius:15px;background:#fffdfa
+}
+.v126-step{
+  position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);
+  column-gap:8px;min-height:51px;margin:0!important;padding:0!important;width:auto!important
+}
+.v126-step:last-child{min-height:42px}
+.v126-step:not(:last-child)::after{
+  content:"";position:absolute;left:16px;top:31px;bottom:0;width:1px;background:#d5cec6
+}
+.v126-icon{
+  position:relative;z-index:2;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:#edf3ef;
+  border:1px solid #cad9d2;box-shadow:0 0 0 3px #fffdfa;font-size:13px
+}
+.v126-step.bus .v126-icon{background:#e6efea}
+.v126-step.stop .v126-icon{background:#f4eee2;border-color:#dfd2b5}
+.v126-step.walk .v126-icon,.v126-step.finish .v126-icon{background:#f1ebee;border-color:#dbcbd0}
+.v126-text{padding-top:1px;min-width:0}
+.v126-label{font-size:5.2px;letter-spacing:.10em;text-transform:uppercase;color:#8d857f;font-weight:900}
+.v126-main{margin-top:2px;font-size:8px;line-height:1.35;color:#3e4d47;font-weight:900}
+.v126-busrow{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.v126-time{
+  flex:none;padding:3px 5px;border-radius:999px;background:#e7f0eb;border:1px solid #c8d9d1;
+  color:#42685a;font-size:5.7px;font-weight:900
+}
+.v126-map{margin:8px 20px 13px}
+.v126-map button{
+  width:100%;min-height:34px;border:1px solid #bfd5ca;border-radius:9px;
+  background:#e9f1ed;color:#315d50;font-size:6.6px;font-weight:900;cursor:pointer
+}
+.v126-modal .v106-modal-hero,
+.v126-modal .v106-modal-section-label,
+.v126-modal .v106-primary-route,
+.v126-modal .v106-alt,
+.v126-modal .v106-modal-note{display:none!important}
+.v126-modal .zs-route,.v126-modal .zs-note{display:none!important}
+</style>
+
+
+<style id="atlas-v130-no-replacement-glyph-css">
+/* v130 · vehicle header uses inline SVG, never an emoji glyph */
+.v126-modal .v126-leg-name{
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  line-height:1!important;
+  min-height:18px!important;
+}
+.v126-modal .v130-vehicle{
+  width:13px!important;
+  height:13px!important;
+  flex:0 0 13px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:#4f7567!important;
+}
+.v126-modal .v130-vehicle svg{
+  width:13px!important;
+  height:13px!important;
+  display:block!important;
+}
+</style>
+
+
+<style id="atlas-v131-alignment-arrivals-css">
+/* v131 · text alignment + complete approximate arrivals */
+.v126-modal .v126-route .v126-step{
+  align-items:center!important;
+}
+.v126-modal .v126-route .v126-step .v126-text{
+  min-height:32px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding-top:0!important;
+}
+.v126-modal .v126-route .v126-icon{
+  align-self:center!important;
+}
+</style>
+
+
+<style id="atlas-v132-universal-css">
+/* =========================================================
+   v132 · UNIVERSAL TRANSPORT MODAL
+   One semantic renderer for walking + one/multiple buses/trains.
+   ========================================================= */
+.v132-modal .route-box{
+  width:min(660px,100%)!important;
+  max-height:min(92vh,850px)!important;
+  padding:0!important;
+  background:#fffdf9!important;
+  border:1px solid #d3cbc1!important;
+  border-radius:22px!important;
+  box-shadow:0 28px 90px rgba(32,46,40,.24)!important;
+}
+.v132-modal .route-kicker,
+.v132-modal .route-sub{display:none!important}
+.v132-modal .route-box h3{
+  margin:0!important;
+  padding:19px 48px 7px 20px!important;
+  font:800 23px/1.03 "Fraunces",serif!important;
+  color:#2e3d38!important;
+}
+.v132-content{padding-bottom:4px}
+.v132-heading{
+  margin:10px 20px 5px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.v132-heading b{
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;
+  color:#8a817b;font-weight:900
+}
+.v132-heading span{font-size:5.7px;color:#8a837e}
+
+.v132-leg{
+  margin:0 20px 8px;
+  border:1px solid #d1ddd7;border-radius:13px;
+  background:#f5f8f5;overflow:hidden
+}
+.v132-leg-head{
+  padding:8px 10px 7px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px
+}
+.v132-leg-name{
+  display:flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:900;color:#354b43;line-height:1
+}
+.v132-leg-name svg{width:13px;height:13px;display:block;flex:0 0 13px}
+.v132-leg-count{font-size:5.5px;color:#718079}
+.v132-picker{
+  display:flex;gap:5px;overflow:auto;padding:0 8px 8px;scrollbar-width:none
+}
+.v132-picker::-webkit-scrollbar{display:none}
+.v132-chip{
+  flex:0 0 auto;min-width:88px;
+  padding:5px 6px;border:1px solid #d2ded8;border-radius:9px;
+  background:#fffdfa;text-align:left;cursor:pointer
+}
+.v132-chip small{
+  display:block;font-size:4.8px;text-transform:uppercase;
+  letter-spacing:.08em;color:#8b847d;font-weight:900
+}
+.v132-chip strong{
+  display:block;margin-top:2px;font:800 12px "Fraunces",serif;color:#4a6e60
+}
+.v132-chip span{
+  display:block;margin-top:1px;font-size:5.1px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;color:#756e69
+}
+.v132-chip.active{
+  background:#e8f1ec;border-color:#a8c3b7;
+  box-shadow:0 0 0 1px #cbdcd4 inset
+}
+
+.v132-selected{
+  margin:7px 20px 11px;padding:9px 10px;
+  border:1px solid #d8d0c8;border-radius:12px;
+  background:linear-gradient(135deg,#f8f4ed,#eef4f0);
+  display:grid;grid-template-columns:1fr 27px 1fr;align-items:center;gap:8px
+}
+.v132-selected small{
+  display:block;font-size:4.9px;letter-spacing:.1em;text-transform:uppercase;
+  color:#8e857f;font-weight:900
+}
+.v132-selected b{
+  display:block;margin-top:2px;font:800 17px "Fraunces",serif;color:#456b5d
+}
+.v132-selected .arr{text-align:right}
+.v132-selected .arrow{
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#e3eee8;border:1px solid #c6d9d0;color:#4a6e60;
+  font-size:12px;font-weight:900
+}
+
+.v132-title{
+  margin:0 20px 6px;
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;
+  color:#8a817b;font-weight:900
+}
+.v132-route{
+  margin:0 20px;padding:9px 9px 5px;
+  border:1px solid #ddd5cc;border-radius:15px;background:#fffdfa
+}
+.v132-step{
+  position:relative;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  column-gap:8px;
+  min-height:51px;
+  margin:0!important;padding:0!important;width:auto!important;
+  align-items:center!important
+}
+.v132-step:last-child{min-height:42px}
+.v132-step:not(:last-child)::after{
+  content:"";position:absolute;left:16px;top:31px;bottom:0;
+  width:1px;background:#d5cec6
+}
+.v132-icon{
+  position:relative;z-index:2;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#edf3ef;border:1px solid #cad9d2;
+  box-shadow:0 0 0 3px #fffdfa;font-size:13px
+}
+.v132-step.bus .v132-icon{background:#e6efea}
+.v132-step.stop .v132-icon{background:#f4eee2;border-color:#dfd2b5}
+.v132-step.walk .v132-icon,.v132-step.finish .v132-icon{
+  background:#f1ebee;border-color:#dbcbd0
+}
+.v132-text{
+  min-width:0;padding:0!important;align-self:center!important;
+  display:flex;flex-direction:column;justify-content:center
+}
+.v132-label{
+  font-size:5.2px;letter-spacing:.10em;text-transform:uppercase;
+  color:#8d857f;font-weight:900
+}
+.v132-main{
+  margin-top:2px;font-size:8px;line-height:1.35;
+  color:#3e4d47;font-weight:900
+}
+.v132-busrow{
+  display:flex;align-items:center;gap:6px;flex-wrap:nowrap
+}
+.v132-time{
+  flex:none;padding:3px 5px;border-radius:999px;
+  background:#e7f0eb;border:1px solid #c8d9d1;
+  color:#42685a;font-size:5.7px;font-weight:900
+}
+.v132-map{margin:8px 20px 13px}
+.v132-map button{
+  width:100%;min-height:34px;border:1px solid #bfd5ca;border-radius:9px;
+  background:#e9f1ed;color:#315d50;font-size:6.6px;font-weight:900;cursor:pointer
+}
+
+/* old generated UIs: hidden, source blocks remain as data */
+.v132-modal .v106-modal-hero,
+.v132-modal .v106-modal-section-label,
+.v132-modal .v106-primary-route,
+.v132-modal .v106-alt,
+.v132-modal .v106-modal-note,
+.v132-modal .v107-route-strip,
+.v132-modal .v107-walk-card,
+.v132-modal .v107-leg,
+.v132-modal .v107-leg-divider,
+.v132-modal .v107-final-line,
+.v132-modal .v107-note,
+.v132-modal .v108-modal-content,
+.v132-modal .v109-content,
+.v132-modal .v110-route-board,
+.v132-modal .v110-mapbar,
+.v132-modal .v111-content,
+.v132-modal .v116-chain,
+.v132-modal .v118-chain,
+.v132-modal .v119-content,
+.v132-modal .v121-content,
+.v132-modal .v122-content,
+.v132-modal .v123-content,
+.v132-modal .v124-content,
+.v132-modal .v125-content,
+.v132-modal .v126-content{
+  display:none!important
+}
+.v132-modal .zs-route,
+.v132-modal .zs-note{display:none!important}
+</style>
+
+
+<script id="atlas-v132-universal-js">
+(function(){
+  if(window.__atlasV132)return;
+  window.__atlasV132=true;
+
+  const clean=s=>(s||'').replace(/\s+/g,' ').trim();
+  const strip=s=>clean(s).replace(/^[^A-Za-z0-9ÁÉÍÓÚÜÑáéíóúüñ0-9]+/,'').trim();
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+
+  const busSvg=()=>`<span class="v134-bus-emoji" aria-hidden="true">🚌</span>`;
+  const trainSvg=()=>`<span class="v135-train-emoji" aria-hidden="true">🚆</span>`;
+  }
+
+  function isTransitHead(head){
+    return /^(🚌|🚇)/.test(clean(head));
+  }
+
+  function lineFrom(route){
+    return clean(route.querySelector('.zs-route-head b')?.textContent||'Transporte')
+      .replace(/^[🚌🚇]\s*/,'')
+      .replace(/\s*·\s*(primera opción|backup|respaldo|conexión|siguiente respaldo|ruta principal|salida.*)$/i,'')
+      .trim();
+  }
+
+  function strongValues(route, labelRx){
+    const out=[];
+    route.querySelectorAll('.zs-walk').forEach(w=>{
+      const b=w.querySelector('b');
+      if(!b || !labelRx.test(clean(b.textContent)))return;
+      w.querySelectorAll('strong').forEach(s=>{
+        const v=clean(s.textContent);
+        if(v&&!out.includes(v))out.push(v);
+      });
+    });
+    return out;
+  }
+
+  function parseBoarding(routes,line){
+    for(const r of routes){
+      let vals=strongValues(r,/^Subida/i);
+      if(vals.length)return vals[0];
+
+      vals=strongValues(r,/^Salida/i);
+      if(vals.length)return vals[vals.length-1];
+
+      vals=strongValues(r,/^Ruta/i);
+      if(vals.length){
+        const idx=vals.findIndex(v=>v.toLowerCase().includes(line.toLowerCase()));
+        if(idx>0)return vals[idx-1];
+        if(vals.length>1)return vals[0];
+      }
+    }
+
+    return '';
+  }
+
+  function parseAlighting(routes,line){
+    for(const r of routes){
+      let vals=strongValues(r,/^Bajada/i);
+      if(vals.length)return vals[0];
+
+      vals=strongValues(r,/^Final/i);
+      if(vals.length)return vals[0];
+
+      vals=strongValues(r,/^Ruta/i);
+      if(vals.length){
+        const idx=vals.findIndex(v=>v.toLowerCase().includes(line.toLowerCase()));
+        if(idx>=0 && vals[idx+1])return vals[idx+1];
+        if(vals.length>1)return vals[vals.length-1];
+      }
+    }
+    return '';
+  }
+
+  function parseWalkTarget(route){
+    const strong=[...route.querySelectorAll('.zs-walk strong')]
+      .map(x=>clean(x.textContent)).filter(Boolean);
+    if(strong.length)return strong[strong.length-1];
+    return '';
+  }
+
+  function parseSchedules(routes){
+    const result=[];
+    routes.forEach(r=>{
+      const durationText=clean(r.querySelector('.zs-route-head span')?.textContent||'');
+      const dm=durationText.match(/(?:≈|~)?\s*(\d+)\s*(?:min|mins|minutes)/i);
+      const duration=dm?Number(dm[1]):null;
+
+      r.querySelectorAll('.zs-time').forEach(row=>{
+        const raw=clean(row.querySelector('strong')?.textContent);
+        const detail=clean(row.querySelector('em')?.textContent);
+        const clockMatch=raw.match(/(\d{1,2}:\d{2}\s*(?:am|pm))/i);
+        if(!clockMatch)return;
+
+        const time=clockMatch[1];
+        const clocks=[...detail.matchAll(/(\d{1,2}:\d{2}\s*(?:am|pm))/ig)].map(m=>m[1]);
+        let arrival=clocks.length?clocks[clocks.length-1]:'';
+
+        if(!arrival && duration!==null){
+          const mt=time.match(/(\d{1,2}):(\d{2})\s*(am|pm)/i);
+          if(mt){
+            let h=Number(mt[1]),m=Number(mt[2]);
+            if(mt[3].toLowerCase()==='pm'&&h<12)h+=12;
+            if(mt[3].toLowerCase()==='am'&&h===12)h=0;
+            let total=h*60+m+duration;
+            total=((total%1440)+1440)%1440;
+            let ah=Math.floor(total/60), am=total%60;
+            const ap=ah>=12?'pm':'am';
+            ah=ah%12||12;
+            arrival=`${ah}:${String(am).padStart(2,'0')} ${ap}`;
+          }
+        }
+        result.push({time,detail,arrival});
+      });
+    });
+    return result;
+  }
+
+  function fullMapButton(box){
+    return [...box.querySelectorAll('.zs-maprow button')]
+      .find(b=>/ruta completa/i.test(clean(b.textContent))) || null;
+  }
+
+  function build(modal){
+    if(!modal||modal.dataset.v132Built)return;
+    const box=modal.querySelector('.route-box');
+    if(!box)return;
+
+    const source=[...box.querySelectorAll('.zs-route')];
+    if(!source.length)return;
+
+    modal.dataset.v132Built='1';
+    modal.classList.add('v132-modal');
+
+    /* Extract semantic sequence from the original blocks. */
+    const title=clean(box.querySelector('h3')?.textContent||'Traslado');
+    const {origin,destination}=titleParts(title);
+
+    const transit=source.filter(r=>isTransitHead(r.querySelector('.zs-route-head b')?.textContent||''));
+    if(!transit.length)return;
+
+    /* Split only on an explicit "conexión". Backup/respaldo routes remain
+       alternatives for the same leg instead of becoming fake second buses. */
+    const groups=[];
+    transit.forEach(route=>{
+      const line=lineFrom(route);
+      const head=clean(route.querySelector('.zs-route-head b')?.textContent||'');
+      const isConnection=/\bconexi[oó]n\b/i.test(head);
+
+      if(!groups.length || isConnection){
+        groups.push({line,routes:[route]});
+      }else{
+        groups[groups.length-1].routes.push(route);
+      }
+    });
+
+    const data=groups.map((g,idx)=>({
+      line:g.line,
+      routes:g.routes,
+      boarding:parseBoarding(g.routes,g.line),
+      alighting:parseAlighting(g.routes,g.line),
+      schedules:parseSchedules(g.routes)
+    }));
+
+    /* Real walking blocks immediately before each transit block:
+       use their destination as the "Ir a" stop. */
+    const walkTargets=[];
+    for(const g of data){
+      const firstRoute=g.routes[0];
+      const pos=source.indexOf(firstRoute);
+      let target='';
+      for(let i=pos-1;i>=0;i--){
+        const head=clean(source[i].querySelector('.zs-route-head b')?.textContent||'');
+        if(/^🚶/.test(head)){
+          target=parseWalkTarget(source[i]);
+          if(target)break;
+        }
+        if(isTransitHead(head))break;
+      }
+      walkTargets.push(target);
+    }
+
+    data.forEach((g,i)=>{
+      if(!g.boarding)g.boarding=walkTargets[i]||'';
+      /* For a direct bus route with explicit walk block, that block is the
+         actual boarding stop. */
+    });
+
+    /* Hide everything generated previously; source blocks remain hidden data. */
+    box.querySelectorAll(
+      '.v106-modal-hero,.v106-modal-section-label,.v106-primary-route,.v106-alt,.v106-modal-note,'+
+      '.v107-route-strip,.v107-walk-card,.v107-leg,.v107-leg-divider,.v107-final-line,.v107-note,'+
+      '.v108-modal-content,.v109-content,.v110-route-board,.v110-mapbar,.v111-content,.v116-chain,'+
+      '.v118-chain,.v119-content,.v120-content,.v121-content,.v122-content,.v123-content,.v124-content,'+
+      '.v125-content,.v126-content,.v132-content'
+    ).forEach(x=>x.remove());
+    source.forEach(r=>r.style.display='none');
+    box.querySelectorAll('.zs-note').forEach(x=>x.style.display='none');
+
+    const mount=document.createElement('div');
+    mount.innerHTML=`
+      <div class="v132-content">
+        ${data.some(g=>g.schedules.length)?`
+          <div class="v132-heading">
+            <b>Horarios disponibles</b><span>seleccioná la salida</span>
+          </div>`:''}
+
+        ${data.map((g,gi)=>g.schedules.length?`
+          <section class="v132-leg" data-leg="${gi}">
+            <div class="v132-leg-head">
+              <div class="v132-leg-name">
+                ${/Blue Line/i.test(g.line)?trainSvg():busSvg()}
+                <span>${esc(g.line)}</span>
+              </div>
+              <div class="v132-leg-count">${g.schedules.length} ${g.schedules.length===1?'horario':'horarios'}</div>
+            </div>
+            <div class="v132-picker">
+              ${g.schedules.map((s,i)=>`
+                <button class="v132-chip ${i===0?'active':''}" data-schedule="${i}">
+                  <small>${i===0?'plan':'salida'}</small>
+                  <strong>${esc(s.time)}</strong>
+                  <span>${esc(s.arrival?`→ ${s.arrival}`:s.detail.slice(0,36))}</span>
+                </button>`).join('')}
+            </div>
+          </section>`:'').join('')}
+
+        ${data.some(g=>g.schedules.length)?`
+          <div class="v132-selected">
+            <div><small>Salida seleccionada</small><b data-selected-depart>${esc(data.find(g=>g.schedules.length)?.schedules[0]?.time||'—')}</b></div>
+            <div class="arrow">→</div>
+            <div class="arr"><small>Llegada aproximada</small><b data-selected-arrive>${esc(data.find(g=>g.schedules.length)?.schedules[0]?.arrival||'—')}</b></div>
+          </div>`:''}
+
+        <div class="v132-title">Cómo llegar</div>
+        <div class="v132-route">
+          <div class="v132-step">
+            <div class="v132-icon">📍</div>
+            <div class="v132-text">
+              <div class="v132-label">Salir</div>
+              <div class="v132-main">${esc(origin)}</div>
+            </div>
+          </div>
+
+          ${data.map((g,gi)=>`
+            ${g.boarding?`
+              <div class="v132-step walk">
+                <div class="v132-icon">🚶</div>
+                <div class="v132-text">
+                  <div class="v132-label">Ir a</div>
+                  <div class="v132-main">${esc(g.boarding)}</div>
+                </div>
+              </div>`:''}
+
+            <div class="v132-step bus">
+              <div class="v132-icon">${/Blue Line/i.test(g.line)?trainSvg():busSvg()}</div>
+              <div class="v132-text">
+                <div class="v132-label">Tomar</div>
+                <div class="v132-main v132-busrow">
+                  <span>${esc(g.line)}</span>
+                  ${g.schedules.length?`<span class="v132-time" data-inline="${gi}">${esc(g.schedules[0].time)}</span>`:''}
+                </div>
+              </div>
+            </div>
+
+            ${g.alighting?`
+              <div class="v132-step stop">
+                <div class="v132-icon">📍</div>
+                <div class="v132-text">
+                  <div class="v132-label">Bajar en</div>
+                  <div class="v132-main">${esc(g.alighting)}</div>
+                </div>
+              </div>`:''}
+
+            ${gi<data.length-1 && data[gi+1].boarding?`
+              <div class="v132-step walk">
+                <div class="v132-icon">🚶</div>
+                <div class="v132-text">
+                  <div class="v132-label">Ir a</div>
+                  <div class="v132-main">${esc(data[gi+1].boarding)}</div>
+                </div>
+              </div>`:''}
+          `).join('')}
+
+          <div class="v132-step finish">
+            <div class="v132-icon">🚶</div>
+            <div class="v132-text">
+              <div class="v132-label">Caminar hasta</div>
+              <div class="v132-main">${esc(destination)}</div>
+            </div>
+          </div>
+        </div>
+
+        ${fullMapButton(box)?`<div class="v132-map"><button data-full-map>🗺️ Ver ruta completa</button></div>`:''}
+      </div>
+    `;
+
+    const content=mount.firstElementChild;
+    box.querySelector('h3')?.insertAdjacentElement('afterend',content);
+
+    data.forEach((g,gi)=>{
+      const leg=content.querySelector(`[data-leg="${gi}"]`);
+      const inline=content.querySelector(`[data-inline="${gi}"]`);
+      if(!leg)return;
+      leg.querySelectorAll('.v132-chip').forEach((chip,i)=>{
+        chip.addEventListener('click',()=>{
+          leg.querySelectorAll('.v132-chip').forEach(c=>c.classList.remove('active'));
+          chip.classList.add('active');
+          const sel=g.schedules[i];
+          if(inline)inline.textContent=sel.time;
+          if(gi===0){
+            const d=content.querySelector('[data-selected-depart]');
+            const a=content.querySelector('[data-selected-arrive]');
+            if(d)d.textContent=sel.time;
+            if(a)a.textContent=sel.arrival||'—';
+          }
+        });
+      });
+    });
+
+    const full=fullMapButton(box);
+    content.querySelector('[data-full-map]')?.addEventListener('click',()=>full?.click());
+  }
+
+  document.querySelectorAll('.route-modal').forEach(build);
+  setTimeout(()=>document.querySelectorAll('.route-modal').forEach(build),80);
+  setTimeout(()=>document.querySelectorAll('.route-modal').forEach(build),220);
+})();
+</script>
+
+
+<style id="atlas-v134-bus-emoji-css">
+/* v134 · use the exact bus emoji requested */
+.v132-modal .v132-leg-name{
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  line-height:1!important;
+}
+.v132-modal .v132-leg-name .v134-bus-emoji{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:14px!important;
+  height:14px!important;
+  flex:0 0 14px!important;
+  font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif!important;
+  font-size:13px!important;
+  line-height:1!important;
+}
+.v132-modal .v132-step.bus .v132-icon .v134-bus-emoji{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:14px!important;
+  line-height:1!important;
+}
+</style>
 
 </body>
 </html>
