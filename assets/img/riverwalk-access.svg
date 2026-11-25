@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 224" role="img" aria-labelledby="title desc">
+  <title id="title">Las dos orillas del río Chicago</title>
+  <desc id="desc">Esquema sin escala: al norte, el muelle está al oeste del puente DuSable junto al Wrigley Building. Al sur, la rampa del Riverwalk está en el lado este de State Street.</desc>
+  <rect width="400" height="224" rx="12" fill="#eef6f4"/>
+  <path d="M0 80h400v62H0z" fill="#c1deee"/>
+  <path d="M0 147h400" stroke="#1a785f" stroke-width="6"/>
+  <path d="M61 29v180M185 75v74M328 29v180" stroke="#fff" stroke-width="20"/>
+  <path d="M61 29v180M185 75v74M328 29v180" stroke="#647788" stroke-width="2" stroke-dasharray="4 5"/>
+  <path d="M82 155v19h42M285 70V51h-81" fill="none" stroke="#13584a" stroke-width="2"/>
+  <circle cx="82" cy="148" r="7" fill="#19614f" stroke="white" stroke-width="2"/>
+  <circle cx="285" cy="80" r="7" fill="#19614f" stroke="white" stroke-width="2"/>
+  <g fill="#173443" font-family="system-ui,sans-serif" font-size="14" font-weight="700">
+    <text x="14" y="22">ORILLA NORTE</text>
+    <text x="12" y="218">State St</text>
+    <text x="266" y="218">Michigan Ave</text>
+    <text x="206" y="35">Wrigley Building</text>
+    <text x="155" y="66">Muelle Water Taxi</text>
+    <text x="77" y="119">Río Chicago</text>
+    <text x="227" y="119">Puente DuSable</text>
+    <text x="128" y="179">Rampa de State</text>
+    <text x="128" y="200">Riverwalk · orilla sur</text>
+  </g>
+</svg>

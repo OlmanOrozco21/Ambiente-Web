@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 224">
+  <rect width="400" height="224" rx="12" fill="#f7efed"/>
+  <path stroke="#81504a" stroke-width="3" stroke-dasharray="5 4" d="M31 35v158"/>
+  <g fill="#fff" stroke="#ddc1bd">
+    <rect x="53" y="11" width="333" height="43" rx="7"/><rect x="53" y="64" width="333" height="43" rx="7"/>
+    <rect x="53" y="117" width="333" height="43" rx="7"/><rect x="53" y="170" width="333" height="43" rx="7"/>
+  </g>
+  <g fill="#8c322c"><circle cx="31" cy="32" r="12"/><circle cx="31" cy="85" r="12"/><circle cx="31" cy="138" r="12"/><circle cx="31" cy="191" r="12"/></g>
+  <g fill="#fff" font-family="system-ui,sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+    <text x="31" y="37">1</text><text x="31" y="90">2</text><text x="31" y="143">3</text><text x="31" y="196">4</text>
+  </g>
+  <g fill="#442c29" font-family="system-ui,sans-serif" font-size="15">
+    <text x="66" y="37">Puerta del boleto / acceso público</text>
+    <text x="66" y="90">Sube al nivel 300</text>
+    <text x="66" y="143">Sigue el letrero Section 320</text>
+    <text x="66" y="196">Pregunta al acomodador por tu fila</text>
+  </g>
+</svg>

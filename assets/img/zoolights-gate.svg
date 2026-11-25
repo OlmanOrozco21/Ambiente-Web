@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 224">
+  <rect width="400" height="224" rx="12" fill="#edf6f1"/>
+  <path fill="#d7e1e7" d="M143 42h49v182h-49zM0 110h400v30H0z"/>
+  <path stroke="white" stroke-width="2" stroke-dasharray="5 5" d="M168 42v182M0 125h400"/>
+  <path fill="#b9decb" d="M240 58h160v51H240zM240 141h160v83H240z"/>
+  <path d="M210 93h65m-6-6 6 6-6 6" fill="none" stroke="#1a624f" stroke-width="2"/>
+  <circle cx="207" cy="93" r="5" fill="#1a624f"/>
+  <circle cx="129" cy="93" r="5" fill="#1a624f"/>
+  <g fill="#173443" font-family="system-ui,sans-serif" font-size="15" font-weight="700">
+    <text x="16" y="29">NORTE ↑</text>
+    <text x="135" y="29">Stockton Dr</text>
+    <text x="13" y="68">Regreso #1082</text><text x="13" y="90">151 Union Station</text>
+    <text x="207" y="69">Bajada #1143</text><text x="282" y="98">West Gate</text>
+    <text x="14" y="131">Webster Ave</text><text x="256" y="174">Lincoln Park Zoo</text>
+    <text x="208" y="200">Ida: 151 hacia Devon/Clark</text>
+  </g>
+</svg>

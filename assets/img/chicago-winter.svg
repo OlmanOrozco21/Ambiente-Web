@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#101c36"/>
+      <stop offset="1" stop-color="#334e7a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#314b74"/>
+      <stop offset="1" stop-color="#132340"/>
+    </linearGradient>
+    <pattern id="windows" width="16" height="20" patternUnits="userSpaceOnUse">
+      <rect x="6" y="5" width="4" height="7" rx="1" fill="#f6bc9e" opacity=".69"/>
+    </pattern>
+  </defs>
+  <path fill="url(#sky)" d="M0 0H900V400H0Z"/>
+  <circle cx="711" cy="112" r="65" fill="#f4ae97"/>
+  <path fill="#829cc8" opacity=".38" d="M0 277L227 228l55 11v-25h39v16h44v-23h65v34h32v-52h47v31h26v-36h56v59h74v-55h40v46h67v-59h43v36h22v-63h33v59h70v76H0Z"/>
+  <path fill="#192c50" d="M0 282l213-1 28-24h31v-22h31v33h27v-67h53v74h22v-106h45v-25h16v-21h43v143h20v-83h36v-24h28v-26h18V54h4v73h16V42h4v92h16v26h20v22h10v93h37v-76h19v-26h7v26h20v-17h41v92h28v-87h9v-53h4v53h25l12 87h30v-36h43v53H0Z"/>
+  <path fill="url(#windows)" d="M331 207h51v67h-51zm76-32h43v91h-43zm61-24h39v115h-39zm68 38h58v77h-58zm62-43h48v118h-48zm52 42h30v78h-30zm69 18h46v70h-46zm72-16h42v81h-42zm68 7h30l9 75h-39z"/>
+  <path fill="url(#water)" d="M0 291H900V400H0Z"/>
+  <g fill="none" stroke-linecap="round">
+    <path stroke="#a1b2d7" opacity=".48" d="M217 298h162m30 0h216m30 0h157m-366 14h95m23 0h147m-398 20h97m189 0h190m-373 32h112m64 0h147"/>
+    <path stroke="#f4ae97" stroke-width="2" opacity=".5" d="M597 302h61m19 0h45m-133 23h141m-101 17h73m-120 15h59m20 0h74m-176 23h66m21 0h99"/>
+    <path stroke="#d8e6ff" opacity=".24" d="M421 98h39m-19-19v38m337-61h28m-14-14v28m53 56h18m-9-9v18m-304-84h20m-10-10v20"/>
+  </g>
+  <path fill="#e4efff" opacity=".48" d="M375 65h2v2h-2zm105 18h2v2h-2zm-68 47h2v2h-2zm207-44h2v2h-2zm87-63h2v2h-2zm100 74h2v2h-2zm-270 52h2v2h-2zm287 30h2v2h-2zm-45-46h2v2h-2zm84-100h2v2h-2z"/>
+</svg>

@@ -1,0 +1,715 @@
+/* atlas-v106-clean-css */
+/* =========================================================
+   CHICAGO ATLAS v106 — CLEAN WINTER
+   Built directly from v92. One UI layer only.
+   ========================================================= */
+:root{
+  --v106-pine:#355b50;
+  --v106-pine-dark:#203f37;
+  --v106-pine-soft:#edf4f0;
+  --v106-wine:#7b4654;
+  --v106-wine-soft:#f4eaed;
+  --v106-gold:#b89a63;
+  --v106-cream:#f7f1e8;
+  --v106-paper:#fffdf9;
+  --v106-ink:#293432;
+  --v106-muted:#7c7671;
+  --v106-line:#ddd4ca;
+}
+
+/* original app is the data source, not the visible interface */
+body.v106-body{background:#e9e4dc!important}
+body.v106-body .app{display:none!important}
+body.v106-body .topbtn,
+body.v106-body .toast{display:none!important}
+
+/* ---------------- main shell ---------------- */
+.v106{
+  min-height:100vh;
+  padding:18px;
+  background:
+    radial-gradient(760px 390px at 100% -5%,rgba(123,70,84,.06),transparent 70%),
+    radial-gradient(700px 380px at -5% 12%,rgba(53,91,80,.09),transparent 70%),
+    linear-gradient(180deg,#efeae4 0%,#e7e1d9 100%);
+}
+.v106-shell{
+  max-width:1240px;margin:auto;background:var(--v106-paper);
+  border:1px solid #cec5bb;box-shadow:0 24px 70px rgba(45,39,33,.13);
+  overflow:hidden;
+}
+.v106-mast{
+  padding:24px 28px 20px;
+  background:linear-gradient(120deg,#fffefa,#f2eee7);
+  border-bottom:1px solid var(--v106-line);
+  position:relative;
+}
+.v106-brand{
+  font-size:8px;letter-spacing:.19em;text-transform:uppercase;font-weight:900;color:var(--v106-pine)
+}
+.v106-title{
+  margin:7px 0 5px;font:800 clamp(38px,5vw,63px)/.9 "Fraunces",serif;color:#2b3834;
+}
+.v106-sub{font-size:10px;line-height:1.5;color:#77716d;max-width:720px}
+.v106-mast:after{
+  content:"✦  ✦  ✦";
+  position:absolute;right:24px;top:18px;color:#c0a46d;font-size:8px;letter-spacing:.16em;opacity:.65
+}
+
+/* day navigation */
+.v106-dayrail{
+  display:flex;overflow:auto;background:#334a43;scrollbar-width:none
+}
+.v106-dayrail::-webkit-scrollbar{display:none}
+.v106-day{
+  flex:1 0 150px;min-width:150px;padding:13px 15px;
+  border:0;border-right:1px solid rgba(255,255,255,.08);
+  background:transparent;color:#cad7d2;text-align:left;cursor:pointer;position:relative;
+}
+.v106-day small{display:block;font-size:6px;letter-spacing:.12em;text-transform:uppercase;opacity:.67;font-weight:900}
+.v106-day strong{display:block;margin-top:4px;font-size:11px;color:#f2f6f3}
+.v106-day span{display:block;margin-top:3px;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.68}
+.v106-day.active{background:#466057}
+.v106-day.active:after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:3px;background:#c5a76c}
+
+/* nav: no blue dock */
+.v106-nav{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 16px;border-bottom:1px solid var(--v106-line);background:#fffdfa;
+  position:sticky;top:0;z-index:30;
+}
+.v106-modes{
+  display:flex;gap:4px;padding:4px;background:#eee8e0;border-radius:10px
+}
+.v106-modes button{
+  border:0;background:transparent;color:#77716d;padding:8px 11px;border-radius:7px;
+  font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;cursor:pointer
+}
+.v106-modes button.active{background:#fffdfa;color:var(--v106-pine-dark);box-shadow:0 2px 8px rgba(40,53,48,.07)}
+.v106-mini{
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end
+}
+.v106-mini span{
+  padding:5px 7px;border:1px solid #ddd5cb;border-radius:999px;
+  color:#7d7670;background:#fffdf9;font-size:6px;font-weight:900;text-transform:uppercase
+}
+
+/* page header */
+.v106-page{padding:21px 22px 0}
+.v106-head{
+  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;
+  border-bottom:1px solid var(--v106-line);padding-bottom:16px
+}
+.v106-kicker{font-size:6.5px;letter-spacing:.15em;text-transform:uppercase;color:#668377;font-weight:900}
+.v106-h1{margin:5px 0 5px;font:800 clamp(29px,4vw,48px)/.98 "Fraunces",serif;color:#2c3935}
+.v106-desc{max-width:760px;font-size:9px;line-height:1.5;color:#7b7470}
+.v106-stats{display:flex;gap:8px}
+.v106-stat{padding-left:9px;border-left:2px solid #d4c8bc;min-width:62px}
+.v106-stat b{display:block;font:800 18px "Fraunces",serif;color:var(--v106-pine-dark)}
+.v106-stat span{display:block;margin-top:2px;font-size:6px;text-transform:uppercase;letter-spacing:.08em;color:#8a837e;font-weight:900}
+
+/* journey */
+.v106-view{margin-top:17px}
+.v106-journey-grid{
+  display:grid;grid-template-columns:1fr 285px;gap:19px
+}
+.v106-route{
+  position:relative;padding:2px 0 26px 55px
+}
+.v106-route:before{
+  content:"";position:absolute;left:21px;top:12px;bottom:14px;width:1px;
+  background:linear-gradient(180deg,#d9d0c6,#b9c9c2 50%,#d9d0c6)
+}
+.v106-stop{
+  position:relative;display:grid;grid-template-columns:96px 1fr;gap:13px;margin-bottom:9px
+}
+.v106-stop-pin{
+  position:absolute;left:-43px;top:14px;width:18px;height:18px;border-radius:50%;
+  border:4px solid #fffdf9;background:#6c4854;box-shadow:0 0 0 1px #c9beb3;z-index:2
+}
+.v106-stop.free .v106-stop-pin{background:#497567}
+.v106-stop.paid .v106-stop-pin{background:#b99c66}
+.v106-time{text-align:right;padding-top:9px;font:800 12px/1 "Fraunces",serif;color:#746e69}
+.v106-stop-main{border-top:1px solid #e1dad2;padding:9px 0 11px}
+.v106-place{font-size:14px;font-weight:900;color:#30403b}
+.v106-stop-desc{margin-top:3px;font-size:8px;line-height:1.45;color:#7a7470}
+.v106-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.v106-tag{padding:4px 6px;border-radius:999px;background:#f1ede7;border:1px solid #ddd5cc;color:#746d68;font-size:6px;font-weight:900}
+.v106-tag.free{background:#edf4f0;border-color:#cce0d7;color:#3d6b5c}
+.v106-tag.paid{background:#f8f1df;border-color:#e4d4b0;color:#876c35}
+.v106-address{margin-top:6px;font-size:7px;color:#89817c}
+.v106-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.v106-actions a,.v106-actions button{
+  border:1px solid #d7d0c8;background:#fffdf9;color:#46645b;border-radius:8px;
+  padding:6px 8px;text-decoration:none;font-size:6.5px;font-weight:900;cursor:pointer
+}
+.v106-actions .primary{background:#eef4f0;border-color:#c8dbd3;color:#355e51}
+.v106-actions.has-hours{display:flex;align-items:stretch;gap:5px;flex-wrap:wrap}
+.v106-hours{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:27px;box-sizing:border-box;
+  padding:6px 8px;border:1px solid #d6e1dc;border-radius:8px;
+  background:#f7faf8;color:#45675c;font-size:6.4px;font-weight:900;
+  white-space:nowrap;
+}
+@media(max-width:620px){
+  .v106-hours{font-size:6.1px;padding:6px 7px}
+}
+
+/* right side */
+.v106-side{align-self:start}
+.v106-panel{
+  border:1px solid #d9d0c6;background:#fffefa;padding:14px
+}
+.v106-panel + .v106-panel{margin-top:9px}
+.v106-eyeline{
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8c817a;font-weight:900
+}
+.v106-panel h3{
+  margin:4px 0 5px;font:800 19px/1 "Fraunces",serif;color:#34433e
+}
+.v106-panel .note{font-size:7.4px;line-height:1.45;color:#7b7470}
+
+/* one and only route list */
+.v106-transfer-title{
+  margin-top:11px;padding-top:9px;border-top:1px solid #ded6ce;
+  font-size:6px;letter-spacing:.11em;text-transform:uppercase;color:#817771;font-weight:900
+}
+.v106-transfer{
+  margin-top:7px;padding:9px 10px;border:1px solid #d8d0c7;border-left:3px solid #527969;
+  border-radius:10px;background:linear-gradient(135deg,#fffefa,#f6f1ea);cursor:pointer
+}
+.v106-transfer:hover{background:#fbf8f3;box-shadow:0 6px 16px rgba(45,60,54,.06)}
+.v106-transfer-top{display:flex;justify-content:space-between;gap:7px;align-items:center}
+.v106-transfer-top span{font-size:5.7px;letter-spacing:.1em;text-transform:uppercase;color:#71867d;font-weight:900}
+.v106-transfer-top b{font-size:6px;color:#476b5d}
+.v106-transfer-name{margin-top:4px;font-size:8.4px;color:#374842;font-weight:900}
+.v106-transfer-route{margin-top:3px;font-size:6.7px;line-height:1.4;color:#7c7470}
+
+/* food */
+.v106-food{display:none;margin-top:17px}
+.v106-food.active{display:block}
+.v106-section-title{font:800 28px/1 "Fraunces",serif;color:#2e3d38}
+.v106-section-sub{margin-top:4px;font-size:8px;line-height:1.45;color:#7d7671}
+.v106-food-origin{
+  margin:12px 0;padding:10px;border:1px solid #d9d0c6;border-radius:12px;background:#f6f2eb;
+  display:flex;justify-content:space-between;gap:10px;align-items:center
+}
+.v106-food-origin strong{display:block;font-size:7px;color:#53645e}
+.v106-food-origin span{display:block;margin-top:2px;font-size:6px;color:#8a827d}
+.v106-origin-btns{display:flex;gap:5px}
+.v106-origin-btns button{
+  border:1px solid #cfdad4;background:#fffdfa;color:#61746c;border-radius:8px;padding:6px 7px;font-size:6.5px;font-weight:900
+}
+.v106-origin-btns button.active{background:#e9f1ed;color:#3c6659;border-color:#bdd3c9}
+.v106-food-category{
+  border:1px solid #d9d0c6;background:#fffefa;margin-bottom:8px
+}
+.v106-food-category summary{list-style:none;cursor:pointer;padding:10px;font-size:8px;font-weight:900;color:#455851}
+.v106-food-category summary::-webkit-details-marker{display:none}
+.v106-food-category summary:after{content:"＋";float:right;color:#899089}
+.v106-food-category[open] summary:after{content:"−"}
+.v106-food-count{margin-left:5px;font-size:6px;color:#927a42}
+.v106-food-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:0 8px 8px}
+.v106-food-card{border:1px solid #e1dad2;background:#fff;padding:9px;border-radius:9px}
+.v106-food-card b{font-size:8.5px;color:#455751}
+.v106-food-meta{margin-top:3px;font-size:6.8px;line-height:1.4;color:#7e7670}
+.v106-food-price{display:inline-block;margin-top:5px;padding:3px 6px;border-radius:999px;background:#f8f0df;color:#876c35;font-size:6px;font-weight:900}
+.v106-food-route{
+  margin-top:6px;padding:6px;border-radius:8px;background:#edf4f0;color:#3c6659;font-size:6.3px;font-weight:900
+}
+
+/* transit overview */
+.v106-transit{display:none;margin-top:17px}
+.v106-transit.active{display:block}
+.v106-transit-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+.v106-transit-card{
+  border:1px solid #d5cec5;background:#fffefa;padding:13px;position:relative
+}
+.v106-transit-card:before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#52786a
+}
+.v106-transit-num{font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8b8079;font-weight:900}
+.v106-transit-card h4{margin:4px 0;font:800 18px/1.05 "Fraunces",serif;color:#384942}
+.v106-transit-card p{margin:0;font-size:7px;line-height:1.45;color:#7c7470}
+.v106-transit-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.v106-transit-actions button{
+  flex:1 1 135px;min-height:33px;border:1px solid #cedbd5;background:#fffdfa;color:#49685e;
+  border-radius:8px;font-size:6.5px;font-weight:900;cursor:pointer
+}
+.v106-transit-actions .main{background:#eaf2ed;border-color:#c5d9cf;color:#355f52}
+
+/* ---------------- cleaned bus modal ---------------- */
+.v106-modal .route-box{
+  width:min(720px,100%)!important;max-height:min(91vh,850px)!important;
+  padding:0!important;background:#fffdf9!important;border:1px solid #d2c8be!important;
+  border-radius:24px!important;box-shadow:0 30px 100px rgba(31,39,35,.25)!important
+}
+.v106-modal .route-kicker{padding:18px 52px 0 19px!important;color:#698277!important;letter-spacing:.13em!important;font-size:6.5px!important}
+.v106-modal .route-box h3{margin:6px 0 0!important;padding:0 19px!important;font:800 22px/1.05 "Fraunces",serif!important;color:#2d3935!important}
+.v106-modal .route-sub{margin:6px 0 0!important;padding:0 19px!important;color:#7b7470!important;font-size:8.5px!important;line-height:1.45!important}
+
+/* hero journey header */
+.v106-modal-hero{
+  margin:13px 19px 10px;padding:11px 12px;border:1px solid #d8d0c7;border-radius:14px;
+  background:linear-gradient(135deg,#f4f1eb,#eef3ef)
+}
+.v106-modal-hero-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.v106-modal-hero-label{font-size:5.8px;letter-spacing:.13em;text-transform:uppercase;color:#8b817b;font-weight:900}
+.v106-modal-hero-badge{padding:4px 6px;border-radius:999px;background:#e4eee9;color:#476b5d;font-size:5.8px;font-weight:900}
+.v106-modal-hero-title{margin-top:4px;font-size:9.5px;font-weight:900;color:#394a44}
+.v106-modal-path{
+  margin-top:8px;display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:5px
+}
+.v106-node{
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e1ece7;color:#42685b;font-size:7px;font-weight:900;border:1px solid #c6d9cf
+}
+.v106-node.bus{background:#edf2ee}
+.v106-node.end{background:#f3eceb;color:#775362;border-color:#decbd0}
+.v106-line{height:1px;background:#d3cec8}
+.v106-modal-metrics{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px
+}
+.v106-modal-metric{
+  background:#fffdfa;border:1px solid #e2dad2;border-radius:8px;padding:6px
+}
+.v106-modal-metric small{display:block;font-size:5.4px;text-transform:uppercase;letter-spacing:.08em;color:#918880;font-weight:900}
+.v106-modal-metric b{display:block;margin-top:2px;font-size:7px;color:#4a5b55}
+.v106-modal-section-label{
+  margin:12px 19px 6px;font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8a7f79;font-weight:900
+}
+
+/* primary route schedule */
+.v106-primary-route{
+  margin:0 19px;border:1px solid #c9dcd2;border-radius:15px;background:#f5f8f5;overflow:hidden
+}
+.v106-primary-head{padding:10px 11px;border-bottom:1px solid #d8e2dc}
+.v106-primary-tag{
+  display:inline-block;padding:4px 6px;border-radius:999px;background:#e2eee8;color:#41695b;font-size:5.7px;font-weight:900;letter-spacing:.08em
+}
+.v106-primary-title{margin-top:4px;font-size:9px;color:#385148;font-weight:900}
+.v106-walk{
+  margin:8px 10px;padding:8px;border-radius:9px;background:#fffdfa;border:1px solid #e2dbd3;
+  color:#6f6964;font-size:7px;line-height:1.45
+}
+.v106-schedule{
+  margin:8px 10px 10px;display:grid;gap:5px
+}
+.v106-time-option{
+  display:grid;grid-template-columns:66px 1fr;gap:7px;align-items:center;
+  padding:8px;border-radius:9px;background:#fffdfa;border:1px solid #e4ddd5
+}
+.v106-time-option b{font-size:8px;color:#456a5d}
+.v106-time-option span{font-size:6.8px;line-height:1.35;color:#726b67}
+.v106-mapbar{
+  display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 11px
+}
+.v106-mapbar button{
+  flex:1 1 150px;min-height:34px;border:1px solid #cbdad4;background:#fffdfa;color:#43685d;
+  border-radius:9px;font-size:6.6px;font-weight:900;cursor:pointer
+}
+.v106-mapbar button:last-child{background:#e8f1ec;border-color:#c0d5ca;color:#315d50}
+
+/* alternative routes are collapsed, not repeated */
+.v106-alt{
+  margin:8px 19px 12px;border:1px solid #ded6ce;border-radius:13px;background:#fffefa
+}
+.v106-alt summary{list-style:none;cursor:pointer;padding:10px;font-size:7px;font-weight:900;color:#5f6c67}
+.v106-alt summary::-webkit-details-marker{display:none}
+.v106-alt summary:after{content:"＋";float:right;color:#89938e}
+.v106-alt[open] summary:after{content:"−"}
+.v106-alt-item{margin:0 9px 9px;border:1px solid #e2dad2;border-radius:10px;background:#fbf8f3;overflow:hidden}
+.v106-alt-head{padding:8px 9px;border-bottom:1px solid #e5ded7}
+.v106-alt-head b{font-size:7px;color:#52625d}
+.v106-alt-times{padding:7px 8px;display:grid;gap:4px}
+.v106-alt-time{display:grid;grid-template-columns:60px 1fr;gap:7px;padding:6px 7px;border-radius:8px;background:#fffdfa}
+.v106-alt-time b{font-size:7px;color:#537165}
+.v106-alt-time span{font-size:6.3px;color:#756e69;line-height:1.35}
+.v106-alt-maps{display:flex;gap:5px;padding:0 8px 8px}
+.v106-alt-maps button{
+  flex:1;border:1px solid #d1ddd7;background:#fff;color:#4b6d61;border-radius:7px;padding:6px;font-size:6px;font-weight:900
+}
+.v106-modal-note{
+  margin:10px 19px 17px;padding:9px 10px;border:1px solid #ddd5cc;border-radius:10px;
+  background:#f2eee8;color:#7b746f;font-size:6.8px;line-height:1.45
+}
+
+@media(max-width:900px){
+  .v106-journey-grid{grid-template-columns:1fr}
+  .v106-food-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .v106{padding:0}
+  .v106-shell{border:0;min-height:100vh}
+  .v106-mast{padding:20px 17px 17px}
+  .v106-page{padding:17px 14px 0}
+  .v106-head{grid-template-columns:1fr}
+  .v106-stats{width:100%}
+  .v106-stat{flex:1}
+  .v106-nav{padding:9px 11px}
+  .v106-mini{display:none}
+  .v106-day{min-width:122px}
+  .v106-route{padding-left:43px}
+  .v106-route:before{left:17px}
+  .v106-stop{grid-template-columns:1fr;gap:2px}
+  .v106-time{text-align:left;padding-top:6px}
+  .v106-stop-pin{left:-35px}
+  .v106-food-grid{grid-template-columns:1fr}
+  .v106-food-origin{align-items:flex-start;flex-direction:column}
+  .v106-transit-grid{grid-template-columns:1fr}
+  .v106-modal-metrics{grid-template-columns:1fr 1fr 1fr}
+  .v106-time-option{grid-template-columns:1fr;gap:2px}
+}
+
+/* atlas-v126-transport-css */
+/* v126 · semantic transport modal */
+.v126-modal .route-box{
+  width:min(660px,100%)!important;max-height:min(92vh,850px)!important;
+  padding:0!important;background:#fffdf9!important;border:1px solid #d3cbc1!important;
+  border-radius:22px!important;box-shadow:0 28px 90px rgba(32,46,40,.24)!important
+}
+.v126-modal .route-kicker,.v126-modal .route-sub{display:none!important}
+.v126-modal .route-box h3{
+  margin:0!important;padding:19px 48px 7px 20px!important;
+  font:800 23px/1.03 "Fraunces",serif!important;color:#2e3d38!important
+}
+.v126-content{padding-bottom:5px}
+.v126-schedule-title{
+  margin:10px 20px 5px;display:flex;justify-content:space-between;align-items:center
+}
+.v126-schedule-title b{
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8a817b;font-weight:900
+}
+.v126-schedule-title span{font-size:5.7px;color:#8a837e}
+.v126-leg{
+  margin:0 20px 8px;border:1px solid #d1ddd7;border-radius:13px;
+  background:#f5f8f5;overflow:hidden
+}
+.v126-leg-head{
+  padding:8px 10px 7px;display:flex;justify-content:space-between;align-items:center;gap:8px
+}
+.v126-leg-name{font-size:9px;font-weight:900;color:#354b43}
+.v126-leg-count{font-size:5.5px;color:#718079}
+.v126-picker{
+  display:flex;gap:5px;overflow:auto;padding:0 8px 8px;scrollbar-width:none
+}
+.v126-picker::-webkit-scrollbar{display:none}
+.v126-chip{
+  flex:0 0 auto;min-width:86px;padding:5px 6px;border:1px solid #d2ded8;border-radius:9px;
+  background:#fffdfa;text-align:left;cursor:pointer
+}
+.v126-chip small{
+  display:block;font-size:4.8px;text-transform:uppercase;letter-spacing:.08em;color:#8b847d;font-weight:900
+}
+.v126-chip strong{display:block;margin-top:2px;font:800 12px "Fraunces",serif;color:#4a6e60}
+.v126-chip span{
+  display:block;margin-top:1px;font-size:5.1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#756e69
+}
+.v126-chip.active{background:#e8f1ec;border-color:#a8c3b7;box-shadow:0 0 0 1px #cbdcd4 inset}
+.v126-selected{
+  margin:7px 20px 11px;padding:9px 10px;border:1px solid #d8d0c8;border-radius:12px;
+  background:linear-gradient(135deg,#f8f4ed,#eef4f0);
+  display:grid;grid-template-columns:1fr 27px 1fr;align-items:center;gap:8px
+}
+.v126-selected small{
+  display:block;font-size:4.9px;letter-spacing:.1em;text-transform:uppercase;color:#8e857f;font-weight:900
+}
+.v126-selected b{display:block;margin-top:2px;font:800 17px "Fraunces",serif;color:#456b5d}
+.v126-selected .arr{text-align:right}
+.v126-selected .arrow{
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e3eee8;border:1px solid #c6d9d0;color:#4a6e60;font-size:12px;font-weight:900
+}
+.v126-route-title{
+  margin:0 20px 6px;font-size:6px;letter-spacing:.12em;text-transform:uppercase;color:#8a817b;font-weight:900
+}
+.v126-route{
+  margin:0 20px;padding:9px 9px 5px;border:1px solid #ddd5cc;border-radius:15px;background:#fffdfa
+}
+.v126-step{
+  position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);
+  column-gap:8px;min-height:51px;margin:0!important;padding:0!important;width:auto!important
+}
+.v126-step:last-child{min-height:42px}
+.v126-step:not(:last-child)::after{
+  content:"";position:absolute;left:16px;top:31px;bottom:0;width:1px;background:#d5cec6
+}
+.v126-icon{
+  position:relative;z-index:2;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;background:#edf3ef;
+  border:1px solid #cad9d2;box-shadow:0 0 0 3px #fffdfa;font-size:13px
+}
+.v126-step.bus .v126-icon{background:#e6efea}
+.v126-step.stop .v126-icon{background:#f4eee2;border-color:#dfd2b5}
+.v126-step.walk .v126-icon,.v126-step.finish .v126-icon{background:#f1ebee;border-color:#dbcbd0}
+.v126-text{padding-top:1px;min-width:0}
+.v126-label{font-size:5.2px;letter-spacing:.10em;text-transform:uppercase;color:#8d857f;font-weight:900}
+.v126-main{margin-top:2px;font-size:8px;line-height:1.35;color:#3e4d47;font-weight:900}
+.v126-busrow{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.v126-time{
+  flex:none;padding:3px 5px;border-radius:999px;background:#e7f0eb;border:1px solid #c8d9d1;
+  color:#42685a;font-size:5.7px;font-weight:900
+}
+.v126-map{margin:8px 20px 13px}
+.v126-map button{
+  width:100%;min-height:34px;border:1px solid #bfd5ca;border-radius:9px;
+  background:#e9f1ed;color:#315d50;font-size:6.6px;font-weight:900;cursor:pointer
+}
+.v126-modal .v106-modal-hero,
+.v126-modal .v106-modal-section-label,
+.v126-modal .v106-primary-route,
+.v126-modal .v106-alt,
+.v126-modal .v106-modal-note{display:none!important}
+.v126-modal .zs-route,.v126-modal .zs-note{display:none!important}
+
+/* atlas-v130-no-replacement-glyph-css */
+/* v130 · vehicle header uses inline SVG, never an emoji glyph */
+.v126-modal .v126-leg-name{
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  line-height:1!important;
+  min-height:18px!important;
+}
+.v126-modal .v130-vehicle{
+  width:13px!important;
+  height:13px!important;
+  flex:0 0 13px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:#4f7567!important;
+}
+.v126-modal .v130-vehicle svg{
+  width:13px!important;
+  height:13px!important;
+  display:block!important;
+}
+
+/* atlas-v131-alignment-arrivals-css */
+/* v131 · text alignment + complete approximate arrivals */
+.v126-modal .v126-route .v126-step{
+  align-items:center!important;
+}
+.v126-modal .v126-route .v126-step .v126-text{
+  min-height:32px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding-top:0!important;
+}
+.v126-modal .v126-route .v126-icon{
+  align-self:center!important;
+}
+
+/* atlas-v132-universal-css */
+/* =========================================================
+   v132 · UNIVERSAL TRANSPORT MODAL
+   One semantic renderer for walking + one/multiple buses/trains.
+   ========================================================= */
+.v132-modal .route-box{
+  width:min(660px,100%)!important;
+  max-height:min(92vh,850px)!important;
+  padding:0!important;
+  background:#fffdf9!important;
+  border:1px solid #d3cbc1!important;
+  border-radius:22px!important;
+  box-shadow:0 28px 90px rgba(32,46,40,.24)!important;
+}
+.v132-modal .route-kicker,
+.v132-modal .route-sub{display:none!important}
+.v132-modal .route-box h3{
+  margin:0!important;
+  padding:19px 48px 7px 20px!important;
+  font:800 23px/1.03 "Fraunces",serif!important;
+  color:#2e3d38!important;
+}
+.v132-content{padding-bottom:4px}
+.v132-heading{
+  margin:10px 20px 5px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.v132-heading b{
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;
+  color:#8a817b;font-weight:900
+}
+.v132-heading span{font-size:5.7px;color:#8a837e}
+
+.v132-leg{
+  margin:0 20px 8px;
+  border:1px solid #d1ddd7;border-radius:13px;
+  background:#f5f8f5;overflow:hidden
+}
+.v132-leg-head{
+  padding:8px 10px 7px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px
+}
+.v132-leg-name{
+  display:flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:900;color:#354b43;line-height:1
+}
+.v132-leg-name svg{width:13px;height:13px;display:block;flex:0 0 13px}
+.v132-leg-count{font-size:5.5px;color:#718079}
+.v132-picker{
+  display:flex;gap:5px;overflow:auto;padding:0 8px 8px;scrollbar-width:none
+}
+.v132-picker::-webkit-scrollbar{display:none}
+.v132-chip{
+  flex:0 0 auto;min-width:88px;
+  padding:5px 6px;border:1px solid #d2ded8;border-radius:9px;
+  background:#fffdfa;text-align:left;cursor:pointer
+}
+.v132-chip small{
+  display:block;font-size:4.8px;text-transform:uppercase;
+  letter-spacing:.08em;color:#8b847d;font-weight:900
+}
+.v132-chip strong{
+  display:block;margin-top:2px;font:800 12px "Fraunces",serif;color:#4a6e60
+}
+.v132-chip span{
+  display:block;margin-top:1px;font-size:5.1px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;color:#756e69
+}
+.v132-chip.active{
+  background:#e8f1ec;border-color:#a8c3b7;
+  box-shadow:0 0 0 1px #cbdcd4 inset
+}
+
+.v132-selected{
+  margin:7px 20px 11px;padding:9px 10px;
+  border:1px solid #d8d0c8;border-radius:12px;
+  background:linear-gradient(135deg,#f8f4ed,#eef4f0);
+  display:grid;grid-template-columns:1fr 27px 1fr;align-items:center;gap:8px
+}
+.v132-selected small{
+  display:block;font-size:4.9px;letter-spacing:.1em;text-transform:uppercase;
+  color:#8e857f;font-weight:900
+}
+.v132-selected b{
+  display:block;margin-top:2px;font:800 17px "Fraunces",serif;color:#456b5d
+}
+.v132-selected .arr{text-align:right}
+.v132-selected .arrow{
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#e3eee8;border:1px solid #c6d9d0;color:#4a6e60;
+  font-size:12px;font-weight:900
+}
+
+.v132-title{
+  margin:0 20px 6px;
+  font-size:6px;letter-spacing:.12em;text-transform:uppercase;
+  color:#8a817b;font-weight:900
+}
+.v132-route{
+  margin:0 20px;padding:9px 9px 5px;
+  border:1px solid #ddd5cc;border-radius:15px;background:#fffdfa
+}
+.v132-step{
+  position:relative;
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  column-gap:8px;
+  min-height:51px;
+  margin:0!important;padding:0!important;width:auto!important;
+  align-items:center!important
+}
+.v132-step:last-child{min-height:42px}
+.v132-step:not(:last-child)::after{
+  content:"";position:absolute;left:16px;top:31px;bottom:0;
+  width:1px;background:#d5cec6
+}
+.v132-icon{
+  position:relative;z-index:2;width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#edf3ef;border:1px solid #cad9d2;
+  box-shadow:0 0 0 3px #fffdfa;font-size:13px
+}
+.v132-step.bus .v132-icon{background:#e6efea}
+.v132-step.stop .v132-icon{background:#f4eee2;border-color:#dfd2b5}
+.v132-step.walk .v132-icon,.v132-step.finish .v132-icon{
+  background:#f1ebee;border-color:#dbcbd0
+}
+.v132-text{
+  min-width:0;padding:0!important;align-self:center!important;
+  display:flex;flex-direction:column;justify-content:center
+}
+.v132-label{
+  font-size:5.2px;letter-spacing:.10em;text-transform:uppercase;
+  color:#8d857f;font-weight:900
+}
+.v132-main{
+  margin-top:2px;font-size:8px;line-height:1.35;
+  color:#3e4d47;font-weight:900
+}
+.v132-busrow{
+  display:flex;align-items:center;gap:6px;flex-wrap:nowrap
+}
+.v132-time{
+  flex:none;padding:3px 5px;border-radius:999px;
+  background:#e7f0eb;border:1px solid #c8d9d1;
+  color:#42685a;font-size:5.7px;font-weight:900
+}
+.v132-map{margin:8px 20px 13px}
+.v132-map button{
+  width:100%;min-height:34px;border:1px solid #bfd5ca;border-radius:9px;
+  background:#e9f1ed;color:#315d50;font-size:6.6px;font-weight:900;cursor:pointer
+}
+
+/* old generated UIs: hidden, source blocks remain as data */
+.v132-modal .v106-modal-hero,
+.v132-modal .v106-modal-section-label,
+.v132-modal .v106-primary-route,
+.v132-modal .v106-alt,
+.v132-modal .v106-modal-note,
+.v132-modal .v107-route-strip,
+.v132-modal .v107-walk-card,
+.v132-modal .v107-leg,
+.v132-modal .v107-leg-divider,
+.v132-modal .v107-final-line,
+.v132-modal .v107-note,
+.v132-modal .v108-modal-content,
+.v132-modal .v109-content,
+.v132-modal .v110-route-board,
+.v132-modal .v110-mapbar,
+.v132-modal .v111-content,
+.v132-modal .v116-chain,
+.v132-modal .v118-chain,
+.v132-modal .v119-content,
+.v132-modal .v121-content,
+.v132-modal .v122-content,
+.v132-modal .v123-content,
+.v132-modal .v124-content,
+.v132-modal .v125-content,
+.v132-modal .v126-content{
+  display:none!important
+}
+.v132-modal .zs-route,
+.v132-modal .zs-note{display:none!important}
+
+/* atlas-v134-bus-emoji-css */
+/* v134 · use the exact bus emoji requested */
+.v132-modal .v132-leg-name{
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  line-height:1!important;
+}
+.v132-modal .v132-leg-name .v134-bus-emoji{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:14px!important;
+  height:14px!important;
+  flex:0 0 14px!important;
+  font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif!important;
+  font-size:13px!important;
+  line-height:1!important;
+}
+.v132-modal .v132-step.bus .v132-icon .v134-bus-emoji{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:14px!important;
+  line-height:1!important;
+}

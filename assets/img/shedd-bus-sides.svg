@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 224" role="img" aria-labelledby="title desc">
+  <title id="title">Las dos paradas del 146 en Shedd Aquarium</title>
+  <desc id="desc">Al norte de Solidarity Drive está el poste 4595 para volver hacia el hotel. Al sur está la bajada 4591 de la ida al acuario.</desc>
+  <rect width="400" height="224" rx="12" fill="#eef6f4"/>
+  <rect x="0" y="83" width="400" height="58" fill="#dce6ee"/>
+  <path d="M0 112h400" stroke="#758c9e" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M228 98h-62l9-7m-9 7 9 7M166 127h62l-9-7m9 7-9 7" fill="none" stroke="#386672" stroke-width="2"/>
+  <path d="M77 65v18m237 58v18" stroke="#155d4e" stroke-width="3"/>
+  <circle cx="77" cy="83" r="6" fill="#155d4e"/>
+  <circle cx="314" cy="141" r="6" fill="#155d4e"/>
+  <g font-family="system-ui,sans-serif" font-size="15" fill="#173443">
+    <text x="19" y="29" font-weight="800">NORTE · REGRESO</text>
+    <text x="19" y="54">#4595 · hacia Berwyn</text>
+    <text x="19" y="118" font-weight="700">Solidarity Drive</text>
+    <text x="234" y="181" font-weight="800">SUR · IDA</text>
+    <text x="234" y="204">#4591 · bajada Shedd</text>
+  </g>
+</svg>
